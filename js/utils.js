@@ -6,8 +6,6 @@ Utils.randomIndex = array => Math.floor(Math.random() * array.length);
 Utils.randomElement = array => array[Utils.randomIndex(array)];
 Utils.clamp = (x, min, max) => Math.min(Math.max(x, min), max);
 Utils.equalsAny = (x, ...values) => values.some(value => x === value);
-Utils.round2dp = x => Math.round(x * 100) / 100;
-
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 Utils.getRandomIntInclusive = function (min, max) {

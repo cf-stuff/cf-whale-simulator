@@ -169,7 +169,7 @@ function compileStatTotal(total, fighterName) {
   const fighterInfo = Object.values(FIGHTER).find(x => x.name === fighterName);
   if (!fighterInfo) return total;
   return {
-    hp: Math.floor(total.hp * (1 + (total.hpPercent + Utils.round2dp(total.sta / fighterInfo.bmv[2])) / 100)),
+    hp: Math.floor(total.hp * (1 + (total.hpPercent + Math.floor(total.sta / fighterInfo.bmv[2])) / 100)),
     sp: Math.floor((total.sp + total.sta / fighterInfo.bmv[2]) * (1 + (total.spPercent) / 100)),
     minAtk: Math.floor(total.minAtk * (1 + (total.atkPercent + total.str / fighterInfo.bmv[0]) / 100)), // todo possibly round the ratio
     maxAtk: Math.floor(total.maxAtk * (1 + (total.atkPercent + total.str / fighterInfo.bmv[0]) / 100)),

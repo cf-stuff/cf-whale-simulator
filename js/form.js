@@ -592,10 +592,11 @@ function initAltar() {
   document.getElementById("altar-max").onclick = () => {
     document.getElementById("altar-tab")
       .querySelectorAll("input[type='number']")
-      .forEach(x => {
-        x.value = x.max;
-      });
+      .forEach(x => x.value = x.max);
   }
+  document.getElementById("altar-tab")
+    .querySelectorAll("input[type='number']")
+    .forEach(x => x.onchange = () => x.value = Utils.clamp(x.value, x.min, x.max));
 }
 
 function initTotem() {
@@ -606,10 +607,11 @@ function initTotem() {
   document.getElementById("totem-max").onclick = () => {
     document.getElementById("totem-tab")
       .querySelectorAll("input[type='number']")
-      .forEach(x => {
-        x.value = x.max;
-      });
+      .forEach(x => x.value = x.max);
   }
+  document.getElementById("totem-tab")
+    .querySelectorAll("input[type='number']")
+    .forEach(x => x.onchange = () => x.value = Utils.clamp(x.value, x.min, x.max));
 }
 
 function initArena() {

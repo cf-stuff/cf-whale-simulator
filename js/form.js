@@ -401,7 +401,7 @@ function initFighter() {
   setOnchangeLimitCheckbox(fighterResetSelect, 2);
   Object.values(FIGHTER_SKILL_ICONS).forEach(skill => {
     const id = `coatSkill_${skill.iconIds[2]}`;
-    const url = `img/coatSkillIcon/coatSkill_icon${skill.iconIds[2]}.png`;
+    const url = `img/coatSkillIcon/coatskill_icon${skill.iconIds[2]}.png`;
     if (skill.type === FighterSkillIconType.stat) {
       const checkbox = createImageCheckbox(id, skill.name, "fighter-stat", url);
       fighterStatSelect.appendChild(checkbox);

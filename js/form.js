@@ -215,9 +215,9 @@ function formToFighter() {
     skills.push(resets[0]);
     if (healing.length > 0) {
       skills.push(healing[0]);
-    }
-    if (resets.length > 1) {
-      skills.push(resets[1]);
+      if (resets.length > 1) {
+        skills.push(resets[1]);
+      }
     }
   }
   return {

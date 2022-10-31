@@ -55,6 +55,7 @@ function mapFighter(fighter, total) {
     const str = Math.ceil(fighterInfo.growthRate[0] * level * 8) + fighterInfo.isv[0];
     const dex = Math.ceil(fighterInfo.growthRate[1] * level * 8) + fighterInfo.isv[1];
     const sta = Math.ceil(fighterInfo.growthRate[2] * level * 8) + fighterInfo.isv[2];
+    console.log(`[DEBUG] calculated fighter stats: str=${str} dex=${dex} sta=${sta}`);
     addStats({ str, dex, sta }, total);
   }
   addStats(fighter.potentials, total);
@@ -123,7 +124,6 @@ function addGearStatsToTotal(gears, total) {
 }
 
 function mapPhylactery(phy, total) {
-  if (!phy.skill) return;
   phy.stats.forEach(stat => total[BuildStatReverse[stat]] += Phylactery.initialBMV + Phylactery.bmvStats[phy.level]);
   let extraTriggerPercent = 0;
   let glyphMultiplier = 1;
@@ -165,6 +165,7 @@ function addStats(stats, total) {
 }
 
 function compileStatTotal(total, fighterName) {
+  console.log(total)
   const fighterInfo = Object.values(FIGHTER).find(x => x.name === fighterName);
   if (!fighterInfo) return total;
   return {
@@ -172,9 +173,9 @@ function compileStatTotal(total, fighterName) {
     sp: Math.floor((total.sp + total.sta / fighterInfo.bmv[2]) * (1 + (total.spPercent) / 100)),
     minAtk: Math.floor(total.minAtk * (1 + (total.atkPercent + total.str / fighterInfo.bmv[0]) / 100)), // todo possibly round the ratio
     maxAtk: Math.floor(total.maxAtk * (1 + (total.atkPercent + total.str / fighterInfo.bmv[0]) / 100)),
-    spd: total.spd + Math.floor(total.dex / fighterInfo.bmv[1]),
+    spd: Math.floor(total.spd + total.dex / fighterInfo.bmv[1]),
     hit: total.hit,
-    eva: total.eva + Math.floor(total.dex / fighterInfo.bmv[1]),
+    eva: Math.floor(total.eva + total.dex / fighterInfo.bmv[1]),
     brk: total.brk,
     def: total.def,
     crt: total.crt,
@@ -278,7 +279,7 @@ function getGems(component) {
     .filter(group => group.querySelector(".gem-select").value !== "None")
     .map(group => ({
       name: group.querySelector(".gem-select").value,
-      level: Number(group.querySelector(".gem-level").value)
+      level: Number(group.querySelector(".gem-level").value) + 1
     }))
 }
 
@@ -545,7 +546,10 @@ function initGears() {
         const option = document.createElement("option");
         option.value = gear.name;
         option.textContent = gear.name;
-        if (gear.type === GearType.weapon.name) option.classList.add("d-none");
+        if (gear.type === GearType.weapon.name) {
+          option.classList.add("d-none");
+          option.setAttribute("disabled", "");
+        };
         return option;
       });
     const gearComponent = createGearComponent(gearType, gearOptions);
@@ -781,8 +785,10 @@ function updateGearComponent(component) {
   component.querySelectorAll(".stat-select>option").forEach(option => {
     if (selectedStats.includes(option.value)) {
       option.classList.add("d-none");
+      option.setAttribute("disabled", "");
     } else {
       option.classList.remove("d-none");
+      option.removeAttribute("disabled");
     }
   });
   // for weapon, filter by fighter weapon type
@@ -800,8 +806,10 @@ function updateGearComponent(component) {
       if (option.value === "None") return;
       if (selectedFighter?.weaponType === getGear(option.value).weaponType) {
         option.classList.remove("d-none");
+        option.removeAttribute("disabled");
       } else {
         option.classList.add("d-none");
+        option.setAttribute("disabled", "");
       }
     });
   }
@@ -852,8 +860,10 @@ function updatePhyStats() {
   document.querySelectorAll(".phy-stat-select>option").forEach(option => {
     if (selectedStatCount[option.value] >= 2) {
       option.classList.add("d-none");
+      option.setAttribute("disabled", "");
     } else {
       option.classList.remove("d-none");
+      option.removeAttribute("disabled");
     }
   });
   const phyLevel = document.getElementById("phy-level").value;
@@ -866,8 +876,10 @@ function updatePhyStats() {
   document.querySelectorAll(".glyph-select>option").forEach(option => {
     if (selectedglyphs.includes(option.value)) {
       option.classList.add("d-none");
+      option.setAttribute("disabled", "");
     } else {
       option.classList.remove("d-none");
+      option.removeAttribute("disabled");
     }
   });
   document.querySelectorAll(".phy-glyph-group").forEach(group => {
@@ -892,8 +904,10 @@ function updateNexus() {
   document.querySelectorAll(".nexus-soul-select>option").forEach(option => {
     if (selectedSouls.includes(option.value)) {
       option.classList.add("d-none");
+      option.setAttribute("disabled", "");
     } else {
       option.classList.remove("d-none");
+      option.removeAttribute("disabled");
     }
   });
   document.querySelectorAll(".nexus-stat-group").forEach(group => {

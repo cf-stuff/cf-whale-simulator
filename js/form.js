@@ -160,7 +160,6 @@ function addStatsFromArenaTitle(title, total) {
 }
 
 function addStats(stats, total) {
-  // Object.entries(stats).forEach(([key, value]) => console.log(key, value));
   Object.entries(stats).forEach(([key, value]) => total[key] += value);
 }
 
@@ -171,7 +170,7 @@ function compileStatTotal(total, fighterName) {
   return {
     hp: Math.floor(total.hp * (1 + (total.hpPercent + Math.floor(total.sta / fighterInfo.bmv[2])) / 100)),
     sp: Math.floor((total.sp + total.sta / fighterInfo.bmv[2]) * (1 + (total.spPercent) / 100)),
-    minAtk: Math.floor(total.minAtk * (1 + (total.atkPercent + total.str / fighterInfo.bmv[0]) / 100)), // todo possibly round the ratio
+    minAtk: Math.floor(total.minAtk * (1 + (total.atkPercent + total.str / fighterInfo.bmv[0]) / 100)),
     maxAtk: Math.floor(total.maxAtk * (1 + (total.atkPercent + total.str / fighterInfo.bmv[0]) / 100)),
     spd: Math.floor(total.spd + total.dex / fighterInfo.bmv[1]),
     hit: total.hit,

@@ -2,14 +2,17 @@ import { FIGHTER, PET, SKILL, SKILL_TYPE, TOTEM } from "./config.js";
 import { EVOLVED_PET_SKILL_ICONS, FIGHTER_SKILL_ICONS, PET_SKILL_ICONS } from "./formInfo.js";
 import getImagePath, { ImageType } from "./image.js";
 
-export async function render(player) {
-  const canvas = document.getElementById("display");
+export async function createCanvas(player) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 512;
+  canvas.height = 720;
   const ctx = canvas.getContext("2d");
+
 
   const backgroundImage = await getImage("img/display/background.png");
   ctx.drawImage(backgroundImage, 0, 0);
 
-  if (!player || player.fighter.name === "None") return;
+  if (!player || player.fighter.name === "None") return canvas;
 
   // name
   ctx.font = "bold 21px arial";
@@ -71,6 +74,8 @@ export async function render(player) {
   renderStats(ctx, player.stats);
   lineSeparator(ctx, 400);
   renderSkills(ctx, player);
+
+  return canvas;
 }
 
 function renderStats(ctx, stats) {

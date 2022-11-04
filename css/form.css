@@ -2,23 +2,13 @@
   display: none;
 }
 
-#form {
+.form {
   max-height: 100vh;
   overflow-y: scroll;
 }
 
-#form .row {
+.form .row {
   padding-top: 1rem;
-  /* flex-wrap: nowrap; */
-}
-
-/* tabs */
-.tab-content {
-  display: none;
-}
-
-.tab-content.active {
-  display: flex;
 }
 
 /* image checkbox */

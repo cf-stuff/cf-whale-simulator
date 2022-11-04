@@ -1,8 +1,10 @@
 import { simulateBattle } from "./battle.js";
 import { buildToPlayer, formToBuild, initForm } from "./form.js";
 import { EVOLVED_FIGHTER_SKILL, EVOLVED_PET_SKILL, FIGHTER, PET, PET_SKILL, SKILL, SKILL_TYPE, TOTEM } from "./config.js";
-import { render } from "./display.js";
 import BuildTemplate from "./templates.js";
+import { html, render } from "https://unpkg.com/htm/preact/standalone.module.js";
+
+import App from "./components/App.js";
 
 const player1 = {
   name: "Dingus",
@@ -310,7 +312,9 @@ const brkHH = {
   }
 };
 
-initForm();
-render();
+// initForm();
+// render();
+
+render(html`<${App} />`, document.body);
 
 // simulateBattle([brkHH, tank, evader], [brkTank, evader, tank]);

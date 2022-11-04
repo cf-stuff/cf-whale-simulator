@@ -1,5 +1,5 @@
 import { FIGHTER, PET, SKILL, SKILL_TYPE, TOTEM } from "./config.js";
-import { render } from "./display.js";
+import { createCanvas as render } from "./display.js";
 import { ARENA_TITLE, BuildStat, BuildStatReverse, EVOLVED_PET_SKILL_ICONS, FighterSkillIconType, FIGHTER_SKILL_ICONS, GEAR, GearType, GEAR_MAX_VALUES, GEAR_SUIT_BONUS, GEM, GemType, GlyphStat, NEXUS_STATS, PetSkillIconType, PET_SKILL_ICONS, Phylactery } from "./formInfo.js";
 import Utils from "./utils.js";
 

@@ -386,12 +386,12 @@ export const PET_SKILL_ICONS = {
     iconId: 14
   },
   sp_10: {
-    name: "30SP",
+    name: "10SP",
     type: PetSkillIconType.stat,
     iconId: 15
   },
   sp_20: {
-    name: "30SP",
+    name: "20SP",
     type: PetSkillIconType.stat,
     iconId: 16
   },

@@ -1,6 +1,5 @@
-import { html, useState, useEffect } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import { FIGHTER } from "../config.js";
-import Utils from "../utils.js";
 import EvolvedFighter from "./EvolvedFighter.js";
 import NumberInput from "./NumberInput.js";
 import SelectInput from "./SelectInput.js";
@@ -13,8 +12,6 @@ const FighterTab = ({ isActive, fighter, setFighter }) => {
     plus: 21,
     potentials: { str: 360, dex: 360, sta: 360 }
   });
-  const setPotentials = potentials => setFighter({ potentials });
-  const setSkills = skills => setFighter({ skills });
 
   return html`
   <div class="row">
@@ -22,7 +19,7 @@ const FighterTab = ({ isActive, fighter, setFighter }) => {
       <button class="btn btn-outline-secondary" onClick=${handleMax}>Max</button>
     </div>
     <div class="col">
-      <${SelectInput} value=${fighter.name}
+      <${SelectInput} value=${fighter.name} onChange=${e => setFighter({ name: e.target.value })}
       options=${Object.values(FIGHTER).map(x => x.name)} />
     </div>
     <div class="col-auto">
@@ -36,7 +33,7 @@ const FighterTab = ({ isActive, fighter, setFighter }) => {
       </div>
     </div>
   </div>
-  <${EvolvedFighter} fighter=${fighter} setPotentials=${setPotentials} setSkills=${setSkills} />
+  <${EvolvedFighter} fighter=${fighter} setFighter=${setFighter} />
   `;
 }
 

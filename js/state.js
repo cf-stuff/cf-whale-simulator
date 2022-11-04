@@ -24,7 +24,16 @@ export const initialState = {
     plus: 0,
     evolved: false,
     potentials: { str: 0, dex: 0, sta: 0 },
-    skills: []
+    stats: {},
+    resets: {},
+    healing: undefined
+  },
+  pet: {
+    name: "None",
+    plus: 0,
+    evolved: false,
+    skills: {},
+    evoSkills: {}
   }
 }
 
@@ -41,6 +50,11 @@ export const reducer = (state, action) => {
       fighter.potentials.str = Utils.clamp(fighter.potentials.str, 0, 360);
       fighter.potentials.dex = Utils.clamp(fighter.potentials.dex, 0, 360);
       fighter.potentials.sta = Utils.clamp(fighter.potentials.sta, 0, 360);
-      return { ...state, fighter }
+      return { ...state, fighter };
+    case ActionType.pet:
+      const pet = state.pet;
+      Object.entries(action.payload).forEach(([key, value]) => pet[key] = value);
+      pet.plus = Utils.clamp(pet.plus, pet.evolved ? 1 : 0, pet.evolved ? 21 : 34);
+      return { ...state, pet };
   }
 }

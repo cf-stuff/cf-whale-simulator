@@ -2,6 +2,7 @@ import { html, useState } from "https://unpkg.com/htm/preact/standalone.module.j
 import { ActionType } from "../state.js";
 import FighterTab from "./FighterTab.js";
 import NumberInput from "./NumberInput.js";
+import PetTab from "./PetTab.js";
 import TabLink from "./TabLink.js";
 import TextInput from "./TextInput.js";
 
@@ -38,6 +39,7 @@ const Form = ({ state, dispatch }) => {
       </div>
     </div>
     <${FighterTab} isActive=${activeTab === "Fighter"} fighter=${state.fighter} setFighter=${fighter => dispatch({ type: ActionType.fighter, payload: fighter })} />
+    <${PetTab} isActive=${activeTab === "Pet"} pet=${state.pet} setPet=${pet => dispatch({ type: ActionType.pet, payload: pet })} />
   </div>
   `;
 }

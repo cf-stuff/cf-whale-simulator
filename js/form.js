@@ -1,4 +1,4 @@
-import { FIGHTER, PET, SKILL, SKILL_TYPE, TOTEM } from "./config.js";
+import { FIGHTER, PET, SKILL, SkillType, TOTEM } from "./config.js";
 import { createCanvas as render } from "./display.js";
 import { ARENA_TITLE, BuildStat, BuildStatReverse, EVOLVED_PET_SKILL_ICONS, FighterSkillIconType, FIGHTER_SKILL_ICONS, GEAR, GearType, GEAR_MAX_VALUES, GEAR_SUIT_BONUS, GEM, GemType, GlyphStat, NEXUS_STATS, PetSkillIconType, PET_SKILL_ICONS, Phylactery } from "./formInfo.js";
 import Utils from "./utils.js";
@@ -649,7 +649,7 @@ function initSkills() {
   const resSelect = document.getElementById("res-select");
   setOnchangeLimitCheckbox(proSelect, 9);
   setOnchangeLimitCheckbox(resSelect, 2);
-  Object.values(SKILL_TYPE).forEach(skill => {
+  Object.values(SkillType).forEach(skill => {
     proSelect.appendChild(createImageCheckbox(`pro-${skill.iconId}`, skill.name, "pro", `img/skillSet/skillSet${skill.iconId}.png`));
     resSelect.appendChild(createImageCheckbox(`res-${skill.iconId}`, skill.name, "res", `img/skillSet/skillSet${skill.iconId}.png`));
   });

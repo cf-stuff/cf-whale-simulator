@@ -1,5 +1,5 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
-import { FIGHTER } from "../config.js";
+import Fighters from "../data/fighters.js";
 import EvolvedFighter from "./EvolvedFighter.js";
 import NumberInput from "./NumberInput.js";
 import SelectInput from "./SelectInput.js";
@@ -20,7 +20,7 @@ const FighterTab = ({ isActive, fighter, setFighter }) => {
     </div>
     <div class="col">
       <${SelectInput} value=${fighter.name} onChange=${e => setFighter({ name: e.target.value })}
-      options=${Object.values(FIGHTER).map(x => x.name)} />
+      options=${Object.values(Fighters).map(x => x.name)} />
     </div>
     <div class="col-auto">
       <div class="input-group">

@@ -1,6 +1,11 @@
-import { FIGHTER, PET, SKILL, SKILL_TYPE, TOTEM } from "./config.js";
-import { EVOLVED_PET_SKILL_ICONS, FIGHTER_SKILL_ICONS, PET_SKILL_ICONS } from "./formInfo.js";
+import Fighters from "./data/fighters.js";
+import Totems from "./data/totems.js";
+import Pets from "./data/pets.js";
 import getImagePath, { ImageType } from "./image.js";
+import FighterSkills from "./data/fighterSkills.js";
+import PetSkills from "./data/petSkills.js";
+import { SkillType } from "./data/categories.js";
+import Skills from "./data/skills.js";
 
 export async function createCanvas(player) {
   const canvas = document.createElement("canvas");
@@ -180,7 +185,7 @@ CanvasRenderingContext2D.prototype.roundRect = function (x, y, width, height, ra
 }
 
 function getFighter(name) {
-  return Object.values(FIGHTER).find(x => x.name === name);
+  return Object.values(Fighters).find(x => x.name === name);
 }
 
 function getFighterDisplayName(name, evolved) {
@@ -193,7 +198,7 @@ function getFighterId(name) {
 }
 
 function getPet(name) {
-  return Object.values(PET).find(x => x.name === name);
+  return Object.values(Pets).find(x => x.name === name);
 }
 
 function getPetDisplayName(name, evolved) {
@@ -207,11 +212,11 @@ function getPetId(name, evo) {
 }
 
 function getSkillId(name) {
-  return Object.values(SKILL).find(x => x.name === name).iconId;
+  return Object.values(Skills).find(x => x.name === name).iconId;
 }
 
 function getPetSkillId(petName, name) {
-  return Object.values(PET_SKILL_ICONS).find(x => {
+  return Object.values(PetSkills).find(x => {
     if (x.name === name) {
       if (String(x.iconId).startsWith("28")) {
         return x.iconId.endsWith(getPet(petName).iconId);
@@ -227,13 +232,13 @@ function getEvoPetSkillId(name) {
 }
 
 function getFighterSkillId(name) {
-  return Object.values(FIGHTER_SKILL_ICONS).find(x => x.name === name).iconIds[2];
+  return Object.values(FighterSkills).find(x => x.name === name).iconIds[2];
 }
 
 function getSkillTypeId(name) {
-  return Object.values(SKILL_TYPE).find(x => x.name === name).iconId;
+  return Object.values(SkillType).find(x => x.name === name).iconId;
 }
 
 function getTotemId(name) {
-  return Object.values(TOTEM).find(x => x.name === name).iconId;
+  return Object.values(Totems).find(x => x.name === name).iconId;
 }

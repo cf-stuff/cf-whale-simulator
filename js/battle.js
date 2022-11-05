@@ -1,4 +1,12 @@
-import { DamageType, EVOLVED_FIGHTER_SKILL, EVOLVED_PET_SKILL, FURY_BURST_THRESHOLD, PET_SKILL, SKILL, SkillPhase, SKILL_TYPE, Stat, STATUS, StatusType, Target, TIMER_LIMIT, TOTEM } from "./config.js";
+import { FURY_BURST_THRESHOLD, BATTLE_TIME_LIMIT_MS } from "./config.js";
+import { DamageType, SkillPhase, SkillTarget, SkillType, StatusType } from "./data/categories.js";
+import Fighters from "./data/fighters.js";
+import FighterSkills from "./data/fighterSkills.js";
+import PetSkills from "./data/petSkills.js";
+import Skills from "./data/skills.js";
+import Stats from "./data/stats.js";
+import Status from "./data/status.js";
+import Totems from "./data/totems.js";
 import Utils from "./utils.js";
 
 export function simulateBattle(left, right) {
@@ -35,7 +43,7 @@ function createPlayerForBattle(player, index) {
       initial: Utils.deepClone(player.stats),
       current: Utils.deepClone(player.stats)
     },
-    mastery: player.fighter.mastery,
+    mastery: Object.values(Fighters).find(x.name === player.figher.name).mastery,
     expertise: player.expertise,
     resistance: player.resistance,
     fury: 0,
@@ -103,8 +111,8 @@ function applyExpertiseAndMasteryToSkills(state) {
 }
 
 function getBaseSkill(name) {
-  return [...Object.values(SKILL), ...Object.values(PET_SKILL),
-  ...Object.values(EVOLVED_PET_SKILL), ...Object.values(EVOLVED_FIGHTER_SKILL), ...Object.values(TOTEM)]
+  return [...Object.values(Skills), ...Object.values(PetSkills),
+  ...Object.values(FighterSkills), ...Object.values(Totems)]
     .find(skill => skill.name === name);
 }
 
@@ -124,7 +132,7 @@ export function startBattle(state) {
   state.players.forEach(player => getAllSkillsEligibleToBeUsed(state, player.index, SkillPhase.beforeFight)
     .forEach(skill => useSkill(state, player.index, skill)));
   // start game timer, measured in ms mainly to avoid decimals
-  while (state.timer < TIMER_LIMIT) {
+  while (state.timer < BATTLE_TIME_LIMIT_MS) {
     if (state.isGameOver) break;
     // e.g. 715 spd = 1.4s/attack = 1400ms/attack
     // so should attack whenever timer is at 1400, 2800, etc
@@ -187,7 +195,7 @@ function getSkillTriggerProbability(state, playerIndex, skill) {
     if (!Utils.equalsAny(skill.phase, SkillPhase.petAttack, SkillPhase.onPetBlock)) {
       triggerProbabilityMultiplier *= x.effect.triggerProbabilityMultiplier || 1;
     }
-    if (x.effect.decreasePetBlockAndMovingIllusionPercent && Utils.equalsAny(skill.name, SKILL.movingIllusion.name, PET_SKILL.block.name)) {
+    if (x.effect.decreasePetBlockAndMovingIllusionPercent && Utils.equalsAny(skill.name, Skills.movingIllusion.name, PetSkills.block.name)) {
       triggerProbabilityMultiplier *= (100 - x.effect.decreasePetBlockAndMovingIllusionPercent) / 100;
     }
   });
@@ -201,7 +209,7 @@ function tryToUseSkillFromPhase(state, playerIndex, phase) {
   if (skill) {
     return useSkill(state, playerIndex, skill);
   } else if (phase === SkillPhase.duringYourAttack) {
-    return useSkill(state, playerIndex, SKILL.normal);
+    return useSkill(state, playerIndex, Skills.normal);
   }
   return false;
 }
@@ -212,7 +220,7 @@ function useSkill(state, playerIndex, skill) {
   if (skill.spConsumption > 0) {
     let spConsumptionMultiplier = 1;
     state.players[playerIndex].status.forEach(x => spConsumptionMultiplier *= x.effect.spConsumptionMultiplier || 1);
-    updateStat(state, playerIndex, Stat.sp, -skill.spConsumption * spConsumptionMultiplier, "skill cost");
+    updateStat(state, playerIndex, Stats.sp.name, -skill.spConsumption * spConsumptionMultiplier, "skill cost");
     state.players[playerIndex].status.filter(x => x.removeWhenSpConsumed)
       .forEach(x => removeStatus(state, playerIndex, x.name));
   }
@@ -221,7 +229,7 @@ function useSkill(state, playerIndex, skill) {
   }
   let damage = 0;
   let attackedSkill;
-  if ((skill.damage || skill.effect.target === Target.enemy) && !skill.undodgeable) {
+  if ((skill.damage || skill.effect.target === SkillTarget.enemy) && !skill.undodgeable) {
     // mi, esw, pet block
     const eligibleAttackedSkills = getAllSkillsEligibleToBeUsed(state, playerIndex ^ 1, SkillPhase.duringAllEnemyAttacks)
       .filter(x => x.effect.damageTakenMultiplier ? skill.damage : true);
@@ -270,7 +278,7 @@ function handleSkillDamage(state, playerIndex, skill, attackedSkill) {
   }
   state.players[playerIndex ^ 1].status.forEach(x => {
     if (x.effect.damageTakenMultiplier) damage *= x.effect.damageTakenMultiplier;
-    if (x.effect.fireDamageTakenMultiplier && skill.type === SKILL_TYPE.fire.name) damage *= x.effect.fireDamageTakenMultiplier;
+    if (x.effect.fireDamageTakenMultiplier && skill.type === SkillType.fire.name) damage *= x.effect.fireDamageTakenMultiplier;
   });
   damage = Math.floor(damage);
   let damageTakenMultiplier = 1;
@@ -289,7 +297,7 @@ function handleSkillDamage(state, playerIndex, skill, attackedSkill) {
   dealDamage(state, playerIndex ^ 1, damage, {
     source: skill.name,
     type: DamageType.attack,
-    isFire: skill.type === SKILL_TYPE.fire.name
+    isFire: skill.type === SkillType.fire.name
   });
   handleOnHitStatusEffects(state, playerIndex, damage);
   if (skill.phase === SkillPhase.duringYourAttack || skill.phase === SkillPhase.afterYourAttack) {
@@ -300,11 +308,11 @@ function handleSkillDamage(state, playerIndex, skill, attackedSkill) {
 
 function handleSkillEffects(state, playerIndex, skill, damage) {
   if (skill.effect.removeThunderGod) {
-    removeStatus(state, playerIndex, STATUS.thunderGod.name);
+    removeStatus(state, playerIndex, Status.thunderGod.name);
   }
   if (skill.effect.status) {
     let targetIndices = [];
-    if (skill.effect.target === Target.both) {
+    if (skill.effect.target === SkillTarget.both) {
       targetIndices = [0, 1];
     } else {
       targetIndices.push(skill.effect.target ^ playerIndex);
@@ -324,32 +332,32 @@ function handleSkillEffects(state, playerIndex, skill, damage) {
     state.players[playerIndex].atkMultiplierForNextAttack = skill.effect.atkMultiplierForNextAttack;
   }
   if (skill.effect.increaseSpd) {
-    updateStat(state, playerIndex, Stat.spd, skill.effect.increaseSpd, skill.name);
+    updateStat(state, playerIndex, Stats.spd.name, skill.effect.increaseSpd, skill.name);
   }
   if (skill.effect.percentDamageHealedOnHit && state.players[playerIndex ^ 1].status.every(x => !x.effect.preventHealingWhenAttacked)) {
     const healAmount = Math.floor(damage * skill.effect.percentDamageHealedOnHit / 100);
-    updateStat(state, playerIndex, Stat.hp, healAmount, skill.name);
+    updateStat(state, playerIndex, Stats.hp.name, healAmount, skill.name);
   }
   if (skill.effect.removeEnemySpByYourSpPercent) {
     const spToRemove = Math.floor(state.players[playerIndex].stats.initial.sp * skill.effect.removeEnemySpByYourSpPercent / 100);
-    updateStat(state, playerIndex ^ 1, Stat.sp, -spToRemove, skill.name);
+    updateStat(state, playerIndex ^ 1, Stats.sp.name, -spToRemove, skill.name);
   }
   if (skill.effect.removeEnemySpByEnemySpPercent) {
     const spToRemove = Math.floor(state.players[playerIndex ^ 1].stats.initial.sp * skill.effect.removeEnemySpByEnemySpPercent / 100);
-    updateStat(state, playerIndex ^ 1, Stat.sp, -spToRemove, skill.name);
+    updateStat(state, playerIndex ^ 1, Stats.sp.name, -spToRemove, skill.name);
   }
   if (skill.effect.gainPercentHp) {
-    updateStat(state, playerIndex, Stat.hp, Math.floor(state.players[playerIndex].stats.initial.hp * skill.effect.gainPercentHp / 100), skill.name);
+    updateStat(state, playerIndex, Stats.hp.name, Math.floor(state.players[playerIndex].stats.initial.hp * skill.effect.gainPercentHp / 100), skill.name);
   }
   if (skill.effect.gainPercentSp) {
-    updateStat(state, playerIndex, Stat.sp, Math.floor(state.players[playerIndex].stats.initial.sp * skill.effect.gainPercentSp / 100), skill.name);
+    updateStat(state, playerIndex, Stats.sp.name, Math.floor(state.players[playerIndex].stats.initial.sp * skill.effect.gainPercentSp / 100), skill.name);
   }
   if (skill.effect.removePoison) {
-    removeStatus(state, playerIndex, STATUS.poisoned.name);
+    removeStatus(state, playerIndex, Status.poisoned.name);
   }
   if (skill.effect.combosWithBloodFrenzy) {
     // call recursively while probabilty check passes
-    if (state.players[playerIndex].status.some(x => x.name === STATUS.bloodFrenzy.name)) {
+    if (state.players[playerIndex].status.some(x => x.name === Status.bloodFrenzy.name)) {
       const comboProbability = getSkillTriggerProbability(state, playerIndex, skill);
       if (Utils.testProbability(comboProbability)) useSkill(state, playerIndex, skill);
     }
@@ -386,7 +394,7 @@ function getAtkMultiplierFromStatusEffects(state, playerIndex) {
 }
 
 function getBaseStatus(name) {
-  return Object.values(STATUS).find(status => status.name === name);
+  return Object.values(Status).find(status => status.name === name);
 }
 
 function addStatus(state, playerIndex, name, options) {
@@ -480,7 +488,7 @@ function handleStartOfTurnStatusEffects(state, playerIndex) {
       });
     }
     if (x.effect.spTakenAtTurnStart) {
-      updateStat(state, playerIndex, Stat.sp, -x.effect.spTakenAtTurnStart, x.name);
+      updateStat(state, playerIndex, Stats.sp.name, -x.effect.spTakenAtTurnStart, x.name);
     }
     if (x.removeOnTurnStart) {
       removeStatus(state, playerIndex, x.name);
@@ -534,11 +542,11 @@ function handleWhenAttackedStatusEffects(state, playerIndex, damage, skill) {
         type: DamageType.other
       });
     }
-    if (x.effect.igniteWhenHitByFire && skill.type === SKILL_TYPE.fire.name) {
-      addStatus(state, playerIndex, STATUS.ignited.name);
+    if (x.effect.igniteWhenHitByFire && skill.type === SkillType.fire.name) {
+      addStatus(state, playerIndex, Status.ignited.name);
     }
     if (x.removeWhenAttacked) {
-      if (!(x.effect.immuneToFireDamage && skill.type === SKILL_TYPE.fire.name)) {
+      if (!(x.effect.immuneToFireDamage && skill.type === SkillType.fire.name)) {
         removeStatus(state, playerIndex, x.name);
       }
     }
@@ -548,7 +556,7 @@ function handleWhenAttackedStatusEffects(state, playerIndex, damage, skill) {
 function handleOnHitStatusEffects(state, playerIndex, damage) {
   state.players[playerIndex].status.forEach(x => {
     if (x.effect.percentDamageHealedOnHit && state.players[playerIndex ^ 1].status.every(x => !x.effect.preventHealingWhenAttacked)) {
-      updateStat(state, playerIndex, Stat.hp, Math.floor(damage * x.effect.percentDamageHealedOnHit / 100), x.name);
+      updateStat(state, playerIndex, Stats.hp.name, Math.floor(damage * x.effect.percentDamageHealedOnHit / 100), x.name);
     }
     if (x.effect.percentHpLostOnHit) {
       dealDamage(state, playerIndex, Math.floor(damage * x.effect.percentHpLostOnHit / 100), {
@@ -558,11 +566,11 @@ function handleOnHitStatusEffects(state, playerIndex, damage) {
     }
     if (x.effect.spStolenOnHit) {
       const amount = Math.min(x.effect.spStolenOnHit, state.players[playerIndex ^ 1].stats.current.sp);
-      updateStat(state, playerIndex ^ 1, Stat.sp, -amount, x.name);
-      updateStat(state, playerIndex, Stat.sp, amount, x.name);
+      updateStat(state, playerIndex ^ 1, Stats.sp.name, -amount, x.name);
+      updateStat(state, playerIndex, Stats.sp.name, amount, x.name);
     }
     if (x.effect.applyWoundedOnHit) {
-      addStatus(state, playerIndex ^ 1, STATUS.wounded.name, { expertise: x.effect.expertWounded });
+      addStatus(state, playerIndex ^ 1, Status.wounded.name, { expertise: x.effect.expertWounded });
     }
     if (x.effect.gainFuryOnHit) {
       if (Utils.testProbability(x.effect.triggerPercent / 100)) {
@@ -578,7 +586,7 @@ function dealDamage(state, playerIndex, amount, options) {
       amount = 0;
     } else if (options.type === DamageType.other && x.effect.immuneToOtherDamage) {
       amount = 0;
-    } else if (options.source === STATUS.thunderGod.name && x.effect.immuneToThunderGod) {
+    } else if (options.source === Status.thunderGod.name && x.effect.immuneToThunderGod) {
       amount = 0;
     } else if (options.isFire && x.effect.immuneToFireDamage) {
       amount = 0;
@@ -597,7 +605,7 @@ function dealDamage(state, playerIndex, amount, options) {
     }
   }
   state.players[playerIndex].status.filter(x => x.effect.storeDamageTaken).forEach(x => x.damageTaken += amount);
-  updateStat(state, playerIndex, Stat.hp, -amount, options.source);
+  updateStat(state, playerIndex, Stats.hp.name, -amount, options.source);
   if (state.players[playerIndex].stats.current.hp <= 0) {
     if (!tryToUseSkillFromPhase(state, playerIndex, SkillPhase.onDeath)) {
       console.log("game over");
@@ -610,7 +618,7 @@ function dealDamage(state, playerIndex, amount, options) {
 function updateStat(state, playerIndex, stat, amount, source) {
   const stats = state.players[playerIndex].stats;
   stats.current[stat] += amount;
-  if (stat === Stat.hp || stat === Stat.sp) {
+  if (stat === Stats.hp.name || stat === Stats.sp.name) {
     stats.current[stat] = Utils.clamp(stats.current[stat], 0, stats.initial[stat]);
   }
   console.log(`${state.players[playerIndex].id}: ${amount} ${stat} from ${source}, ${stats.current[stat]}/${stats.initial[stat]}`);
@@ -664,7 +672,7 @@ function removeRandomDebuff(state, playerIndex) {
 }
 
 function isThunderGodActive(state) {
-  return state.players.some(player => player.status.some(status => status.name === STATUS.thunderGod.name));
+  return state.players.some(player => player.status.some(status => status.name === Status.thunderGod.name));
 }
 
 function evaTest(state, playerIndex) {

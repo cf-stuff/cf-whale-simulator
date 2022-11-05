@@ -1,6 +1,8 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
-import { PET } from "../config.js";
-import { PET_SKILL_ICONS } from "../formInfo.js";
+import { PetSkillType } from "../data/categories.js";
+import Pets from "../data/pets.js";
+import PetSkills from "../data/petSkills.js";
+import Utils from "../utils.js";
 import ImageCheckbox from "./ImageCheckbox.js";
 import NumberInput from "./NumberInput.js";
 import SelectInput from "./SelectInput.js";
@@ -14,7 +16,7 @@ const PetTab = ({ isActive, pet, setPet }) => {
     plus: 21
   });
   const handlePetChange = e => {
-    const newPetIconId = Object.values(PET).find(x => x.name === e.target.value)?.iconId;
+    const newPetIconId = Object.values(Pets).find(x => x.name === e.target.value)?.iconId;
     const skills = pet.skills
     let specialStatSelected = false;
     let specialSkillSelected = false;
@@ -22,7 +24,7 @@ const PetTab = ({ isActive, pet, setPet }) => {
       if (x.startsWith("petskill_27")) {
         specialStatSelected = true;
         skills[x] = false;
-      } else if ( x.startsWith("petskill_28")) {
+      } else if (x.startsWith("petskill_28")) {
         specialSkillSelected = true;
         skills[x] = false;
       }
@@ -40,18 +42,20 @@ const PetTab = ({ isActive, pet, setPet }) => {
       [e.target.id]: e.target.checked
     }
   });
-  const petIconId = Object.values(PET).find(x => x.name === pet.name)?.iconId;
+  const petIconId = Object.values(Pets).find(x => x.name === pet.name)?.iconId;
   const disableSkills = Object.values(pet.skills).filter(x => x).length >= 12;
-  Object.values(PET_SKILL_ICONS).forEach(skill => {
-    const id = `petskill_${skill.iconId}`;
-    const url = `img/petskillIcon/petskill_icon_${skill.iconId}.png`;
-    if ((id.startsWith("petskill_27") && !id.endsWith(`_${petIconId}`))
-      || (id.startsWith("petskill_28") && !id.endsWith(`_${petIconId}`))) {
-      return;
-    }
-    petSkillSelect.push(html`<${ImageCheckbox} id=${id} value=${skill.name} name="pet-skill"
+  Object.values(PetSkills)
+    .filter(x => Utils.equalsAny(x.type, PetSkillType.stat, PetSkillType.skill))
+    .forEach(skill => {
+      const id = `petskill_${skill.iconId}`;
+      const url = `img/petskillIcon/petskill_icon_${skill.iconId}.png`;
+      if ((id.startsWith("petskill_27") && !id.endsWith(`_${petIconId}`))
+        || (id.startsWith("petskill_28") && !id.endsWith(`_${petIconId}`))) {
+        return;
+      }
+      petSkillSelect.push(html`<${ImageCheckbox} id=${id} value=${skill.name} name="pet-skill"
     checked=${pet.skills[id] ? true : false} disabled=${disableSkills} src=${url} onClick=${handleSkills} />`);
-  });
+    });
 
   return html`
   <div class="row">
@@ -60,7 +64,7 @@ const PetTab = ({ isActive, pet, setPet }) => {
     </div>
     <div class="col">
       <${SelectInput} value=${pet.name} onChange=${handlePetChange}
-      options=${Object.values(PET).map(x => x.name)} />
+      options=${Object.values(Pets).map(x => x.name)} />
     </div>
     <div class="col-auto">
       <div class="input-group">

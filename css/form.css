@@ -15,6 +15,7 @@
 .image-checkbox-container {
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
 }
 
 .image-checkbox>input[type="checkbox"],
@@ -24,7 +25,6 @@
 
 .image-checkbox>label {
   cursor: pointer;
-  margin: 5px 10px 5px 0;
 }
 
 .image-checkbox> :checked+label {

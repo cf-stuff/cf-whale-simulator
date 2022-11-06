@@ -1,6 +1,7 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import { FighterSkillType } from "../data/categories.js";
 import CFDB from "../data/CFDB.js";
+import Utils from "../utils.js";
 import ImageCheckbox from "./ImageCheckbox.js";
 import ImageRadio from "./ImageRadio.js";
 import NumberInput from "./NumberInput.js";
@@ -18,16 +19,18 @@ const EvolvedFighter = ({ fighter, setFighter }) => {
       [e.target.id.split("-")[1]]: e.target.value
     }
   });
-  const handleStats = e => setFighter({
-    stats: {
-      ...fighter.stats, [e.target.value]: e.target.checked
-    }
-  });
-  const handleResets = e => setFighter({
-    resets: {
-      ...fighter.resets, [e.target.value]: e.target.checked
-    }
-  });
+  const handleStats = e => {
+    const stats = fighter.stats;
+    if (e.target.checked) stats.push(e.target.value);
+    else Utils.removeElement(stats, e.target.value);
+    setFighter({ stats });
+  }
+  const handleResets = e => {
+    const resets = fighter.resets;
+    if (e.target.checked) resets.push(e.target.value);
+    else Utils.removeElement(resets, e.target.value);
+    setFighter({ resets });
+  }
   const handleHealing = e => setFighter({ healing: e.target.value });
 
   const statLimitReached = Object.values(fighter.stats).filter(x => x).length >= 3;
@@ -38,13 +41,13 @@ const EvolvedFighter = ({ fighter, setFighter }) => {
     const url = `img/coatSkillIcon/coatskill_icon${skill.iconIds[2]}.png`;
     if (skill.type === FighterSkillType.stat) {
       fighterStatSelect.push(html`<${ImageCheckbox} id=${id} value=${skill.name} name="fighter-stat"
-      checked=${fighter.stats[skill.name] ? true : false} disabled=${statLimitReached} src=${url} onClick=${handleStats} />`);
+      checked=${fighter.stats.includes(skill.name)} disabled=${statLimitReached} src=${url} onClick=${handleStats} />`);
     } else if (skill.type === FighterSkillType.reset) {
       fighterResetSelect.push(html`<${ImageCheckbox} id=${id} value=${skill.name} name="fighter-reset"
-      checked=${fighter.resets[skill.name] ? true : false} disabled=${resetLimitReached} src=${url} onClick=${handleResets} />`);
+      checked=${fighter.resets.includes(skill.name)} disabled=${resetLimitReached} src=${url} onClick=${handleResets} />`);
     } else if (skill.type === FighterSkillType.healing) {
       fighterHealingSelect.push(html`<${ImageRadio} id=${id} value=${skill.name} name="fighter-healing"
-      checked=${fighter.healing === skill.name ? true : false} src=${url} onClick=${handleHealing} />`);
+      checked=${fighter.healing === skill.name} src=${url} onClick=${handleHealing} />`);
     }
   });
 

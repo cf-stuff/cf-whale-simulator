@@ -32,6 +32,7 @@ CFDB.getFighterCombatSkills = () => [...CFDB.getFighterHealingSkills(), ...CFDB.
 
 CFDB.getPetSkills = type => type ? Object.values(PetSkills).filter(skill => skill.type === type) : Object.values(PetSkills);
 CFDB.getPetSkill = name => CFDB.getPetSkills().find(skill => skill.name === name);
+CFDB.getPetSkillByIconId = id => CFDB.getPetSkills().find(skill => skill.iconId === id);
 CFDB.getPetPassives = () => CFDB.getPetSkills(PetSkillType.passive);
 CFDB.getPetActives = () => CFDB.getPetSkills(PetSkillType.active);
 CFDB.getPetCombatSkills = () => [...CFDB.getPetActives(), ...CFDB.getPetPassives(), ...CFDB.getPetSkills(PetSkillType.skill)];

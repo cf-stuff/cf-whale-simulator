@@ -25,16 +25,16 @@ export const initialState = {
     plus: 0,
     evolved: false,
     potentials: { str: 0, dex: 0, sta: 0 },
-    stats: {},
-    resets: {},
+    stats: [],
+    resets: [],
     healing: undefined
   },
   pet: {
     name: "None",
     plus: 0,
     evolved: false,
-    skills: {},
-    evoSkills: {}
+    skills: [],
+    evoSkills: []
   }
 }
 
@@ -56,9 +56,22 @@ export const reducer = (state, action) => {
       const pet = state.pet;
       Object.entries(action.payload).forEach(([key, value]) => pet[key] = value);
       pet.plus = Utils.clamp(pet.plus, pet.evolved ? 1 : 0, pet.evolved ? 21 : 27);
+
+      const petInfo = CFDB.getPet(pet.name);
+      for (let i = pet.skills.length - 1; i >= 0; --i) {
+        const skill = pet.skills[i];
+        if (skill.includes("Special")) {
+          const skillInfo = CFDB.getPetSkill(skill);
+          if (petInfo && !skillInfo.iconId.endsWith(`_${petInfo.iconId}`)) {
+            Utils.removeElement(pet.skills, skill);
+            const newIconId = `${skillInfo.iconId.substring(0, 2)}_${petInfo.iconId}`;
+            pet.skills.push(CFDB.getPetSkillByIconId(newIconId).name);
+          }
+        }
+      }
       if (pet.evolved) {
-        if (pet.plus < 21) CFDB.getPetActives()
-          .forEach(skill => pet.evoSkills[skill.name] = false);
+        if (pet.plus < 21) CFDB.getPetActives().forEach(skill => Utils.removeElement(pet.evoSkills, skill.name));
+        if (pet.plus < 15) CFDB.getPetPassives().forEach(skill => Utils.removeElement(pet.evoSkills, skill.name));
       }
       return { ...state, pet };
   }

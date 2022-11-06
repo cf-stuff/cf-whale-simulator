@@ -23,32 +23,16 @@ const PetTab = ({ isActive, pet, setPet }) => {
     plus: 21
   });
   const handlePetChange = e => {
-    const newPetIconId = CFDB.getPet(e.target.value)?.iconId;
-    const skills = pet.skills
-    let specialStatSelected = false;
-    let specialSkillSelected = false;
-    Object.keys(skills).forEach(x => {
-      if (x.startsWith("petskill_27")) {
-        specialStatSelected = true;
-        skills[x] = false;
-      } else if (x.startsWith("petskill_28")) {
-        specialSkillSelected = true;
-        skills[x] = false;
-      }
-    });
-    if (specialStatSelected) skills[`petskill_27_${newPetIconId}`] = true;
-    if (specialSkillSelected) skills[`petskill_28_${newPetIconId}`] = true;
     setPet({
-      name: e.target.value,
-      skills
+      name: e.target.value
     });
   }
-  const handleSkills = e => setPet({
-    skills: {
-      ...pet.skills,
-      [e.target.id]: e.target.checked
-    }
-  });
+  const handleSkills = e => {
+    const skills = pet.skills;
+    if (e.target.checked) skills.push(e.target.value);
+    else Utils.removeElement(skills, e.target.value);
+    setPet({ skills });
+  }
   const petIconId = CFDB.getPet(pet.name)?.iconId;
   const skillLimitReached = Object.values(pet.skills).filter(x => x).length >= getPetSkillLimit(pet.evolved ? 27 : pet.plus);
   CFDB.getPetSkills()
@@ -61,7 +45,7 @@ const PetTab = ({ isActive, pet, setPet }) => {
         return;
       }
       petSkillSelect.push(html`<${ImageCheckbox} id=${id} value=${skill.name} name="pet-skill"
-      checked=${pet.skills[id] ? true : false} disabled=${skillLimitReached} src=${url} onClick=${handleSkills} />`);
+      checked=${pet.skills.includes(skill.name)} disabled=${skillLimitReached} src=${url} onClick=${handleSkills} />`);
     });
 
   return html`

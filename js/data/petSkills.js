@@ -607,7 +607,7 @@ const PetSkills = {
     iconId: 82
   },
   infect: {
-    name: "Infect",
+    name: "Infect (Active)",
     type: PetSkillType.active,
     iconId: 91,
     damage: {
@@ -621,7 +621,7 @@ const PetSkills = {
     triggerPercent: 7,
   },
   needle: {
-    name: "Energy",
+    name: "Energy (Active)",
     type: PetSkillType.active,
     iconId: 92,
     damage: {
@@ -634,7 +634,7 @@ const PetSkills = {
     triggerPercent: 7,
   },
   thunder: {
-    name: "Thunder",
+    name: "Thunder (Active)",
     type: PetSkillType.active,
     iconId: 93,
     damage: {
@@ -649,7 +649,7 @@ const PetSkills = {
     triggerPercent: 7,
   },
   force: {
-    name: "Force",
+    name: "Force (Active)",
     type: PetSkillType.active,
     iconId: 94,
     damage: {
@@ -659,7 +659,7 @@ const PetSkills = {
     triggerPercent: 7,
   },
   ignite: {
-    name: "Fire",
+    name: "Fire (Active)",
     type: PetSkillType.active,
     iconId: 95,
     damage: {
@@ -673,7 +673,7 @@ const PetSkills = {
     triggerPercent: 7,
   },
   barbarian: {
-    name: "Barbarian",
+    name: "Barbarian (Active)",
     type: PetSkillType.active,
     iconId: 96,
     damage: {
@@ -687,7 +687,7 @@ const PetSkills = {
     triggerPercent: 7,
   },
   wine: {
-    name: "Wine",
+    name: "Wine (Passive)",
     type: PetSkillType.passive,
     iconId: 101,
     effect: {
@@ -698,7 +698,7 @@ const PetSkills = {
     triggerPercent: 40,
   },
   shieldWall: {
-    name: "Shield Wall",
+    name: "Shield Wall (Passive)",
     type: PetSkillType.passive,
     iconId: 102,
     effect: {
@@ -709,7 +709,7 @@ const PetSkills = {
     triggerPercent: 40,
   },
   meditation: {
-    name: "Meditation",
+    name: "Meditation (Passive)",
     type: PetSkillType.passive,
     iconId: 103,
     effect: {
@@ -719,7 +719,7 @@ const PetSkills = {
     triggerPercent: 40,
   },
   cleanse: {
-    name: "Cleanse",
+    name: "Cleanse (Passive)",
     type: PetSkillType.passive,
     iconId: 104,
     effect: {
@@ -729,7 +729,7 @@ const PetSkills = {
     triggerPercent: 40,
   },
   healing: {
-    name: "Healing",
+    name: "Healing (Passive)",
     type: PetSkillType.passive,
     iconId: 105,
     effect: {
@@ -740,7 +740,7 @@ const PetSkills = {
     triggerPercent: 40,
   },
   energyShield: {
-    name: "Energy Shield",
+    name: "Energy Shield (Passive)",
     type: PetSkillType.passive,
     iconId: 106,
     effect: {

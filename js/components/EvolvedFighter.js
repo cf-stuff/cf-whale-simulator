@@ -1,6 +1,6 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import { FighterSkillType } from "../data/categories.js";
-import FighterSkills from "../data/fighterSkills.js";
+import CFDB from "../data/CFDB.js";
 import ImageCheckbox from "./ImageCheckbox.js";
 import ImageRadio from "./ImageRadio.js";
 import NumberInput from "./NumberInput.js";
@@ -30,18 +30,18 @@ const EvolvedFighter = ({ fighter, setFighter }) => {
   });
   const handleHealing = e => setFighter({ healing: e.target.value });
 
-  const disableStats = Object.values(fighter.stats).filter(x => x).length >= 3;
-  const disableResets = Object.values(fighter.resets).filter(x => x).length >= 2;
+  const statLimitReached = Object.values(fighter.stats).filter(x => x).length >= 3;
+  const resetLimitReached = Object.values(fighter.resets).filter(x => x).length >= 2;
 
-  Object.values(FighterSkills).forEach(skill => {
+  CFDB.getFighterSkills().forEach(skill => {
     const id = `coatSkill_${skill.iconIds[2]}`;
     const url = `img/coatSkillIcon/coatskill_icon${skill.iconIds[2]}.png`;
     if (skill.type === FighterSkillType.stat) {
       fighterStatSelect.push(html`<${ImageCheckbox} id=${id} value=${skill.name} name="fighter-stat"
-      checked=${fighter.stats[skill.name] ? true : false} disabled=${disableStats} src=${url} onClick=${handleStats} />`);
+      checked=${fighter.stats[skill.name] ? true : false} disabled=${statLimitReached} src=${url} onClick=${handleStats} />`);
     } else if (skill.type === FighterSkillType.reset) {
       fighterResetSelect.push(html`<${ImageCheckbox} id=${id} value=${skill.name} name="fighter-reset"
-      checked=${fighter.resets[skill.name] ? true : false} disabled=${disableResets} src=${url} onClick=${handleResets} />`);
+      checked=${fighter.resets[skill.name] ? true : false} disabled=${resetLimitReached} src=${url} onClick=${handleResets} />`);
     } else if (skill.type === FighterSkillType.healing) {
       fighterHealingSelect.push(html`<${ImageRadio} id=${id} value=${skill.name} name="fighter-healing"
       checked=${fighter.healing === skill.name ? true : false} src=${url} onClick=${handleHealing} />`);

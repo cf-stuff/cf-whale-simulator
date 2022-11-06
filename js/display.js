@@ -1,11 +1,5 @@
-import Fighters from "./data/fighters.js";
-import Totems from "./data/totems.js";
-import Pets from "./data/pets.js";
 import getImagePath, { ImageType } from "./image.js";
-import FighterSkills from "./data/fighterSkills.js";
-import PetSkills from "./data/petSkills.js";
-import { SkillType } from "./data/categories.js";
-import Skills from "./data/skills.js";
+import CFDB from "./data/CFDB.js";
 
 export async function createCanvas(player) {
   const canvas = document.createElement("canvas");
@@ -13,11 +7,9 @@ export async function createCanvas(player) {
   canvas.height = 720;
   const ctx = canvas.getContext("2d");
 
+  ctx.drawImage(await getImage("img/display/background.png"), 0, 0);
 
-  const backgroundImage = await getImage("img/display/background.png");
-  ctx.drawImage(backgroundImage, 0, 0);
-
-  if (!player || player.fighter.name === "None") return canvas;
+  if (!player) return canvas;
 
   // name
   ctx.font = "bold 21px arial";
@@ -30,6 +22,8 @@ export async function createCanvas(player) {
   const playerLevel = player.level;
   ctx.fillText(`lv${playerLevel.length === 3 ? "" : "l"}: ${playerLevel}`, 13, 118);
 
+  if (player.fighter.name === "None") return canvas;
+
   // stat box thing
   ctx.fillStyle = "rgba(25, 0, 21, 0.9)";
   ctx.strokeStyle = "#ffffff";
@@ -38,12 +32,14 @@ export async function createCanvas(player) {
 
   // totem
   if (player.totem.name) {
-    ctx.drawImage(await getImage(getImagePath(ImageType.totem, getTotemId(player.totem.name))), 300, 400);
+    const totem = CFDB.getTotem(player.totem.name);
+    ctx.drawImage(await getImage(getImagePath(ImageType.totem, totem.iconId)), 300, 400);
   }
 
   // fighter + pet
-  ctx.drawImage(await getImage(getImagePath(ImageType.fighter, getFighterId(player.fighter.name))), 35, 20);
-  const fighterDisplayName = getFighterDisplayName(player.fighter.name, player.fighter.evolved);
+  const fighter = CFDB.getFighter(player.fighter.name);
+  ctx.drawImage(await getImage(getImagePath(ImageType.fighter, fighter.iconId)), 35, 20);
+  const fighterDisplayName = player.fighter.evolved ? fighter.evoName : fighter.name;
   ctx.font = "bold 16px arial";
   ctx.fillStyle = "#a15f08";
   ctx.fillText(`${fighterDisplayName}`, 15, 180);
@@ -55,10 +51,11 @@ export async function createCanvas(player) {
 
 
   if (player.pet.name !== "None") {
-    ctx.drawImage(await getImage(getImagePath(ImageType.pet, getPetId(player.pet.name, player.pet.evolved))), 250, 500);
+    const pet = CFDB.getPet(player.pet.name);
+    ctx.drawImage(await getImage(getImagePath(ImageType.pet, pet.iconId)), 250, 500);
     ctx.font = "bold 16px arial";
     ctx.fillStyle = "#a15f08";
-    const petDisplayName = getPetDisplayName(player.pet.name, player.pet.evolved);
+    const petDisplayName = player.pet.evolved ? pet.evoName : pet.name;
     ctx.fillText(`${petDisplayName}`, 15, 200);
     const petNameWidth = (player.pet) ? ctx.measureText(petDisplayName).width : 0;
     ctx.font = "16px arial";
@@ -72,13 +69,15 @@ export async function createCanvas(player) {
   ctx.font = "19px arial";
   ctx.fillStyle = "#ffffff";
   ctx.fillText("Resistance", 15, 240);
-  for (let i = 0; i < player.resistance.length; ++i)
-    ctx.drawImage(await getImage(getImagePath(ImageType.skillType, getSkillTypeId(player.resistance[i]))), 120 + 40 * i, 215, 39, 36.5);
+  for (let i = 0; i < player.resistance.length; ++i) {
+    const skillType = CFDB.getSkillType(player.resistance[i]);
+    ctx.drawImage(await getImage(getImagePath(ImageType.skillType, skillType.iconId)), 120 + 40 * i, 215, 39, 36.5);
+  }
 
   lineSeparator(ctx, 250);
   renderStats(ctx, player.stats);
   lineSeparator(ctx, 400);
-  renderSkills(ctx, player);
+  await renderSkills(ctx, player);
 
   return canvas;
 }
@@ -117,33 +116,37 @@ function renderStats(ctx, stats) {
 async function renderSkills(ctx, player) {
   let skillIndex = 0;
   let petSkillIndex = 0;
-  let evoPetSkillIndex = 0;
   let phySkillRendered = false;
+  const skillFrame = await getImage("img/display/skill-frame.png");
   for (let y = 0; y < 3; ++y) {
     for (let x = 0; x < 4; ++x) {
-      let path;
-      ctx.drawImage(await getImage("img/display/skill-frame.png"), 15 + x * 50, 415 + y * 50, 45, 45);
+      let imagePath;
+      ctx.drawImage(skillFrame, 15 + x * 50, 415 + y * 50, 45, 45);
       if (skillIndex < Math.min(6, player.skills.length)) {
-        path = await getImage(getImagePath(ImageType.skill, getSkillId(player.skills[skillIndex++])));
+        const skill = CFDB.getSkill(player.skills[skillIndex++]);
+        imagePath = await getImage(getImagePath(ImageType.skill, skill.iconId));
       } else if (petSkillIndex < player.pet?.skills.length) {
-        path = await getImage(getImagePath(ImageType.petSkill, getPetSkillId(player.pet.name, player.pet.skills[petSkillIndex++])));
-      } else if (evoPetSkillIndex < player.pet?.evoSkills.length) {
-        path = await getImage(getImagePath(ImageType.petSkill, getEvoPetSkillId(player.pet.evoSkills[evoPetSkillIndex++])));
+        const skill = CFDB.getPetSkill(player.pet.skills[petSkillIndex++]);
+        imagePath = await getImage(getImagePath(ImageType.petSkill, skill.iconId));
       } else if (player.phylactery?.skill && !phySkillRendered) {
-        path = await getImage(getImagePath(ImageType.skill, getSkillId(player.phylactery.skill)));
+        console.log()
+        const skill = CFDB.getSkill(player.phylactery.skill);
+        imagePath = await getImage(getImagePath(ImageType.skill, skill.iconId));
         phySkillRendered = true;
       }
-      if (path) ctx.drawImage(path, 17 + x * 50, 417 + y * 50, 41, 41);
+      if (imagePath) ctx.drawImage(imagePath, 17 + x * 50, 417 + y * 50, 41, 41);
     }
   }
+
   if (player.fighter.skills.length > 0) {
     lineSeparator(ctx, 575);
-    let resetIndex = 0;
+    let fighterSkillIndex = 0;
+    const evoSkillFrame = await getImage("img/display/skill-evo-frame.png");
     for (let x = 0; x < 4; ++x) {
-      ctx.drawImage(await getImage("img/display/skill-evo-frame.png"), 15 + x * 50, 590, 45, 45);
-      if (resetIndex < player.fighter.skills.length) {
-        const id = getFighterSkillId(player.fighter.skills[resetIndex++]);
-        ctx.drawImage(await getImage(getImagePath(ImageType.fighterSkill, id)), 17 + x * 50, 592, 41, 41);
+      ctx.drawImage(evoSkillFrame, 15 + x * 50, 590, 45, 45);
+      if (fighterSkillIndex < player.fighter.skills.length) {
+        const fighterSkill = CFDB.getFighterSkill(player.fighter.skills[fighterSkillIndex++]);
+        ctx.drawImage(await getImage(getImagePath(ImageType.fighterSkill, fighterSkill.iconIds[2])), 17 + x * 50, 592, 41, 41);
       }
     }
   }
@@ -182,63 +185,4 @@ CanvasRenderingContext2D.prototype.roundRect = function (x, y, width, height, ra
     this.stroke();
   }
   this.fill();
-}
-
-function getFighter(name) {
-  return Object.values(Fighters).find(x => x.name === name);
-}
-
-function getFighterDisplayName(name, evolved) {
-  const fighter = getFighter(name);
-  return evolved ? fighter.evoName : fighter.name;
-}
-
-function getFighterId(name) {
-  return getFighter(name).iconId;
-}
-
-function getPet(name) {
-  return Object.values(Pets).find(x => x.name === name);
-}
-
-function getPetDisplayName(name, evolved) {
-  const pet = getPet(name);
-  return evolved ? pet.evoName : pet.name;
-}
-
-function getPetId(name, evo) {
-  const pet = getPet(name);
-  return evo ? pet.evoIconId : pet.iconId;
-}
-
-function getSkillId(name) {
-  return Object.values(Skills).find(x => x.name === name).iconId;
-}
-
-function getPetSkillId(petName, name) {
-  return Object.values(PetSkills).find(x => {
-    if (x.name === name) {
-      if (String(x.iconId).startsWith("28")) {
-        return x.iconId.endsWith(getPet(petName).iconId);
-      }
-      return true;
-    }
-    return false;
-  }).iconId;
-}
-
-function getEvoPetSkillId(name) {
-  return Object.values(EVOLVED_PET_SKILL_ICONS).find(x => x.name === name).iconId;
-}
-
-function getFighterSkillId(name) {
-  return Object.values(FighterSkills).find(x => x.name === name).iconIds[2];
-}
-
-function getSkillTypeId(name) {
-  return Object.values(SkillType).find(x => x.name === name).iconId;
-}
-
-function getTotemId(name) {
-  return Object.values(Totems).find(x => x.name === name).iconId;
 }

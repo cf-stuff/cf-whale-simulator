@@ -1,12 +1,10 @@
 import { FURY_BURST_THRESHOLD, BATTLE_TIME_LIMIT_MS } from "./config.js";
 import { DamageType, SkillPhase, SkillTarget, SkillType, StatusType } from "./data/categories.js";
-import Fighters from "./data/fighters.js";
-import FighterSkills from "./data/fighterSkills.js";
+import CFDB from "./data/CFDB.js";
 import PetSkills from "./data/petSkills.js";
 import Skills from "./data/skills.js";
 import Stats from "./data/stats.js";
 import Status from "./data/status.js";
-import Totems from "./data/totems.js";
 import Utils from "./utils.js";
 
 export function simulateBattle(left, right) {
@@ -44,7 +42,7 @@ function createPlayerForBattle(player, index) {
       initial: Utils.deepClone(player.stats),
       current: Utils.deepClone(player.stats)
     },
-    mastery: Object.values(Fighters).find(fighter => fighter.name === player.fighter.name).mastery,
+    mastery: CFDB.getFighter(player.fighter.name).mastery,
     expertise: player.expertise,
     resistance: player.resistance,
     fury: 0,
@@ -70,9 +68,6 @@ function populateSkills(player) {
   }
   if (player.pet.skills) {
     player.pet.skills.forEach(skill => skills.push(createSkillForBattle(skill)));
-  }
-  if (player.pet.evoSkills) {
-    player.pet.evoSkills.forEach(skill => skills.push(createSkillForBattle(skill)));
   }
   if (player.fighter.skills) {
     player.fighter.skills.forEach(skill => skills.push(createSkillForBattle(skill)));
@@ -112,8 +107,8 @@ function applyExpertiseAndMasteryToSkills(state) {
 }
 
 function getBaseSkill(name) {
-  return [...Object.values(Skills), ...Object.values(PetSkills),
-  ...Object.values(FighterSkills), ...Object.values(Totems)]
+  return [...CFDB.getSkills(), ...CFDB.getPetCombatSkills(),
+  ...CFDB.getFighterCombatSkills(), ...CFDB.getTotems()]
     .find(skill => skill.name === name);
 }
 
@@ -394,10 +389,6 @@ function getAtkMultiplierFromStatusEffects(state, playerIndex) {
   return atkMultiplier;
 }
 
-function getBaseStatus(name) {
-  return Object.values(Status).find(status => status.name === name);
-}
-
 function addStatus(state, playerIndex, name, options) {
   const existingStatus = state.players[playerIndex].status.find(x => x.name === name);
   if (existingStatus) {
@@ -415,7 +406,7 @@ function addStatus(state, playerIndex, name, options) {
 }
 
 function createStatus(state, playerIndex, name, options) {
-  const baseStatus = getBaseStatus(name);
+  const baseStatus = CFDB.getStatusEffect(name);
   let status = Utils.deepClone(baseStatus);
   if (options.expertise) {
     status.getExpertiseVersion = baseStatus.getExpertiseVersion;

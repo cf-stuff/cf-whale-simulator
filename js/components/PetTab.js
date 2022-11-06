@@ -1,11 +1,18 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import { PetSkillType } from "../data/categories.js";
+import CFDB from "../data/CFDB.js";
 import Pets from "../data/pets.js";
-import PetSkills from "../data/petSkills.js";
 import Utils from "../utils.js";
+import EvolvedPet from "./EvolvedPet.js";
 import ImageCheckbox from "./ImageCheckbox.js";
 import NumberInput from "./NumberInput.js";
 import SelectInput from "./SelectInput.js";
+
+const getPetSkillLimit = plus => {
+  if (plus === 0) return 3;
+  if (plus % 3 === 0) return getPetSkillLimit(plus - 3) + 1;
+  return getPetSkillLimit(plus - 1);
+}
 
 const PetTab = ({ isActive, pet, setPet }) => {
   if (!isActive) return html``;
@@ -16,7 +23,7 @@ const PetTab = ({ isActive, pet, setPet }) => {
     plus: 21
   });
   const handlePetChange = e => {
-    const newPetIconId = Object.values(Pets).find(x => x.name === e.target.value)?.iconId;
+    const newPetIconId = CFDB.getPet(e.target.value)?.iconId;
     const skills = pet.skills
     let specialStatSelected = false;
     let specialSkillSelected = false;
@@ -42,10 +49,10 @@ const PetTab = ({ isActive, pet, setPet }) => {
       [e.target.id]: e.target.checked
     }
   });
-  const petIconId = Object.values(Pets).find(x => x.name === pet.name)?.iconId;
-  const disableSkills = Object.values(pet.skills).filter(x => x).length >= 12;
-  Object.values(PetSkills)
-    .filter(x => Utils.equalsAny(x.type, PetSkillType.stat, PetSkillType.skill))
+  const petIconId = CFDB.getPet(pet.name)?.iconId;
+  const skillLimitReached = Object.values(pet.skills).filter(x => x).length >= getPetSkillLimit(pet.evolved ? 27 : pet.plus);
+  CFDB.getPetSkills()
+    .filter(skill => Utils.equalsAny(skill.type, PetSkillType.stat, PetSkillType.skill))
     .forEach(skill => {
       const id = `petskill_${skill.iconId}`;
       const url = `img/petskillIcon/petskill_icon_${skill.iconId}.png`;
@@ -54,7 +61,7 @@ const PetTab = ({ isActive, pet, setPet }) => {
         return;
       }
       petSkillSelect.push(html`<${ImageCheckbox} id=${id} value=${skill.name} name="pet-skill"
-    checked=${pet.skills[id] ? true : false} disabled=${disableSkills} src=${url} onClick=${handleSkills} />`);
+      checked=${pet.skills[id] ? true : false} disabled=${skillLimitReached} src=${url} onClick=${handleSkills} />`);
     });
 
   return html`
@@ -82,6 +89,7 @@ const PetTab = ({ isActive, pet, setPet }) => {
       ${petSkillSelect}
     </div>
   </div>
+  <${EvolvedPet} pet=${pet} setPet=${setPet} />
   `;
 }
 

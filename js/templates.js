@@ -247,8 +247,7 @@ Players.trashEvader = {
     name: Pets.riceball.name,
     plus: 21,
     evolved: true,
-    skills: [PetSkills.block.name, PetSkills.riceballSpecialSkill.name],
-    evoSkills: [PetSkills.energyShield.name, PetSkills.needle.name]
+    skills: [PetSkills.block.name, PetSkills.riceballSpecialSkill.name, PetSkills.needle.name, PetSkills.energyShield.name]
   },
   weapon: Gears.tyrantAgileStaff.name,
   stats: {
@@ -297,8 +296,7 @@ Players.tank = {
     name: Pets.riceball.name,
     plus: 21,
     evolved: true,
-    skills: [PetSkills.block.name, PetSkills.riceballSpecialSkill.name],
-    evoSkills: [PetSkills.energyShield.name, PetSkills.ignite.name]
+    skills: [PetSkills.block.name, PetSkills.riceballSpecialSkill.name, PetSkills.ignite.name, PetSkills.energyShield.name]
   },
   weapon: "Tyrant Callous Sword",
   stats: {
@@ -347,8 +345,7 @@ Players.critHybrid = {
     name: Pets.bat.name,
     plus: 21,
     evolved: true,
-    skills: [PetSkills.block.name, PetSkills.batSpecialSkill.name],
-    evoSkills: [PetSkills.meditation.name]
+    skills: [PetSkills.block.name, PetSkills.batSpecialSkill.name, PetSkills.meditation.name]
   },
   weapon: "Tyrant Bloodthirsty Sword",
   stats: {
@@ -397,8 +394,7 @@ Players.brkTank = {
     name: Pets.sleipnir.name,
     plus: 21,
     evolved: true,
-    skills: [PetSkills.block.name, PetSkills.sleipnirSpecialSkill.name],
-    evoSkills: [PetSkills.barbarian.name, PetSkills.energyShield.name]
+    skills: [PetSkills.block.name, PetSkills.sleipnirSpecialSkill.name, PetSkills.energyShield.name, PetSkills.barbarian.name]
   },
   weapon: "Tyrant Callous Sword",
   stats: {
@@ -447,8 +443,7 @@ Players.evader = {
     name: Pets.rekachu.name,
     plus: 21,
     evolved: true,
-    skills: [PetSkills.block.name, PetSkills.rekachuSpecialSkill.name],
-    evoSkills: [PetSkills.energyShield.name, PetSkills.needle.name]
+    skills: [PetSkills.block.name, PetSkills.rekachuSpecialSkill.name, PetSkills.needle.name, PetSkills.energyShield.name]
   },
   weapon: "Tyrant Agile Staff",
   stats: {
@@ -497,8 +492,7 @@ Players.brkHH = {
     name: Pets.sleipnir.name,
     plus: 21,
     evolved: true,
-    skills: [PetSkills.block.name, PetSkills.sleipnirSpecialSkill.name],
-    evoSkills: [PetSkills.energyShield.name, PetSkills.barbarian.name]
+    skills: [PetSkills.block.name, PetSkills.sleipnirSpecialSkill.name, PetSkills.barbarian.name, PetSkills.energyShield.name]
   },
   weapon: "Tyrant Bloodthirsty Sword",
   stats: {

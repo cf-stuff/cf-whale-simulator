@@ -1,3 +1,4 @@
+import CFDB from "./data/CFDB.js";
 import Utils from "./utils.js";
 
 export const ActionType = {
@@ -54,7 +55,11 @@ export const reducer = (state, action) => {
     case ActionType.pet:
       const pet = state.pet;
       Object.entries(action.payload).forEach(([key, value]) => pet[key] = value);
-      pet.plus = Utils.clamp(pet.plus, pet.evolved ? 1 : 0, pet.evolved ? 21 : 34);
+      pet.plus = Utils.clamp(pet.plus, pet.evolved ? 1 : 0, pet.evolved ? 21 : 27);
+      if (pet.evolved) {
+        if (pet.plus < 21) CFDB.getPetActives()
+          .forEach(skill => pet.evoSkills[skill.name] = false);
+      }
       return { ...state, pet };
   }
 }

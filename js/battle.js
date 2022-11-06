@@ -12,7 +12,8 @@ import Utils from "./utils.js";
 export function simulateBattle(left, right) {
   const leftPlayers = left.map(player => createPlayerForBattle(player, 0));
   const rightPlayers = right.map(player => createPlayerForBattle(player, 1));
-  [...leftPlayers, ...rightPlayers].forEach((player, i) => player.id = i);
+  leftPlayers.forEach((player, i) => player.id = i * 2);
+  rightPlayers.forEach((player, i) => player.id = i * 2 + 1);
   console.log(`left: ${leftPlayers.map(player => `${player.name}=${player.id}`)}`);
   console.log(`right: ${rightPlayers.map(player => `${player.name}=${player.id}`)}`);
   let currentIndex = [0, 0];
@@ -43,7 +44,7 @@ function createPlayerForBattle(player, index) {
       initial: Utils.deepClone(player.stats),
       current: Utils.deepClone(player.stats)
     },
-    mastery: Object.values(Fighters).find(x.name === player.figher.name).mastery,
+    mastery: Object.values(Fighters).find(fighter => fighter.name === player.fighter.name).mastery,
     expertise: player.expertise,
     resistance: player.resistance,
     fury: 0,

@@ -1,5 +1,5 @@
 import ArenaTitle from "./data/arena.js";
-import { SkillType } from "./data/categories";
+import { SkillType } from "./data/categories.js";
 import Fighters from "./data/fighters.js";
 import FighterSkills from "./data/fighterSkills.js";
 import { Gears } from "./data/gears.js";
@@ -247,7 +247,7 @@ Players.trashEvader = {
     name: Pets.riceball.name,
     plus: 21,
     evolved: true,
-    skills: [PetSkills.block.name, PetSkills.healing.name],
+    skills: [PetSkills.block.name, PetSkills.riceballSpecialSkill.name],
     evoSkills: [PetSkills.energyShield.name, PetSkills.needle.name]
   },
   weapon: Gears.tyrantAgileStaff.name,
@@ -297,7 +297,7 @@ Players.tank = {
     name: Pets.riceball.name,
     plus: 21,
     evolved: true,
-    skills: [PetSkills.block.name, PetSkills.healing.name],
+    skills: [PetSkills.block.name, PetSkills.riceballSpecialSkill.name],
     evoSkills: [PetSkills.energyShield.name, PetSkills.ignite.name]
   },
   weapon: "Tyrant Callous Sword",
@@ -334,7 +334,7 @@ Players.tank = {
   }
 };
 
-players.critHybrid = {
+Players.critHybrid = {
   name: "Gumi",
   level: 100,
   fighter: {
@@ -344,10 +344,10 @@ players.critHybrid = {
     skills: [FighterSkills.goldenShield.name, FighterSkills.pray.name, FighterSkills.bloodFrenzy.name]
   },
   pet: {
-    name: PET.bat.name,
+    name: Pets.bat.name,
     plus: 21,
     evolved: true,
-    skills: [PetSkills.block.name, PetSkills.bloodsucking.name],
+    skills: [PetSkills.block.name, PetSkills.batSpecialSkill.name],
     evoSkills: [PetSkills.meditation.name]
   },
   weapon: "Tyrant Bloodthirsty Sword",
@@ -384,7 +384,7 @@ players.critHybrid = {
   }
 };
 
-players.brkTank = {
+Players.brkTank = {
   name: "Brk Tank Template",
   level: 100,
   fighter: {
@@ -394,10 +394,10 @@ players.brkTank = {
     skills: [FighterSkills.bloodFrenzy.name, FighterSkills.shieldWall.name, FighterSkills.thunderclapQuake.name]
   },
   pet: {
-    name: PET.sleipnir.name,
+    name: Pets.sleipnir.name,
     plus: 21,
     evolved: true,
-    skills: [PetSkills.block.name, PetSkills.freezing.name],
+    skills: [PetSkills.block.name, PetSkills.sleipnirSpecialSkill.name],
     evoSkills: [PetSkills.barbarian.name, PetSkills.energyShield.name]
   },
   weapon: "Tyrant Callous Sword",
@@ -434,7 +434,7 @@ players.brkTank = {
   }
 };
 
-players.evader = {
+Players.evader = {
   name: "Evader Template",
   level: 100,
   fighter: {
@@ -444,10 +444,10 @@ players.evader = {
     skills: [FighterSkills.thunderclapQuake.name, FighterSkills.shieldWall.name, FighterSkills.bloodFrenzy.name]
   },
   pet: {
-    name: PET.rekachu.name,
+    name: Pets.rekachu.name,
     plus: 21,
     evolved: true,
-    skills: [PetSkills.block.name, PetSkills.seal.name],
+    skills: [PetSkills.block.name, PetSkills.rekachuSpecialSkill.name],
     evoSkills: [PetSkills.energyShield.name, PetSkills.needle.name]
   },
   weapon: "Tyrant Agile Staff",
@@ -484,7 +484,7 @@ players.evader = {
   }
 };
 
-players.brkHH = {
+Players.brkHH = {
   name: "Brk HH Template",
   level: 100,
   fighter: {
@@ -494,10 +494,10 @@ players.brkHH = {
     skills: [FighterSkills.goldenShield.name, FighterSkills.pray.name, FighterSkills.bloodFrenzy.name]
   },
   pet: {
-    name: PET.sleipnir.name,
+    name: Pets.sleipnir.name,
     plus: 21,
     evolved: true,
-    skills: [PetSkills.block.name, PetSkills.freezing.name],
+    skills: [PetSkills.block.name, PetSkills.sleipnirSpecialSkill.name],
     evoSkills: [PetSkills.energyShield.name, PetSkills.barbarian.name]
   },
   weapon: "Tyrant Bloodthirsty Sword",

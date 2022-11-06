@@ -30,7 +30,7 @@ const FighterSkills = {
     maxTriggerTimes: 3,
     spConsumption: 0
   },
-  goldenshield: {
+  goldenShield: {
     name: "Golden Shield Reset",
     type: FighterSkillType.reset,
     iconIds: [3, 12, 21],

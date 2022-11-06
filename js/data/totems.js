@@ -95,7 +95,7 @@ const Totems = {
     triggerPercentPerLevel: 0.1
   },
   white: {
-    name: "Lightning Atatck Totem",
+    name: "Lightning Attack Totem",
     iconId: 8,
     effect: {
       status: Status.shocked.name,

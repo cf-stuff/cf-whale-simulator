@@ -1,9 +1,10 @@
 import { html, useState } from "https://unpkg.com/htm/preact/standalone.module.js"
 import { ActionType } from "../state.js";
-import FighterTab from "./FighterTab.js";
-import NexusTab from "./NexusTab.js";
+import Fighter from "./Fighter.js";
+import Nexus from "./Nexus.js";
 import NumberInput from "./NumberInput.js";
-import PetTab from "./PetTab.js";
+import Pet from "./Pet.js";
+import StarAltar from "./StarAltar.js";
 import TabLink from "./TabLink.js";
 import TextInput from "./TextInput.js";
 
@@ -39,9 +40,10 @@ const Form = ({ state, dispatch }) => {
         </div><br/>`)}
       </div>
     </div>
-    <${FighterTab} isActive=${activeTab === "Fighter"} fighter=${state.fighter} setFighter=${fighter => dispatch({ type: ActionType.fighter, payload: fighter })} />
-    <${PetTab} isActive=${activeTab === "Pet"} pet=${state.pet} setPet=${pet => dispatch({ type: ActionType.pet, payload: pet })} />
-    <${NexusTab} isActive=${activeTab === "Nexus"} nexus=${state.nexus} setNexus=${nexus => dispatch({ type: ActionType.nexus, payload: nexus })} />
+    <${Fighter} isActive=${activeTab === "Fighter"} fighter=${state.fighter} setFighter=${fighter => dispatch({ type: ActionType.fighter, payload: fighter })} />
+    <${Pet} isActive=${activeTab === "Pet"} pet=${state.pet} setPet=${pet => dispatch({ type: ActionType.pet, payload: pet })} />
+    <${Nexus} isActive=${activeTab === "Nexus"} nexus=${state.nexus} setNexus=${nexus => dispatch({ type: ActionType.nexus, payload: nexus })} />
+    <${StarAltar} isActive=${activeTab === "Star Altar"} altar=${state.altar} setAltar=${altar => dispatch({ type: ActionType.altar, payload: altar })} />
   </div>
   `;
 }

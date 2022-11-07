@@ -5,6 +5,8 @@ import Nexus from "./nexus.js";
 import Pets from "./pets.js";
 import PetSkills from "./petSkills.js";
 import Skills from "./skills.js";
+import StarAltar from "./starAltar.js";
+import Stats from "./stats.js";
 import Status from "./status.js";
 import Totems from "./totems.js";
 
@@ -24,6 +26,10 @@ CFDB.getSkillType = name => CFDB.getSkillTypes().find(type => type.name === name
 
 CFDB.getStatusEffects = () => Object.values(Status);
 CFDB.getStatusEffect = name => CFDB.getStatusEffects().find(status => status.name === name);
+
+CFDB.getStats = () => Object.values(Stats);
+CFDB.getStatFromName = name => CFDB.getStats().find(stat => stat.name === name);
+CFDB.getStatFromDisplayName = name => CFDB.getStats().find(stat => stat.displayName === name);
 
 CFDB.getFighterSkills = type => type ? Object.values(FighterSkills).filter(skill => skill.type === type) : Object.values(FighterSkills);
 CFDB.getFighterSkill = name => CFDB.getFighterSkills().find(skill => skill.name === name);
@@ -49,5 +55,7 @@ CFDB.calculateNexusStat = (stat, level) => {
   else if (level <= 7) return Math.ceil(nexusStat.amountPerLevel + CFDB.calculateNexusStat(stat, level - 1));
   else return Math.ceil(nexusStat.amountPerLevelAfter7 + CFDB.calculateNexusStat(stat, level - 1));
 }
+
+CFDB.getStarAltar = () => Object.values(StarAltar);
 
 export default CFDB;

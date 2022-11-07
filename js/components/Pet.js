@@ -14,7 +14,7 @@ const getPetSkillLimit = plus => {
   return getPetSkillLimit(plus - 1);
 }
 
-const PetTab = ({ isActive, pet, setPet }) => {
+const Pet = ({ isActive, pet, setPet }) => {
   if (!isActive) return html``;
   const petSkillSelect = [];
 
@@ -77,4 +77,4 @@ const PetTab = ({ isActive, pet, setPet }) => {
   `;
 }
 
-export default PetTab;
+export default Pet;

@@ -37,6 +37,23 @@ export const initialState = {
     evoSkills: []
   },
   nexus: [],
+  altar: {
+    str: 0,
+    dex: 0,
+    sta: 0,
+    atkPercent: 0,
+    def: 0,
+    eva: 0,
+    hpPercent: 0,
+    hp: 0,
+    crt: 0,
+    spd: 0,
+    brk: 0,
+    hit: 0,
+    res: 0,
+    minAtk: 0,
+    maxAtk: 0
+  },
 }
 
 export const reducer = (state, action) => {
@@ -75,10 +92,13 @@ export const reducer = (state, action) => {
       }
       return { ...state, pet };
     case ActionType.nexus:
-      const nexus = action.payload;
-      for (let soul of nexus) {
-        soul.level = Utils.clamp(soul.level, 1, 12);
-      }
-      return { ...state, nexus: action.payload }
+      const nexusStats = CFDB.getNexusStats().map(stat => stat.name);
+      const nexus = action.payload.filter(soul => soul && nexusStats.includes(soul.stat));
+      nexus.forEach(soul => soul.level = Utils.clamp(soul.level, 1, 12));
+      return { ...state, nexus };
+    case ActionType.altar:
+      const altar = action.payload;
+      CFDB.getStarAltar().forEach(stat => altar[stat.stat] = Utils.clamp(altar[stat.stat], 0, stat.max));
+      return { ...state, altar };
   }
 }

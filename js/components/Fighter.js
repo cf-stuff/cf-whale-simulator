@@ -4,7 +4,7 @@ import EvolvedFighter from "./EvolvedFighter.js";
 import NumberInput from "./NumberInput.js";
 import SelectInput from "./SelectInput.js";
 
-const FighterTab = ({ isActive, fighter, setFighter }) => {
+const Fighter = ({ isActive, fighter, setFighter }) => {
   if (!isActive) return html``;
 
   const handleMax = () => setFighter({
@@ -37,4 +37,4 @@ const FighterTab = ({ isActive, fighter, setFighter }) => {
   `;
 }
 
-export default FighterTab;
+export default Fighter;

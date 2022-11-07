@@ -2,9 +2,9 @@ import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import CFDB from "../data/CFDB.js";
 import NexusElement from "./NexusElement.js";
 
-const NexusTab = ({ isActive, nexus, setNexus }) => {
+const Nexus = ({ isActive, nexus, setNexus }) => {
   if (!isActive) return html``;
-  
+
   const selectedStats = nexus.map(soul => soul.stat);
   const nexusStats = CFDB.getNexusStats();
 
@@ -31,4 +31,4 @@ const NexusTab = ({ isActive, nexus, setNexus }) => {
   `;
 }
 
-export default NexusTab;
+export default Nexus;

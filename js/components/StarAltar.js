@@ -6,7 +6,7 @@ const StarAltar = ({ isActive, altar, setAltar }) => {
   if (!isActive) return html``;
 
   const handleMax = () => {
-    CFDB.getStarAltar().forEach(altarStat => altar[altarStat.stat] = altarStat.max);
+    CFDB.getStarAltar().forEach(stat => altar[stat.stat] = stat.max);
     setAltar(altar);
   }
 
@@ -16,7 +16,7 @@ const StarAltar = ({ isActive, altar, setAltar }) => {
       <button class="btn btn-outline-secondary" onClick=${handleMax}>Max</button>
     </div>
   </div>
-  <div class="row row-cols-3">
+  <div class="row row-cols-2">
     ${Object.entries(altar).map(([stat, value]) => html`
     <div class="col">
       <${StarAltarStat} stat=${CFDB.getStatFromName(stat).displayName} value=${value}

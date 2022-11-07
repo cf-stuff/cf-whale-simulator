@@ -39,10 +39,6 @@ export const initialState = {
   nexus: [],
 }
 
-for (let i = 0; i < 8; ++i) {
-  initialState.nexus.push({ stat: "None", level: 12 });
-}
-
 export const reducer = (state, action) => {
   switch (action.type) {
     case ActionType.name:

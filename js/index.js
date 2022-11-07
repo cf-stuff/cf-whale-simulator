@@ -5,4 +5,4 @@ import { Players } from "./templates.js";
 
 render(html`<${App} />`, document.body);
 
-simulateBattle([Players.brkHH, Players.tank, Players.evader], [Players.brkTank, Players.evader, Players.tank]);
+// simulateBattle([Players.brkHH, Players.tank, Players.evader], [Players.brkTank, Players.evader, Players.tank]);

@@ -35,7 +35,12 @@ export const initialState = {
     evolved: false,
     skills: [],
     evoSkills: []
-  }
+  },
+  nexus: [],
+}
+
+for (let i = 0; i < 8; ++i) {
+  initialState.nexus.push({ stat: "None", level: 12 });
 }
 
 export const reducer = (state, action) => {
@@ -56,7 +61,6 @@ export const reducer = (state, action) => {
       const pet = state.pet;
       Object.entries(action.payload).forEach(([key, value]) => pet[key] = value);
       pet.plus = Utils.clamp(pet.plus, pet.evolved ? 1 : 0, pet.evolved ? 21 : 27);
-
       const petInfo = CFDB.getPet(pet.name);
       for (let i = pet.skills.length - 1; i >= 0; --i) {
         const skill = pet.skills[i];
@@ -74,5 +78,11 @@ export const reducer = (state, action) => {
         if (pet.plus < 15) CFDB.getPetPassives().forEach(skill => Utils.removeElement(pet.evoSkills, skill.name));
       }
       return { ...state, pet };
+    case ActionType.nexus:
+      const nexus = action.payload;
+      for (let soul of nexus) {
+        soul.level = Utils.clamp(soul.level, 1, 12);
+      }
+      return { ...state, nexus: action.payload }
   }
 }

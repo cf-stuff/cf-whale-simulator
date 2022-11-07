@@ -1,6 +1,7 @@
 import { html, useState } from "https://unpkg.com/htm/preact/standalone.module.js"
 import { ActionType } from "../state.js";
 import FighterTab from "./FighterTab.js";
+import NexusTab from "./NexusTab.js";
 import NumberInput from "./NumberInput.js";
 import PetTab from "./PetTab.js";
 import TabLink from "./TabLink.js";
@@ -35,11 +36,12 @@ const Form = ({ state, dispatch }) => {
         ${tabs.map(row => html`
         <div class="btn-group tab">
           ${row.map(tab => html`<${TabLink} key=${tab} isActive=${activeTab === tab} name=${tab} onClick=${() => setActiveTab(tab)} />`)}
-        </div>`)}
+        </div><br/>`)}
       </div>
     </div>
     <${FighterTab} isActive=${activeTab === "Fighter"} fighter=${state.fighter} setFighter=${fighter => dispatch({ type: ActionType.fighter, payload: fighter })} />
     <${PetTab} isActive=${activeTab === "Pet"} pet=${state.pet} setPet=${pet => dispatch({ type: ActionType.pet, payload: pet })} />
+    <${NexusTab} isActive=${activeTab === "Nexus"} nexus=${state.nexus} setNexus=${nexus => dispatch({ type: ActionType.nexus, payload: nexus })} />
   </div>
   `;
 }

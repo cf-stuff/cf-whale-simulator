@@ -1,6 +1,7 @@
 import { FighterSkillType, PetSkillType, SkillType } from "./categories.js";
 import Fighters from "./fighters.js";
 import FighterSkills from "./fighterSkills.js";
+import Nexus from "./nexus.js";
 import Pets from "./pets.js";
 import PetSkills from "./petSkills.js";
 import Skills from "./skills.js";
@@ -39,5 +40,14 @@ CFDB.getPetCombatSkills = () => [...CFDB.getPetActives(), ...CFDB.getPetPassives
 
 CFDB.getTotems = () => Object.values(Totems);
 CFDB.getTotem = name => CFDB.getTotems().find(totem => totem.name === name);
+
+CFDB.getNexusStats = () => Object.values(Nexus);
+CFDB.getNexusStat = name => CFDB.getNexusStats().find(stat => stat.name === name);
+CFDB.calculateNexusStat = (stat, level) => {
+  const nexusStat = CFDB.getNexusStat(stat);
+  if (level == 1) return nexusStat.startingAmount;
+  else if (level <= 7) return Math.ceil(nexusStat.amountPerLevel + CFDB.calculateNexusStat(stat, level - 1));
+  else return Math.ceil(nexusStat.amountPerLevelAfter7 + CFDB.calculateNexusStat(stat, level - 1));
+}
 
 export default CFDB;

@@ -1,5 +1,6 @@
 import { html, useState } from "https://unpkg.com/htm/preact/standalone.module.js"
 import { ActionType } from "../state.js";
+import Arena from "./Arena.js";
 import Fighter from "./Fighter.js";
 import Nexus from "./Nexus.js";
 import NumberInput from "./NumberInput.js";
@@ -51,6 +52,7 @@ const Form = ({ state, dispatch }) => {
     <${Skills} isActive=${activeTab === "Skills"} skills=${state.skills} setSkills=${createDispatch(ActionType.skills)}
     expertise=${state.expertise} setExpertise=${createDispatch(ActionType.expertise)}
     resistance=${state.resistance} setResistance=${createDispatch(ActionType.resistance)} />
+    <${Arena} isActive=${activeTab === "Arena"} arenaTitle=${state.arenaTitle} setArenaTitle=${createDispatch(ActionType.arena)} />
   </div>
   `;
 }

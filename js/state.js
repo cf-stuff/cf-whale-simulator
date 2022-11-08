@@ -1,3 +1,4 @@
+import ArenaTitles from "./data/arena.js";
 import CFDB from "./data/CFDB.js";
 import Utils from "./utils.js";
 
@@ -57,6 +58,7 @@ export const initialState = {
   skills: [],
   expertise: [],
   resistance: [],
+  arenaTitle: ArenaTitles.newbie.name
 }
 
 export const reducer = (state, action) => {
@@ -115,5 +117,7 @@ export const reducer = (state, action) => {
       const resistance = action.payload;
       if (resistance.length > 2) resistance.length = 2;
       return { ...state, resistance };
+    case ActionType.arena:
+      return { ...state, arenaTitle: action.payload }
   }
 }

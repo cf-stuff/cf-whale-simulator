@@ -1,3 +1,4 @@
+import ArenaTitles from "./arena.js";
 import { FighterSkillType, PetSkillType, SkillType } from "./categories.js";
 import Fighters from "./fighters.js";
 import FighterSkills from "./fighterSkills.js";
@@ -57,5 +58,7 @@ CFDB.calculateNexusStat = (stat, level) => {
 }
 
 CFDB.getStarAltar = () => Object.values(StarAltar);
+
+CFDB.getArenaTitles = () => Object.values(ArenaTitles);
 
 export default CFDB;

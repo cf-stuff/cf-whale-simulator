@@ -2,18 +2,16 @@ import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import CFDB from "../data/CFDB.js";
 import StarAltarStat from "./StarAltarStat.js";
 
+const maxAltar = {};
+CFDB.getStarAltar().forEach(stat => maxAltar[stat.stat] = stat.max);
+
+
 const StarAltar = ({ isActive, altar, setAltar }) => {
   if (!isActive) return html``;
-
-  const handleMax = () => {
-    CFDB.getStarAltar().forEach(stat => altar[stat.stat] = stat.max);
-    setAltar(altar);
-  }
-
   return html`
   <div class="row">
     <div class="col-auto">
-      <button class="btn btn-outline-secondary" onClick=${handleMax}>Max</button>
+      <button class="btn btn-outline-secondary" onClick=${() => setAltar(maxAltar)}>Max</button>
     </div>
   </div>
   <div class="row row-cols-2">

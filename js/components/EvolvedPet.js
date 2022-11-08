@@ -20,29 +20,29 @@ const EvolvedPet = ({ pet, setPet }) => {
   const passives = [];
   const actives = [];
 
-  const handleStats = e => setPet({
-    evoSkills: {
-      ...pet.evoSkills, [e.target.value]: e.target.checked
-    }
-  });
+  const handleStats = e => {
+    const evoSkills = pet.evoSkills;
+    if (e.target.checked) evoSkills.push(e.target.value);
+    else Utils.removeElement(evoSkills, e.target.value);
+    setPet({ evoSkills });
+  }
 
-  const selectedSkills = Object.entries(pet.evoSkills).filter(entry => entry[1]).map(entry => entry[0]);
-  const skillLimitReached = selectedSkills.length >= getPetSkillLimit(pet.plus);
-  const passiveChosen = Utils.includesAny(CFDB.getPetPassives().map(skill => skill.name), selectedSkills);
-  const activeChosen = Utils.includesAny(CFDB.getPetActives().map(skill => skill.name), selectedSkills);
+  const skillLimitReached = pet.evoSkills.length >= getPetSkillLimit(pet.plus);
+  const passiveChosen = Utils.includesAny(CFDB.getPetPassives().map(skill => skill.name), pet.evoSkills);
+  const activeChosen = Utils.includesAny(CFDB.getPetActives().map(skill => skill.name), pet.evoSkills);
 
   CFDB.getPetSkills().forEach(skill => {
     const id = `petskill_${skill.iconId}`;
     const url = `img/petskillIcon/petskill_icon_${skill.iconId}.png`;
     if (skill.type === PetSkillType.evolvedStat) {
       stats.push(html`<${ImageCheckbox} id=${id} value=${skill.name} name="e-pet-skill"
-        checked=${pet.evoSkills[skill.name] ? true : false} disabled=${skillLimitReached} src=${url} onClick=${handleStats} />`);
+        checked=${pet.evoSkills.includes(skill.name)} disabled=${skillLimitReached} src=${url} onClick=${handleStats} />`);
     } else if (pet.plus >= 15 && skill.type === PetSkillType.passive) {
       passives.push(html`<${ImageCheckbox} id=${id} value=${skill.name} name="pet-passive"
-        checked=${pet.evoSkills[skill.name] ? true : false} disabled=${skillLimitReached || passiveChosen} src=${url} onClick=${handleStats} />`);
+        checked=${pet.evoSkills.includes(skill.name)} disabled=${skillLimitReached || passiveChosen} src=${url} onClick=${handleStats} />`);
     } else if (skill.type === PetSkillType.active) {
       actives.push(html`<${ImageCheckbox} id=${id} value=${skill.name} name="pet-active"
-        checked=${pet.evoSkills[skill.name] ? true : false} disabled=${skillLimitReached || activeChosen} src=${url} onClick=${handleStats} />`);
+        checked=${pet.evoSkills.includes(skill.name)} disabled=${skillLimitReached || activeChosen} src=${url} onClick=${handleStats} />`);
     }
   });
 

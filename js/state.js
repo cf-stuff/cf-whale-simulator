@@ -54,6 +54,9 @@ export const initialState = {
     minAtk: 0,
     maxAtk: 0
   },
+  skills: [],
+  expertise: [],
+  resistance: [],
 }
 
 export const reducer = (state, action) => {
@@ -100,5 +103,17 @@ export const reducer = (state, action) => {
       const altar = action.payload;
       CFDB.getStarAltar().forEach(stat => altar[stat.stat] = Utils.clamp(altar[stat.stat], 0, stat.max));
       return { ...state, altar };
+    case ActionType.skills:
+      const skills = action.payload;
+      if (skills.length > 6) skills.length = 6;
+      return { ...state, skills };
+    case ActionType.expertise:
+      const expertise = action.payload;
+      if (expertise.length > 9) expertise.length = 9;
+      return { ...state, expertise };
+    case ActionType.resistance:
+      const resistance = action.payload;
+      if (resistance.length > 2) resistance.length = 2;
+      return { ...state, resistance };
   }
 }

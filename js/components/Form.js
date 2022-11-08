@@ -5,10 +5,12 @@ import Fighter from "./Fighter.js";
 import Nexus from "./Nexus.js";
 import NumberInput from "./NumberInput.js";
 import Pet from "./Pet.js";
+import Phylactery from "./Phylactery.js";
 import Skills from "./Skills.js";
 import StarAltar from "./StarAltar.js";
 import TabLink from "./TabLink.js";
 import TextInput from "./TextInput.js";
+import Totem from "./Totem.js";
 
 const tabs = [
   ["Fighter", "Pet", "Gear", "Phylactery", "Nexus"],
@@ -18,8 +20,7 @@ const tabs = [
 const Form = ({ state, dispatch }) => {
   const [activeTab, setActiveTab] = useState(tabs[0][0]);
 
-  const createDispatch = type =>
-    payload => dispatch({ type, payload });
+  const createDispatch = type => payload => dispatch({ type, payload });
 
   return html`
   <div class="col-md form">
@@ -47,8 +48,10 @@ const Form = ({ state, dispatch }) => {
     </div>
     <${Fighter} isActive=${activeTab === "Fighter"} fighter=${state.fighter} setFighter=${createDispatch(ActionType.fighter)} />
     <${Pet} isActive=${activeTab === "Pet"} pet=${state.pet} setPet=${createDispatch(ActionType.pet)} />
+    <${Phylactery} isActive=${activeTab === "Phylactery"} phylactery=${state.phylactery} setPhylactery=${createDispatch(ActionType.phy)} />
     <${Nexus} isActive=${activeTab === "Nexus"} nexus=${state.nexus} setNexus=${createDispatch(ActionType.nexus)} />
     <${StarAltar} isActive=${activeTab === "Star Altar"} altar=${state.altar} setAltar=${createDispatch(ActionType.altar)} />
+    <${Totem} isActive=${activeTab === "Totem"} totem=${state.totem} setTotem=${createDispatch(ActionType.totem)} />
     <${Skills} isActive=${activeTab === "Skills"} skills=${state.skills} setSkills=${createDispatch(ActionType.skills)}
     expertise=${state.expertise} setExpertise=${createDispatch(ActionType.expertise)}
     resistance=${state.resistance} setResistance=${createDispatch(ActionType.resistance)} />

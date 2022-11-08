@@ -1,5 +1,6 @@
 import ArenaTitles from "./data/arena.js";
 import CFDB from "./data/CFDB.js";
+import Totems from "./data/totems.js";
 import Utils from "./utils.js";
 
 export const ActionType = {
@@ -37,6 +38,12 @@ export const initialState = {
     skills: [],
     evoSkills: []
   },
+  phylactery: {
+    plus: 0,
+    skill: undefined,
+    stats: [],
+    glyphs: []
+  },
   nexus: [],
   altar: {
     str: 0,
@@ -55,6 +62,20 @@ export const initialState = {
     minAtk: 0,
     maxAtk: 0
   },
+  totem: {
+    name: Totems.black.name,
+    level: 1,
+    stats: {
+      hit: 0,
+      brk: 0,
+      crt: 0,
+      atkPercent: 0,
+      hpPercent: 0,
+      res: 0,
+      def: 0,
+      eva: 0
+    }
+  },
   skills: [],
   expertise: [],
   resistance: [],
@@ -68,16 +89,14 @@ export const reducer = (state, action) => {
     case ActionType.level:
       return { ...state, level: Utils.clamp(action.payload, 1, 100) };
     case ActionType.fighter:
-      const fighter = state.fighter;
-      Object.entries(action.payload).forEach(([key, value]) => fighter[key] = value);
+      const fighter = { ...state.fighter, ...action.payload }
       fighter.plus = Utils.clamp(fighter.plus, fighter.evolved ? 1 : 0, fighter.evolved ? 21 : 34);
       fighter.potentials.str = Utils.clamp(fighter.potentials.str, 0, 360);
       fighter.potentials.dex = Utils.clamp(fighter.potentials.dex, 0, 360);
       fighter.potentials.sta = Utils.clamp(fighter.potentials.sta, 0, 360);
       return { ...state, fighter };
     case ActionType.pet:
-      const pet = state.pet;
-      Object.entries(action.payload).forEach(([key, value]) => pet[key] = value);
+      const pet = { ...state.pet, ...action.payload };
       pet.plus = Utils.clamp(pet.plus, pet.evolved ? 1 : 0, pet.evolved ? 21 : 27);
       const petInfo = CFDB.getPet(pet.name);
       for (let i = pet.skills.length - 1; i >= 0; --i) {
@@ -96,15 +115,26 @@ export const reducer = (state, action) => {
         if (pet.plus < 15) CFDB.getPetPassives().forEach(skill => Utils.removeElement(pet.evoSkills, skill.name));
       }
       return { ...state, pet };
+    case ActionType.phy:
+      const phylactery = { ...state.phylactery, ...action.payload };
+      phylactery.stats = phylactery.stats.filter(stat => stat && stat !== "None");
+      phylactery.glyphs = phylactery.glyphs.filter(glyph => glyph && glyph.stat !== "None");
+      phylactery.glyphs.forEach(glyph => glyph.plus = Utils.clamp(glyph.plus, 1, 6));
+      return { ...state, phylactery };
     case ActionType.nexus:
       const nexusStats = CFDB.getNexusStats().map(stat => stat.name);
       const nexus = action.payload.filter(soul => soul && nexusStats.includes(soul.stat));
       nexus.forEach(soul => soul.level = Utils.clamp(soul.level, 1, 12));
       return { ...state, nexus };
     case ActionType.altar:
-      const altar = action.payload;
+      const altar = { ...state.altar, ...action.payload };
       CFDB.getStarAltar().forEach(stat => altar[stat.stat] = Utils.clamp(altar[stat.stat], 0, stat.max));
       return { ...state, altar };
+    case ActionType.totem:
+      const totem = { ...state.totem, ...action.payload };
+      totem.level = Utils.clamp(totem.level, 1, 64);
+      Object.entries(totem.stats).forEach(([stat, value]) => totem.stats[stat] = Utils.clamp(value, 0, stat.includes("Percent") ? 12 : 120));
+      return { ...state, totem }
     case ActionType.skills:
       const skills = action.payload;
       if (skills.length > 6) skills.length = 6;
@@ -119,5 +149,7 @@ export const reducer = (state, action) => {
       return { ...state, resistance };
     case ActionType.arena:
       return { ...state, arenaTitle: action.payload }
+    default:
+      return state;
   }
 }

@@ -7,7 +7,7 @@ const arenaTitles = CFDB.getArenaTitles();
 
 const Arena = ({ isActive, arenaTitle, setArenaTitle }) => {
   if (!isActive) return html``;
-  const titleStats = arenaTitles.find(title => title.name === arenaTitle).stats;
+  const titleStats = CFDB.getArenaTitle(arenaTitle).stats;
   return html`
   <div class="row">
     <div class="col-auto">

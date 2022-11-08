@@ -5,6 +5,7 @@ import FighterSkills from "./fighterSkills.js";
 import Nexus from "./nexus.js";
 import Pets from "./pets.js";
 import PetSkills from "./petSkills.js";
+import Phylactery from "./phylactery.js";
 import Skills from "./skills.js";
 import StarAltar from "./starAltar.js";
 import Stats from "./stats.js";
@@ -48,6 +49,8 @@ CFDB.getPetCombatSkills = () => [...CFDB.getPetActives(), ...CFDB.getPetPassives
 CFDB.getTotems = () => Object.values(Totems);
 CFDB.getTotem = name => CFDB.getTotems().find(totem => totem.name === name);
 
+CFDB.getPhylactery = type => Object.values(Phylactery).find(phy => phy.type === type);
+
 CFDB.getNexusStats = () => Object.values(Nexus);
 CFDB.getNexusStat = name => CFDB.getNexusStats().find(stat => stat.name === name);
 CFDB.calculateNexusStat = (stat, level) => {
@@ -60,5 +63,6 @@ CFDB.calculateNexusStat = (stat, level) => {
 CFDB.getStarAltar = () => Object.values(StarAltar);
 
 CFDB.getArenaTitles = () => Object.values(ArenaTitles);
+CFDB.getArenaTitle = name => CFDB.getArenaTitles().find(title => title.name === name);
 
 export default CFDB;

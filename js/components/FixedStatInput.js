@@ -1,8 +1,8 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import NumberInput from "./NumberInput.js";
 
-const StarAltarStat = ({ stat, value, onInput }) => {
-  const id = `altar-${stat}`;
+const FixedStatInput = ({ idPrefix, stat, value, onInput }) => {
+  const id = `${idPrefix}-${stat}`;
   return html`
     <div class="input-group">
       <label class="input-group-text" for=${id} style="width:5rem;">${stat}</label>
@@ -11,4 +11,4 @@ const StarAltarStat = ({ stat, value, onInput }) => {
   `;
 }
 
-export default StarAltarStat;
+export default FixedStatInput;

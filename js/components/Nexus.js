@@ -1,14 +1,14 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import CFDB from "../data/CFDB.js";
-import NexusElement from "./NexusElement.js";
+import Soul from "./Soul.js";
 
 const Nexus = ({ isActive, nexus, setNexus }) => {
   if (!isActive) return html``;
 
-  const selectedStats = nexus.map(soul => soul.stat);
+  const selectedSouls = nexus.map(soul => soul.stat);
   const nexusStats = CFDB.getNexusStats();
 
-  const setSoul = (soul, position) => {
+  const setSoul = position => soul => {
     nexus[position] = soul;
     setNexus(nexus);
   }
@@ -17,18 +17,11 @@ const Nexus = ({ isActive, nexus, setNexus }) => {
   for (let i = 0; i < 8; ++i) {
     const soul = nexus[i] || { stat: "None", level: 12 };
     const options = nexusStats.map(stat => stat.name)
-      .filter(stat => !selectedStats.filter(selected => selected !== soul.stat).includes(stat));
-    nexusElements.push(html`<${NexusElement} position=${i} soul=${soul} setSoul=${setSoul}
-    options=${options} />`);
+      .filter(stat => stat === soul.stat || !selectedSouls.includes(stat));
+    nexusElements.push(html`<div class="row"><${Soul} soul=${soul} setSoul=${setSoul(i)} options=${options} /></div>`);
   }
 
-  return html`
-  <div class="row">
-    <div class="col">
-      ${nexusElements}
-    </div>
-  </div>
-  `;
+  return html`${nexusElements}`;
 }
 
 export default Nexus;

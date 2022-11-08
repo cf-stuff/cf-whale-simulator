@@ -135,25 +135,25 @@ Builds.brkTank = {
     }
   },
   phylactery: {
-    level: 20,
+    plus: 20,
     skill: Skills.movingIllusion.name,
     stats: [Stats.sta.displayName, Stats.sta.displayName, Stats.sta.displayName],
     glyphs: [
       {
         stat: Stats.brk.displayName,
-        level: 6
+        plus: 6
       },
       {
         stat: Stats.def.displayName,
-        level: 6
+        plus: 6
       },
       {
         stat: Stats.hit.displayName,
-        level: 6
+        plus: 6
       },
       {
         stat: Stats.res.displayName,
-        level: 6
+        plus: 6
       },
     ]
   },

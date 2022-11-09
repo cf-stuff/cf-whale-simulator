@@ -1,7 +1,9 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import CFDB from "../data/CFDB.js";
 import Stats from "../data/stats.js";
+import getImagePath, { ImageType } from "../image.js";
 import Glyph from "./Glyph.js";
+import ImageRadio from "./ImageRadio.js";
 import NumberInput from "./NumberInput.js";
 import SelectInput from "./SelectInput.js";
 
@@ -42,6 +44,7 @@ const Phylactery = ({ isActive, phylactery, setPhylactery }) => {
     phylactery.glyphs[position] = glyph;
     setPhylactery({ glyphs: phylactery.glyphs });
   }
+  const setSkill = e => setPhylactery({ skill: e.target.value });
 
   const selectedGlyphs = phylactery.glyphs.map(glyph => glyph.stat);
   const glyphs = [];
@@ -66,6 +69,13 @@ const Phylactery = ({ isActive, phylactery, setPhylactery }) => {
   </div>
   <div class="row">${statSelect}</div>
   ${glyphs}
+  <div class="row">
+    <div class="image-checkbox-container">
+      ${CFDB.getSkills().filter(skill => skill.name !== "Normal Attack").map(skill => html`
+      <${ImageRadio} id=${`phy-skill-${skill.iconId}`} value=${skill.name} name="phy-skill" checked=${phylactery.skill === skill.name}
+      src=${getImagePath(ImageType.skill, skill.iconId)} onClick=${setSkill} />`)}
+    </div>
+  </div>
   `;
 }
 

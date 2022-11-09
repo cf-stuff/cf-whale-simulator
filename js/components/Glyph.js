@@ -17,7 +17,7 @@ const Glyph = ({ glyph, setGlyph, options, phyPlus }) => {
     <div class="input-group">
       <${SelectInput} value=${glyph.stat} options=${options} onChange=${e => setGlyph({ stat: e.target.value, plus: glyph.plus })} />
       <span class="input-group-text">+</span>
-      <${NumberInput} value=${glyph.plus} onInput=${e => setGlyph({ stat: glyph.stat, plus: e.target.vlue })} />
+      <${NumberInput} value=${glyph.plus} onInput=${e => setGlyph({ stat: glyph.stat, plus: e.target.value })} />
       <span class="input-group-text glyph-stat-amount">${calculateStatAmount()}</span>
     </div>
   `;

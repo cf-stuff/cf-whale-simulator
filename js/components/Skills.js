@@ -25,7 +25,7 @@ const Skills = ({ isActive, skills, setSkills, expertise, setExpertise, resistan
   <div class="row">
     <div class="image-checkbox-container">
       ${CFDB.getSkills().filter(skill => skill.name !== "Normal Attack").map(skill => html`
-        <${ImageCheckbox} id=${`skill-${skill.iconId}`}value=${skill.name} name="skill" checked=${skills.includes(skill.name)}
+        <${ImageCheckbox} id=${`skill-${skill.iconId}`} value=${skill.name} name="skill" checked=${skills.includes(skill.name)}
         disabled=${skills.length >= 6} src=${getImagePath(ImageType.skill, skill.iconId)} onClick=${handleSkillChange} />`)}
     </div>
     <span class="text-muted">(go to phylactery for 7th skill)</span>

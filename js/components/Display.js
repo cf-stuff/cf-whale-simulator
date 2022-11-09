@@ -7,6 +7,7 @@ const Display = ({ player }) => {
     const canvas = await createCanvas(player);
     const blob = await new Promise(resolve => canvas.toBlob(resolve));
     setSrc(URL.createObjectURL(blob));
+    return () => URL.revokeObjectURL(blob);
   }, []);
   return html`<img class="display" src=${src} />`;
 }

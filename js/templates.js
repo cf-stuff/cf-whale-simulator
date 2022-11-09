@@ -44,96 +44,56 @@ Builds.brkTank = {
       PetSkills.atkPercent_25Evo.name, PetSkills.hpPercent_25Evo.name, PetSkills.spd_30Evo.name,
       PetSkills.spd_20Evo.name, PetSkills.barbarian.name, PetSkills.energyShield.name],
   },
-  gears: {
-    weapon: {
+  gears: [
+    {
       name: Gears.tyrantCallousSword.name,
       enhancement: 10,
-      stats: {
-        res: 135,
-        def: 125,
-        hit: 120,
-        brk: 150
-      },
+      stats: [{ res: 135 }, { def: 125 }, { hit: 120 }, { brk: 150 }],
       gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.topaz.name, plus: 9 }, { name: Gems.topaz.name, plus: 9 }]
     },
-    helmet: {
+    {
       name: Gears.tyrantBloodthirstyHelmet.name,
       enhancement: 10,
-      stats: {
-        res: 135,
-        def: 125,
-        hit: 120,
-        brk: 150
-      },
+      stats: [{ res: 135 }, { def: 125 }, { hit: 120 }, { brk: 150 }],
       gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
     },
-    necklace: {
+    {
       name: Gears.tyrantBloodthirstyNecklace.name,
       enhancement: 10,
-      stats: {
-        res: 135,
-        def: 125,
-        hit: 120,
-        brk: 150
-      },
+      stats: [{ res: 135 }, { def: 125 }, { hit: 120 }, { brk: 150 }],
       gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
     },
-    shoes: {
+    {
       name: Gears.tyrantAgileBoots.name,
       enhancement: 10,
-      stats: {
-        res: 135,
-        def: 125,
-        hit: 120,
-        brk: 150
-      },
+      stats: [{ res: 135 }, { def: 125 }, { hit: 120 }, { brk: 150 }],
       gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
     },
-    chest: {
+    {
       name: Gears.tyrantAgileArmor.name,
       enhancement: 10,
-      stats: {
-        sta: 137,
-        def: 130,
-        hit: 124,
-        brk: 156
-      },
+      stats: [{ sta: 137 }, { def: 130 }, { hit: 124 }, { brk: 156 }],
       gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
     },
-    gloves: {
+    {
       name: Gears.tyrantCallousGloves.name,
       enhancement: 10,
-      stats: {
-        sta: 137,
-        def: 130,
-        hit: 124,
-        brk: 156
-      },
+      stats: [{ sta: 137 }, { def: 130 }, { hit: 124 }, { brk: 156 }],
       gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
     },
-    pants: {
+    {
       name: Gears.tyrantCallousLeggings.name,
       enhancement: 10,
-      stats: {
-        res: 140,
-        def: 130,
-        hit: 124,
-        brk: 156
-      },
+      stats: [{ res: 140 }, { def: 130 }, { hit: 124 }, { brk: 156 }],
       gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
     },
-    ring: {
+    {
       name: Gears.viperRing.name,
       enhancement: 10,
-      stats: {
-        sta: 127,
-        def: 110,
-        hit: 108,
-        brk: 132
-      },
+      stats: [{ sta: 127 }, { def: 110 }, { hit: 108 }, { brk: 132 }],
       gems: [{ name: Gems.topaz.name, plus: 8 }, { name: Gems.emerald.name, plus: 8 }]
     }
-  },
+  ],
   phylactery: {
     plus: 20,
     skill: Skills.movingIllusion.name,

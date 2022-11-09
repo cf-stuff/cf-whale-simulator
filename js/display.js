@@ -1,4 +1,4 @@
-import getImagePath, { ImageType } from "./image.js";
+import { getImagePath, ImageType } from "./image.js";
 import CFDB from "./data/CFDB.js";
 
 export async function createCanvas(player) {

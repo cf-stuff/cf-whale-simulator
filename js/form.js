@@ -667,7 +667,7 @@ function createGearComponent(gearType, gearOptions) {
     </div>
     <div class="row">
       <div class="col-auto">
-        <img id="gear-${gearType.name}-icon" class="icon-placeholder" src="img/itemPlaceholder/icon${gearType.iconId}.png">
+        <img id="gear-${gearType.name}-icon" class="item-frame" src="img/itemPlaceholder/icon${gearType.iconId}.png">
       </div>
       <div class="col">
         <div class="input-group">

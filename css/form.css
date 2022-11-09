@@ -31,14 +31,14 @@
   outline: 4px solid black;
 }
 
-.icon-placeholder {
+.item-frame {
   background-image: url("../img/itemPlaceholder/skill-kuang1.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
 }
 
-.pink {
+.purple-stat>* {
   background-color: pink;
 }
 

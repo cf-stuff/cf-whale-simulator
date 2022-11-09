@@ -1,17 +1,18 @@
 export const ImageType = {
-  fighter: 0,
-  fighterSkill: 1,
-  gear: 2,
-  glyph: 3,
-  item: 4,
-  pet: 5,
-  petSkill: 6,
-  skill: 7,
-  skillType: 8,
-  totem: 9
+  fighter: "fighter",
+  fighterSkill: "fighterSkill",
+  gear: "gear",
+  gearType: "gearType",
+  glyph: "glyph",
+  item: "item",
+  pet: "pet",
+  petSkill: "petSkill",
+  skill: "skill",
+  skillType: "skillType",
+  totem: "totem"
 }
 
-export default function getImagePath(type, id) {
+export function getImagePath(type, id) {
   const basePath = "img/";
   switch (type) {
     case ImageType.fighter:
@@ -20,6 +21,8 @@ export default function getImagePath(type, id) {
       return basePath + `coatSkillIcon/coatskill_icon${id}.png`;
     case ImageType.gear:
       return basePath + `iquipIcon/equ_icon_${id}.png`;
+    case ImageType.gearType:
+      return basePath + `itemPlaceholder/icon${id}.png`;
     case ImageType.glyph:
       return basePath + `glyphsIcon/item_icon_${id}.png`;
     case ImageType.item:

@@ -2,8 +2,7 @@ import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import CFDB from "../data/CFDB.js";
 import NumberInput from "./NumberInput.js";
 import FixedStatInput from "./FixedStatInput.js";
-import ImageCheckbox from "./ImageCheckbox.js";
-import getImagePath, { ImageType } from "../image.js";
+import { getImagePath, ImageType } from "../image.js";
 import ImageRadio from "./ImageRadio.js";
 
 const maxStats = {

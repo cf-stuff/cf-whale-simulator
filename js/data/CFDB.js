@@ -1,7 +1,8 @@
 import ArenaTitles from "./arena.js";
-import { FighterSkillType, PetSkillType, SkillType } from "./categories.js";
+import { FighterSkillType, GearType, PetSkillType, SkillType } from "./categories.js";
 import Fighters from "./fighters.js";
 import FighterSkills from "./fighterSkills.js";
+import { GearMaxValues, Gears } from "./gears.js";
 import Nexus from "./nexus.js";
 import Pets from "./pets.js";
 import PetSkills from "./petSkills.js";
@@ -45,6 +46,26 @@ CFDB.getPetSkillByIconId = id => CFDB.getPetSkills().find(skill => skill.iconId 
 CFDB.getPetPassives = () => CFDB.getPetSkills(PetSkillType.passive);
 CFDB.getPetActives = () => CFDB.getPetSkills(PetSkillType.active);
 CFDB.getPetCombatSkills = () => [...CFDB.getPetActives(), ...CFDB.getPetPassives(), ...CFDB.getPetSkills(PetSkillType.skill)];
+
+CFDB.getGearTypes = () => Object.values(GearType);
+CFDB.getGearType = name => CFDB.getGearTypes().find(gearType => gearType.name === name);
+CFDB.getGears = () => Object.values(Gears);
+CFDB.getGear = name => CFDB.getGears().find(gear => gear.name === name);
+CFDB.getGearMaxValue = (level, stat, purple = false) => {
+  if (purple) {
+    if (level >= 96) return GearMaxValues.purple96[stat];
+    if (level >= 91) return GearMaxValues.purple91[stat];
+    if (level >= 86) return GearMaxValues.purple86[stat];
+    if (level >= 81) return GearMaxValues.purple81[stat];
+  } else {
+    if (level >= 96) return GearMaxValues.white96[stat];
+    if (level >= 91) return GearMaxValues.white91[stat];
+    if (level >= 86) return GearMaxValues.white86[stat];
+    if (level >= 81) return GearMaxValues.white81[stat];
+  }
+  console.error(`Couldn't find max value for ${level} ${stat}`);
+  return 0;
+}
 
 CFDB.getTotems = () => Object.values(Totems);
 CFDB.getTotem = name => CFDB.getTotems().find(totem => totem.name === name);

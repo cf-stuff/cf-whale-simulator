@@ -1,7 +1,7 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import CFDB from "../data/CFDB.js";
 import Stats from "../data/stats.js";
-import getImagePath, { ImageType } from "../image.js";
+import { getImagePath, ImageType } from "../image.js";
 import Glyph from "./Glyph.js";
 import ImageRadio from "./ImageRadio.js";
 import NumberInput from "./NumberInput.js";

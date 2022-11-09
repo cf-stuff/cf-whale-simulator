@@ -1,7 +1,7 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import CFDB from "../data/CFDB.js";
 import ImageCheckbox from "./ImageCheckbox.js";
-import getImagePath, { ImageType } from "../image.js";
+import { getImagePath, ImageType } from "../image.js";
 import Utils from "../utils.js";
 
 const Skills = ({ isActive, skills, setSkills, expertise, setExpertise, resistance, setResistance }) => {
@@ -28,7 +28,7 @@ const Skills = ({ isActive, skills, setSkills, expertise, setExpertise, resistan
         <${ImageCheckbox} id=${`skill-${skill.iconId}`} value=${skill.name} name="skill" checked=${skills.includes(skill.name)}
         disabled=${skills.length >= 6} src=${getImagePath(ImageType.skill, skill.iconId)} onClick=${handleSkillChange} />`)}
     </div>
-    <span class="text-muted">(go to phylactery for 7th skill)</span>
+    <span class="text-muted">(go to Phylactery for 7th skill)</span>
   </div>
   <div class="row">
     <h3>PRO</h3>

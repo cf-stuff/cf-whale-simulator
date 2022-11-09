@@ -10,7 +10,7 @@ const Soul = ({ options, soul, setSoul }) => {
   <div class="input-group">
     <${SelectInput} options=${options} value=${soul.stat} onChange=${handleStatChange} />
     <${NumberInput} value=${soul.level} onInput=${handleLevelChange} />
-    <span class="input-group-text soul-stat-amount">${soul.stat === "None" ? "" : CFDB.calculateNexusStat(soul.stat, soul.level)}</span>
+    <span class="input-group-text soul-stat-amount">${soul.stat !== "None" && CFDB.calculateNexusStat(soul.stat, soul.level)}</span>
   </div>
   `;
 }

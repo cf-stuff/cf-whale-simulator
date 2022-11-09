@@ -1,6 +1,7 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import { PetSkillType } from "../data/categories.js";
 import CFDB from "../data/CFDB.js";
+import { getImagePath, ImageType } from "../image.js";
 import Utils from "../utils.js";
 import ImageCheckbox from "./ImageCheckbox.js";
 
@@ -33,16 +34,16 @@ const EvolvedPet = ({ pet, setPet }) => {
 
   CFDB.getPetSkills().forEach(skill => {
     const id = `petskill_${skill.iconId}`;
-    const url = `img/petskillIcon/petskill_icon_${skill.iconId}.png`;
+    const path = getImagePath(ImageType.petSkill, skill.iconId);
     if (skill.type === PetSkillType.evolvedStat) {
       stats.push(html`<${ImageCheckbox} id=${id} value=${skill.name} name="e-pet-skill"
-        checked=${pet.evoSkills.includes(skill.name)} disabled=${skillLimitReached} src=${url} onClick=${handleStats} />`);
+        checked=${pet.evoSkills.includes(skill.name)} disabled=${skillLimitReached} src=${path} onClick=${handleStats} />`);
     } else if (pet.plus >= 15 && skill.type === PetSkillType.passive) {
       passives.push(html`<${ImageCheckbox} id=${id} value=${skill.name} name="pet-passive"
-        checked=${pet.evoSkills.includes(skill.name)} disabled=${skillLimitReached || passiveChosen} src=${url} onClick=${handleStats} />`);
+        checked=${pet.evoSkills.includes(skill.name)} disabled=${skillLimitReached || passiveChosen} src=${path} onClick=${handleStats} />`);
     } else if (skill.type === PetSkillType.active) {
       actives.push(html`<${ImageCheckbox} id=${id} value=${skill.name} name="pet-active"
-        checked=${pet.evoSkills.includes(skill.name)} disabled=${skillLimitReached || activeChosen} src=${url} onClick=${handleStats} />`);
+        checked=${pet.evoSkills.includes(skill.name)} disabled=${skillLimitReached || activeChosen} src=${path} onClick=${handleStats} />`);
     }
   });
 

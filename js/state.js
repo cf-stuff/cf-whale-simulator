@@ -38,6 +38,7 @@ export const initialState = {
     skills: [],
     evoSkills: []
   },
+  gears: [],
   phylactery: {
     plus: 0,
     skill: undefined,
@@ -115,6 +116,9 @@ export const reducer = (state, action) => {
         if (pet.plus < 15) CFDB.getPetPassives().forEach(skill => Utils.removeElement(pet.evoSkills, skill.name));
       }
       return { ...state, pet };
+    case ActionType.gear:
+      const gears = action.payload.filter(gear => gear && gear.name !== "None");
+      return { ...state, gears };
     case ActionType.phy:
       const phylactery = { ...state.phylactery, ...action.payload };
       phylactery.stats = phylactery.stats.filter(stat => stat && stat !== "None");

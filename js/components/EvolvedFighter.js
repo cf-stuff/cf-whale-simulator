@@ -1,6 +1,7 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import { FighterSkillType } from "../data/categories.js";
 import CFDB from "../data/CFDB.js";
+import { getImagePath, ImageType } from "../image.js";
 import Utils from "../utils.js";
 import ImageCheckbox from "./ImageCheckbox.js";
 import ImageRadio from "./ImageRadio.js";
@@ -38,16 +39,16 @@ const EvolvedFighter = ({ fighter, setFighter }) => {
 
   CFDB.getFighterSkills().forEach(skill => {
     const id = `coatSkill_${skill.iconIds[2]}`;
-    const url = `img/coatSkillIcon/coatskill_icon${skill.iconIds[2]}.png`;
+    const path = getImagePath(ImageType.fighterSkill, skill.iconIds[2]);
     if (skill.type === FighterSkillType.stat) {
       fighterStatSelect.push(html`<${ImageCheckbox} id=${id} value=${skill.name} name="fighter-stat"
-      checked=${fighter.stats.includes(skill.name)} disabled=${statLimitReached} src=${url} onClick=${handleStats} />`);
+      checked=${fighter.stats.includes(skill.name)} disabled=${statLimitReached} src=${path} onClick=${handleStats} />`);
     } else if (skill.type === FighterSkillType.reset) {
       fighterResetSelect.push(html`<${ImageCheckbox} id=${id} value=${skill.name} name="fighter-reset"
-      checked=${fighter.resets.includes(skill.name)} disabled=${resetLimitReached} src=${url} onClick=${handleResets} />`);
+      checked=${fighter.resets.includes(skill.name)} disabled=${resetLimitReached} src=${path} onClick=${handleResets} />`);
     } else if (skill.type === FighterSkillType.healing) {
       fighterHealingSelect.push(html`<${ImageRadio} id=${id} value=${skill.name} name="fighter-healing"
-      checked=${fighter.healing === skill.name} src=${url} onClick=${handleHealing} />`);
+      checked=${fighter.healing === skill.name} src=${path} onClick=${handleHealing} />`);
     }
   });
 

@@ -2,6 +2,7 @@ import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import { PetSkillType } from "../data/categories.js";
 import CFDB from "../data/CFDB.js";
 import Pets from "../data/pets.js";
+import { getImagePath, ImageType } from "../image.js";
 import Utils from "../utils.js";
 import EvolvedPet from "./EvolvedPet.js";
 import ImageCheckbox from "./ImageCheckbox.js";
@@ -39,13 +40,13 @@ const Pet = ({ isActive, pet, setPet }) => {
     .filter(skill => Utils.equalsAny(skill.type, PetSkillType.stat, PetSkillType.skill))
     .forEach(skill => {
       const id = `petskill_${skill.iconId}`;
-      const url = `img/petskillIcon/petskill_icon_${skill.iconId}.png`;
+      const path = getImagePath(ImageType.petSkill, skill.iconId);
       if ((id.startsWith("petskill_27") && !id.endsWith(`_${petIconId}`))
         || (id.startsWith("petskill_28") && !id.endsWith(`_${petIconId}`))) {
         return;
       }
       petSkillSelect.push(html`<${ImageCheckbox} id=${id} value=${skill.name} name="pet-skill"
-      checked=${pet.skills.includes(skill.name)} disabled=${skillLimitReached} src=${url} onClick=${handleSkills} />`);
+      checked=${pet.skills.includes(skill.name)} disabled=${skillLimitReached} src=${path} onClick=${handleSkills} />`);
     });
 
   return html`

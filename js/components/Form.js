@@ -1,7 +1,9 @@
 import { html, useState } from "https://unpkg.com/htm/preact/standalone.module.js"
+import CFDB from "../data/CFDB.js";
 import { ActionType } from "../state.js";
 import Arena from "./Arena.js";
 import Fighter from "./Fighter.js";
+import Gears from "./Gears.js";
 import Nexus from "./Nexus.js";
 import NumberInput from "./NumberInput.js";
 import Pet from "./Pet.js";
@@ -48,6 +50,7 @@ const Form = ({ state, dispatch }) => {
     </div>
     <${Fighter} isActive=${activeTab === "Fighter"} fighter=${state.fighter} setFighter=${createDispatch(ActionType.fighter)} />
     <${Pet} isActive=${activeTab === "Pet"} pet=${state.pet} setPet=${createDispatch(ActionType.pet)} />
+    <${Gears} isActive=${activeTab === "Gear"} fighterWeaponType=${CFDB.getFighter(state.fighter.name)?.weaponType || "None"} gears=${state.gears} setGears=${createDispatch(ActionType.gear)} />
     <${Phylactery} isActive=${activeTab === "Phylactery"} phylactery=${state.phylactery} setPhylactery=${createDispatch(ActionType.phy)} />
     <${Nexus} isActive=${activeTab === "Nexus"} nexus=${state.nexus} setNexus=${createDispatch(ActionType.nexus)} />
     <${StarAltar} isActive=${activeTab === "Star Altar"} altar=${state.altar} setAltar=${createDispatch(ActionType.altar)} />

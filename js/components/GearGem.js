@@ -1,11 +1,14 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import CFDB from "../data/CFDB.js";
-import FixedStatInput from "./FixedStatInput.js";
+import NumberInput from "./NumberInput.js";
+import SelectInput from "./SelectInput.js";
 
-
-const GearGem = ({ gear, setGear }) => {
+const GearGem = ({ gemType, gem, setGem }) => {
   return html`
-  <div class="mb-3">
+  <div class="input-group">
+    <${SelectInput} options=${[]} />
+    <span class="input-group-text">+</span>
+    <${NumberInput} />
   </div>
   `;
 }

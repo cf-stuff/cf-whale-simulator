@@ -20,7 +20,7 @@ export function getImagePath(type, id) {
     case ImageType.fighterSkill:
       return basePath + `coatSkillIcon/coatskill_icon${id}.png`;
     case ImageType.gear:
-      return basePath + `iquipIcon/equ_icon_${id}.png`;
+      return basePath + `equipIcon/equ_icon_${id}.png`;
     case ImageType.gearType:
       return basePath + `itemPlaceholder/icon${id}.png`;
     case ImageType.glyph:

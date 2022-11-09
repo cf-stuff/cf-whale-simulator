@@ -118,6 +118,14 @@ export const reducer = (state, action) => {
       return { ...state, pet };
     case ActionType.gear:
       const gears = action.payload.filter(gear => gear && gear.name !== "None");
+      gears.forEach(gear => {
+        const gearInfo = CFDB.getGear(gear.name);
+        gear.stats.forEach((stat, i) => {
+          const statName = Object.keys(stat)[0];
+          const max = CFDB.getGearMaxValue(gearInfo.level, statName, i === 3);
+          stat[statName] = Utils.clamp(stat[statName], 0, max);
+        })
+      });
       return { ...state, gears };
     case ActionType.phy:
       const phylactery = { ...state.phylactery, ...action.payload };

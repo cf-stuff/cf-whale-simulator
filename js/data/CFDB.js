@@ -1,8 +1,9 @@
 import ArenaTitles from "./arena.js";
-import { FighterSkillType, GearType, PetSkillType, SkillType } from "./categories.js";
+import { FighterSkillType, GearType, GemType, PetSkillType, SkillType } from "./categories.js";
 import Fighters from "./fighters.js";
 import FighterSkills from "./fighterSkills.js";
 import { GearMaxValues, Gears } from "./gears.js";
+import Gems from "./gems.js";
 import Nexus from "./nexus.js";
 import Pets from "./pets.js";
 import PetSkills from "./petSkills.js";
@@ -66,6 +67,9 @@ CFDB.getGearMaxValue = (level, stat, purple = false) => {
   console.error(`Couldn't find max value for ${level} ${stat}`);
   return 0;
 }
+
+CFDB.getNormalGems = () => Object.values(Gems).filter(gem => gem.type === GemType.normal);
+CFDB.getFusionGems = () => Object.values(Gems).filter(gem => gem.type === GemType.fusion);
 
 CFDB.getTotems = () => Object.values(Totems);
 CFDB.getTotem = name => CFDB.getTotems().find(totem => totem.name === name);

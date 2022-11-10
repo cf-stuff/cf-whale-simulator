@@ -27,7 +27,7 @@ const Gear = ({ fighterWeaponType, gear, type, setGear }) => {
       gear.stats[position] = (stat === "None") ? null : { [stat]: value };
       setGear({ ...gear, stats: gear.stats });
     }
-    const selectedStats = gear.stats.map(stat => stat && Object.keys(stat)[0]);
+    const selectedStats = gear.stats.filter(stat => stat).map(stat => Object.keys(stat)[0]);
     for (let i = 0; i < 4; ++i) {
       const [stat, value] = Object.entries(gear.stats[i] || { "None": 0 })[0];
       const options = CFDB.getStats()

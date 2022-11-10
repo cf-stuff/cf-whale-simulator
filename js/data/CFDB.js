@@ -2,7 +2,7 @@ import ArenaTitles from "./arena.js";
 import { FighterSkillType, GearType, GemType, PetSkillType, SkillType } from "./categories.js";
 import Fighters from "./fighters.js";
 import FighterSkills from "./fighterSkills.js";
-import { GearMaxValues, Gears } from "./gears.js";
+import { GearMaxValues, Gears, GearSuitBonus } from "./gears.js";
 import Gems from "./gems.js";
 import Nexus from "./nexus.js";
 import Pets from "./pets.js";
@@ -68,13 +68,37 @@ CFDB.getGearMaxValue = (level, stat, purple = false) => {
   return 0;
 }
 
-CFDB.getNormalGems = () => Object.values(Gems).filter(gem => gem.type === GemType.normal);
-CFDB.getFusionGems = () => Object.values(Gems).filter(gem => gem.type === GemType.fusion);
+CFDB.getGearSuitBonus = () => Object.values(GearSuitBonus);
+
+CFDB.getGems = () => Object.values(Gems);
+CFDB.getGem = name => CFDB.getGems().find(gem => gem.name === name);
+CFDB.getNormalGems = () => CFDB.getGems().filter(gem => gem.type === GemType.normal);
+CFDB.getFusionGems = () => CFDB.getGems().filter(gem => gem.type === GemType.fusion);
 
 CFDB.getTotems = () => Object.values(Totems);
 CFDB.getTotem = name => CFDB.getTotems().find(totem => totem.name === name);
 
 CFDB.getPhylactery = type => Object.values(Phylactery).find(phy => phy.type === type);
+CFDB.getPhylacteryExtraTriggerPercent = level => {
+  let extraTriggerPercent = 0;
+  if (level >= 12) extraTriggerPercent += 1;
+  if (level >= 16) extraTriggerPercent += 1;
+  if (level >= 20) extraTriggerPercent += 1;
+  return extraTriggerPercent;
+}
+CFDB.getPhylacteryInfo = (type, plus) => {
+  const phy = CFDB.getPhylactery(type);
+  const bmvAmount = phy.initialBmv + phy.bmvPerPlus[plus];
+  const stats = {};
+  let glyphMultiplier = 1;
+  if (plus >= 2) stats.maxAtk = phy.maxAtk;
+  if (plus >= 4) stats.minAtk = phy.minAtk;
+  if (plus >= 6) stats.hp = phy.hp;
+  if (plus >= 8) glyphMultiplier += 0.4;
+  if (plus >= 14) glyphMultiplier += 0.4;
+  if (plus >= 18) glyphMultiplier += 0.4;
+  return { bmvAmount, glyphMultiplier, stats };
+}
 
 CFDB.getNexusStats = () => Object.values(Nexus);
 CFDB.getNexusStat = name => CFDB.getNexusStats().find(stat => stat.name === name);

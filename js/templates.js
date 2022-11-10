@@ -25,10 +25,9 @@ Builds.brkTank = {
       dex: 360,
       sta: 360
     },
-    skills: [
-      FighterSkills.atkPercent.name, FighterSkills.spd.name, FighterSkills.fury.name,
-      FighterSkills.bloodFrenzy.name, FighterSkills.pray.name, FighterSkills.thunderclapQuake.name
-    ]
+    stats: [FighterSkills.atkPercent.name, FighterSkills.spd.name, FighterSkills.fury.name],
+    resets: [FighterSkills.bloodFrenzy.name, FighterSkills.thunderclapQuake.name],
+    healing: FighterSkills.pray.name
   },
   pet: {
     name: Pets.sleipnir.name,
@@ -97,7 +96,7 @@ Builds.brkTank = {
   phylactery: {
     plus: 20,
     skill: Skills.movingIllusion.name,
-    stats: [Stats.sta.displayName, Stats.sta.displayName, Stats.sta.displayName],
+    stats: [Stats.sta.displayName, Stats.sta.displayName, Stats.dex.displayName],
     glyphs: [
       {
         stat: Stats.brk.displayName,

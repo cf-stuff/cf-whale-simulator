@@ -5,7 +5,7 @@ const Gems = {
     name: "Sapphire",
     iconId: 14,
     type: GemType.normal,
-    statsPerLevel: {
+    statsPerPlus: {
       dex: 7
     }
   },
@@ -13,7 +13,7 @@ const Gems = {
     name: "Topaz",
     iconId: 15,
     type: GemType.normal,
-    statsPerLevel: {
+    statsPerPlus: {
       sta: 7
     }
   },
@@ -21,7 +21,7 @@ const Gems = {
     name: "Ruby",
     iconId: 16,
     type: GemType.normal,
-    statsPerLevel: {
+    statsPerPlus: {
       str: 7
     }
   },
@@ -29,7 +29,7 @@ const Gems = {
     name: "Amethyst",
     iconId: 17,
     type: GemType.fusion,
-    statsPerLevel: {
+    statsPerPlus: {
       str: 5,
       dex: 5
     }
@@ -38,7 +38,7 @@ const Gems = {
     name: "Garnet",
     iconId: 18,
     type: GemType.fusion,
-    statsPerLevel: {
+    statsPerPlus: {
       str: 5,
       sta: 5
     }
@@ -47,7 +47,7 @@ const Gems = {
     name: "Emerald",
     iconId: 19,
     type: GemType.fusion,
-    statsPerLevel: {
+    statsPerPlus: {
       dex: 5,
       sta: 5
     }

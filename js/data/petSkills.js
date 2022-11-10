@@ -5,122 +5,146 @@ const PetSkills = {
   def_30: {
     name: "30DEF",
     type: PetSkillType.stat,
-    iconId: 1
+    iconId: 1,
+    stat: { def: 30 }
   },
   def_60: {
     name: "60DEF",
     type: PetSkillType.stat,
-    iconId: 2
+    iconId: 2,
+    stat: { def: 60 }
   },
   brk_50: {
     name: "50BRK",
     type: PetSkillType.stat,
-    iconId: 3
+    iconId: 3,
+    stat: { brk: 50 }
   },
   brk_100: {
     name: "100BRK",
     type: PetSkillType.stat,
-    iconId: 4
+    iconId: 4,
+    stat: { brk: 100 }
   },
   res_50: {
     name: "50RES",
     type: PetSkillType.stat,
-    iconId: 5
+    iconId: 5,
+    stat: { res: 50 }
   },
   res_100: {
     name: "100RES",
     type: PetSkillType.stat,
-    iconId: 6
+    iconId: 6,
+    stat: { res: 100 }
   },
   crt_50: {
     name: "50CRT",
     type: PetSkillType.stat,
-    iconId: 7
+    iconId: 7,
+    stat: { crt: 50 }
   },
   crt_100: {
     name: "100CRT",
     type: PetSkillType.stat,
-    iconId: 8
+    iconId: 8,
+    stat: { crt: 100 }
   },
   hpPercent_5: {
     name: "5HP%",
     type: PetSkillType.stat,
-    iconId: 9
+    iconId: 9,
+    stat: { hpPercent: 5 }
   },
   hpPercent_10: {
     name: "10HP%",
     type: PetSkillType.stat,
-    iconId: 10
+    iconId: 10,
+    stat: { hpPercent: 10 }
   },
   maxAtk_10: {
     name: "10Max ATK",
     type: PetSkillType.stat,
-    iconId: 11
+    iconId: 11,
+    stat: { maxAtk: 10 }
   },
   maxAtk_20: {
     name: "20Max ATK",
     type: PetSkillType.stat,
-    iconId: 12
+    iconId: 12,
+    stat: { maxAtk: 20 }
   },
   hit_50: {
     name: "50HIT",
     type: PetSkillType.stat,
-    iconId: 13
+    iconId: 13,
+    stat: { hit: 50 }
   },
   hit_100: {
     name: "100HIT",
     type: PetSkillType.stat,
-    iconId: 14
+    iconId: 14,
+    stat: { hit: 100 }
   },
   sp_10: {
     name: "10SP",
     type: PetSkillType.stat,
-    iconId: 15
+    iconId: 15,
+    stat: { sp: 10 }
   },
   sp_20: {
     name: "20SP",
     type: PetSkillType.stat,
-    iconId: 16
+    iconId: 16,
+    stat: { sp: 20 }
   },
   atkPercent_5: {
     name: "5ATK%",
     type: PetSkillType.stat,
-    iconId: 17
+    iconId: 17,
+    stat: { atkPercent: 5 }
   },
   atkPercent_10: {
     name: "10ATK%",
     type: PetSkillType.stat,
-    iconId: 18
+    iconId: 18,
+    stat: { atkPercent: 10 }
   },
   eva_25: {
     name: "25EVA",
     type: PetSkillType.stat,
-    iconId: 19
+    iconId: 19,
+    stat: { eva: 25 }
   },
   eva_50: {
     name: "50EVA",
     type: PetSkillType.stat,
-    iconId: 20
+    iconId: 20,
+    stat: { eva: 50 }
   },
   hp_30: {
     name: "30HP",
     type: PetSkillType.stat,
-    iconId: 21
+    iconId: 21,
+    stat: { hp: 30 }
   },
   hp_60: {
     name: "60HP",
     type: PetSkillType.stat,
-    iconId: 22
+    iconId: 22,
+    stat: { hp: 60 }
   },
   spd_5: {
     name: "5SPD",
     type: PetSkillType.stat,
-    iconId: 23
+    iconId: 23,
+    stat: { spd: 5 }
   },
   spd_10: {
     name: "10SPD",
     type: PetSkillType.stat,
-    iconId: 24
+    iconId: 24,
+    stat: { spd: 10 }
   },
   scratch: {
     name: "Scratch",
@@ -146,77 +170,92 @@ const PetSkills = {
   foxSpecialStat: {
     name: "50EVA (Gale Fox Special)",
     type: PetSkillType.stat,
-    iconId: "27_1"
+    iconId: "27_1",
+    stat: { eva: 50 }
   },
   dogSpecialStat: {
     name: "150BRK (Psychic Dog Special)",
     type: PetSkillType.stat,
-    iconId: "27_2"
+    iconId: "27_2",
+    stat: { brk: 150 }
   },
   riceballSpecialStat: {
     name: "60HP (Rice Ball Special)",
     type: PetSkillType.stat,
-    iconId: "27_3"
+    iconId: "27_3",
+    stat: { hp: 60 }
   },
   slimeSpecialStat: {
     name: "150RES (Slime Special)",
     type: PetSkillType.stat,
-    iconId: "27_4"
+    iconId: "27_4",
+    stat: { res: 150 }
   },
   penguinSpecialStat: {
     name: "60DEF (Penguin Special)",
     type: PetSkillType.stat,
-    iconId: "27_5"
+    iconId: "27_5",
+    stat: { def: 60 }
   },
   batSpecialStat: {
     name: "150CRT (Vampire Bat Special)",
     type: PetSkillType.stat,
-    iconId: "27_6"
+    iconId: "27_6",
+    stat: { crt: 150 }
   },
   toadSpecialStat: {
     name: "10SPD (Toad King Special)",
     type: PetSkillType.stat,
-    iconId: "27_7"
+    iconId: "27_7",
+    stat: { spd: 10 }
   },
   tigerSpecialStat: {
     name: "50EVA (Ghost Tiger Special)",
     type: PetSkillType.stat,
-    iconId: "27_8"
+    iconId: "27_8",
+    stat: { eva: 50 }
   },
   cocoSpecialStat: {
     name: "150HIT (Coco Special)",
     type: PetSkillType.stat,
-    iconId: "27_9"
+    iconId: "27_9",
+    stat: { hit: 150 }
   },
   unicornSpecialStat: {
     name: "150HIT (Unicorn Special)",
     type: PetSkillType.stat,
-    iconId: "27_10"
+    iconId: "27_10",
+    stat: { hit: 150 }
   },
   dragonSpecialStat: {
     name: "150BRK (Black Dragon Special)",
     type: PetSkillType.stat,
-    iconId: "27_11"
+    iconId: "27_11",
+    stat: { brk: 150 }
   },
   fenrirSpecialStat: {
     name: "150CRT (Fenrir Special)",
     type: PetSkillType.stat,
-    iconId: "27_12"
+    iconId: "27_12",
+    stat: { crt: 150 }
   },
   sleipnirSpecialStat: {
     name: "150BRK (Sleipnir Special)",
     type: PetSkillType.stat,
-    iconId: "27_13"
+    iconId: "27_13",
+    stat: { brk: 150 }
   },
   rekachuSpecialStat: {
     name: "50EVA (Rekachu Special)",
     type: PetSkillType.stat,
-    iconId: "27_15"
+    iconId: "27_15",
+    stat: { eva: 50 }
   },
   snowFoxSpecialStat: {
     name: "10SPD (Snow Fox Special)",
     type: PetSkillType.stat,
-    iconId: "27_17"
+    iconId: "27_17",
+    stat: { spd: 10 }
   },
   foxSpecialSkill: {
     name: "Stun (Gale Fox Special)",
@@ -429,182 +468,218 @@ const PetSkills = {
   def_20Evo: {
     name: "20DEF",
     type: PetSkillType.evolvedStat,
-    iconId: 31
+    iconId: 31,
+    stat: { def: 20 }
   },
   brk_20Evo: {
     name: "20BRK",
     type: PetSkillType.evolvedStat,
-    iconId: 32
+    iconId: 32,
+    stat: { brk: 20 }
   },
   res_20Evo: {
     name: "20RES",
     type: PetSkillType.evolvedStat,
-    iconId: 33
+    iconId: 33,
+    stat: { res: 20 }
   },
   crt_20Evo: {
     name: "20CRT",
     type: PetSkillType.evolvedStat,
-    iconId: 34
+    iconId: 34,
+    stat: { crt: 20 }
   },
   hpPercent_10Evo: {
     name: "10HP%",
     type: PetSkillType.evolvedStat,
-    iconId: 35
+    iconId: 35,
+    stat: { hpPercent: 10 }
   },
   maxAtk_20Evo: {
     name: "20Max ATK",
     type: PetSkillType.evolvedStat,
-    iconId: 36
+    iconId: 36,
+    stat: { maxAtk: 20 }
   },
   hit_20Evo: {
     name: "20HIT",
     type: PetSkillType.evolvedStat,
-    iconId: 37
+    iconId: 37,
+    stat: { hit: 20 }
   },
   sp_10Evo: {
     name: "10SP",
     type: PetSkillType.evolvedStat,
-    iconId: 38
+    iconId: 38,
+    stat: { sp: 10 }
   },
   atkPercent_10Evo: {
     name: "10ATK%",
     type: PetSkillType.evolvedStat,
-    iconId: 39
+    iconId: 39,
+    stat: { atkPercent: 10 }
   },
   eva_20Evo: {
     name: "20EVA",
     type: PetSkillType.evolvedStat,
-    iconId: 40
+    iconId: 40,
+    stat: { eva: 20 }
   },
   hp_50Evo: {
     name: "50HP",
     type: PetSkillType.evolvedStat,
-    iconId: 41
+    iconId: 41,
+    stat: { hp: 50 }
   },
   spd_10Evo: {
     name: "10SPD",
     type: PetSkillType.evolvedStat,
-    iconId: 42
+    iconId: 42,
+    stat: { spd: 10 }
   },
   def_30Evo: {
     name: "30DEF",
     type: PetSkillType.evolvedStat,
-    iconId: 51
+    iconId: 51,
+    stat: { def: 30 }
   },
   brk_30Evo: {
     name: "30BRK",
     type: PetSkillType.evolvedStat,
-    iconId: 52
+    iconId: 52,
+    stat: { brk: 30 }
   },
   res_30Evo: {
     name: "30RES",
     type: PetSkillType.evolvedStat,
-    iconId: 53
+    iconId: 53,
+    stat: { res: 30 }
   },
   crt_30Evo: {
     name: "30CRT",
     type: PetSkillType.evolvedStat,
-    iconId: 54
+    iconId: 54,
+    stat: { crt: 30 }
   },
   hpPercent_15Evo: {
     name: "15HP%",
     type: PetSkillType.evolvedStat,
-    iconId: 55
+    iconId: 55,
+    stat: { hpPercent: 15 }
   },
   maxAtk_30Evo: {
     name: "30Max ATK",
     type: PetSkillType.evolvedStat,
-    iconId: 56
+    iconId: 56,
+    stat: { maxAtk: 30 }
   },
   hit_30Evo: {
     name: "30HIT",
     type: PetSkillType.evolvedStat,
-    iconId: 57
+    iconId: 57,
+    stat: { hit: 30 }
   },
   sp_20Evo: {
     name: "20SP",
     type: PetSkillType.evolvedStat,
-    iconId: 58
+    iconId: 58,
+    stat: { sp: 20 }
   },
   atkPercent_15Evo: {
     name: "15ATK%",
     type: PetSkillType.evolvedStat,
-    iconId: 59
+    iconId: 59,
+    stat: { atkPercent: 15 }
   },
   eva_30Evo: {
     name: "30EVA",
     type: PetSkillType.evolvedStat,
-    iconId: 60
+    iconId: 60,
+    stat: { eva: 30 }
   },
   hp_80Evo: {
     name: "80HP",
     type: PetSkillType.evolvedStat,
-    iconId: 61
+    iconId: 61,
+    stat: { hp: 80 }
   },
   spd_20Evo: {
     name: "20SPD",
     type: PetSkillType.evolvedStat,
-    iconId: 62
+    iconId: 62,
+    stat: { spd: 20 }
   },
   def_50Evo: {
     name: "50DEF",
     type: PetSkillType.evolvedStat,
-    iconId: 71
+    iconId: 71,
+    stat: { def: 50 }
   },
   brk_50Evo: {
     name: "50BRK",
     type: PetSkillType.evolvedStat,
-    iconId: 72
+    iconId: 72,
+    stat: { brk: 50 }
   },
   res_50Evo: {
     name: "50RES",
     type: PetSkillType.evolvedStat,
-    iconId: 73
+    iconId: 73,
+    stat: { res: 50 }
   },
   crt_50Evo: {
     name: "50CRT",
     type: PetSkillType.evolvedStat,
-    iconId: 74
+    iconId: 74,
+    stat: { crt: 50 }
   },
   hpPercent_25Evo: {
     name: "25HP%",
     type: PetSkillType.evolvedStat,
-    iconId: 75
+    iconId: 75,
+    stat: { hpPercent: 25 }
   },
   maxAtk_50Evo: {
     name: "50Max ATK",
     type: PetSkillType.evolvedStat,
-    iconId: 76
+    iconId: 76,
+    stat: { maxAtk: 50 }
   },
   hit_50Evo: {
     name: "50HIT",
     type: PetSkillType.evolvedStat,
-    iconId: 77
+    iconId: 77,
+    stat: { hit: 50 }
   },
   sp_30Evo: {
     name: "30SP",
     type: PetSkillType.evolvedStat,
-    iconId: 78
+    iconId: 78,
+    stat: { sp: 30 }
   },
   atkPercent_25Evo: {
     name: "25ATK%",
     type: PetSkillType.evolvedStat,
-    iconId: 79
+    iconId: 79,
+    stat: { atkPercent: 25 }
   },
   eva_50Evo: {
     name: "50EVA",
     type: PetSkillType.evolvedStat,
-    iconId: 80
+    iconId: 80,
+    stat: { eva: 50 }
   },
   hp_130Evo: {
     name: "130HP",
     type: PetSkillType.evolvedStat,
-    iconId: 81
+    iconId: 81,
+    stat: { hp: 130 }
   },
   spd_30Evo: {
     name: "30SPD",
     type: PetSkillType.evolvedStat,
-    iconId: 82
+    iconId: 82,
+    stat: { spd: 30 }
   },
   infect: {
     name: "Infect (Active)",

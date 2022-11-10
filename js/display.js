@@ -52,7 +52,7 @@ export async function createCanvas(player) {
 
   if (player.pet.name !== "None") {
     const pet = CFDB.getPet(player.pet.name);
-    ctx.drawImage(await getImage(getImagePath(ImageType.pet, pet.iconId)), 250, 500);
+    ctx.drawImage(await getImage(getImagePath(ImageType.pet, player.pet.evolved ? pet.evoIconId : pet.iconId)), 250, 500);
     ctx.font = "bold 16px arial";
     ctx.fillStyle = "#a15f08";
     const petDisplayName = player.pet.evolved ? pet.evoName : pet.name;

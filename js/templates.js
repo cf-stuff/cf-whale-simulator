@@ -40,7 +40,7 @@ Builds.brkTank = {
     },
     stats: [FighterSkills.atkPercent.name, FighterSkills.spd.name, FighterSkills.fury.name],
     resets: [FighterSkills.bloodFrenzy.name, FighterSkills.thunderclapQuake.name],
-    healing: FighterSkills.pray.name
+    healing: FighterSkills.shieldWall.name
   },
   pet: {
     name: Pets.sleipnir.name,

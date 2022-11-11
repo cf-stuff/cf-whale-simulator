@@ -4,13 +4,14 @@ import SelectInput from "./SelectInput.js";
 import { getBuild, getBuildNames } from "../templates.js";
 import { getSavedKeys, load, remove, save } from "../storage.js";
 import { initialState } from "../state.js";
+import Utils from "../utils.js";
 
 const BuildLoader = ({ build, setBuild }) => {
   const [selectedBuild, setSelectedBuild] = useState("None");
 
   const loadBuild = () => {
     if (selectedBuild === "None") {
-      setBuild(initialState);
+      setBuild(Utils.deepClone(initialState));
     } else {
       const newBuild = load(selectedBuild) || getBuild(selectedBuild);
       setBuild(newBuild);

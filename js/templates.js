@@ -373,6 +373,186 @@ Builds.evader = {
   arenaTitle: ArenaTitle.grandMaster2.name
 };
 
+Builds.tank = {
+  name: "Sample Tank",
+  level: 100,
+  fighter: {
+    name: Fighters.madara.name,
+    plus: 21,
+    evolved: true,
+    potentials: {
+      str: 360,
+      dex: 360,
+      sta: 360
+    },
+    stats: [FighterSkills.def.name, FighterSkills.hpPercent.name, FighterSkills.fury.name],
+    resets: [FighterSkills.rejuvenation.name, FighterSkills.energyShield.name],
+    healing: FighterSkills.pray.name
+  },
+  pet: {
+    name: Pets.riceball.name,
+    plus: 21,
+    evolved: true,
+    skills: [
+      PetSkills.block.name, PetSkills.riceballSpecialSkill.name, PetSkills.def_30.name,
+      PetSkills.def_60.name, PetSkills.hit_100.name, PetSkills.hit_50.name,
+      PetSkills.res_100.name, PetSkills.res_50.name, PetSkills.hpPercent_10.name,
+      PetSkills.hpPercent_5.name, PetSkills.hp_60.name, PetSkills.spd_10.name
+    ],
+    evoSkills: [
+      PetSkills.def_50Evo.name, PetSkills.hpPercent_25Evo.name, PetSkills.spd_30Evo.name,
+      PetSkills.hp_130Evo.name, PetSkills.ignite.name, PetSkills.energyShield.name],
+  },
+  gears: [
+    {
+      name: Gears.tyrantCallousSword.name,
+      enhancement: 10,
+      stats: [{ hp: 185 }, { sta: 132 }, { hit: 120 }, { def: 150 }],
+      gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.topaz.name, plus: 9 }, { name: Gems.topaz.name, plus: 9 }]
+    },
+    {
+      name: Gears.tyrantCallousHelmet.name,
+      enhancement: 10,
+      stats: [{ res: 135 }, { sta: 132 }, { hp: 185 }, { def: 150 }],
+      gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
+    },
+    {
+      name: Gears.tyrantCallousNecklace.name,
+      enhancement: 10,
+      stats: [{ res: 135 }, { sta: 132 }, { hit: 120 }, { def: 150 }],
+      gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
+    },
+    {
+      name: Gears.tyrantCallousBoots.name,
+      enhancement: 10,
+      stats: [{ res: 135 }, { sta: 132 }, { hp: 185 }, { def: 150 }],
+      gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
+    },
+    {
+      name: Gears.tyrantCallousArmor.name,
+      enhancement: 10,
+      stats: [{ hp: 194 }, { sta: 137 }, { hit: 124 }, { def: 156 }],
+      gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
+    },
+    {
+      name: Gears.tyrantCallousGloves.name,
+      enhancement: 10,
+      stats: [{ hp: 194 }, { sta: 137 }, { hit: 124 }, { def: 156 }],
+      gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
+    },
+    {
+      name: Gears.tyrantCallousLeggings.name,
+      enhancement: 10,
+      stats: [{ res: 140 }, { sta: 137 }, { hp: 194 }, { def: 156 }],
+      gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
+    },
+    {
+      name: Gears.tyrantCallousRing.name,
+      enhancement: 10,
+      stats: [{ res: 140 }, { sta: 110 }, { hp: 194 }, { def: 156 }],
+      gems: [{ name: Gems.topaz.name, plus: 8 }, { name: Gems.emerald.name, plus: 8 }]
+    }
+  ],
+  phylactery: {
+    plus: 20,
+    skill: Skills.movingIllusion.name,
+    stats: [Stats.sta.displayName, Stats.sta.displayName, Stats.dex.displayName],
+    glyphs: [
+      {
+        stat: Stats.brk.displayName,
+        plus: 6
+      },
+      {
+        stat: Stats.def.displayName,
+        plus: 6
+      },
+      {
+        stat: Stats.hit.displayName,
+        plus: 6
+      },
+      {
+        stat: Stats.res.displayName,
+        plus: 6
+      },
+    ]
+  },
+  nexus: [
+    {
+      stat: Stats.sta.displayName,
+      level: 12
+    },
+    {
+      stat: Stats.dex.displayName,
+      level: 12
+    },
+    {
+      stat: Stats.def.displayName,
+      level: 12
+    },
+    {
+      stat: Stats.hit.displayName,
+      level: 12
+    },
+    {
+      stat: Stats.res.displayName,
+      level: 12
+    },
+    {
+      stat: Stats.hp.displayName,
+      level: 12
+    },
+    {
+      stat: Stats.spd.displayName,
+      level: 12
+    },
+    {
+      stat: Stats.sp.displayName,
+      level: 12
+    },
+  ],
+  altar: {
+    str: 240,
+    dex: 240,
+    sta: 240,
+    atkPercent: 20,
+    def: 200,
+    eva: 200,
+    hpPercent: 20,
+    hp: 200,
+    crt: 200,
+    spd: 20,
+    brk: 200,
+    hit: 200,
+    res: 200,
+    minAtk: 40,
+    maxAtk: 40
+  },
+  totem: {
+    name: Totems.green.name,
+    level: 64,
+    stats: {
+      hit: 120,
+      brk: 120,
+      crt: 120,
+      atkPercent: 12,
+      hpPercent: 12,
+      res: 120,
+      def: 120,
+      eva: 120
+    }
+  },
+  skills: [
+    Skills.arrivalOfThunderGod.name, Skills.poisonousFog.name, Skills.energyShield.name,
+    Skills.drawPower.name, Skills.rejuvenation.name, Skills.earthStyleWall.name
+  ],
+  expertise: [
+    SkillType.water.name, SkillType.fire.name, SkillType.earth.name, SkillType.thunder.name, SkillType.wind.name,
+    SkillType.ninjutsu.name, SkillType.cursedSealJutsu.name, SkillType.genjutsu.name, SkillType.healing.name
+  ],
+  resistance: [SkillType.thunder.name, SkillType.genjutsu.name],
+  arenaTitle: ArenaTitle.grandMaster2.name
+};
+
 Players.trashEvader = {
   name: "Dingus",
   level: 100,

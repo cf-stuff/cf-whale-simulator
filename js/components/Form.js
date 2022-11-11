@@ -26,7 +26,7 @@ const Form = ({ state, dispatch }) => {
   const [sample, setSample] = useState("None");
 
   const createDispatch = type => payload => dispatch({ type, payload });
-  const importBuild = () => sample !== "None" && dispatch({ type: ActionType.import, payload: Object.values(Builds).find(build => build.name) });
+  const importBuild = () => sample !== "None" && dispatch({ type: ActionType.import, payload: Object.values(Builds).find(build => build.name === sample) });
 
   return html`
   <div class="col-md form pb-3">

@@ -48,9 +48,6 @@ const toStats = build => {
     build.pet.evoSkills.map(skill => CFDB.getPetSkill(skill))
       .filter(skill => skill.type === PetSkillType.evolvedStat)
       .forEach(skill => addStats(skill.stat, stats));
-    build.pet.evoSkills.map(skill => CFDB.getPetSkill(skill))
-      // .filter(skill => skill.type === PetSkillType.evolvedStat)
-      .forEach(skill => console.log(skill));
   }
   build.gears.forEach(gear => {
     const gearInfo = CFDB.getGear(gear.name);

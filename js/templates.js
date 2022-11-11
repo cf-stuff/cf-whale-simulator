@@ -14,7 +14,7 @@ export const Builds = {};
 export const Players = {};
 
 Builds.brkTank = {
-  name: "BrkTankPreset",
+  name: "Sample BRK Tank",
   level: 100,
   fighter: {
     name: Fighters.madara.name,

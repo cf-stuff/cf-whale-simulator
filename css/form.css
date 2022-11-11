@@ -1,6 +1,6 @@
-*::-webkit-scrollbar {
+/* *::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .form {
   max-height: 100vh;

@@ -16,7 +16,8 @@ export const ActionType = {
   arena: "arena",
   skills: "skills",
   expertise: "expertise",
-  resistance: "resistance"
+  resistance: "resistance",
+  import: "import"
 }
 
 export const initialState = {
@@ -86,7 +87,7 @@ export const initialState = {
 export const reducer = (state, action) => {
   switch (action.type) {
     case ActionType.name:
-      return { ...state, name: action.payload.substr(0, 13) };
+      return { ...state, name: action.payload.substr(0, 17) };
     case ActionType.level:
       return { ...state, level: Utils.clamp(action.payload, 1, 100) };
     case ActionType.fighter:
@@ -168,6 +169,8 @@ export const reducer = (state, action) => {
       return { ...state, resistance };
     case ActionType.arena:
       return { ...state, arenaTitle: action.payload }
+    case ActionType.import:
+      return action.payload;
     default:
       return state;
   }

@@ -466,217 +466,217 @@ const PetSkills = {
     triggerPercent: 10,
   },
   def_20Evo: {
-    name: "20DEF",
+    name: "20DEF (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 31,
     stat: { def: 20 }
   },
   brk_20Evo: {
-    name: "20BRK",
+    name: "20BRK (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 32,
     stat: { brk: 20 }
   },
   res_20Evo: {
-    name: "20RES",
+    name: "20RES (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 33,
     stat: { res: 20 }
   },
   crt_20Evo: {
-    name: "20CRT",
+    name: "20CRT (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 34,
     stat: { crt: 20 }
   },
   hpPercent_10Evo: {
-    name: "10HP%",
+    name: "10HP% (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 35,
     stat: { hpPercent: 10 }
   },
   maxAtk_20Evo: {
-    name: "20Max ATK",
+    name: "20Max ATK (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 36,
     stat: { maxAtk: 20 }
   },
   hit_20Evo: {
-    name: "20HIT",
+    name: "20HIT (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 37,
     stat: { hit: 20 }
   },
   sp_10Evo: {
-    name: "10SP",
+    name: "10SP (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 38,
     stat: { sp: 10 }
   },
   atkPercent_10Evo: {
-    name: "10ATK%",
+    name: "10ATK% (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 39,
     stat: { atkPercent: 10 }
   },
   eva_20Evo: {
-    name: "20EVA",
+    name: "20EVA (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 40,
     stat: { eva: 20 }
   },
   hp_50Evo: {
-    name: "50HP",
+    name: "50HP (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 41,
     stat: { hp: 50 }
   },
   spd_10Evo: {
-    name: "10SPD",
+    name: "10SPD (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 42,
     stat: { spd: 10 }
   },
   def_30Evo: {
-    name: "30DEF",
+    name: "30DEF (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 51,
     stat: { def: 30 }
   },
   brk_30Evo: {
-    name: "30BRK",
+    name: "30BRK (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 52,
     stat: { brk: 30 }
   },
   res_30Evo: {
-    name: "30RES",
+    name: "30RES (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 53,
     stat: { res: 30 }
   },
   crt_30Evo: {
-    name: "30CRT",
+    name: "30CRT (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 54,
     stat: { crt: 30 }
   },
   hpPercent_15Evo: {
-    name: "15HP%",
+    name: "15HP% (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 55,
     stat: { hpPercent: 15 }
   },
   maxAtk_30Evo: {
-    name: "30Max ATK",
+    name: "30Max ATK (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 56,
     stat: { maxAtk: 30 }
   },
   hit_30Evo: {
-    name: "30HIT",
+    name: "30HIT (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 57,
     stat: { hit: 30 }
   },
   sp_20Evo: {
-    name: "20SP",
+    name: "20SP (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 58,
     stat: { sp: 20 }
   },
   atkPercent_15Evo: {
-    name: "15ATK%",
+    name: "15ATK% (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 59,
     stat: { atkPercent: 15 }
   },
   eva_30Evo: {
-    name: "30EVA",
+    name: "30EVA (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 60,
     stat: { eva: 30 }
   },
   hp_80Evo: {
-    name: "80HP",
+    name: "80HP (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 61,
     stat: { hp: 80 }
   },
   spd_20Evo: {
-    name: "20SPD",
+    name: "20SPD (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 62,
     stat: { spd: 20 }
   },
   def_50Evo: {
-    name: "50DEF",
+    name: "50DEF (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 71,
     stat: { def: 50 }
   },
   brk_50Evo: {
-    name: "50BRK",
+    name: "50BRK (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 72,
     stat: { brk: 50 }
   },
   res_50Evo: {
-    name: "50RES",
+    name: "50RES (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 73,
     stat: { res: 50 }
   },
   crt_50Evo: {
-    name: "50CRT",
+    name: "50CRT (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 74,
     stat: { crt: 50 }
   },
   hpPercent_25Evo: {
-    name: "25HP%",
+    name: "25HP% (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 75,
     stat: { hpPercent: 25 }
   },
   maxAtk_50Evo: {
-    name: "50Max ATK",
+    name: "50Max ATK (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 76,
     stat: { maxAtk: 50 }
   },
   hit_50Evo: {
-    name: "50HIT",
+    name: "50HIT (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 77,
     stat: { hit: 50 }
   },
   sp_30Evo: {
-    name: "30SP",
+    name: "30SP (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 78,
     stat: { sp: 30 }
   },
   atkPercent_25Evo: {
-    name: "25ATK%",
+    name: "25ATK% (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 79,
     stat: { atkPercent: 25 }
   },
   eva_50Evo: {
-    name: "50EVA",
+    name: "50EVA (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 80,
     stat: { eva: 50 }
   },
   hp_130Evo: {
-    name: "130HP",
+    name: "130HP (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 81,
     stat: { hp: 130 }
   },
   spd_30Evo: {
-    name: "30SPD",
+    name: "30SPD (Evolved)",
     type: PetSkillType.evolvedStat,
     iconId: 82,
     stat: { spd: 30 }

@@ -2,7 +2,6 @@ import { html, useReducer } from "https://unpkg.com/htm/preact/standalone.module
 import { initialState, reducer } from "../state.js";
 import Display from "./Display.js";
 import Form from "./Form.js";
-import { Builds, Players } from "../templates.js";
 import toPlayer from "../calculator.js";
 
 const App = () => {

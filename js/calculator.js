@@ -1,9 +1,7 @@
-import { FighterSkillType, GearType, PetSkillType } from "./data/categories.js";
+import { GearType, PetSkillType } from "./data/categories.js";
 import CFDB from "./data/CFDB.js";
-import { GearSuitBonus } from "./data/gears.js";
 import Utils from "./utils.js";
 
-const fighterCombatSkills = CFDB.getFighterCombatSkills().map(skill => skill.name);
 
 const addStat = (stat, value, total) => total[stat] += value;
 const addStats = (stats, total) => Object.entries(stats).forEach(([key, value]) => total[key] += value);
@@ -50,6 +48,9 @@ const toStats = build => {
     build.pet.evoSkills.map(skill => CFDB.getPetSkill(skill))
       .filter(skill => skill.type === PetSkillType.evolvedStat)
       .forEach(skill => addStats(skill.stat, stats));
+    build.pet.evoSkills.map(skill => CFDB.getPetSkill(skill))
+      // .filter(skill => skill.type === PetSkillType.evolvedStat)
+      .forEach(skill => console.log(skill));
   }
   build.gears.forEach(gear => {
     const gearInfo = CFDB.getGear(gear.name);

@@ -9,9 +9,22 @@ import PetSkills from "./data/petSkills.js";
 import Skills from "./data/skills.js";
 import Stats from "./data/stats.js";
 import Totems from "./data/totems.js";
+import Utils from "./utils.js";
 
-export const Builds = {};
-export const Players = {};
+const Builds = {};
+const Players = {};
+
+export const getBuildNames = () => Object.values(Object.values(Builds).map(build => build.name));
+
+export const getBuild = name => {
+  const build = Object.values(Builds).find(build => build.name === name);
+  return Utils.deepClone(build);
+}
+
+export const getPlayer = name => {
+  const player = Object.values(Players).find(player => player.name === name);
+  return Utils.deepClone(player);
+}
 
 Builds.brkTank = {
   name: "Sample BRK Tank",

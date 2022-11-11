@@ -8,13 +8,12 @@ import Nexus from "./Nexus.js";
 import NumberInput from "./NumberInput.js";
 import Pet from "./Pet.js";
 import Phylactery from "./Phylactery.js";
-import SelectInput from "./SelectInput.js";
 import Skills from "./Skills.js";
 import StarAltar from "./StarAltar.js";
 import Button from "./Button.js";
 import TextInput from "./TextInput.js";
 import Totem from "./Totem.js";
-import { Builds, Players } from "../templates.js";
+import BuildLoader from "./BuildLoader.js";
 
 const tabs = [
   ["Fighter", "Pet", "Gear", "Phylactery", "Nexus"],
@@ -23,22 +22,12 @@ const tabs = [
 
 const Form = ({ state, dispatch }) => {
   const [activeTab, setActiveTab] = useState(tabs[0][0]);
-  const [sample, setSample] = useState("None");
 
   const createDispatch = type => payload => dispatch({ type, payload });
-  const importBuild = () => sample !== "None" && dispatch({ type: ActionType.import, payload: Object.values(Builds).find(build => build.name === sample) });
 
   return html`
   <div class="col-md form pb-3">
-    <div class="row">
-      <div class="col-auto">
-        <${SelectInput} value=${sample} options=${Object.values(Builds).map(build => build.name)}
-        onChange=${e => setSample(e.target.value)} width="15rem" />
-      </div>
-      <div class="col-auto">
-        <${Button} onClick=${importBuild}>Load</${Button}>
-      </div>
-    </div>
+    <${BuildLoader} build=${state} setBuild=${createDispatch(ActionType.import)} />
     <div class="row">
       <div class="col-auto">
         <label class="col-form-label" for="player-name">Name</label>

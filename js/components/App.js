@@ -9,7 +9,7 @@ const App = () => {
   console.log(state);
 
   const player = toPlayer(state);
-  console.log(player)
+  console.log(player);
 
   return html`
   <div class="container-xl">

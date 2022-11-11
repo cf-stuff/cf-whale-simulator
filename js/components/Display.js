@@ -6,8 +6,9 @@ const Display = ({ player }) => {
   useEffect(async () => {
     const canvas = await createCanvas(player);
     const blob = await new Promise(resolve => canvas.toBlob(resolve));
-    setSrc(URL.createObjectURL(blob));
-    return () => URL.revokeObjectURL(blob);
+    const url = URL.createObjectURL(blob);
+    setSrc(url);
+    return () => URL.revokeObjectURL(url);
   }, [player]);
   return html`<img class="display" src=${src} />`;
 }

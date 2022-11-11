@@ -1,4 +1,5 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { calculateFighterStats } from "../calculator.js";
 import CFDB from "../data/CFDB.js";
 import EvolvedFighter from "./EvolvedFighter.js";
 import NumberInput from "./NumberInput.js";
@@ -12,6 +13,9 @@ const Fighter = ({ isActive, fighter, setFighter }) => {
     plus: 21,
     potentials: { str: 360, dex: 360, sta: 360 }
   });
+  const fighterInfo = CFDB.getFighter(fighter.name);
+  const fighterStats = fighter.name === "None" ? { str: 0, dex: 0, sta: 0 }
+    : calculateFighterStats(fighter.name, fighter.evolved ? 34 : fighter.plus);
 
   return html`
   <div class="row">
@@ -33,6 +37,25 @@ const Fighter = ({ isActive, fighter, setFighter }) => {
       </div>
     </div>
   </div>
+  ${fighterInfo && html`
+  <div class="row">
+    <div class="col">
+      <span>STR: ${fighterStats.str}</span><br/>
+      <span>(+${fighterInfo.growthRate[0]} per level)</span><br/>
+      <span>Each ${fighterInfo.bmv[0]} adds 1% ATK)</span>
+    </div>
+    <div class="col">
+      <span>DEX: ${fighterStats.dex}</span><br/>
+      <span>(+${fighterInfo.growthRate[1]} per level)</span><br/>
+      <span>Each ${fighterInfo.bmv[1]} adds 1 SPD & 1 EVA)</span>
+    </div>
+    <div class="col">
+      <span>STA: ${fighterStats.sta}</span><br/>
+      <span>(+${fighterInfo.growthRate[2]} per level)</span><br/>
+      <span>Each ${fighterInfo.bmv[2]} adds 1% HP & 1 SP)</span>
+    </div>
+  </div>
+  `}
   <${EvolvedFighter} fighter=${fighter} setFighter=${setFighter} />
   `;
 }

@@ -6,6 +6,14 @@ import Utils from "./utils.js";
 const addStat = (stat, value, total) => total[stat] += value;
 const addStats = (stats, total) => Object.entries(stats).forEach(([key, value]) => total[key] += value);
 
+export const calculateFighterStats = (fighter, plus) => {
+  const fighterInfo = CFDB.getFighter(fighter);
+  const str = Math.ceil(fighterInfo.growthRate[0] * plus * 8) + fighterInfo.isv[0];
+  const dex = Math.ceil(fighterInfo.growthRate[1] * plus * 8) + fighterInfo.isv[1];
+  const sta = Math.ceil(fighterInfo.growthRate[2] * plus * 8) + fighterInfo.isv[2];
+  return { str, dex, sta };
+}
+
 const toStats = build => {
   const stats = {
     str: 0,
@@ -27,14 +35,9 @@ const toStats = build => {
     sp: 100,
     furyReversion: 0
   }
-  const fighterInfo = CFDB.getFighter(build.fighter.name);
-  const level = build.fighter.evolved ? 34 : build.fighter.plus;
-  if (fighterInfo) {
-    const str = Math.ceil(fighterInfo.growthRate[0] * level * 8) + fighterInfo.isv[0];
-    const dex = Math.ceil(fighterInfo.growthRate[1] * level * 8) + fighterInfo.isv[1];
-    const sta = Math.ceil(fighterInfo.growthRate[2] * level * 8) + fighterInfo.isv[2];
-    console.log(`[DEBUG] calculated fighter stats: str=${str} dex=${dex} sta=${sta}`);
-    addStats({ str, dex, sta }, stats);
+  if (build.fighter.name !== "None") {
+    const fighterStats = calculateFighterStats(build.fighter.name, build.fighter.evolved ? 34 : build.fighter.plus);
+    addStats(fighterStats, stats);
   }
   if (build.fighter.evolved) {
     addStats(build.fighter.potentials, stats);
@@ -79,6 +82,7 @@ const toStats = build => {
   addStats(build.altar, stats);
   addStats(build.totem.stats, stats);
   addStats(CFDB.getArenaTitle(build.arenaTitle).stats, stats);
+  const fighterInfo = CFDB.getFighter(build.fighter.name);
   if (fighterInfo) {
     stats.hp = Math.floor(stats.hp * (1 + (stats.hpPercent + Math.floor(stats.sta / fighterInfo.bmv[2])) / 100));
     stats.sp = Math.floor((stats.sp + stats.sta / fighterInfo.bmv[2]) * (1 + (stats.spPercent) / 100));

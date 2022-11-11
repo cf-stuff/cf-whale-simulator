@@ -34,13 +34,13 @@ const BuildLoader = ({ build, setBuild }) => {
       <${SelectInput} value=${selectedBuild} options=${options}
       onChange=${e => setSelectedBuild(e.target.value)} width="15rem" />
     </div>
-    <div class="col">
+    <div class="col-auto">
       <${Button} onClick=${loadBuild}>Load</${Button}>
     </div>
-    <div class="col">
+    <div class="col-auto">
       <${Button} onClick=${saveBuild}>Save</${Button}>
     </div>
-    <div class="col">
+    <div class="col-auto">
       <${Button} onClick=${removeBuild}>Remove</${Button}>
     </div>
   </div>

@@ -41,23 +41,16 @@ const Battle = () => {
     </div>
   </div>
   <div class="row battle-display">
-    <div class="col-sm-5">
+    <div class="col-md-4 order-2 order-md-1">
       ${leftPlayer && html`<${Display} player=${leftPlayer} />`}
     </div>
-    <div class="col-sm"></div>
-    <div class="col-sm-5">
+    <div class="col-md order-1 order-md-2 logs">
+    ${battle && battle.map(line => html`<span>${line}</span>`)}
+    </div>
+    <div class="col-md-4 order-3 order-md-3">
       ${rightPlayer && html`<${Display} player=${rightPlayer} />`}
     </div>
   </div>
-  ${battle && html`
-  <div class="row">
-    <div class="col"></div>
-    <div class="col-sm-6 logs">
-      ${battle.map(line => html`<span>${line}</span>`)}
-    </div>
-    <div class="col"></div>
-  </div>
-  `}
   `;
 }
 

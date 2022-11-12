@@ -52,7 +52,7 @@ const Form = ({ state, dispatch }) => {
     </div>
     ${activeTab === "Fighter" && html`<${Fighter} fighter=${state.fighter} setFighter=${createDispatch(ActionType.fighter)} />`}
     ${activeTab === "Pet" && html`<${Pet} pet=${state.pet} setPet=${createDispatch(ActionType.pet)} />`}
-    ${activeTab === "Gears" && html`<${Gears} fighterWeaponType=${CFDB.getFighter(state.fighter.name)?.weaponType || "None"}
+    ${activeTab === "Gear" && html`<${Gears} fighterWeaponType=${CFDB.getFighter(state.fighter.name)?.weaponType || "None"}
     gears=${state.gears} setGears=${createDispatch(ActionType.gear)} />`}
     ${activeTab === "Phylactery" && html`<${Phylactery} phylactery=${state.phylactery} setPhylactery=${createDispatch(ActionType.phy)} />`}
     ${activeTab === "Nexus" && html`<${Nexus} nexus=${state.nexus} setNexus=${createDispatch(ActionType.nexus)} />`}

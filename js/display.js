@@ -33,12 +33,14 @@ export async function createCanvas(player) {
   // totem
   if (player.totem.name) {
     const totem = CFDB.getTotem(player.totem.name);
-    ctx.drawImage(await getImage(getImagePath(ImageType.totem, totem.iconId)), 300, 400);
+    getImage(getImagePath(ImageType.totem, totem.iconId))
+      .then(image => ctx.drawImage(image, 300, 400));
   }
 
   // fighter + pet
   const fighter = CFDB.getFighter(player.fighter.name);
-  ctx.drawImage(await getImage(getImagePath(ImageType.fighter, fighter.iconId)), 35, 20);
+  getImage(getImagePath(ImageType.fighter, fighter.iconId))
+    .then(image => ctx.drawImage(image, 35, 20));
   const fighterDisplayName = player.fighter.evolved ? fighter.evoName : fighter.name;
   ctx.font = "bold 16px arial";
   ctx.fillStyle = "#a15f08";
@@ -52,7 +54,8 @@ export async function createCanvas(player) {
 
   if (player.pet.name !== "None") {
     const pet = CFDB.getPet(player.pet.name);
-    ctx.drawImage(await getImage(getImagePath(ImageType.pet, player.pet.evolved ? pet.evoIconId : pet.iconId)), 250, 500);
+    getImage(getImagePath(ImageType.pet, player.pet.evolved ? pet.evoIconId : pet.iconId))
+      .then(image => ctx.drawImage(image, 250, 500));
     ctx.font = "bold 16px arial";
     ctx.fillStyle = "#a15f08";
     const petDisplayName = player.pet.evolved ? pet.evoName : pet.name;
@@ -71,7 +74,8 @@ export async function createCanvas(player) {
   ctx.fillText("Resistance", 15, 240);
   for (let i = 0; i < player.resistance.length; ++i) {
     const skillType = CFDB.getSkillType(player.resistance[i]);
-    ctx.drawImage(await getImage(getImagePath(ImageType.skillType, skillType.iconId)), 120 + 40 * i, 215, 39, 36.5);
+    getImage(getImagePath(ImageType.skillType, skillType.iconId))
+      .then(image => ctx.drawImage(image, 120 + 40 * i, 215, 39, 36.5));
   }
 
   lineSeparator(ctx, 250);
@@ -120,21 +124,20 @@ async function renderSkills(ctx, player) {
   const skillFrame = await getImage("img/display/skill-frame.png");
   for (let y = 0; y < 3; ++y) {
     for (let x = 0; x < 4; ++x) {
-      let imagePath;
+      let skillImage;
       ctx.drawImage(skillFrame, 15 + x * 50, 415 + y * 50, 45, 45);
       if (skillIndex < Math.min(6, player.skills.length)) {
         const skill = CFDB.getSkill(player.skills[skillIndex++]);
-        imagePath = await getImage(getImagePath(ImageType.skill, skill.iconId));
+        skillImage = getImage(getImagePath(ImageType.skill, skill.iconId));
       } else if (petSkillIndex < player.pet?.skills.length) {
         const skill = CFDB.getPetSkill(player.pet.skills[petSkillIndex++]);
-        imagePath = await getImage(getImagePath(ImageType.petSkill, skill.iconId));
+        skillImage = getImage(getImagePath(ImageType.petSkill, skill.iconId));
       } else if (player.phylactery?.skill && !phySkillRendered) {
-        console.log()
         const skill = CFDB.getSkill(player.phylactery.skill);
-        imagePath = await getImage(getImagePath(ImageType.skill, skill.iconId));
+        skillImage = getImage(getImagePath(ImageType.skill, skill.iconId));
         phySkillRendered = true;
       }
-      if (imagePath) ctx.drawImage(imagePath, 17 + x * 50, 417 + y * 50, 41, 41);
+      skillImage?.then(image => ctx.drawImage(image, 17 + x * 50, 417 + y * 50, 41, 41));
     }
   }
 

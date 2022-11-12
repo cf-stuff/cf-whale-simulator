@@ -12,7 +12,7 @@ export const ImageType = {
   totem: "totem"
 }
 
-export function getImagePath(type, id) {
+export const getImagePath = (type, id) => {
   const basePath = "img/";
   switch (type) {
     case ImageType.fighter:
@@ -39,3 +39,5 @@ export function getImagePath(type, id) {
       return basePath + `totems/tuten${id}.png`;
   }
 }
+
+export const preload = url => new Image().src = url;

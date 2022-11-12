@@ -7,8 +7,13 @@ import { getPlayer } from "./templates.js";
 
 render(html`<${App} />`, document.body);
 
+CFDB.getFighters().forEach(fighter => preload(getImagePath(ImageType.fighter, fighter.iconId)));
+CFDB.getSkillTypes().forEach(type => preload(getImagePath(ImageType.skillType, type.iconId)));
 CFDB.getSkills().filter(skill => skill.name !== "Normal Attack")
   .forEach(skill => preload(getImagePath(ImageType.skill, skill.iconId)));
+CFDB.getFighterSkills().forEach(skill => preload(getImagePath(ImageType.fighterSkill, skill.iconIds[2])));
+CFDB.getPetSkills().forEach(skill => preload(getImagePath(ImageType.petSkill, skill.iconId)));
+CFDB.getTotems().forEach(totem => preload(getImagePath(ImageType.totem, totem.iconId)));
 
 // simulateBattle(
 //   [getPlayer("Brk HH Template"), getPlayer("Tank Template"), getPlayer("Evader Template")],

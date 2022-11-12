@@ -12,14 +12,16 @@ export function simulateBattle(left, right) {
   const rightPlayers = right.map(player => createPlayerForBattle(player, 1));
   leftPlayers.forEach((player, i) => player.id = i * 2);
   rightPlayers.forEach((player, i) => player.id = i * 2 + 1);
-  console.log(`left: ${leftPlayers.map(player => `${player.name}=${player.id}`)}`);
-  console.log(`right: ${rightPlayers.map(player => `${player.name}=${player.id}`)}`);
+  const logs = [];
+  logs.push(`left: ${leftPlayers.map(player => `${player.name}=${player.id}`)}`);
+  logs.push(`right: ${rightPlayers.map(player => `${player.name}=${player.id}`)}`);
   let currentIndex = [0, 0];
   while (currentIndex[0] < left.length && currentIndex[1] < right.length) {
     let state = {
       players: [leftPlayers[currentIndex[0]], rightPlayers[currentIndex[1]]],
       timer: 0,
-      isGameOver: false
+      isGameOver: false,
+      log:[]
     }
     // before round cleanup
     applyExpertiseAndMasteryToSkills(state);
@@ -31,7 +33,9 @@ export function simulateBattle(left, right) {
       }
     });
     console.log(state);
+    logs.push(...state.log);
   }
+  return logs;
 }
 
 function createPlayerForBattle(player, index) {
@@ -124,7 +128,7 @@ function createSkillForBattle(skillname) {
 }
 
 export function startBattle(state) {
-  console.log(`${state.players[0].id} vs ${state.players[1].id}`);
+  state.log.push(`${state.players[0].id} vs ${state.players[1].id}`);
   state.players.forEach(player => getAllSkillsEligibleToBeUsed(state, player.index, SkillPhase.beforeFight)
     .forEach(skill => useSkill(state, player.index, skill)));
   // start game timer, measured in ms mainly to avoid decimals
@@ -141,7 +145,7 @@ export function startBattle(state) {
       });
       if (player.status.some(x => x.effect.skipTurn)) return;
       // turn start
-      console.log(`${player.id}: turn start at ${state.timer / 1000} seconds`);
+      state.log.push(`${player.id}: turn start at ${state.timer / 1000} seconds`);
       // save here just in case it gets removed at start of turn
       const skipActions = player.status.some(x => x.effect.skipActions);
       handleStartOfTurnStatusEffects(state, player.index);
@@ -163,7 +167,7 @@ export function startBattle(state) {
     state.timer += 100;
     handleTimerRelatedStatusEffects(state);
   }
-  console.log(`${state.players[1].stats.current.hp > 0 ? state.players[1].id : state.players[0].id} wins`);
+  state.log.push(`${state.players[1].stats.current.hp > 0 ? state.players[1].id : state.players[0].id} wins`);
   // return state;
 }
 
@@ -196,7 +200,7 @@ function getSkillTriggerProbability(state, playerIndex, skill) {
     }
   });
   const probabilty = (skill.triggerPercent + flatTriggerPercent) * triggerProbabilityMultiplier / 100;
-  if (state.debug) console.log(`[DEBUG] Probability forcast: ${state.players[playerIndex].id} ${skill.name} ${probabilty.toFixed(2)}`);
+  if (state.debug) state.log.push(`[DEBUG] Probability forcast: ${state.players[playerIndex].id} ${skill.name} ${probabilty.toFixed(2)}`);
   return probabilty
 }
 
@@ -212,7 +216,7 @@ function tryToUseSkillFromPhase(state, playerIndex, phase) {
 
 function useSkill(state, playerIndex, skill) {
   if (state.isGameOver) return;
-  console.log(`${state.players[playerIndex].id}: ${skill.name}`);
+  state.log.push(`${state.players[playerIndex].id}: ${skill.name}`);
   if (skill.spConsumption > 0) {
     let spConsumptionMultiplier = 1;
     state.players[playerIndex].status.forEach(x => spConsumptionMultiplier *= x.effect.spConsumptionMultiplier || 1);
@@ -231,7 +235,7 @@ function useSkill(state, playerIndex, skill) {
       .filter(x => x.effect.damageTakenMultiplier ? skill.damage : true);
     attackedSkill = Utils.randomElement(eligibleAttackedSkills);
     if (attackedSkill) {
-      console.log(`${state.players[playerIndex ^ 1].id}: ${attackedSkill.name}`);
+      state.log.push(`${state.players[playerIndex ^ 1].id}: ${attackedSkill.name}`);
       if (attackedSkill.effect.dodgeAttack) {
         return false;
       }
@@ -241,7 +245,7 @@ function useSkill(state, playerIndex, skill) {
       }
     }
     if (evaTest(state, playerIndex ^ 1)) {
-      console.log(`${state.players[playerIndex ^ 1].id} evaded the hit`);
+      state.log.push(`${state.players[playerIndex ^ 1].id} evaded the hit`);
       return false;
     }
   }
@@ -265,11 +269,11 @@ function handleSkillDamage(state, playerIndex, skill, attackedSkill) {
   const playerCrt = state.players[playerIndex].stats.current.crt;
   const enemyRes = state.players[playerIndex ^ 1].stats.current.res;
   if (crtTest(playerCrt, enemyRes)) {
-    console.log("It's a critical hit!");
+    state.log.push("It's a critical hit!");
     damage *= 2 + ((playerCrt - enemyRes) * (1 / 500));
   }
   if (parryTest(enemyRes)) {
-    console.log(`${state.players[playerIndex ^ 1].id}: parried the hit`);
+    state.log.push(`${state.players[playerIndex ^ 1].id}: parried the hit`);
     damage *= 0.5;
   }
   state.players[playerIndex ^ 1].status.forEach(x => {
@@ -395,14 +399,14 @@ function addStatus(state, playerIndex, name, options) {
     if (existingStatus.stackable) {
       // add stack to existing status
       existingStatus.stacks += 1;
-      console.log(`${state.players[playerIndex].id}: gained a stack of ${name}, total: ${existingStatus.stacks}`);
+      state.log.push(`${state.players[playerIndex].id}: gained a stack of ${name}, total: ${existingStatus.stacks}`);
       return;
     } else {
       removeStatus(state, playerIndex, name);
     }
   }
   state.players[playerIndex].status.push(createStatus(state, playerIndex, name, options));
-  console.log(`${state.players[playerIndex].id}: gained status ${name}`);
+  state.log.push(`${state.players[playerIndex].id}: gained status ${name}`);
 }
 
 function createStatus(state, playerIndex, name, options) {
@@ -460,7 +464,7 @@ function removeStatus(state, playerIndex, name) {
     if (removedStatus.effect.increaseCrt) {
       state.players[playerIndex].stats.current.crt -= removedStatus.effect.increaseCrt;
     }
-    console.log(`${state.players[playerIndex].id}: lost status ${name}`);
+    state.log.push(`${state.players[playerIndex].id}: lost status ${name}`);
   }
 }
 
@@ -517,10 +521,10 @@ function handleStatusBetrayal(state) {
   let betrayed = [];
   state.players.forEach(player => player.status.forEach(x => {
     if (!betrayed.includes(x.name) && x.betrayalPercent && Utils.testProbability(x.betrayalPercent / 100)) {
-      if (state.debug) console.log("[DEBUG] top 10 anime betrayals");
+      if (state.debug) state.log.push("[DEBUG] top 10 anime betrayals");
       removeStatus(state, player.index, x.name);
       state.players[player.index ^ 1].status.push(x);
-      console.log(`${state.players[player.index ^ 1].id}: gained status ${x.name}`);
+      state.log.push(`${state.players[player.index ^ 1].id}: gained status ${x.name}`);
       betrayed.push(x.name);
     }
   }));
@@ -588,11 +592,11 @@ function dealDamage(state, playerIndex, amount, options) {
   if (statusWithHpShield) {
     if (statusWithHpShield.hpShield > amount) {
       statusWithHpShield.hpShield -= amount;
-      console.log(`${state.players[playerIndex].id}: ${statusWithHpShield.name} absorbs ${amount} damage`);
+      state.log.push(`${state.players[playerIndex].id}: ${statusWithHpShield.name} absorbs ${amount} damage`);
       amount = 0;
     } else {
       amount -= statusWithHpShield.hpShield;
-      console.log(`${state.players[playerIndex].id}: ${statusWithHpShield.name} absorbs ${statusWithHpShield.hpShield} damage`);
+      state.log.push(`${state.players[playerIndex].id}: ${statusWithHpShield.name} absorbs ${statusWithHpShield.hpShield} damage`);
       removeStatus(state, playerIndex, statusWithHpShield.name);
     }
   }
@@ -600,7 +604,7 @@ function dealDamage(state, playerIndex, amount, options) {
   updateStat(state, playerIndex, Stats.hp.name, -amount, options.source);
   if (state.players[playerIndex].stats.current.hp <= 0) {
     if (!tryToUseSkillFromPhase(state, playerIndex, SkillPhase.onDeath)) {
-      console.log("game over");
+      state.log.push("game over");
       state.isGameOver = true;
     }
   }
@@ -613,19 +617,19 @@ function updateStat(state, playerIndex, stat, amount, source) {
   if (stat === Stats.hp.name || stat === Stats.sp.name) {
     stats.current[stat] = Utils.clamp(stats.current[stat], 0, stats.initial[stat]);
   }
-  console.log(`${state.players[playerIndex].id}: ${amount} ${stat} from ${source}, ${stats.current[stat]}/${stats.initial[stat]}`);
+  state.log.push(`${state.players[playerIndex].id}: ${amount} ${stat} from ${source}, ${stats.current[stat]}/${stats.initial[stat]}`);
 }
 
 function gainFury(state, playerIndex, overrideAmount) {
   if (state.players[playerIndex].fury < FURY_BURST_THRESHOLD) {
     const furyPoints = overrideAmount || state.players[playerIndex].stats.current.furyReversion;
     state.players[playerIndex].fury += furyPoints;
-    console.log(`${state.players[playerIndex].id}: gained ${furyPoints} fury, ${state.players[playerIndex].fury}/${FURY_BURST_THRESHOLD}`);
+    state.log.push(`${state.players[playerIndex].id}: gained ${furyPoints} fury, ${state.players[playerIndex].fury}/${FURY_BURST_THRESHOLD}`);
   }
   if (state.players[playerIndex].fury >= FURY_BURST_THRESHOLD) {
     if (getDebuffs(state, playerIndex).length > 0) {
       state.players[playerIndex].furyBursts += 1;
-      console.log(`${state.players[playerIndex].id}: fury burst`);
+      state.log.push(`${state.players[playerIndex].id}: fury burst`);
       getAllSkillsEligibleToBeUsed(state, playerIndex, SkillPhase.onFuryBurst).forEach(skill => useSkill(state, playerIndex, skill));
       removeRandomDebuff(state, playerIndex);
       state.players[playerIndex].fury = 0;

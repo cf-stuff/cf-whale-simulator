@@ -1,0 +1,7 @@
+.logs {
+  height: 50vh;
+  border: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}

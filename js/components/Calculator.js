@@ -12,7 +12,7 @@ const Calculator = () => {
   console.log(player);
 
   return html`
-  <div class="row">
+  <div class="row calculator">
     <div class="col-auto">
       <${Display} player=${player} />
     </div>

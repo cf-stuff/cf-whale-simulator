@@ -1,4 +1,11 @@
 .display {
-  max-width: 100vw;
   max-height: 100vh;
+}
+
+.calculator .display {
+  max-width: 100vw;
+}
+
+.battle-display .display {
+  max-width: 100%;
 }

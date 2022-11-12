@@ -90,6 +90,7 @@ CFDB.getPhylacteryInfo = (type, plus) => {
   const phy = CFDB.getPhylactery(type);
   const bmvAmount = phy.initialBmv + phy.bmvPerPlus[plus];
   const stats = {};
+  stats.furyReversion = phy.initialFuryReversion + plus;
   let glyphMultiplier = 1;
   if (plus >= 2) stats.maxAtk = phy.maxAtk;
   if (plus >= 4) stats.minAtk = phy.minAtk;

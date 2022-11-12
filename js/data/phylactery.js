@@ -6,6 +6,7 @@ const Phylactery = {
     maxAtk: 28,
     minAtk: 28,
     hp: 112,
+    initialFuryReversion: 4,
   },
   IVB: {
     type: "4B",
@@ -14,6 +15,7 @@ const Phylactery = {
     maxAtk: 32,
     minAtk: 32,
     hp: 128,
+    initialFuryReversion: 5,
   }
 };
 

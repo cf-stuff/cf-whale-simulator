@@ -4,8 +4,7 @@ import ImageCheckbox from "./ImageCheckbox.js";
 import { getImagePath, ImageType } from "../image.js";
 import Utils from "../utils.js";
 
-const Skills = ({ isActive, skills, setSkills, expertise, setExpertise, resistance, setResistance }) => {
-  if (!isActive) return html``;
+const Skills = ({ skills, setSkills, expertise, setExpertise, resistance, setResistance }) => {
   const handleSkillChange = e => {
     if (e.target.checked) skills.push(e.target.value);
     else Utils.removeElement(skills, e.target.value);

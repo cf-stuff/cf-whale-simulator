@@ -14,9 +14,7 @@ const glyphStats = [
   Stats.eva.displayName, Stats.hit.displayName, Stats.res.displayName
 ];
 
-const Phylactery = ({ isActive, phylactery, setPhylactery }) => {
-  if (!isActive) return html``;
-
+const Phylactery = ({ phylactery, setPhylactery }) => {
   const handleMax = () => setPhylactery({ plus: 20 });
   const handlePhylacteryStats = position => e => {
     const stats = phylactery.stats;

@@ -15,8 +15,7 @@ const getPetSkillLimit = plus => {
   return getPetSkillLimit(plus - 1);
 }
 
-const Pet = ({ isActive, pet, setPet }) => {
-  if (!isActive) return html``;
+const Pet = ({ pet, setPet }) => {
   const petSkillSelect = [];
 
   const handleMax = () => setPet({

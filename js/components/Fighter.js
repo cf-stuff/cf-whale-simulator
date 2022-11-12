@@ -5,9 +5,7 @@ import EvolvedFighter from "./EvolvedFighter.js";
 import NumberInput from "./NumberInput.js";
 import SelectInput from "./SelectInput.js";
 
-const Fighter = ({ isActive, fighter, setFighter }) => {
-  if (!isActive) return html``;
-
+const Fighter = ({ fighter, setFighter }) => {
   const handleMax = () => setFighter({
     evolved: true,
     plus: 21,

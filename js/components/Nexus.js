@@ -2,9 +2,7 @@ import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import CFDB from "../data/CFDB.js";
 import Soul from "./Soul.js";
 
-const Nexus = ({ isActive, nexus, setNexus }) => {
-  if (!isActive) return html``;
-
+const Nexus = ({ nexus, setNexus }) => {
   const selectedSouls = nexus.map(soul => soul.stat);
   const nexusStats = CFDB.getNexusStats();
 

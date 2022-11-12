@@ -6,8 +6,7 @@ const maxAltar = {};
 CFDB.getStarAltar().forEach(stat => maxAltar[stat.stat] = stat.max);
 
 
-const StarAltar = ({ isActive, altar, setAltar }) => {
-  if (!isActive) return html``;
+const StarAltar = ({ altar, setAltar }) => {
   return html`
   <div class="row">
     <div class="col-auto">

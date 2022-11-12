@@ -2,11 +2,9 @@ import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import CFDB from "../data/CFDB.js";
 import Gear from "./Gear.js";
 
-const Gears = ({ isActive, fighterWeaponType, gears, setGears }) => {
-  if (!isActive) return html``;
-
+const Gears = ({ fighterWeaponType, gears, setGears }) => {
   const setGear = position => gear => {
-    if (position >=0) gears[position] = gear;
+    if (position >= 0) gears[position] = gear;
     else gears.push(gear);
     setGears(gears);
   }

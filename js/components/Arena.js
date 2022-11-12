@@ -5,8 +5,7 @@ import SelectInput from "./SelectInput.js";
 
 const arenaTitles = CFDB.getArenaTitles();
 
-const Arena = ({ isActive, arenaTitle, setArenaTitle }) => {
-  if (!isActive) return html``;
+const Arena = ({ arenaTitle, setArenaTitle }) => {
   const titleStats = CFDB.getArenaTitle(arenaTitle).stats;
   return html`
   <div class="row">

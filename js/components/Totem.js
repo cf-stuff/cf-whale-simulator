@@ -16,8 +16,7 @@ const maxStats = {
   eva: 120
 }
 
-const Totem = ({ isActive, totem, setTotem }) => {
-  if (!isActive) return html``;
+const Totem = ({ totem, setTotem }) => {
   const totemSelect = CFDB.getTotems().map(totemType => {
     const id = `totem${totemType.iconId}`;
     const src = getImagePath(ImageType.totem, totemType.iconId);

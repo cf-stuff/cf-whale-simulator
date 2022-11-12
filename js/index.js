@@ -1,9 +1,7 @@
 import { html, render } from "https://unpkg.com/htm/preact/standalone.module.js";
-import { simulateBattle } from "./battle.js";
 import App from "./components/App.js";
 import CFDB from "./data/CFDB.js";
 import { getImagePath, ImageType, preload } from "./image.js";
-import { getPlayer } from "./templates.js";
 
 render(html`<${App} />`, document.body);
 
@@ -15,8 +13,3 @@ CFDB.getPetSkills().forEach(skill => preload(getImagePath(ImageType.petSkill, sk
 CFDB.getTotems().forEach(totem => preload(getImagePath(ImageType.totem, totem.iconId)));
 preload("img/display/skill-frame.png");
 preload("img/display/skill-evo-frame.png");
-
-// simulateBattle(
-//   [getPlayer("Brk HH Template"), getPlayer("Tank Template"), getPlayer("Evader Template")],
-//   [getPlayer("Brk Tank Template"), getPlayer("Evader Template"), getPlayer("Tank Template")]
-// );

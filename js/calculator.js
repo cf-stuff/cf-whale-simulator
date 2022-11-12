@@ -91,6 +91,7 @@ const toStats = build => {
     stats.spd = Math.floor(stats.spd + stats.dex / fighterInfo.bmv[1]);
     stats.eva = Math.floor(stats.eva + stats.dex / fighterInfo.bmv[1]);
   }
+  if (stats.minAtk > stats.maxAtk) stats.minAtk = stats.maxAtk
   return stats;
 }
 

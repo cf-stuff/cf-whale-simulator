@@ -35,7 +35,10 @@ export function simulateBattle(left, right) {
     console.log(state);
     logs.push(...state.log);
   }
-  return logs;
+  return {
+    winner: rightPlayers[rightPlayers.length - 1].stats.current.hp <= 0 ? 0 : 1,
+    logs
+  };
 }
 
 function createPlayerForBattle(player, index) {

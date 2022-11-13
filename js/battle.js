@@ -1,4 +1,4 @@
-import { FURY_BURST_THRESHOLD, BATTLE_TIME_LIMIT_MS } from "./config.js";
+import { FURY_BURST_THRESHOLD, BATTLE_TIME_LIMIT_MS, SKILL_TRIGGER_PERCENT_PER_HIT, PARRY_PERCENT_PER_RES, CRIT_PERCENT_PER_CRT, DODGE_PERCENT_PER_EVA } from "./config.js";
 import { DamageType, SkillPhase, SkillTarget, SkillType, StatusType } from "./data/categories.js";
 import CFDB from "./data/CFDB.js";
 import PetSkills from "./data/petSkills.js";
@@ -186,7 +186,7 @@ function getAllSkillsEligibleToBeUsed(state, playerIndex, phase) {
 function getSkillTriggerProbability(state, playerIndex, skill) {
   let flatTriggerPercent = 0;
   if (Utils.equalsAny(skill.phase, SkillPhase.beforeYourAttack, SkillPhase.duringYourAttack, SkillPhase.afterYourAttack, SkillPhase.beforeEnemyAttack)) {
-    flatTriggerPercent += state.players[playerIndex].stats.current.hit * 0.01;
+    flatTriggerPercent += state.players[playerIndex].stats.current.hit * SKILL_TRIGGER_PERCENT_PER_HIT;
   }
   if (skill.effect.reduceTriggerPercentPerTenSeconds) {
     flatTriggerPercent -= Math.floor(state.timer / 10000) * skill.effect.reduceTriggerPercentPerTenSeconds;
@@ -680,15 +680,15 @@ function evaTest(state, playerIndex) {
   let evaMultiplier = 1;
   const eva = state.players[playerIndex].stats.current.eva * evaMultiplier;
   if (state.players[playerIndex ^ 1].stats.current.hit > eva) return false;
-  return Utils.testProbability((eva - state.players[playerIndex ^ 1].stats.current.hit) * 0.0006);
+  return Utils.testProbability((eva - state.players[playerIndex ^ 1].stats.current.hit) * DODGE_PERCENT_PER_EVA / 100);
 }
 
 function crtTest(crt, res) {
-  return Utils.testProbability((crt - res) * 0.0004);
+  return Utils.testProbability((crt - res) * CRIT_PERCENT_PER_CRT / 100);
 }
 
 function parryTest(res) {
-  return Utils.testProbability(res * 0.0002);
+  return Utils.testProbability(res * PARRY_PERCENT_PER_RES / 100);
 }
 
 function calculateDamage(state, atatckerIndex, options) {

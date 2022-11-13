@@ -27,13 +27,6 @@ reuse button component
 
 ---
 
-stat info
-every 1 res increases parry by 0.02%
-every 1 crt increases crit chance by 0.06% - perhaps its not linear?
-every 1 eva increases dodge chance by 0.06% - perhaps its not linear?
-every 1 hit increases trigger chance for active skill by 0.02% -> 0.01
-
-
 2 arrays of players, returns replay object
 createGame (leftPlayers, rightPlayers)
 

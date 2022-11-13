@@ -175,6 +175,7 @@ export function startBattle(state) {
 }
 
 function getAllSkillsEligibleToBeUsed(state, playerIndex, phase) {
+  if (state.players[playerIndex].status.some(x => x.effect.skipActions)) return [];
   return state.players[playerIndex].skills.filter(skill => skill.phase === phase)
     .filter(skill => skill.spConsumption ? state.players[playerIndex].stats.current.sp >= skill.spConsumption : true)
     .filter(skill => areActiveSkillsDisabled(state, playerIndex, phase) ? skill.bypassDisableActiveSkills : true)
@@ -248,7 +249,8 @@ function useSkill(state, playerIndex, skill) {
         return false;
       }
     }
-    if (evaTest(state, playerIndex ^ 1)) {
+    const skipActions = state.players[playerIndex ^ 1].status.some(x => x.effect.skipActions);
+    if (!skipActions && evaTest(state, playerIndex ^ 1)) {
       state.log.push(`${state.players[playerIndex ^ 1].id} dodged the attack`);
       return false;
     }
@@ -390,6 +392,7 @@ function getAtkMultiplierFromStatusEffects(state, playerIndex) {
       const maxHp = state.players[playerIndex].stats.initial.hp;
       const curHp = state.players[playerIndex].stats.current.hp;
       const percentHpLost = Math.floor((maxHp - curHp) * 100 / maxHp);
+      state.log.push(`DEBUG barb mod=${1 + percentHpLost * x.effect.atkMultiplierPerHpPercentLost}`);
       atkMultiplier *= 1 + percentHpLost * x.effect.atkMultiplierPerHpPercentLost;
     }
     atkMultiplier *= x.effect.atkMultiplier || 1;

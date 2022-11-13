@@ -246,7 +246,7 @@ function useSkill(state, playerIndex, skill) {
       }
     }
     if (evaTest(state, playerIndex ^ 1)) {
-      state.log.push(`${state.players[playerIndex ^ 1].id} evaded the hit`);
+      state.log.push(`${state.players[playerIndex ^ 1].id} dodged the attack`);
       return false;
     }
   }
@@ -294,12 +294,12 @@ function handleSkillDamage(state, playerIndex, skill, attackedSkill) {
     });
   }
   damage = Math.floor(damage * damageTakenMultiplier);
-  handleWhenAttackedStatusEffects(state, playerIndex ^ 1, damage, skill);
   dealDamage(state, playerIndex ^ 1, damage, {
     source: skill.name,
     type: DamageType.attack,
     isFire: skill.type === SkillType.fire.name
   });
+  handleWhenAttackedStatusEffects(state, playerIndex ^ 1, damage, skill);
   handleOnHitStatusEffects(state, playerIndex, damage);
   if (skill.phase === SkillPhase.duringYourAttack || skill.phase === SkillPhase.afterYourAttack) {
     tryToUseSkillFromPhase(state, playerIndex, SkillPhase.afterAttacking);

@@ -109,14 +109,14 @@ const toPlayer = build => {
       name: build.pet.name,
       plus: build.pet.plus,
       evolved: build.pet.evolved,
-      skills: [...build.pet.skills.filter(skill => CFDB.getPetSkill(skill).type === PetSkillType.skill),
-      ...build.pet.evoSkills.filter(skill => build.pet.evolved && Utils.equalsAny(CFDB.getPetSkill(skill).type, PetSkillType.active, PetSkillType.passive))]
+      skills: CFDB.getPetCombatSkills().filter(skill => build.pet.skills.includes(skill.name) || build.pet.evoSkills.includes(skill.name))
+        .map(skill => skill.name)
     },
     weapon: build.gears.find(gear => CFDB.getGear(gear.name)?.type === GearType.weapon.name)?.name,
     stats: toStats(build),
     skills: build.skills,
     expertise: build.expertise,
-    resistance: build.resistance,
+    resistance: CFDB.getSkillTypes().filter(skillType => build.resistance.includes(skillType.name)).map(skillType => skillType.name),
     phylactery: {
       skill: build.phylactery.skill,
       extraTriggerPercent: CFDB.getPhylacteryExtraTriggerPercent(build.phylactery.plus)

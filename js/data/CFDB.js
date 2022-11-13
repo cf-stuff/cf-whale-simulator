@@ -46,7 +46,7 @@ CFDB.getPetSkill = name => CFDB.getPetSkills().find(skill => skill.name === name
 CFDB.getPetSkillByIconId = id => CFDB.getPetSkills().find(skill => skill.iconId === id);
 CFDB.getPetPassives = () => CFDB.getPetSkills(PetSkillType.passive);
 CFDB.getPetActives = () => CFDB.getPetSkills(PetSkillType.active);
-CFDB.getPetCombatSkills = () => [...CFDB.getPetActives(), ...CFDB.getPetPassives(), ...CFDB.getPetSkills(PetSkillType.skill)];
+CFDB.getPetCombatSkills = () => [...CFDB.getPetSkills(PetSkillType.skill), ...CFDB.getPetActives(), ...CFDB.getPetPassives()];
 
 CFDB.getGearTypes = () => Object.values(GearType);
 CFDB.getGearType = name => CFDB.getGearTypes().find(gearType => gearType.name === name);

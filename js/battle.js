@@ -602,13 +602,13 @@ function dealDamage(state, playerIndex, amount, options) {
   }
   state.players[playerIndex].status.filter(x => x.effect.storeDamageTaken).forEach(x => x.damageTaken += amount);
   updateStat(state, playerIndex, Stats.hp.name, -amount, options.source);
+  gainFury(state, playerIndex);
   if (state.players[playerIndex].stats.current.hp <= 0) {
     if (!tryToUseSkillFromPhase(state, playerIndex, SkillPhase.onDeath)) {
       state.log.push("game over");
       state.isGameOver = true;
     }
   }
-  gainFury(state, playerIndex);
 }
 
 function updateStat(state, playerIndex, stat, amount, source) {

@@ -21,7 +21,7 @@ export function simulateBattle(left, right) {
       players: [leftPlayers[currentIndex[0]], rightPlayers[currentIndex[1]]],
       timer: 0,
       isGameOver: false,
-      log:[]
+      log: []
     }
     // before round cleanup
     applyExpertiseAndMasteryToSkills(state);
@@ -178,6 +178,7 @@ function getAllSkillsEligibleToBeUsed(state, playerIndex, phase) {
     .filter(skill => skill.maxTriggerTimes ? skill.remainingUses > 0 : true)
     .filter(skill => skill.effect?.removeRandomDebuff ? getDebuffs(state, playerIndex).length > 0 : true)
     .filter(skill => skill.cantUseIfThunderGodIsActive ? !isThunderGodActive(state) : true)
+    .filter(skill => skill.cantUseIfFullHp ? !isFullHp(state, playerIndex) : true)
     .filter(skill => skill.numberOfFuryBursts ? state.players[playerIndex].furyBursts % skill.numberOfFuryBursts === 0 : true)
     .filter(skill => Utils.testProbability(getSkillTriggerProbability(state, playerIndex, skill)));
 }
@@ -669,6 +670,10 @@ function removeRandomDebuff(state, playerIndex) {
 
 function isThunderGodActive(state) {
   return state.players.some(player => player.status.some(status => status.name === Status.thunderGod.name));
+}
+
+function isFullHp(state, playerIndex) {
+  return state.players[playerIndex].stats.initial.hp === state.players[playerIndex].stats.current.hp;
 }
 
 function evaTest(state, playerIndex) {

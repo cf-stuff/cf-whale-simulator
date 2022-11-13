@@ -16,11 +16,10 @@ normalise score -> use as probability for pool selection
 todo for phase 1
 bomb bounce back
 evo wine / shield wall
-healing skill cheat revive
+frozen mechanics - probably implement in getAllSkillsEligibleToBeUsed, can pet attack activate?
 
 ---
 todo for phase 2
-load presets / import / export
 validate build
 on fighter change, update weapon
 reuse button component

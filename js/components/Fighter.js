@@ -40,17 +40,17 @@ const Fighter = ({ fighter, setFighter }) => {
     <div class="col">
       <span>STR: ${fighterStats.str}</span><br/>
       <span>(+${fighterInfo.growthRate[0]} per level)</span><br/>
-      <span>Each ${fighterInfo.bmv[0]} adds 1% ATK</span>
+      <span>Each ${fighterInfo.bmv[0]} STR adds 1% ATK</span>
     </div>
     <div class="col">
       <span>DEX: ${fighterStats.dex}</span><br/>
       <span>(+${fighterInfo.growthRate[1]} per level)</span><br/>
-      <span>Each ${fighterInfo.bmv[1]} adds 1 SPD & 1 EVA</span>
+      <span>Each ${fighterInfo.bmv[1]} DEX adds 1 SPD & 1 EVA</span>
     </div>
     <div class="col">
       <span>STA: ${fighterStats.sta}</span><br/>
       <span>(+${fighterInfo.growthRate[2]} per level)</span><br/>
-      <span>Each ${fighterInfo.bmv[2]} adds 1% HP & 1 SP</span>
+      <span>Each ${fighterInfo.bmv[2]} STA adds 1% HP & 1 SP</span>
     </div>
   </div>
   `}

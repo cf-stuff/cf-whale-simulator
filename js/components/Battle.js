@@ -78,6 +78,10 @@ const Battle = () => {
       ${rightPlayer && html`<${Display} player=${rightPlayer} />`}
     </div>
   </div>
+  <div class="row">
+    <span>Due to the nature of this game, it is impossible to 100% accurately depict certain behaviours 
+    (for example crit chance and dodge chance). The best we can do is approximate them, so take the battle results with a grain a salt.</span>
+  </div>
   `;
 }
 

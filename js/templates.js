@@ -54,7 +54,8 @@ Builds.brkTank = {
     ],
     evoSkills: [
       PetSkills.atkPercent_25Evo.name, PetSkills.hpPercent_25Evo.name, PetSkills.spd_30Evo.name,
-      PetSkills.spd_20Evo.name, PetSkills.barbarian.name, PetSkills.energyShield.name],
+      PetSkills.spd_20Evo.name, PetSkills.barbarian.name, PetSkills.energyShield.name
+    ],
   },
   gears: [
     {
@@ -234,7 +235,8 @@ Builds.evader = {
     ],
     evoSkills: [
       PetSkills.brk_50Evo.name, PetSkills.eva_50Evo.name, PetSkills.hpPercent_25Evo.name,
-      PetSkills.atkPercent_25Evo.name, PetSkills.needle.name, PetSkills.energyShield.name],
+      PetSkills.atkPercent_25Evo.name, PetSkills.needle.name, PetSkills.energyShield.name
+    ],
   },
   gears: [
     {
@@ -414,7 +416,8 @@ Builds.tank = {
     ],
     evoSkills: [
       PetSkills.def_50Evo.name, PetSkills.hpPercent_25Evo.name, PetSkills.spd_30Evo.name,
-      PetSkills.hp_130Evo.name, PetSkills.ignite.name, PetSkills.energyShield.name],
+      PetSkills.hp_130Evo.name, PetSkills.ignite.name, PetSkills.energyShield.name
+    ],
   },
   gears: [
     {
@@ -565,6 +568,187 @@ Builds.tank = {
   resistance: [SkillType.thunder.name, SkillType.genjutsu.name],
   arenaTitle: ArenaTitle.grandMaster2.name
 };
+
+Builds.hybrid = {
+  name: "Sample Hybrid",
+  level: 100,
+  fighter: {
+    name: Fighters.stryker.name,
+    plus: 21,
+    evolved: true,
+    potentials: {
+      str: 360,
+      dex: 360,
+      sta: 360
+    },
+    stats: [FighterSkills.crt.name, FighterSkills.atkPercent.name, FighterSkills.spd.name],
+    resets: [FighterSkills.bloodFrenzy.name, FighterSkills.goldenShield.name],
+    healing: FighterSkills.pray.name
+  },
+  pet: {
+    name: Pets.bat.name,
+    plus: 21,
+    evolved: true,
+    skills: [
+      PetSkills.block.name, PetSkills.batSpecialSkill.name, PetSkills.batSpecialStat.name,
+      PetSkills.crt_100.name, PetSkills.crt_50.name, PetSkills.brk_100.name,
+      PetSkills.brk_50.name, PetSkills.def_60.name, PetSkills.def_30.name,
+      PetSkills.hit_100.name, PetSkills.hit_50.name, PetSkills.hpPercent_10.name
+    ],
+    evoSkills: [
+      PetSkills.barbarian.name, PetSkills.energyShield.name, PetSkills.spd_30Evo.name,
+      PetSkills.crt_50Evo.name, PetSkills.brk_50Evo.name, PetSkills.hpPercent_25Evo.name
+    ]
+  },
+  gears: [
+    {
+      name: Gears.tyrantBloodthirstySword.name,
+      enhancement: 10,
+      stats: [{ brk: 125 }, { def: 125 }, { hit: 120 }, { crt: 144 }],
+      gems: [{ name: Gems.ruby.name, plus: 9 }, { name: Gems.ruby.name, plus: 9 }, { name: Gems.ruby.name, plus: 9 }]
+    },
+    {
+      name: Gears.tyrantBloodthirstyHelmet.name,
+      enhancement: 10,
+      stats: [{ brk: 125 }, { def: 125 }, { hit: 120 }, { crt: 144 }],
+      gems: [{ name: Gems.ruby.name, plus: 9 }, { name: Gems.garnet.name, plus: 9 }]
+    },
+    {
+      name: Gears.tyrantBloodthirstyLeggings.name,
+      enhancement: 10,
+      stats: [{ brk: 130 }, { def: 130 }, { hit: 124 }, { crt: 149 }],
+      gems: [{ name: Gems.ruby.name, plus: 9 }, { name: Gems.garnet.name, plus: 9 }]
+    },
+    {
+      name: Gears.tyrantBloodthirstyRing.name,
+      enhancement: 10,
+      stats: [{ brk: 130 }, { def: 130 }, { hit: 124 }, { crt: 149 }],
+      gems: [{ name: Gems.ruby.name, plus: 10 }, { name: Gems.garnet.name, plus: 10 }]
+    },
+    {
+      name: Gears.tyrantBloodthirstyArmor.name,
+      enhancement: 10,
+      stats: [{ brk: 130 }, { def: 130 }, { hit: 124 }, { crt: 149 }],
+      gems: [{ name: Gems.ruby.name, plus: 9 }, { name: Gems.garnet.name, plus: 9 }]
+    },
+    {
+      name: Gears.tyrantBloodthirstyGloves.name,
+      enhancement: 10,
+      stats: [{ brk: 130 }, { def: 130 }, { hit: 124 }, { crt: 149 }],
+      gems: [{ name: Gems.ruby.name, plus: 9 }, { name: Gems.garnet.name, plus: 9 }]
+    },
+    {
+      name: Gears.tyrantBloodthirstyNecklace.name,
+      enhancement: 10,
+      stats: [{ brk: 125 }, { def: 125 }, { hit: 120 }, { crt: 144 }],
+      gems: [{ name: Gems.ruby.name, plus: 9 }, { name: Gems.garnet.name, plus: 9 }]
+    },
+    {
+      name: Gears.tyrantBloodthirstyBoots.name,
+      enhancement: 10,
+      stats: [{ brk: 125 }, { def: 125 }, { hit: 120 }, { crt: 144 }],
+      gems: [{ name: Gems.ruby.name, plus: 9 }, { name: Gems.garnet.name, plus: 9 }]
+    }
+  ],
+  phylactery: {
+    plus: 20,
+    skill: Skills.bloodFrenzy.name,
+    stats: [Stats.str.displayName, Stats.str.displayName, Stats.sta.displayName],
+    glyphs: [
+      {
+        stat: Stats.def.displayName,
+        plus: 6
+      },
+      {
+        stat: Stats.brk.displayName,
+        plus: 6
+      },
+      {
+        stat: Stats.crt.displayName,
+        plus: 6
+      },
+      {
+        stat: Stats.hit.displayName,
+        plus: 6
+      }
+    ]
+  },
+  nexus: [
+    {
+      stat: Stats.maxAtk.displayName,
+      level: 12
+    },
+    {
+      stat: Stats.brk.displayName,
+      level: 12
+    },
+    {
+      stat: Stats.crt.displayName,
+      level: 12
+    },
+    {
+      stat: Stats.def.displayName,
+      level: 12
+    },
+    {
+      stat: Stats.hit.displayName,
+      level: 12
+    },
+    {
+      stat: Stats.spd.displayName,
+      level: 12
+    },
+    {
+      stat: Stats.sta.displayName,
+      level: 12
+    },
+    {
+      stat: Stats.hp.displayName,
+      level: 12
+    }
+  ],
+  altar: {
+    str: 240,
+    dex: 240,
+    sta: 240,
+    atkPercent: 20,
+    def: 200,
+    eva: 200,
+    hpPercent: 20,
+    hp: 200,
+    crt: 200,
+    spd: 20,
+    brk: 200,
+    hit: 200,
+    res: 200,
+    minAtk: 40,
+    maxAtk: 40
+  },
+  totem: {
+    name: Totems.white.name,
+    level: 64,
+    stats: {
+      hit: 120,
+      brk: 120,
+      crt: 120,
+      atkPercent: 12,
+      hpPercent: 12,
+      res: 120,
+      def: 120,
+      eva: 120
+    }
+  },
+  skills: [
+    Skills.assassinate.name, Skills.bloodSacrifice.name, Skills.movingIllusion.name,
+    Skills.fireShield.name, Skills.goldenShield.name, Skills.rebirth.name
+  ],
+  expertise: [
+    SkillType.water.name, SkillType.fire.name, SkillType.earth.name, SkillType.thunder.name, SkillType.wind.name,
+    SkillType.ninjutsu.name, SkillType.cursedSealJutsu.name, SkillType.genjutsu.name, SkillType.healing.name
+  ],
+  resistance: [SkillType.thunder.name, SkillType.genjutsu.name],
+  arenaTitle: ArenaTitle.grandMaster2.name
+}
 
 Players.trashEvader = {
   name: "Dingus",

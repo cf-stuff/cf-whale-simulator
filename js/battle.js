@@ -139,14 +139,14 @@ export function startBattle(state) {
     getPlayersEligibleToTakeTurn(state).forEach(player => {
       if (state.isGameOver) return;
       state.players.forEach(player => {
-        if (getDebuffs(state, player.index).length > 0) {
+        const skipActions = player.status.some(x => x.effect.skipActions);
+        if (!skipActions && getDebuffs(state, player.index).length > 0) {
           tryToUseSkillFromPhase(state, player.index, SkillPhase.onDebuff);
         }
       });
       if (player.status.some(x => x.effect.skipTurn)) return;
       // turn start
       state.log.push(`${player.id}: turn start at ${state.timer / 1000} seconds`);
-      // save here just in case it gets removed at start of turn
       const skipActions = player.status.some(x => x.effect.skipActions);
       handleStartOfTurnStatusEffects(state, player.index);
       handleStatusBetrayal(state);
@@ -672,12 +672,10 @@ function isThunderGodActive(state) {
 }
 
 function evaTest(state, playerIndex) {
-  if (state.players[playerIndex ^ 1].stats.current.hit > state.players[playerIndex].stats.current.eva) return false;
   let evaMultiplier = 1;
-  let hitMultiplier = 1;
-  state.players[playerIndex].status.forEach(x => evaMultiplier *= x.effect.evaMultiplier || 1);
-  state.players[playerIndex ^ 1].status.forEach(x => hitMultiplier *= x.effect.hitMultiplier || 1);
-  return Utils.testProbability((state.players[playerIndex].stats.current.eva - state.players[playerIndex ^ 1].stats.current.hit) * 0.0006);
+  const eva = state.players[playerIndex].stats.current.eva * evaMultiplier;
+  if (state.players[playerIndex ^ 1].stats.current.hit > eva) return false;
+  return Utils.testProbability((eva - state.players[playerIndex ^ 1].stats.current.hit) * 0.0006);
 }
 
 function crtTest(crt, res) {

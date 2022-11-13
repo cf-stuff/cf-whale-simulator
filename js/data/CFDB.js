@@ -104,10 +104,13 @@ CFDB.getPhylacteryInfo = (type, plus) => {
 CFDB.getNexusStats = () => Object.values(Nexus);
 CFDB.getNexusStat = name => CFDB.getNexusStats().find(stat => stat.name === name);
 CFDB.calculateNexusStat = (stat, level) => {
+  return Math.ceil(CFDB.calculateNexusStatRecursive(stat, level));
+}
+CFDB.calculateNexusStatRecursive = (stat, level) => {
   const nexusStat = CFDB.getNexusStat(stat);
   if (level == 1) return nexusStat.startingAmount;
-  else if (level <= 7) return Math.ceil(nexusStat.amountPerLevel + CFDB.calculateNexusStat(stat, level - 1));
-  else return Math.ceil(nexusStat.amountPerLevelAfter7 + CFDB.calculateNexusStat(stat, level - 1));
+  else if (level <= 7) return nexusStat.amountPerLevel + CFDB.calculateNexusStatRecursive(stat, level - 1);
+  else return nexusStat.amountPerLevelAfter7 + CFDB.calculateNexusStatRecursive(stat, level - 1);
 }
 
 CFDB.getStarAltar = () => Object.values(StarAltar);

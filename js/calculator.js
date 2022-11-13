@@ -114,7 +114,7 @@ const toPlayer = build => {
     },
     weapon: build.gears.find(gear => CFDB.getGear(gear.name)?.type === GearType.weapon.name)?.name,
     stats: toStats(build),
-    skills: build.skills,
+    skills: build.skills.filter(skill => skill !== build.phylactery.skill),
     expertise: build.expertise,
     resistance: CFDB.getSkillTypes().filter(skillType => build.resistance.includes(skillType.name)).map(skillType => skillType.name),
     phylactery: {

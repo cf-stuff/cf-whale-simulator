@@ -60,12 +60,12 @@ const Battle = () => {
     <div class="col-md order-1 order-md-2">
       <div class="row">
         <div class="col">
+          <${Button} onClick=${() => handleBattle(100)}>VS 100</${Button}>
         </div>
         <div class="col-auto">
           <span class="text-center h2">${leftWins}-${rightWins}</span>
         </div>
         <div class="col">
-          <${Button} onClick=${() => handleBattle(100)}>VS 100</${Button}>
         </div>
       </div>
       <div class="row">

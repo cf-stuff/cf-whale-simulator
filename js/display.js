@@ -6,39 +6,36 @@ export async function createCanvas(player) {
   canvas.width = 512;
   canvas.height = 720;
   const ctx = canvas.getContext("2d");
+  const promises = [];
 
-  ctx.drawImage(await getImage("img/display/background.png"), 0, 0);
+  await asyncDraw(ctx, "img/display/background.png", 0, 0);
 
   if (!player) return canvas;
 
-  // name
   ctx.font = "bold 21px arial";
   ctx.fillStyle = "#000000";
   ctx.fillText(`${player.name}`, 107, 29);
 
-  // level
   ctx.font = "21px arial";
   ctx.fillStyle = "#FFFFFF";
   const playerLevel = player.level;
-  ctx.fillText(`lv${playerLevel.length === 3 ? "" : "l"}: ${playerLevel}`, 13, 118);
+  ctx.fillText(`lvl: ${playerLevel}`, 13, 118);
 
   if (player.fighter.name === "None") return canvas;
 
   // stat box thing
-  ctx.fillStyle = "rgba(25, 0, 21, 0.9)";
+  ctx.fillStyle = "rgba(25, 0, 21, 0.85)";
   ctx.strokeStyle = "#ffffff";
   ctx.lineWidth = 4;
   ctx.roundRect(-20, 150, 250, player.fighter?.skills?.length > 0 ? 500 : 430, 20);
 
-  // totem
   if (player.totem.name) {
     const totem = CFDB.getTotem(player.totem.name);
-    ctx.drawImage(await getImage(getImagePath(ImageType.totem, totem.iconId)), 300, 400);
+    promises.push(asyncDraw(ctx, getImagePath(ImageType.totem, totem.iconId), 300, 400));
   }
 
-  // fighter + pet
   const fighter = CFDB.getFighter(player.fighter.name);
-  ctx.drawImage(await getImage(getImagePath(ImageType.fighter, fighter.iconId)), 35, 20);
+  promises.push(asyncDraw(ctx, getImagePath(ImageType.fighter, fighter.iconId), 35, 20));
   const fighterDisplayName = player.fighter.evolved ? fighter.evoName : fighter.name;
   ctx.font = "bold 16px arial";
   ctx.fillStyle = "#a15f08";
@@ -52,7 +49,7 @@ export async function createCanvas(player) {
 
   if (player.pet.name !== "None") {
     const pet = CFDB.getPet(player.pet.name);
-    ctx.drawImage(await getImage(getImagePath(ImageType.pet, player.pet.evolved ? pet.evoIconId : pet.iconId)), 250, 500);
+    promises.push(asyncDraw(ctx, getImagePath(ImageType.pet, player.pet.evolved ? pet.evoIconId : pet.iconId), 250, 500));
     ctx.font = "bold 16px arial";
     ctx.fillStyle = "#a15f08";
     const petDisplayName = player.pet.evolved ? pet.evoName : pet.name;
@@ -65,31 +62,28 @@ export async function createCanvas(player) {
 
   lineSeparator(ctx, 210);
 
-  // resistance
   ctx.font = "19px arial";
   ctx.fillStyle = "#ffffff";
   ctx.fillText("Resistance", 15, 240);
   for (let i = 0; i < player.resistance.length; ++i) {
     const skillType = CFDB.getSkillType(player.resistance[i]);
-    ctx.drawImage(await getImage(getImagePath(ImageType.skillType, skillType.iconId)), 120 + 40 * i, 215, 39, 36.5);
+    promises.push(asyncDraw(ctx, getImagePath(ImageType.skillType, skillType.iconId), 120 + 40 * i, 215, 39, 36.5));
   }
 
   lineSeparator(ctx, 250);
   renderStats(ctx, player.stats);
   lineSeparator(ctx, 400);
-  await renderSkills(ctx, player);
-
+  await renderSkills(ctx, player, promises);
+  await Promise.allSettled(promises);
   return canvas;
 }
 
 function renderStats(ctx, stats) {
-  // hp + sp
   ctx.font = "21px arial";
   ctx.fillStyle = "#FFFFFF";
   ctx.fillText(`${stats.hp}/${stats.hp}`, 235, 53);
   ctx.fillText(`${stats.sp}/${stats.sp}`, 285, 82);
 
-  // stat names
   ctx.font = "18px arial";
   ctx.fillStyle = "#ffffff";
   ctx.fillText("ATK", 15, 280);
@@ -101,7 +95,6 @@ function renderStats(ctx, stats) {
   ctx.fillText("CRT", 15, 380);
   ctx.fillText("RES", 105, 380);
 
-  // stat values
   ctx.fillStyle = "#b6a357";
   ctx.fillText(` ${stats.minAtk} ~ ${stats.maxAtk}`, 55, 280);
   ctx.fillText(` ${stats.spd}`, 55, 305);
@@ -113,7 +106,7 @@ function renderStats(ctx, stats) {
   ctx.fillText(` ${stats.res}`, 140, 380);
 }
 
-async function renderSkills(ctx, player) {
+async function renderSkills(ctx, player, promises) {
   let skillIndex = 0;
   let petSkillIndex = 0;
   let phySkillRendered = false;
@@ -124,16 +117,16 @@ async function renderSkills(ctx, player) {
       ctx.drawImage(skillFrame, 15 + x * 50, 415 + y * 50, 45, 45);
       if (skillIndex < Math.min(6, player.skills.length)) {
         const skill = CFDB.getSkill(player.skills[skillIndex++]);
-        skillImage = await getImage(getImagePath(ImageType.skill, skill.iconId));
+        skillImage = getImagePath(ImageType.skill, skill.iconId);
       } else if (petSkillIndex < player.pet?.skills.length) {
         const skill = CFDB.getPetSkill(player.pet.skills[petSkillIndex++]);
-        skillImage = await getImage(getImagePath(ImageType.petSkill, skill.iconId));
+        skillImage = getImagePath(ImageType.petSkill, skill.iconId);
       } else if (player.phylactery?.skill && !phySkillRendered) {
         const skill = CFDB.getSkill(player.phylactery.skill);
-        skillImage = await getImage(getImagePath(ImageType.skill, skill.iconId));
+        skillImage = getImagePath(ImageType.skill, skill.iconId);
         phySkillRendered = true;
       }
-      if (skillImage) ctx.drawImage(skillImage, 17 + x * 50, 417 + y * 50, 41, 41);
+      if (skillImage) promises.push(asyncDraw(ctx, skillImage, 17 + x * 50, 417 + y * 50, 41, 41));
     }
   }
 
@@ -145,7 +138,7 @@ async function renderSkills(ctx, player) {
       ctx.drawImage(evoSkillFrame, 15 + x * 50, 590, 45, 45);
       if (fighterSkillIndex < player.fighter.skills.length) {
         const fighterSkill = CFDB.getFighterSkill(player.fighter.skills[fighterSkillIndex++]);
-        ctx.drawImage(await getImage(getImagePath(ImageType.fighterSkill, fighterSkill.iconIds[2])), 17 + x * 50, 592, 41, 41);
+        promises.push(asyncDraw(ctx, getImagePath(ImageType.fighterSkill, fighterSkill.iconIds[2]), 17 + x * 50, 592, 41, 41));
       }
     }
   }
@@ -155,6 +148,16 @@ function getImage(path) {
   const image = document.createElement("img");
   image.src = path;
   return new Promise(resolve => image.onload = () => resolve(image));
+}
+
+async function asyncDraw(ctx, path, x, y, w, h) {
+  await getImage(path).then(image => {
+    if (!w) {
+      ctx.drawImage(image, x, y);
+    } else {
+      ctx.drawImage(image, x, y, w, h);
+    }
+  });
 }
 
 function lineSeparator(ctx, y) {

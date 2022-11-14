@@ -150,22 +150,19 @@ const PetSkills = {
     name: "Scratch",
     type: PetSkillType.skill,
     iconId: 25,
-    skill: {
       phase: SkillPhase.petAttack,
       triggerPercent: 10
-    }
   },
   block: {
     name: "Defense",
     type: PetSkillType.skill,
     iconId: 26,
-    skill: {
-      effect: {
-        blockAttack: true
-      },
-      phase: SkillPhase.duringAllEnemyAttacks,
-      triggerPercent: 10,
-    }
+    effect: {
+      blockAttack: true
+    },
+    phase: SkillPhase.duringAllEnemyAttacks,
+    triggerPercent: 10,
+
   },
   foxSpecialStat: {
     name: "50EVA (Gale Fox Special)",

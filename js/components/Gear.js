@@ -63,7 +63,7 @@ const Gear = ({ fighterWeaponType, gear, type, setGear }) => {
       <div class="col">
         <div class="input-group">
           <label class="input-group-text" for="gear-${gearType.name}-enhance">+</label>
-          <${NumberInput} id="gear-${gearType.name}-enhance" value=${gear.enhancement} />
+          <${NumberInput} id="gear-${gearType.name}-enhance" value=${gear.enhancement} onInput=${e => setGear({ ...gear, enhancement: e.target.value })} />
         </div>
       </div>
     </div>

@@ -122,6 +122,7 @@ export const reducer = (state, action) => {
       gears.forEach(gear => {
 
         const gearInfo = CFDB.getGear(gear.name);
+        gear.enhancement = Utils.clamp(gear.enhancement, 0, 10);
         gear.stats.forEach((stat, i) => {
           if (!stat) return;
           const statName = Object.keys(stat)[0];

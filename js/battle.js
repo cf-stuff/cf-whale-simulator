@@ -141,12 +141,9 @@ export function startBattle(state) {
     // so should attack whenever timer is at 1400, 2800, etc
     getPlayersEligibleToTakeTurn(state).forEach(player => {
       if (state.isGameOver) return;
-      state.players.forEach(player => {
-        const skipActions = player.status.some(x => x.effect.skipActions);
-        if (!skipActions && getDebuffs(state, player.index).length > 0) {
-          tryToUseSkillFromPhase(state, player.index, SkillPhase.onDebuff);
-        }
-      });
+      if (getDebuffs(state, player.index ^ 1).length > 0) {
+        tryToUseSkillFromPhase(state, player.index ^ 1, SkillPhase.onDebuff);
+      }
       if (player.status.some(x => x.effect.skipTurn)) return;
       // turn start
       state.log.push(`${player.id}: turn start at ${state.timer / 1000} seconds`);
@@ -392,7 +389,6 @@ function getAtkMultiplierFromStatusEffects(state, playerIndex) {
       const maxHp = state.players[playerIndex].stats.initial.hp;
       const curHp = state.players[playerIndex].stats.current.hp;
       const percentHpLost = Math.floor((maxHp - curHp) * 100 / maxHp);
-      state.log.push(`DEBUG barb mod=${1 + percentHpLost * x.effect.atkMultiplierPerHpPercentLost}`);
       atkMultiplier *= 1 + percentHpLost * x.effect.atkMultiplierPerHpPercentLost;
     }
     atkMultiplier *= x.effect.atkMultiplier || 1;

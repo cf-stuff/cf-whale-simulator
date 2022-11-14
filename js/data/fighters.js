@@ -391,6 +391,16 @@ const Fighters = {
     bmv: [18, 11, 8],
     mastery: SkillType.healing.name
   },
+  jupiter: {
+    name: "Jupiter",
+    evoName: "E·Jupiter",
+    iconId: 55,
+    weaponType: WeaponType.staff,
+    isv: [35, 31, 23],
+    growthRate: [1.8, 1.75, 1.4],
+    bmv: [8, 12, 17],
+    mastery: SkillType.ninjutsu.name
+  },
 };
 
 export default Fighters;

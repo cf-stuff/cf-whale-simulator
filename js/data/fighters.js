@@ -71,6 +71,16 @@ const Fighters = {
     bmv: [10, 17, 8],
     mastery: SkillType.water.name
   },
+  metalx: {
+    name: "MetalX",
+    evoName: "E·MetalX",
+    iconId: 68,
+    weaponType: WeaponType.gloves,
+    isv: [36, 25, 29],
+    growthRate: [1.8, 1.5, 1.7],
+    bmv: [9, 15, 10],
+    mastery: SkillType.wind.name
+  },
   sif: {
     name: "Sif",
     evoName: "E·Sif",
@@ -210,6 +220,176 @@ const Fighters = {
     growthRate: [1.8, 1.55, 1.75],
     bmv: [8, 16, 12],
     mastery: SkillType.taijutsu.name
+  },
+  zeus: {
+    name: "Zeus",
+    evoName: "E·Zeus",
+    iconId: 71,
+    weaponType: WeaponType.gloves,
+    isv: [36, 29, 25],
+    growthRate: [1.8, 1.7, 1.5],
+    bmv: [9, 12, 16],
+    mastery: SkillType.water.name
+  },
+  hades: {
+    name: "Hades",
+    evoName: "E·Hades",
+    iconId: 69,
+    weaponType: WeaponType.gloves,
+    isv: [36, 25, 29],
+    growthRate: [1.8, 1.5, 1.7],
+    bmv: [9, 16, 12],
+    mastery: SkillType.fire.name
+  },
+  deathKnight: {
+    name: "Death Knight",
+    evoName: "E·Death Knight",
+    iconId: 64,
+    weaponType: WeaponType.heavyWeapon,
+    isv: [30, 35, 25],
+    growthRate: [1.6, 1.9, 1.5],
+    bmv: [11, 8, 15],
+    mastery: SkillType.wind.name
+  },
+  wanderer: {
+    name: "Wanderer",
+    evoName: "E·Wanderer",
+    iconId: 67,
+    weaponType: WeaponType.sword,
+    isv: [25, 35, 30],
+    growthRate: [1.4, 1.9, 1.7],
+    bmv: [17, 8, 12],
+    mastery: SkillType.thunder.name
+  },
+  shinigami: {
+    name: "Shinigami",
+    evoName: "E·Shinigami",
+    iconId: 66,
+    weaponType: WeaponType.sword,
+    isv: [32, 22, 36],
+    growthRate: [1.7, 1.4, 1.9],
+    bmv: [12, 17, 8],
+    mastery: SkillType.cursedSealJutsu.name
+  },
+  thor: {
+    name: "Thor",
+    evoName: "E·Thor",
+    iconId: 65,
+    weaponType: WeaponType.sword,
+    isv: [25, 31, 34],
+    growthRate: [1.4, 1.7, 1.9],
+    bmv: [17, 12, 8],
+    mastery: SkillType.healing.name
+  },
+  evilGuanYu: {
+    name: "Evil Guan Yu",
+    evoName: "E·Evil Guan Yu",
+    iconId: 60,
+    weaponType: WeaponType.cudgel,
+    isv: [34, 31, 25],
+    growthRate: [1.9, 1.7, 1.4],
+    bmv: [8, 12, 17],
+    mastery: SkillType.taijutsu.name
+  },
+  void: {
+    name: "Void",
+    evoName: "E·Void",
+    iconId: 58,
+    weaponType: WeaponType.dagger,
+    isv: [33, 27, 30],
+    growthRate: [1.8, 1.5, 1.7],
+    bmv: [8, 17, 12],
+    mastery: SkillType.genjutsu.name
+  },
+  altira: {
+    name: "Altira",
+    evoName: "E·Altira",
+    iconId: 61,
+    weaponType: WeaponType.sword,
+    isv: [30, 40, 20],
+    growthRate: [1.6, 1.9, 1.5],
+    bmv: [11, 8, 18],
+    mastery: SkillType.genjutsu.name
+  },
+  badger: {
+    name: "Badger",
+    evoName: "E·Badger",
+    iconId: 63,
+    weaponType: WeaponType.gloves,
+    isv: [26, 35, 29],
+    growthRate: [1.5, 1.8, 1.7],
+    bmv: [17, 8, 12],
+    mastery: SkillType.fire.name
+  },
+  merv: {
+    name: "Merv",
+    evoName: "E·Merv",
+    iconId: 59,
+    weaponType: WeaponType.staff,
+    isv: [33, 21, 36],
+    growthRate: [1.75, 1.35, 1.9],
+    bmv: [11, 18, 8],
+    mastery: SkillType.fire.name
+  },
+  fleshy: {
+    name: "Fleshy",
+    evoName: "E·Fleshy",
+    iconId: 62,
+    weaponType: WeaponType.gloves,
+    isv: [25, 32, 33],
+    growthRate: [1.4, 1.8, 1.8],
+    bmv: [17, 12, 8],
+    mastery: SkillType.taijutsu.name
+  },
+  simaYi: {
+    name: "Sima Yi",
+    evoName: "E·Sima Yi",
+    iconId: 51,
+    weaponType: WeaponType.dagger,
+    isv: [33, 26, 30],
+    growthRate: [1.8, 1.45, 1.75],
+    bmv: [8, 18, 11],
+    mastery: SkillType.fire.name
+  },
+  toadmeister: {
+    name: "Toadmeister",
+    evoName: "E·Toadmeister",
+    iconId: 53,
+    weaponType: WeaponType.sword,
+    isv: [30, 37, 22],
+    growthRate: [1.65, 1.85, 1.45],
+    bmv: [11, 9, 17],
+    mastery: SkillType.thunder.name
+  },
+  llamar: {
+    name: "Llamar",
+    evoName: "E·Llamar",
+    iconId: 56,
+    weaponType: WeaponType.cudgel,
+    isv: [25, 35, 29],
+    growthRate: [1.45, 1.85, 1.65],
+    bmv: [18, 8, 11],
+    mastery: SkillType.genjutsu.name
+  },
+  chrome: {
+    name: "Chrome",
+    evoName: "E·Chrome",
+    iconId: 54,
+    weaponType: WeaponType.gloves,
+    isv: [34, 19, 36],
+    growthRate: [1.75, 1.35, 1.85],
+    bmv: [11, 18, 8],
+    mastery: SkillType.healing.name
+  },
+  freya: {
+    name: "Freya",
+    evoName: "E·Freya",
+    iconId: 52,
+    weaponType: WeaponType.heavyWeapon,
+    isv: [24, 32, 33],
+    growthRate: [1.35, 1.75, 1.85],
+    bmv: [18, 11, 8],
+    mastery: SkillType.healing.name
   },
 };
 

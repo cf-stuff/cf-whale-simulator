@@ -18,6 +18,7 @@ const BuildLoader = ({ build, setBuild }) => {
     }
   }
   const saveBuild = () => {
+    if (build.fighter.name === "None") return;
     save(build);
     setSelectedBuild(build.name)
   };

@@ -35,10 +35,11 @@ const toStats = build => {
     sp: 100,
     furyReversion: 0
   }
-  if (build.fighter.name !== "None") {
-    const fighterStats = calculateFighterStats(build.fighter.name, build.fighter.evolved ? 34 : build.fighter.plus);
-    addStats(fighterStats, stats);
+  if (build.fighter.name === "None") {
+    return stats;
   }
+  const fighterStats = calculateFighterStats(build.fighter.name, build.fighter.evolved ? 34 : build.fighter.plus);
+  addStats(fighterStats, stats);
   if (build.fighter.evolved) {
     addStats(build.fighter.potentials, stats);
     build.fighter.stats.map(stat => CFDB.getFighterSkill(stat))
@@ -54,6 +55,10 @@ const toStats = build => {
   }
   build.gears.forEach(gear => {
     const gearInfo = CFDB.getGear(gear.name);
+    if (gearInfo.type === GearType.weapon.name) {
+      const fighterInfo = CFDB.getFighter(build.fighter.name);
+      if (gearInfo.weaponType !== fighterInfo.weaponType) return;
+    }
     addStats(gearInfo.stats, stats);
     gear.stats.filter(stat => stat).forEach(stat => addStats(stat, stats));
     for (let i = 0; i < gear.enhancement; ++i) {

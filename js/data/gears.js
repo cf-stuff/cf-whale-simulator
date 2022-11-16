@@ -1,4 +1,5 @@
 import { GearType, WeaponType } from "./categories.js";
+import Fighters from "./fighters.js";
 
 export const Gears = {
   eagleHelmet: {
@@ -630,10 +631,48 @@ export const Gears = {
       minAtk: 22,
       maxAtk: 22
     }
+  },
+  squidward: {
+    name: "Squidward", // todo find out actual name
+    iconId: 6086,
+    level: 86,
+    type: GearType.weapon.name,
+    weaponType: WeaponType.cudgel,
+    stats: {
+      minAtk: 269,
+      maxAtk: 348,
+    },
+    statsPerEnhance: {
+      minAtk: 20,
+      maxAtk: 20
+    },
+    exclusiveStat: {
+      fighter: Fighters.llamar.name,
+      stat: { eva: 80 }
+    }
+  },
+  chromeGLoves: {
+    name: "Iron man Gloves", // todo find out actual name
+    iconId: 1086,
+    level: 86,
+    type: GearType.weapon.name,
+    weaponType: WeaponType.gloves,
+    stats: {
+      minAtk: 269,
+      maxAtk: 348,
+    },
+    statsPerEnhance: {
+      minAtk: 20,
+      maxAtk: 20
+    },
+    exclusiveStat: {
+      fighter: Fighters.chrome.name,
+      stat: { def: 80 }
+    }
   }
 };
 
-export const GearSuitBonus = {
+export const GearSuits = {
   tyrantBloodthirsty: {
     name: "Tyrant Bloodthirsty",
     twoPieceBonus: {

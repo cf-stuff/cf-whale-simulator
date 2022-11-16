@@ -2,6 +2,7 @@ import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import CFDB from "../data/CFDB.js";
 import Stats from "../data/stats.js";
 import { getImagePath, ImageType } from "../image.js";
+import Button from "./Button.js";
 import Glyph from "./Glyph.js";
 import ImageRadio from "./ImageRadio.js";
 import NumberInput from "./NumberInput.js";
@@ -56,7 +57,7 @@ const Phylactery = ({ phylactery, setPhylactery }) => {
   return html`
   <div class="row">
     <div class="col-auto">
-      <button class="btn btn-outline-secondary" onClick=${handleMax}>Max</button>
+      <${Button} onClick=${handleMax}>Max</${Button}>
     </div>
     <div class="col">
       <div class="input-group">

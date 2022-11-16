@@ -1,5 +1,6 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import CFDB from "../data/CFDB.js";
+import Button from "./Button.js";
 import NumberInput from "./NumberInput.js";
 import SelectInput from "./SelectInput.js";
 
@@ -15,7 +16,7 @@ const GearStat = ({ options, stat, value, setStat, gearLevel, purple = false }) 
   <div class="input-group${purple ? " purple-stat" : ""}">
     <${SelectInput} value=${stat === "None" ? "None" : CFDB.getStatFromName(stat).displayName} options=${options} onChange=${handleSelect} />
     <${NumberInput} value=${value} onInput=${e => setStat(stat, e.target.value)} />
-    <button class="btn btn-outline-secondary stat-max" onClick=${() => setStat(stat, maxStat)}>(Max${maxStat === 0 ? "" : ` ${maxStat}`})</button>
+    <${Button} onClick=${() => setStat(stat, maxStat)} width="6rem">(Max${maxStat === 0 ? "" : ` ${maxStat}`})</${Button}>
   </div>
   `;
 }

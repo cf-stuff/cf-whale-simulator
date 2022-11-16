@@ -4,6 +4,7 @@ import NumberInput from "./NumberInput.js";
 import FixedStatInput from "./FixedStatInput.js";
 import { getImagePath, ImageType } from "../image.js";
 import ImageRadio from "./ImageRadio.js";
+import Button from "./Button.js";
 
 const maxStats = {
   hit: 120,
@@ -26,7 +27,7 @@ const Totem = ({ totem, setTotem }) => {
   return html`
   <div class="row">
     <div class="col-auto">
-      <button class="btn btn-outline-secondary" onClick=${() => setTotem({ level: 64, stats: maxStats })}>Max</button>
+      <${Button} class="btn btn-outline-secondary" onClick=${() => setTotem({ level: 64, stats: maxStats })}>Max</${Button}>
     </div>
     <div class="col">
       <div class="input-group">

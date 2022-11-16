@@ -58,6 +58,9 @@ const toStats = build => {
     if (gearInfo.type === GearType.weapon.name) {
       const fighterInfo = CFDB.getFighter(build.fighter.name);
       if (gearInfo.weaponType !== fighterInfo.weaponType) return;
+      if (gearInfo.exclusiveStat?.fighter === fighterInfo.name) {
+        addStats(gearInfo.exclusiveStat.stat, stats);
+      }
     }
     addStats(gearInfo.stats, stats);
     gear.stats.filter(stat => stat).forEach(stat => addStats(stat, stats));

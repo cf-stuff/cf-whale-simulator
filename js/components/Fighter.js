@@ -1,6 +1,7 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import { calculateFighterStats } from "../calculator.js";
 import CFDB from "../data/CFDB.js";
+import Button from "./Button.js";
 import EvolvedFighter from "./EvolvedFighter.js";
 import NumberInput from "./NumberInput.js";
 import SelectInput from "./SelectInput.js";
@@ -18,7 +19,7 @@ const Fighter = ({ fighter, setFighter }) => {
   return html`
   <div class="row">
     <div class="col-auto">
-      <button class="btn btn-outline-secondary" onClick=${handleMax}>Max</button>
+      <${Button} onClick=${handleMax}>Max</${Button}>
     </div>
     <div class="col">
       <${SelectInput} value=${fighter.name} onChange=${e => setFighter({ name: e.target.value })}

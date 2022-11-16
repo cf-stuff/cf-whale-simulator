@@ -1,5 +1,6 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import CFDB from "../data/CFDB.js";
+import Button from "./Button.js";
 import FixedStatInput from "./FixedStatInput.js";
 
 const maxAltar = {};
@@ -10,7 +11,7 @@ const StarAltar = ({ altar, setAltar }) => {
   return html`
   <div class="row">
     <div class="col-auto">
-      <button class="btn btn-outline-secondary" onClick=${() => setAltar(maxAltar)}>Max</button>
+      <${Button} onClick=${() => setAltar(maxAltar)}>Max</${Button}>
     </div>
   </div>
   <div class="row row-cols-2">

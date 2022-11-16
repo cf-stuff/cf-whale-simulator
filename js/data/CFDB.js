@@ -2,7 +2,7 @@ import ArenaTitles from "./arena.js";
 import { FighterSkillType, GearType, GemType, PetSkillType, SkillType } from "./categories.js";
 import Fighters from "./fighters.js";
 import FighterSkills from "./fighterSkills.js";
-import { GearMaxValues, Gears, GearSuitBonus } from "./gears.js";
+import { GearMaxValues, Gears, GearSuits } from "./gears.js";
 import Gems from "./gems.js";
 import Nexus from "./nexus.js";
 import Pets from "./pets.js";
@@ -68,7 +68,7 @@ CFDB.getGearMaxValue = (level, stat, purple = false) => {
   return 0;
 }
 
-CFDB.getGearSuitBonus = () => Object.values(GearSuitBonus);
+CFDB.getGearSuitBonus = () => Object.values(GearSuits);
 
 CFDB.getGems = () => Object.values(Gems);
 CFDB.getGem = name => CFDB.getGems().find(gem => gem.name === name);

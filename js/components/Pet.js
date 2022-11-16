@@ -4,6 +4,7 @@ import CFDB from "../data/CFDB.js";
 import Pets from "../data/pets.js";
 import { getImagePath, ImageType } from "../image.js";
 import Utils from "../utils.js";
+import Button from "./Button.js";
 import EvolvedPet from "./EvolvedPet.js";
 import ImageCheckbox from "./ImageCheckbox.js";
 import NumberInput from "./NumberInput.js";
@@ -51,7 +52,7 @@ const Pet = ({ pet, setPet }) => {
   return html`
   <div class="row">
     <div class="col-auto">
-      <button class="btn btn-outline-secondary" onClick=${handleMax}>Max</button>
+      <${Button} onClick=${handleMax}>Max</${Button}>
     </div>
     <div class="col">
       <${SelectInput} value=${pet.name} onChange=${handlePetChange}

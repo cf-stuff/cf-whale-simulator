@@ -13,8 +13,8 @@ export function simulateBattle(left, right) {
   leftPlayers.forEach((player, i) => player.id = i * 2);
   rightPlayers.forEach((player, i) => player.id = i * 2 + 1);
   const logs = [];
-  logs.push(`left: ${leftPlayers.map(player => `${player.name}=${player.id}`)}`);
-  logs.push(`right: ${rightPlayers.map(player => `${player.name}=${player.id}`)}`);
+  logs.push(`left: ${leftPlayers.map(player => `${player.name}=${player.id}`).join(", ")}`);
+  logs.push(`right: ${rightPlayers.map(player => `${player.name}=${player.id}`).join(", ")}`);
   let currentIndex = [0, 0];
   while (currentIndex[0] < left.length && currentIndex[1] < right.length) {
     let state = {

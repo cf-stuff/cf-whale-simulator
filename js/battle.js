@@ -20,7 +20,7 @@ export function simulateBattle(left, right) {
     let state = {
       players: [leftPlayers[currentIndex[0]], rightPlayers[currentIndex[1]]],
       timer: 0,
-      isGameOver: false,
+      someoneDied: false,
       log: []
     }
     // before round cleanup
@@ -136,11 +136,11 @@ export function startBattle(state) {
     .forEach(skill => useSkill(state, player.index, skill)));
   // start game timer, measured in ms mainly to avoid decimals
   while (state.timer < BATTLE_TIME_LIMIT_MS) {
-    if (state.isGameOver) break;
+    if (state.someoneDied) break;
     // e.g. 715 spd = 1.4s/attack = 1400ms/attack
     // so should attack whenever timer is at 1400, 2800, etc
     getPlayersEligibleToTakeTurn(state).forEach(player => {
-      if (state.isGameOver) return;
+      if (state.someoneDied) return;
       if (getDebuffs(state, player.index ^ 1).length > 0) {
         tryToUseSkillFromPhase(state, player.index ^ 1, SkillPhase.onDebuff);
       }
@@ -217,7 +217,7 @@ function tryToUseSkillFromPhase(state, playerIndex, phase) {
 }
 
 function useSkill(state, playerIndex, skill) {
-  if (state.isGameOver) return;
+  if (state.someoneDied) return;
   state.log.push(`${state.players[playerIndex].id}: ${skill.name}`);
   if (skill.spConsumption > 0) {
     let spConsumptionMultiplier = 1;
@@ -608,8 +608,7 @@ function dealDamage(state, playerIndex, amount, options) {
   gainFury(state, playerIndex);
   if (state.players[playerIndex].stats.current.hp <= 0) {
     if (!tryToUseSkillFromPhase(state, playerIndex, SkillPhase.onDeath)) {
-      state.log.push("game over");
-      state.isGameOver = true;
+      state.someoneDied = true;
     }
   }
 }

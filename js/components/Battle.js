@@ -6,10 +6,11 @@ import Button from "./Button.js";
 import SelectInput from "./SelectInput.js";
 import { getSavedKeys, load } from "../storage.js";
 import Display from "./Display.js";
+import Carousel from "./Carousel.js";
 
 const Battle = () => {
-  const [left, setLeft] = useState("None");
-  const [right, setRight] = useState("None");
+  const [left, setLeft] = useState(Array(4).fill("None"));
+  const [right, setRight] = useState(Array(4).fill("None"));
   const [battle, setBattle] = useState();
   const [leftWins, setLeftWins] = useState(0);
   const [rightWins, setRightWins] = useState(0);
@@ -22,40 +23,45 @@ const Battle = () => {
     return toPlayer(newBuild);
   }
 
-  const leftPlayer = useMemo(() => left === "None" ? null : getPlayer(left), [left]);
-  const rightPlayer = useMemo(() => right === "None" ? null : getPlayer(right), [right]);
+  const leftPlayers = left.filter(name => name !== "None").map(name => getPlayer(name));
+  const rightPlayers = right.filter(name => name !== "None").map(name => getPlayer(name));
 
-  const handleSelect = side => e => {
-    side === "left" ? setLeft(e.target.value) : setRight(e.target.value);
+  const handleSelect = (side, position) => e => {
+    if (side === "left") {
+      left[position] = e.target.value;
+      setLeft([...left]);
+    } else {
+      right[position] = e.target.value;
+      setRight([...right]);
+    }
     setLeftWins(0);
     setRightWins(0);
   }
 
   const handleBattle = rounds => {
-    if (!leftPlayer || !rightPlayer) return;
+    if (leftPlayers.length === 0 || rightPlayers.length === 0) return;
     let battleSim;
     for (let i = 0; i < rounds; ++i) {
-      battleSim = simulateBattle([leftPlayer], [rightPlayer]);
+      battleSim = simulateBattle(leftPlayers, rightPlayers);
       battleSim.winner === 0 ? setLeftWins(wins => wins + 1) : setRightWins(wins => wins + 1);
     }
     if (battleSim) setBattle(battleSim);
   }
-
   return html`
   <div class="row pt-3">
     <div class="col">
-      <${SelectInput} value=${left} options=${options} onChange=${handleSelect("left")} />
+      ${left.map((name, i) => html`<${SelectInput} value=${name} options=${options} onChange=${handleSelect("left", i)} />`)}
     </div>
     <div class="col-auto">
       <${Button} onClick=${() => handleBattle(1)}>VS</${Button}>
     </div>
     <div class="col">
-      <${SelectInput} value=${right} options=${options} onChange=${handleSelect("right")} />
+      ${right.map((name, i) => html`<${SelectInput} value=${name} options=${options} onChange=${handleSelect("right", i)} />`)}
     </div>
   </div>
   <div class="row battle-display">
     <div class="col-md-4 order-2 order-md-1">
-      ${leftPlayer && html`<${Display} player=${leftPlayer} />`}
+      ${leftPlayers.length > 0 && html`<${Carousel} id="left-display" images=${leftPlayers.map(player => html`<${Display} player=${player} />`)} />`}
     </div>
     <div class="col-md order-1 order-md-2">
       <div class="row">
@@ -75,7 +81,7 @@ const Battle = () => {
       </div>
     </div>
     <div class="col-md-4 order-3 order-md-3">
-      ${rightPlayer && html`<${Display} player=${rightPlayer} />`}
+      ${rightPlayers.length > 0 && html`<${Carousel} id="left-display" images=${rightPlayers.map(player => html`<${Display} player=${player} />`)} />`}
     </div>
   </div>
   <div class="row">

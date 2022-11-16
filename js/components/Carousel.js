@@ -1,7 +1,5 @@
 import { html, useState } from "https://unpkg.com/htm/preact/standalone.module.js"
 
-const tabs = ["Calculator", "Battle"];
-
 const Carousel = ({ images }) => {
   const [activeSlide, setActiveSlide] = useState(0);
 

@@ -189,7 +189,7 @@ function getSkillTriggerProbability(state, playerIndex, skill) {
   if (Utils.equalsAny(skill.phase, SkillPhase.beforeYourAttack, SkillPhase.duringYourAttack, SkillPhase.afterYourAttack, SkillPhase.beforeEnemyAttack)) {
     flatTriggerPercent += state.players[playerIndex].stats.current.hit * SKILL_TRIGGER_PERCENT_PER_HIT;
   }
-  if (skill.effect.reduceTriggerPercentPerTenSeconds) {
+  if (skill.effect?.reduceTriggerPercentPerTenSeconds) {
     flatTriggerPercent -= Math.floor(state.timer / 10000) * skill.effect.reduceTriggerPercentPerTenSeconds;
   }
   let triggerProbabilityMultiplier = 1;

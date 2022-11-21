@@ -22,8 +22,11 @@ const App = () => {
     </nav>
   </header>
   <div class="container-xl">
-    ${activeTab === "Calculator" && html`<${Calculator} />`}\
+    ${activeTab === "Calculator" && html`<${Calculator} />`}
     ${activeTab === "Battle" && html`<${Battle} />`}
+    Feel free to report any issues<br/>
+    LINE ID: derpidgey<br/>
+    Discord: CF99#9616
   </div>
   `;
 }

@@ -128,12 +128,12 @@ export const reducer = (state, action) => {
           const statName = Object.keys(stat)[0];
           const max = CFDB.getGearMaxValue(gearInfo.level, statName, i === 3);
           stat[statName] = Utils.clamp(stat[statName], 0, max);
-        })
+        });
         gear.gems.forEach(gem => {
           if (!gem) return;
           const gemMaxLevel = Math.floor(gearInfo.level / 10);
           gem.plus = Utils.clamp(gem.plus, 0, gemMaxLevel);
-        })
+        });
       });
       return { ...state, gears };
     case ActionType.phy:

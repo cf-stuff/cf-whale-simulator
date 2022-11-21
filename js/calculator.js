@@ -68,6 +68,7 @@ const toStats = build => {
       addStats(gearInfo.statsPerEnhance, stats);
     }
     gear.gems.forEach(gem => {
+      if (!gem) return;
       const gemInfo = CFDB.getGem(gem.name);
       for (let i = 0; i < gem.plus + 1; ++i) {
         addStats(gemInfo.statsPerPlus, stats);

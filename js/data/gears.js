@@ -632,8 +632,8 @@ export const Gears = {
       maxAtk: 22
     }
   },
-  squidward: {
-    name: "Squidward", // todo find out actual name
+  goldenSquid: {
+    name: "Golden Squid",
     iconId: 6086,
     level: 86,
     type: GearType.weapon.name,

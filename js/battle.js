@@ -434,6 +434,9 @@ function createStatus(state, playerIndex, name, options) {
   if (status.stackable) {
     status.stacks = 1;
   }
+  if (status.effect.removeIgnitedOnInflict) {
+    removeStatus(state, playerIndex, Status.ignited.name);
+  }
   if (status.effect.percentHpShield) {
     status.hpShield = Math.floor(state.players[playerIndex].stats.initial.hp * status.effect.percentHpShield / 100);
   }

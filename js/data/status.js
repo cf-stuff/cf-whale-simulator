@@ -117,6 +117,7 @@ const Status = {
       skipActions: true,
       damageTakenMultiplier: 2,
       immuneToFireDamage: true,
+      removeIgnitedOnInflict: true
     },
     removeWhenAttacked: true
   },

@@ -651,8 +651,8 @@ export const Gears = {
       stat: { eva: 80 }
     }
   },
-  chromeGLoves: {
-    name: "Iron man Gloves", // todo find out actual name
+  giantPhantasm: {
+    name: "Giant Phantasm",
     iconId: 1086,
     level: 86,
     type: GearType.weapon.name,

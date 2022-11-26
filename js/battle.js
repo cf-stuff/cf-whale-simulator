@@ -109,6 +109,9 @@ function applyExpertiseAndMasteryToSkills(state) {
       if (player.mastery.toLowerCase() === skill.type?.toLowerCase()) {
         skill.triggerPercent += 5;
       }
+      if (skill.maxTriggerTimes && CFDB.getSkill(skill.name)) {
+        skill.remainingUses = skill.maxTriggerTimes;
+      }
     })
   });
 }

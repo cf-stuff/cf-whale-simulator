@@ -24,7 +24,7 @@ export function simulateBattle(left, right) {
       log: []
     }
     // before round cleanup
-    applyExpertiseAndMasteryToSkills(state);
+    prepareSkills(state);
     state.players.forEach(player => player.status = []);
     startBattle(state);
     state.players.forEach(player => {
@@ -97,7 +97,7 @@ function createSkillFromTotem(totem) {
   return newSkill;
 }
 
-function applyExpertiseAndMasteryToSkills(state) {
+function prepareSkills(state) {
   state.players.forEach((player, i) => {
     const calculatedExpertise = player.expertise.filter(x => !state.players[i ^ 1].resistance.includes(x));
     player.skills.forEach(skill => {

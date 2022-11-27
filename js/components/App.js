@@ -24,6 +24,7 @@ const App = () => {
   <div class="container-xl">
     ${activeTab === "Calculator" && html`<${Calculator} />`}
     ${activeTab === "Battle" && html`<${Battle} />`}
+    <hr/>
     Feel free to report any issues<br/>
     LINE ID: derpidgey<br/>
     Discord: CF99#9616

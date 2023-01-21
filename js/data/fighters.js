@@ -51,16 +51,6 @@ const Fighters = {
     bmv: [10, 10, 10],
     mastery: SkillType.genjutsu.name
   },
-  hel: {
-    name: "Hel",
-    evoName: "Hel",
-    iconId: 85,
-    weaponType: WeaponType.dagger,
-    isv: [25, 40, 25],
-    growthRate: [1.6, 2, 1.6],
-    bmv: [15, 7, 15],
-    mastery: SkillType.fire.name
-  },
   pumpkin: {
     name: "Pumpkin",
     evoName: "E·Pumpkin",
@@ -70,6 +60,16 @@ const Fighters = {
     growthRate: [1.5, 1.9, 1.6],
     bmv: [16, 8, 12],
     mastery: SkillType.wind.name
+  },
+  hel: {
+    name: "Hel",
+    evoName: "Hel",
+    iconId: 85,
+    weaponType: WeaponType.dagger,
+    isv: [25, 40, 25],
+    growthRate: [1.6, 2, 1.6],
+    bmv: [15, 7, 15],
+    mastery: SkillType.fire.name
   },
   shifter: {
     name: "Shifter",

@@ -130,7 +130,7 @@ const Status = {
   },
   wounded: {
     name: "Wounded",
-    type: StatusType.other,
+    type: StatusType.debuff,
     effect: {
       damageTakenPerStack: 20
     },

@@ -131,13 +131,14 @@ export const reducer = (state, action) => {
         });
         gear.gems.forEach(gem => {
           if (!gem) return;
-          const gemMaxLevel = Math.floor(gearInfo.level / 10);
+          const gemMaxLevel = Math.floor((gearInfo.level - 1) / 10);
           gem.plus = Utils.clamp(gem.plus, 0, gemMaxLevel);
         });
       });
       return { ...state, gears };
     case ActionType.phy:
       const phylactery = { ...state.phylactery, ...action.payload };
+      phylactery.plus = Utils.clamp(phylactery.plus, 0, 20);
       phylactery.stats = phylactery.stats.filter(stat => stat && stat !== "None");
       phylactery.glyphs = phylactery.glyphs.filter(glyph => glyph && glyph.stat !== "None");
       phylactery.glyphs.forEach(glyph => glyph.plus = Utils.clamp(glyph.plus, 1, 6));

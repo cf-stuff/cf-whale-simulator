@@ -55,11 +55,11 @@ const StarAltar = {
   },
   minAtk: {
     stat: Stats.minAtk.name,
-    max: 40
+    max: 50
   },
   maxAtk: {
     stat: Stats.maxAtk.name,
-    max: 40
+    max: 50
   },
 }
 

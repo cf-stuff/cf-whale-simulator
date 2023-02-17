@@ -178,8 +178,8 @@ Builds.brkTank = {
     brk: 200,
     hit: 200,
     res: 200,
-    minAtk: 40,
-    maxAtk: 40
+    minAtk: 50,
+    maxAtk: 50
   },
   totem: {
     name: Totems.white.name,
@@ -359,8 +359,8 @@ Builds.evader = {
     brk: 200,
     hit: 200,
     res: 200,
-    minAtk: 40,
-    maxAtk: 40
+    minAtk: 50,
+    maxAtk: 50
   },
   totem: {
     name: Totems.white.name,
@@ -540,8 +540,8 @@ Builds.tank = {
     brk: 200,
     hit: 200,
     res: 200,
-    minAtk: 40,
-    maxAtk: 40
+    minAtk: 50,
+    maxAtk: 50
   },
   totem: {
     name: Totems.green.name,
@@ -623,7 +623,7 @@ Builds.hybrid = {
       name: Gears.tyrantBloodthirstyRing.name,
       enhancement: 10,
       stats: [{ brk: 130 }, { def: 130 }, { hit: 124 }, { crt: 149 }],
-      gems: [{ name: Gems.ruby.name, plus: 10 }, { name: Gems.garnet.name, plus: 10 }]
+      gems: [{ name: Gems.ruby.name, plus: 9 }, { name: Gems.garnet.name, plus: 9 }]
     },
     {
       name: Gears.tyrantBloodthirstyArmor.name,
@@ -721,8 +721,8 @@ Builds.hybrid = {
     brk: 200,
     hit: 200,
     res: 200,
-    minAtk: 40,
-    maxAtk: 40
+    minAtk: 50,
+    maxAtk: 50
   },
   totem: {
     name: Totems.white.name,

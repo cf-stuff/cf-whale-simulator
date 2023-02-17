@@ -9,3 +9,9 @@
 .battle-display .display {
   max-width: 100%;
 }
+
+@media (max-width: 767.98px) {
+  .calculator .display {
+    margin-left: -24px;
+  }
+}

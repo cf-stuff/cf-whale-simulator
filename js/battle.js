@@ -233,6 +233,7 @@ function useSkill(state, playerIndex, skill) {
     --skill.remainingUses;
   }
   let damage = 0;
+  let preventHealing = false;
   let attackedSkill;
   if ((skill.damage || skill.effect.target === SkillTarget.enemy) && !skill.undodgeable) {
     // mi, esw, pet block
@@ -255,8 +256,8 @@ function useSkill(state, playerIndex, skill) {
       return false;
     }
   }
-  if (skill.damage) damage = handleSkillDamage(state, playerIndex, skill, attackedSkill);
-  if (skill.effect) handleSkillEffects(state, playerIndex, skill, damage);
+  if (skill.damage) [damage, preventHealing] = handleSkillDamage(state, playerIndex, skill, attackedSkill);
+  if (skill.effect) handleSkillEffects(state, playerIndex, skill, damage, preventHealing);
   return true;
 }
 
@@ -299,20 +300,20 @@ function handleSkillDamage(state, playerIndex, skill, attackedSkill) {
     });
   }
   damage = Math.floor(damage * damageTakenMultiplier);
-  dealDamage(state, playerIndex ^ 1, damage, {
+  let preventHealing = dealDamage(state, playerIndex ^ 1, damage, {
     source: skill.name,
     type: DamageType.attack,
     isFire: skill.type === SkillType.fire.name
   });
   handleWhenAttackedStatusEffects(state, playerIndex ^ 1, damage, skill);
-  handleOnHitStatusEffects(state, playerIndex, damage);
+  handleOnHitStatusEffects(state, playerIndex, damage, preventHealing);
   if (skill.phase === SkillPhase.duringYourAttack || skill.phase === SkillPhase.afterYourAttack) {
     tryToUseSkillFromPhase(state, playerIndex, SkillPhase.afterAttacking);
   }
-  return damage;
+  return [damage, preventHealing];
 }
 
-function handleSkillEffects(state, playerIndex, skill, damage) {
+function handleSkillEffects(state, playerIndex, skill, damage, preventHealing) {
   if (skill.effect.removeThunderGod) {
     removeStatus(state, playerIndex, Status.thunderGod.name);
   }
@@ -340,8 +341,8 @@ function handleSkillEffects(state, playerIndex, skill, damage) {
   if (skill.effect.increaseSpd) {
     updateStat(state, playerIndex, Stats.spd.name, skill.effect.increaseSpd, skill.name);
   }
-  if (skill.effect.percentDamageHealedOnHit && state.players[playerIndex ^ 1].status.every(x => !x.effect.preventHealingWhenAttacked)) {
-    const healAmount = Math.floor(damage * skill.effect.percentDamageHealedOnHit / 100);
+  if (skill.effect.percentDamageHealedOnHit) {
+    const healAmount = preventHealing ? 0 : Math.floor(damage * skill.effect.percentDamageHealedOnHit / 100);
     updateStat(state, playerIndex, Stats.hp.name, healAmount, skill.name);
   }
   if (skill.effect.removeEnemySpByYourSpPercent) {
@@ -558,10 +559,10 @@ function handleWhenAttackedStatusEffects(state, playerIndex, damage, skill) {
   });
 }
 
-function handleOnHitStatusEffects(state, playerIndex, damage) {
+function handleOnHitStatusEffects(state, playerIndex, damage, preventHealing) {
   state.players[playerIndex].status.forEach(x => {
-    if (x.effect.percentDamageHealedOnHit && state.players[playerIndex ^ 1].status.every(x => !x.effect.preventHealingWhenAttacked)) {
-      updateStat(state, playerIndex, Stats.hp.name, Math.floor(damage * x.effect.percentDamageHealedOnHit / 100), x.name);
+    if (x.effect.percentDamageHealedOnHit) {
+      updateStat(state, playerIndex, Stats.hp.name, preventHealing ? 0 : Math.floor(damage * x.effect.percentDamageHealedOnHit / 100), x.name);
     }
     if (x.effect.percentHpLostOnHit) {
       dealDamage(state, playerIndex, Math.floor(damage * x.effect.percentHpLostOnHit / 100), {
@@ -584,25 +585,27 @@ function handleOnHitStatusEffects(state, playerIndex, damage) {
     }
   });
 }
-
+// todo bell/shield wall bubble heqaling interaction
 function dealDamage(state, playerIndex, amount, options) {
+  let preventHealing = false;
   state.players[playerIndex].status.forEach(x => {
-    if (options.type === DamageType.attack && x.effect.immuneToAttackDamage) {
+    if (options.type === DamageType.attack && x.effect.immuneToAttackDamage
+      || options.type === DamageType.other && x.effect.immuneToOtherDamage
+      || options.source === Status.thunderGod.name && x.effect.immuneToThunderGod
+      || options.isFire && x.effect.immuneToFireDamage) {
       amount = 0;
-    } else if (options.type === DamageType.other && x.effect.immuneToOtherDamage) {
-      amount = 0;
-    } else if (options.source === Status.thunderGod.name && x.effect.immuneToThunderGod) {
-      amount = 0;
-    } else if (options.isFire && x.effect.immuneToFireDamage) {
-      amount = 0;
+      state.log.push(`${state.players[playerIndex].id}: prevented damage due to ${x.name}`);
     }
   })
   const statusWithHpShield = state.players[playerIndex].status.find(x => x.hpShield);
   if (statusWithHpShield) {
     if (statusWithHpShield.hpShield > amount) {
-      statusWithHpShield.hpShield -= amount;
-      state.log.push(`${state.players[playerIndex].id}: ${statusWithHpShield.name} absorbs ${amount} damage`);
-      amount = 0;
+      if (amount > 0) {
+        statusWithHpShield.hpShield -= amount;
+        state.log.push(`${state.players[playerIndex].id}: ${statusWithHpShield.name} absorbs ${amount} damage`);
+        amount = 0;
+        preventHealing = statusWithHpShield.effect.preventHealingWhenDamageAbsorbed;
+      }
     } else {
       amount -= statusWithHpShield.hpShield;
       state.log.push(`${state.players[playerIndex].id}: ${statusWithHpShield.name} absorbs ${statusWithHpShield.hpShield} damage`);
@@ -617,6 +620,7 @@ function dealDamage(state, playerIndex, amount, options) {
       state.someoneDied = true;
     }
   }
+  return preventHealing;
 }
 
 function updateStat(state, playerIndex, stat, amount, source) {

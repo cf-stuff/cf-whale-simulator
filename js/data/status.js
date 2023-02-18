@@ -7,7 +7,7 @@ const Status = {
     effect: {
       percentHpShield: 20,
       immuneToThunderGod: true,
-      preventHealingWhenAttacked: true
+      preventHealingWhenDamageAbsorbed: true
     },
     getExpertiseVersion: function () {
       this.effect.percentHpShield = 25

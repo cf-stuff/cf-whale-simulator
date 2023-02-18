@@ -150,8 +150,11 @@ const PetSkills = {
     name: "Scratch",
     type: PetSkillType.skill,
     iconId: 25,
-      phase: SkillPhase.petAttack,
-      triggerPercent: 10
+    damage: {
+      atkMultiplier: 0.5
+    },
+    phase: SkillPhase.petAttack,
+    triggerPercent: 10
   },
   block: {
     name: "Defense",

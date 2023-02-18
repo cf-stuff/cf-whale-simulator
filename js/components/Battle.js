@@ -87,6 +87,8 @@ const Battle = () => {
   <div class="row">
     <span>Note: Due to the nature of this game, it is impossible to 100% accurately depict certain behaviours 
     (for example crit chance and dodge chance). The best we can do is approximate them, so take the battle results with a grain a salt.</span>
+    <span>In addition, there are certain interactions that haven't been implemented (either due to my laziness or lack of understanding of how they work),
+    including but not limited to: Bomb bounce back; Strong Wine and Shield Wall Burst temporary stat decreases; Different level fighter skills depending on fighter level.</span>
   </div>
   `;
 }

@@ -412,7 +412,7 @@ Builds.tank = {
       PetSkills.block.name, PetSkills.riceballSpecialSkill.name, PetSkills.def_30.name,
       PetSkills.def_60.name, PetSkills.hit_100.name, PetSkills.hit_50.name,
       PetSkills.res_100.name, PetSkills.res_50.name, PetSkills.hpPercent_10.name,
-      PetSkills.hpPercent_5.name, PetSkills.hp_60.name, PetSkills.spd_10.name
+      PetSkills.hpPercent_5.name, PetSkills.hp_60.name, PetSkills.riceballSpecialStat.name
     ],
     evoSkills: [
       PetSkills.def_50Evo.name, PetSkills.hpPercent_25Evo.name, PetSkills.spd_30Evo.name,

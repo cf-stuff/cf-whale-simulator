@@ -3,11 +3,15 @@ import { createCanvas } from "../display.js";
 
 const Display = ({ player }) => {
   const [src, setSrc] = useState("");
-  useEffect(async () => {
-    const canvas = await createCanvas(player);
-    const blob = await new Promise(resolve => canvas.toBlob(resolve));
-    const url = URL.createObjectURL(blob);
-    setSrc(url);
+  useEffect(() => {
+    let url;
+    const createPlayerImage = async () => {
+      const canvas = await createCanvas(player);
+      const blob = await new Promise(resolve => canvas.toBlob(resolve));
+      url = URL.createObjectURL(blob);
+      setSrc(url);
+    }
+    createPlayerImage();
     return () => URL.revokeObjectURL(url);
   }, [player]);
   return html`<img class="display" src=${src} />`;

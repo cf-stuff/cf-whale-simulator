@@ -53,7 +53,18 @@ const Battle = () => {
       ${left.map((name, i) => html`<${SelectInput} value=${name} options=${options} onChange=${handleSelect("left", i)} />`)}
     </div>
     <div class="col-auto">
-      <${Button} onClick=${() => handleBattle(1)}>VS</${Button}>
+      <div class="row">
+        <${Button} onClick=${() => handleBattle(1)}>VS</${Button}>
+      </div>
+      <div class="row">
+        <${Button} onClick=${() => handleBattle(10)}>VS 10</${Button}>
+      </div>
+      <div class="row">
+        <${Button} onClick=${() => handleBattle(100)}>VS 100</${Button}>
+      </div>
+      <div class="row">
+        <${Button} onClick=${() => handleBattle(1000)}>VS 1000</${Button}>
+      </div>
     </div>
     <div class="col">
       ${right.map((name, i) => html`<${SelectInput} value=${name} options=${options} onChange=${handleSelect("right", i)} />`)}
@@ -66,7 +77,6 @@ const Battle = () => {
     <div class="col-md order-1 order-md-2">
       <div class="row">
         <div class="col">
-          <${Button} onClick=${() => handleBattle(100)}>VS 100</${Button}>
         </div>
         <div class="col-auto">
           <span class="text-center h2">${leftWins}-${rightWins}</span>

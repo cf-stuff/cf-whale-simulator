@@ -14,10 +14,11 @@ import Button from "./Button.js";
 import TextInput from "./TextInput.js";
 import Totem from "./Totem.js";
 import BuildLoader from "./BuildLoader.js";
+import Info from "./Info.js";
 
 const tabs = [
   ["Fighter", "Pet", "Gear", "Phylactery", "Nexus"],
-  ["Star Altar", "Totem", "Arena", "Skills"]
+  ["Altar", "Totem", "Arena", "Skills", "Info"]
 ];
 
 const Form = ({ state, dispatch }) => {
@@ -56,12 +57,13 @@ const Form = ({ state, dispatch }) => {
     gears=${state.gears} setGears=${createDispatch(ActionType.gear)} />`}
     ${activeTab === "Phylactery" && html`<${Phylactery} phylactery=${state.phylactery} setPhylactery=${createDispatch(ActionType.phy)} />`}
     ${activeTab === "Nexus" && html`<${Nexus} nexus=${state.nexus} setNexus=${createDispatch(ActionType.nexus)} />`}
-    ${activeTab === "Star Altar" && html`<${StarAltar} altar=${state.altar} setAltar=${createDispatch(ActionType.altar)} />`}
+    ${activeTab === "Altar" && html`<${StarAltar} altar=${state.altar} setAltar=${createDispatch(ActionType.altar)} />`}
     ${activeTab === "Totem" && html`<${Totem} totem=${state.totem} setTotem=${createDispatch(ActionType.totem)} />`}
     ${activeTab === "Arena" && html`<${Arena} arenaTitle=${state.arenaTitle} setArenaTitle=${createDispatch(ActionType.arena)} />`}
     ${activeTab === "Skills" && html`<${Skills} skills=${state.skills} setSkills=${createDispatch(ActionType.skills)}
     expertise=${state.expertise} setExpertise=${createDispatch(ActionType.expertise)}
     resistance=${state.resistance} setResistance=${createDispatch(ActionType.resistance)} />`}
+    ${activeTab === "Info" && html`<${Info} state=${state} setState=${createDispatch(ActionType.import)} />`}
   </div>
   `;
 }

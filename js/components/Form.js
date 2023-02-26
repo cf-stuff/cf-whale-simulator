@@ -14,11 +14,11 @@ import Button from "./Button.js";
 import TextInput from "./TextInput.js";
 import Totem from "./Totem.js";
 import BuildLoader from "./BuildLoader.js";
-import Info from "./Info.js";
+import Other from "./Other.js";
 
 const tabs = [
   ["Fighter", "Pet", "Gear", "Phylactery", "Nexus"],
-  ["Altar", "Totem", "Arena", "Skills", "Info"]
+  ["Altar", "Totem", "Arena", "Skills", "Other"]
 ];
 
 const Form = ({ state, dispatch }) => {
@@ -63,7 +63,7 @@ const Form = ({ state, dispatch }) => {
     ${activeTab === "Skills" && html`<${Skills} skills=${state.skills} setSkills=${createDispatch(ActionType.skills)}
     expertise=${state.expertise} setExpertise=${createDispatch(ActionType.expertise)}
     resistance=${state.resistance} setResistance=${createDispatch(ActionType.resistance)} />`}
-    ${activeTab === "Info" && html`<${Info} state=${state} setState=${createDispatch(ActionType.import)} />`}
+    ${activeTab === "Other" && html`<${Other} state=${state} setState=${createDispatch(ActionType.import)} />`}
   </div>
   `;
 }

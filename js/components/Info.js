@@ -25,8 +25,10 @@ const Info = ({ state, setState }) => {
   }
   return html`
   <div class="row">
-    <div class="col">
+    <div class="col-auto">
       <${Button} onClick=${() => importFromTextArea()}>Import</${Button}>
+    </div>
+    <div class="col-auto">
       <${Button} onClick=${() => copyCode()}>Export</${Button}>
     </div>
   </div>

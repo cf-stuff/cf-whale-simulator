@@ -1,5 +1,6 @@
 import { html, useRef } from "https://unpkg.com/htm/preact/standalone.module.js"
 import LZString from "../lib/lz-string.min.js";
+import { submitPaste } from "../pastee.js";
 import Button from "./Button.js";
 
 const Other = ({ state, setState }) => {
@@ -17,11 +18,10 @@ const Other = ({ state, setState }) => {
       console.warn(error);
     }
   }
-  const copyCode = () => {
-    const copyText = textArea.current;
-    copyText.setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(copyText.value);
-    alert("Copied to clipboard");
+  const exportCode = async () => {
+    const url = await submitPaste(state.name, textArea.current.value);
+    navigator.clipboard.writeText(url);
+    alert(`Copied url to clipboard: ${url}`);
   }
   return html`
   <div class="row">
@@ -29,7 +29,7 @@ const Other = ({ state, setState }) => {
       <${Button} onClick=${() => importFromTextArea()}>Import</${Button}>
     </div>
     <div class="col-auto">
-      <${Button} onClick=${() => copyCode()}>Export</${Button}>
+      <${Button} onClick=${() => exportCode()}>Export</${Button}>
     </div>
   </div>
   <div class="row">

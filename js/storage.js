@@ -16,4 +16,4 @@ export const remove = key => {
 }
 
 export const getSavedKeys = () => Object.keys(localStorage)
-  .filter(key => key !== "debug" || localStorage.getItem(key) !== "honey:core-sdk:*");
+  .filter(key => key !== "debug" || localStorage.getItem(key) !== "honey:core-sdk:*").sort();

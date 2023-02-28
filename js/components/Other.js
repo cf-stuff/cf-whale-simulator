@@ -29,7 +29,7 @@ const Other = ({ state, setState }) => {
       <${Button} onClick=${() => importFromTextArea()}>Import</${Button}>
     </div>
     <div class="col-auto">
-      <${Button} onClick=${() => exportCode()}>Export</${Button}>
+      <${Button} onClick=${() => exportCode()}>Generate Paste</${Button}>
     </div>
   </div>
   <div class="row">

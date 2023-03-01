@@ -38,7 +38,7 @@ const Battle = () => {
     setRightWins(0);
   }
 
-  const handleBattle = rounds => {
+  const handleBattle = (rounds, batches = 1) => {
     if (leftPlayers.length === 0 || rightPlayers.length === 0) return;
     let battleSim;
     for (let i = 0; i < rounds; ++i) {
@@ -46,6 +46,7 @@ const Battle = () => {
       battleSim.winner === 0 ? setLeftWins(wins => wins + 1) : setRightWins(wins => wins + 1);
     }
     if (battleSim) setBattle(battleSim);
+    if (--batches > 0) setTimeout(() => handleBattle(rounds, batches), 0);
   }
   return html`
   <div class="row pt-3">
@@ -63,7 +64,7 @@ const Battle = () => {
         <${Button} onClick=${() => handleBattle(100)}>VS 100</${Button}>
       </div>
       <div class="row">
-        <${Button} onClick=${() => handleBattle(1000)}>VS 1000</${Button}>
+        <${Button} onClick=${() => handleBattle(100, 10)}>VS 1000</${Button}>
       </div>
     </div>
     <div class="col">

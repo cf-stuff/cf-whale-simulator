@@ -13,7 +13,7 @@ const Display = ({ player }) => {
     }
     createPlayerImage();
     return () => URL.revokeObjectURL(url);
-  }, [player]);
+  }, [JSON.stringify(player)]);
   return html`<img class="display" src=${src} />`;
 }
 

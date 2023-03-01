@@ -3,6 +3,8 @@ import { html, useState } from "https://unpkg.com/htm/preact/standalone.module.j
 const Carousel = ({ images }) => {
   const [activeSlide, setActiveSlide] = useState(0);
 
+  if (activeSlide > images.length - 1) setActiveSlide(images.length - 1);
+
   return html`
   <div class="carousel slide" data-bs-ride="false">
     <div class="carousel-indicators">

@@ -341,7 +341,7 @@ function handleSkillEffects(state, playerIndex, skill, damage, preventHealing) {
   if (skill.effect.increaseSpd) {
     updateStat(state, playerIndex, Stats.spd.name, skill.effect.increaseSpd, skill.name);
   }
-  if (skill.effect.percentDamageHealedOnHit) {
+  if (skill.effect.percentDamageHealedOnHit && state.players[playerIndex].stats.current.hp > 0) {
     const healAmount = preventHealing ? 0 : Math.floor(damage * skill.effect.percentDamageHealedOnHit / 100);
     updateStat(state, playerIndex, Stats.hp.name, healAmount, skill.name);
   }
@@ -561,7 +561,7 @@ function handleWhenAttackedStatusEffects(state, playerIndex, damage, skill) {
 
 function handleOnHitStatusEffects(state, playerIndex, damage, preventHealing) {
   state.players[playerIndex].status.forEach(x => {
-    if (x.effect.percentDamageHealedOnHit) {
+    if (x.effect.percentDamageHealedOnHit && state.players[playerIndex].stats.current.hp > 0) {
       updateStat(state, playerIndex, Stats.hp.name, preventHealing ? 0 : Math.floor(damage * x.effect.percentDamageHealedOnHit / 100), x.name);
     }
     if (x.effect.percentHpLostOnHit) {

@@ -224,18 +224,18 @@ Builds.evader = {
     healing: FighterSkills.shieldWall.name
   },
   pet: {
-    name: Pets.riceball.name,
+    name: Pets.rekachu.name,
     plus: 21,
     evolved: true,
     skills: [
-      PetSkills.block.name, PetSkills.riceballSpecialSkill.name, PetSkills.eva_50.name,
+      PetSkills.block.name, PetSkills.rekachuSpecialSkill.name, PetSkills.eva_50.name,
       PetSkills.brk_100.name, PetSkills.brk_50.name, PetSkills.def_60.name,
       PetSkills.hit_100.name, PetSkills.hit_50.name, PetSkills.res_100.name,
-      PetSkills.res_50.name, PetSkills.spd_10.name, PetSkills.eva_25.name
+      PetSkills.rekachuSpecialStat.name, PetSkills.spd_10.name, PetSkills.eva_25.name
     ],
     evoSkills: [
       PetSkills.brk_50Evo.name, PetSkills.eva_50Evo.name, PetSkills.hpPercent_25Evo.name,
-      PetSkills.atkPercent_25Evo.name, PetSkills.needle.name, PetSkills.energyShield.name
+      PetSkills.atkPercent_25Evo.name, PetSkills.barbarian.name, PetSkills.energyShield.name
     ],
   },
   gears: [
@@ -377,7 +377,7 @@ Builds.evader = {
     }
   },
   skills: [
-    Skills.bloodFrenzy.name, Skills.movingIllusion.name, Skills.thunderclapQuake.name,
+    Skills.lightningBall.name, Skills.bloodSacrifice.name, Skills.thunderclapQuake.name,
     Skills.magicStealing.name, Skills.shieldWall.name, Skills.cleanse.name
   ],
   expertise: [

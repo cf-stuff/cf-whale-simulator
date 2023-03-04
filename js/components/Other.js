@@ -1,4 +1,5 @@
 import { html, useRef } from "https://unpkg.com/htm/preact/standalone.module.js"
+import toPlayer from "../calculator.js";
 import LZString from "../lib/lz-string.min.js";
 import { submitPaste } from "../pastee.js";
 import Button from "./Button.js";
@@ -23,7 +24,11 @@ const Other = ({ state, setState }) => {
     navigator.clipboard.writeText(url);
     alert(`Copied url to clipboard: ${url}`);
   }
+  const player = toPlayer(state);
   return html`
+  <div class="row">
+    <span>STR: ${player.stats.str}, DEX: ${player.stats.dex}, STA: ${player.stats.sta}</span>
+  </div>
   <div class="row">
     <div class="col-auto">
       <${Button} onClick=${() => importFromTextArea()}>Import</${Button}>

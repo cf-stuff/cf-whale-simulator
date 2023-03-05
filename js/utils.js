@@ -22,4 +22,6 @@ Utils.removeElement = function (array, value) {
   }
 }
 
+Utils.sum = array => array.reduce((a, b) => a + b, 0);
+
 export default Utils;

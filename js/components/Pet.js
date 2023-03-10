@@ -1,4 +1,4 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html, useState } from "https://unpkg.com/htm/preact/standalone.module.js"
 import { PetSkillType } from "../data/categories.js";
 import CFDB from "../data/CFDB.js";
 import Pets from "../data/pets.js";
@@ -17,6 +17,8 @@ const getPetSkillLimit = plus => {
 }
 
 const Pet = ({ pet, setPet }) => {
+  const [int, setInt] = useState(false);
+  console.log(int)
   const petSkillSelect = [];
 
   const handleMax = () => setPet({
@@ -40,7 +42,7 @@ const Pet = ({ pet, setPet }) => {
     .filter(skill => Utils.equalsAny(skill.type, PetSkillType.stat, PetSkillType.skill))
     .forEach(skill => {
       const id = `petskill_${skill.iconId}`;
-      const path = getImagePath(ImageType.petSkill, skill.iconId);
+      const path = getImagePath(ImageType.petSkill, skill.iconId, int);
       if ((id.startsWith("petskill_27") && !id.endsWith(`_${petIconId}`))
         || (id.startsWith("petskill_28") && !id.endsWith(`_${petIconId}`))) {
         return;
@@ -70,11 +72,17 @@ const Pet = ({ pet, setPet }) => {
     </div>
   </div>
   <div class="row">
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" role="switch" id="int-icons" checked=${int} onClick=${e => setInt(e.target.checked)} />
+      <label class="form-check-label" for="int-icons">International icons</label>
+    </div>
+  </div>
+  <div class="row">
     <div class="image-checkbox-container">
       ${petSkillSelect}
     </div>
   </div>
-  <${EvolvedPet} pet=${pet} setPet=${setPet} />
+  <${EvolvedPet} pet=${pet} setPet=${setPet} int=${int} />
   `;
 }
 

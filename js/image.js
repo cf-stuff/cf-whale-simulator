@@ -12,7 +12,7 @@ export const ImageType = {
   totem: "totem"
 }
 
-export const getImagePath = (type, id) => {
+export const getImagePath = (type, id, intVersion = false) => {
   const basePath = "img/";
   switch (type) {
     case ImageType.fighter:
@@ -30,7 +30,7 @@ export const getImagePath = (type, id) => {
     case ImageType.pet:
       return basePath + `petIcon/pet_icon_${id}.png`;
     case ImageType.petSkill:
-      return basePath + `petskillIcon/petskill_icon_${id}.png`;
+      return basePath + `${intVersion ? "int/" : ""}petskillIcon/petskill_icon_${id}.png`;
     case ImageType.skill:
       return basePath + `skillIcon/skillIcon${id}.png`;
     case ImageType.skillType:

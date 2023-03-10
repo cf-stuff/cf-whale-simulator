@@ -14,7 +14,7 @@ const getPetSkillLimit = plus => {
   return 1;
 }
 
-const EvolvedPet = ({ pet, setPet }) => {
+const EvolvedPet = ({ pet, setPet, int }) => {
   if (!pet.evolved) return html``;
 
   const stats = [];
@@ -34,7 +34,7 @@ const EvolvedPet = ({ pet, setPet }) => {
 
   CFDB.getPetSkills().forEach(skill => {
     const id = `petskill_${skill.iconId}`;
-    const path = getImagePath(ImageType.petSkill, skill.iconId);
+    const path = getImagePath(ImageType.petSkill, skill.iconId, int);
     if (skill.type === PetSkillType.evolvedStat) {
       stats.push(html`<${ImageCheckbox} id=${id} value=${skill.name} name="e-pet-skill"
         checked=${pet.evoSkills.includes(skill.name)} disabled=${skillLimitReached} src=${path} onClick=${handleStats} />`);

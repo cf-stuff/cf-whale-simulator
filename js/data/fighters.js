@@ -411,6 +411,16 @@ const Fighters = {
     bmv: [8, 12, 17],
     mastery: SkillType.ninjutsu.name
   },
+  ironMan: {
+    name: "Iron Man",
+    evoName: "Iron Man",
+    iconId: 82,
+    weaponType: WeaponType.gloves,
+    isv: [40, 35, 30],
+    growthRate: [2, 1.8, 1.75],
+    bmv: [9, 10, 13],
+    mastery: SkillType.thunder.name
+  },
 };
 
 export default Fighters;

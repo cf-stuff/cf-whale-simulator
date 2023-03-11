@@ -54,6 +54,12 @@ const Fighter = ({ fighter, setFighter }) => {
       <span>Each ${fighterInfo.bmv[2]} STA adds 1% HP & 1 SP</span>
     </div>
   </div>
+  <div class="row">
+    <div class="col">
+      <span>Master of ${fighterInfo.mastery}</span>
+      <span>${fighterInfo.mastery} Skill Trigger Chance +5%</span>
+    </div>
+  </div>
   `}
   <${EvolvedFighter} fighter=${fighter} setFighter=${setFighter} />
   `;

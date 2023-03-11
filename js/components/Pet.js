@@ -72,9 +72,11 @@ const Pet = ({ pet, setPet }) => {
     </div>
   </div>
   <div class="row">
-    <div class="form-check form-switch">
-      <input class="form-check-input" type="checkbox" role="switch" id="int-icons" checked=${int} onClick=${e => setInt(e.target.checked)} />
-      <label class="form-check-label" for="int-icons">International icons</label>
+    <div class="col">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="int-icons" checked=${int} onClick=${e => setInt(e.target.checked)} />
+        <label class="form-check-label" for="int-icons">International icons</label>
+      </div>
     </div>
   </div>
   <div class="row">

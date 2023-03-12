@@ -56,8 +56,7 @@ const Fighter = ({ fighter, setFighter }) => {
   </div>
   <div class="row">
     <div class="col">
-      <span>Master of ${fighterInfo.mastery}</span>
-      <span>${fighterInfo.mastery} Skill Trigger Chance +5%</span>
+      <span>Master of ${fighterInfo.mastery}<br/>${fighterInfo.mastery} Skill Trigger Chance +5%</span>
     </div>
   </div>
   `}

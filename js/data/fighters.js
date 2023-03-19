@@ -416,9 +416,9 @@ const Fighters = {
     evoName: "Iron Man",
     iconId: 82,
     weaponType: WeaponType.gloves,
-    isv: [40, 35, 30],
-    growthRate: [2, 1.8, 1.75],
-    bmv: [9, 10, 13],
+    isv: [40, 25, 25],
+    growthRate: [2, 1.6, 1.6],
+    bmv: [7, 15, 15],
     mastery: SkillType.thunder.name
   },
 };

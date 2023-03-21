@@ -318,7 +318,7 @@ const Skills = {
     }
   },
   antiDamageChop: {
-    name: "Anit-damage Chop",
+    name: "Anit-damage Chop", // todo: fix typo -> this will cause local storage builds to break
     iconId: 37,
     type: SkillType.thunder.name,
     effect: {

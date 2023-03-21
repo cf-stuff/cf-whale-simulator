@@ -297,7 +297,7 @@ function handleSkillDamage(state, playerIndex, skill, attackedSkill) {
     dealDamage(state, playerIndex, damageToBeReflected, {
       source: attackedSkill.name,
       type: DamageType.other
-    });
+    }, state.players[playerIndex ^ 1].status.some(x => x.effect.percentDamageReflectedWhenAttacked));
   }
   damage = Math.floor(damage * damageTakenMultiplier);
   let preventHealing = dealDamage(state, playerIndex ^ 1, damage, {
@@ -585,8 +585,8 @@ function handleOnHitStatusEffects(state, playerIndex, damage, preventHealing) {
     }
   });
 }
-// todo bell/shield wall bubble heqaling interaction
-function dealDamage(state, playerIndex, amount, options) {
+
+function dealDamage(state, playerIndex, amount, options, preventOnDeathSkills = false) {
   let preventHealing = false;
   state.players[playerIndex].status.forEach(x => {
     if (options.type === DamageType.attack && x.effect.immuneToAttackDamage
@@ -615,7 +615,7 @@ function dealDamage(state, playerIndex, amount, options) {
   state.players[playerIndex].status.filter(x => x.effect.storeDamageTaken).forEach(x => x.damageTaken += amount);
   updateStat(state, playerIndex, Stats.hp.name, -amount, options.source);
   gainFury(state, playerIndex);
-  if (state.players[playerIndex].stats.current.hp <= 0) {
+  if (!preventOnDeathSkills && state.players[playerIndex].stats.current.hp <= 0) {
     if (!tryToUseSkillFromPhase(state, playerIndex, SkillPhase.onDeath)) {
       state.someoneDied = true;
     }

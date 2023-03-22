@@ -182,7 +182,8 @@ function getAllSkillsEligibleToBeUsed(state, playerIndex, phase) {
     .filter(skill => skill.maxTriggerTimes ? skill.remainingUses > 0 : true)
     .filter(skill => skill.effect?.removeRandomDebuff ? getDebuffs(state, playerIndex).length > 0 : true)
     .filter(skill => skill.cantUseIfThunderGodIsActive ? !isThunderGodActive(state) : true)
-    .filter(skill => skill.cantUseIfFullHp ? !isFullHp(state, playerIndex) : true)
+    .filter(skill => skill.canUseIfHpNotFull ? !isFullHp(state, playerIndex) : true)
+    .filter(skill => skill.canUseIfPoisoned ? state.players[playerIndex].status.some(status => status.name === Status.poisoned.name) : true)
     .filter(skill => skill.numberOfFuryBursts ? state.players[playerIndex].furyBursts % skill.numberOfFuryBursts === 0 : true)
     .filter(skill => Utils.testProbability(getSkillTriggerProbability(state, playerIndex, skill)));
 }
@@ -364,7 +365,7 @@ function handleSkillEffects(state, playerIndex, skill, damage, preventHealing) {
   }
   if (skill.effect.combosWithBloodFrenzy) {
     // call recursively while probabilty check passes
-    if (state.players[playerIndex].status.some(x => x.name === Status.bloodFrenzy.name)) {
+    if (state.players[playerIndex].status.some(status => status.name === Status.bloodFrenzy.name)) {
       const comboProbability = getSkillTriggerProbability(state, playerIndex, skill);
       if (Utils.testProbability(comboProbability)) useSkill(state, playerIndex, skill);
     }

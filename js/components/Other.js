@@ -31,7 +31,7 @@ const Other = ({ state, setState }) => {
     <span>STR: ${player.stats.str}, DEX: ${player.stats.dex}, STA: ${player.stats.sta}</span>
   </div>
   <div class="row">
-    <span>SPD TIER: ${Math.ceil(1000 / secondsPerAttack)}</span>
+    <span>SPD TIER: <b>${Math.ceil(1000 / secondsPerAttack)}</b><br/>SECONDS/ATTACK: <b>${secondsPerAttack}</b></span>
   </div>
   <div class="row">
     <div class="col-auto">

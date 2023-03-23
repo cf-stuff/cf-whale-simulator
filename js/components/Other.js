@@ -25,9 +25,13 @@ const Other = ({ state, setState }) => {
     alert(`Copied url to clipboard: ${url}`);
   }
   const player = toPlayer(state);
+  const secondsPerAttack = Math.ceil(10000 / player.stats.spd) / 10;
   return html`
   <div class="row">
     <span>STR: ${player.stats.str}, DEX: ${player.stats.dex}, STA: ${player.stats.sta}</span>
+  </div>
+  <div class="row">
+    <span>SPD TIER: ${Math.ceil(1000 / secondsPerAttack)}</span>
   </div>
   <div class="row">
     <div class="col-auto">

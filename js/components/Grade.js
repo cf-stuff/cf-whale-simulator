@@ -91,7 +91,7 @@ const Grade = () => {
 
   if (stage === 2) {
     return html`
-    <div class="row">
+    <div class="row grade-display">
       <div class="col-auto">
         <${Display} player=${player} />
       </div>

@@ -43,8 +43,8 @@ const Grade = () => {
     const o = opponents[currentOpponent];
     const weight = Number(o.name.substring(o.name.indexOf("(") + 1, o.name.indexOf("%"))) / 100;
     console.log(`${player.name} VS ${o.name}`);
-    const winsOnLeft = handleBattle([player], [o], 10, 10);
-    const winsOnRight = handleBattle([player], [o], 10, 10);
+    const winsOnLeft = handleBattle([player], [o], 20, 10);
+    const winsOnRight = handleBattle([player], [o], 20, 10);
     const wins = [winsOnLeft[0] + winsOnRight[0], winsOnLeft[1] + winsOnRight[1]];
     console.log(`Score: ${wins[0] / (wins[0] + wins[1])}`);
     setProgress(progress + percentPerOpponent);

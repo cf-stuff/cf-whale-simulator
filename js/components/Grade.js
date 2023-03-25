@@ -67,7 +67,7 @@ const Grade = () => {
         data: {
           labels: opponents.map(o => o.name),
           datasets: [{
-            data: scores.map(score => Math.floor(score * 1000) / 10),
+            data: scores.map(score => Math.round(score * 1000) / 10),
             backgroundColor: ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"]
           }]
         }
@@ -96,7 +96,7 @@ const Grade = () => {
         <${Display} player=${player} />
       </div>
       <div class="col">
-        <h2 class="text-center">Total: ${Math.floor(Utils.sum(scores) * 1000) / 10}%</h2>
+        <h2 class="text-center">Total: ${Math.round(Utils.sum(scores) * 1000) / 10}%</h2>
         <canvas ref=${canvasRef} id="report"/>
       </div>
     </div>

@@ -7,7 +7,7 @@ import Stats from "./data/stats.js";
 import Status from "./data/status.js";
 import Utils from "./utils.js";
 
-export function simulateBattle(left, right) {
+export function simulateBattle(left, right, debug = false) {
   const leftPlayers = left.map(player => createPlayerForBattle(player, 0));
   const rightPlayers = right.map(player => createPlayerForBattle(player, 1));
   leftPlayers.forEach((player, i) => player.id = i * 2);
@@ -32,7 +32,7 @@ export function simulateBattle(left, right) {
         ++currentIndex[player.index];
       }
     });
-    console.log(state);
+    if (debug) console.log(state);
     logs.push(...state.log);
   }
   return {

@@ -1693,3 +1693,80 @@ Players.defSpdster = {
       "level": 64
   }
 }
+
+Players.reflect = {
+  "name": "Reflect (2%)",
+  "level": 100,
+  "fighter": {
+      "name": "Madara",
+      "plus": 21,
+      "evolved": true,
+      "skills": [
+          "Golden Shield Reset",
+          "Pray",
+          "Energy Shield Reset"
+      ]
+  },
+  "pet": {
+      "name": "Sleipnir",
+      "plus": 21,
+      "evolved": true,
+      "skills": [
+          "Defense",
+          "Freezing (Sleipnir Special)",
+          "Energy Shield (Passive)"
+      ]
+  },
+  "weapon": "Tyrant Callous Sword",
+  "stats": {
+      "str": 1968,
+      "dex": 1061,
+      "sta": 4052,
+      "brk": 2620,
+      "def": 794,
+      "hit": 528,
+      "eva": 400,
+      "res": 330,
+      "crt": 2042,
+      "atkPercent": 97,
+      "minAtk": 2802,
+      "maxAtk": 3167,
+      "hpPercent": 89,
+      "hp": 50645,
+      "spd": 190,
+      "spPercent": 0,
+      "sp": 768,
+      "furyReversion": 25
+  },
+  "skills": [
+      "Anit-damage Chop",
+      "Golden Shield",
+      "Rebirth",
+      "Counterattack",
+      "Bomb",
+      "Energy Shield"
+  ],
+  "expertise": [
+      "Water",
+      "Earth",
+      "Thunder",
+      "Wind",
+      "Taijutsu",
+      "Genjutsu",
+      "Healing",
+      "Ninjutsu",
+      "Cursed Seal Jutsu"
+  ],
+  "resistance": [
+      "Genjutsu",
+      "Healing"
+  ],
+  "phylactery": {
+      "skill": "Earth-Style Wall",
+      "extraTriggerPercent": 3
+  },
+  "totem": {
+      "name": "Lightning Attack Totem",
+      "level": 64
+  }
+}

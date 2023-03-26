@@ -113,7 +113,7 @@ const Grade = () => {
     <div class="col-sm-6 order-sm-1 pb-3">
       <div class="row">
         <div class="col">
-          <${SelectInput} value=${build} options=${options} onChange=${e => setBuild(e.target.value)} />
+          <${SelectInput} value=${build} options=${options} onChange=${e => setBuild(e.target.value)} disabled=${stage === 1}/>
         </div>
         <div class="col-auto">
           <${Button} onClick=${handleSubmit} disabled=${stage === 1}>

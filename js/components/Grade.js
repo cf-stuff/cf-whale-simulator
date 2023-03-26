@@ -89,14 +89,24 @@ const Grade = () => {
     return totalWins;
   }
 
+  const getGrade = score => {
+    if (score > 80) return "S";
+    if (score > 70) return "A";
+    if (score > 60) return "B";
+    if (score > 50) return "C";
+    if (score > 40) return "D";
+    return "F";
+  }
+
   if (stage === 2) {
+    const score = Math.round(Utils.sum(scores) * 1000) / 10;
     return html`
     <div class="row grade-display">
       <div class="col-auto">
         <${Display} player=${player} />
       </div>
       <div class="col">
-        <h2 class="text-center">Total: ${Math.round(Utils.sum(scores) * 1000) / 10}%</h2>
+        <h2 class="text-center">Total: ${score}% ${getGrade(score)}</h2>
         <canvas ref=${canvasRef} id="report"/>
       </div>
     </div>

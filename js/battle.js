@@ -233,6 +233,22 @@ function useSkill(state, playerIndex, skill) {
   if (skill.maxTriggerTimes) {
     --skill.remainingUses;
   }
+  if (skill.canBeThrownBack) {
+    const throwbackProbability = skill.throwbackPercentPerTenSeconds * Math.floor(state.timer / 10000) / 100;
+    const min = skill.minThrowbackPercent / 100;
+    const max = skill.maxThrowbackPercent / 100;
+    console.log(`time: ${state.timer / 1000}s, ${Utils.clamp(throwbackProbability, min, max)}`)
+    if (Utils.testProbability(Utils.clamp(throwbackProbability, min, max))) {
+      console.log("pass")
+      const newSkill = createSkillForBattle(skill.name);
+      newSkill.name += " Throwback";
+      newSkill.canBeThrownBack = false;
+      if (useSkill(state, playerIndex ^ 1, newSkill)) {
+        tryToUseSkillFromPhase(state, playerIndex, SkillPhase.duringEnemyAttack);
+      }
+      return false;
+    }
+  }
   let damage = 0;
   let preventHealing = false;
   let attackedSkill;
@@ -346,8 +362,10 @@ function handleSkillEffects(state, playerIndex, skill, damage, preventHealing) {
     const healAmount = preventHealing ? 0 : Math.floor(damage * skill.effect.percentDamageHealedOnHit / 100);
     updateStat(state, playerIndex, Stats.hp.name, healAmount, skill.name);
   }
-  if (skill.effect.removeEnemySpByYourSpPercent) { // todo: bacteria interaction
+  if (skill.effect.removeEnemySpByYourSpPercent) {
     const spToRemove = Math.floor(state.players[playerIndex].stats.initial.sp * skill.effect.removeEnemySpByYourSpPercent / 100);
+    let spConsumptionMultiplier = 1;
+    state.players[playerIndex].status.forEach(x => spConsumptionMultiplier *= x.effect.spConsumptionMultiplier || 1);
     updateStat(state, playerIndex ^ 1, Stats.sp.name, -spToRemove, skill.name);
   }
   if (skill.effect.removeEnemySpByEnemySpPercent) {

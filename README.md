@@ -4,7 +4,6 @@ This aims to replicate battles in Chaos Fighters. Due to the nature of this game
 ### https://cf-stuff.github.io/cf-whale-simulator/
 
 ## Not yet implemented
-- Bomb bounce back
 - Strong Wine and Shield Wall Burst temporary stat decreases
 - Different level fighter skills depending on fighter level
 - Various form validation issues

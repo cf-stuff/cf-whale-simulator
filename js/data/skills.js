@@ -502,6 +502,9 @@ const Skills = {
     },
     phase: SkillPhase.duringYourAttack,
     canBeThrownBack: true,
+    throwbackPercentPerTenSeconds: 10,
+    minThrowbackPercent: 10,
+    maxThrowbackPercent: 90,
     triggerPercent: 30,
     spConsumption: 0,
     getNormalVersion: function () {

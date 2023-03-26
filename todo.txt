@@ -3,7 +3,11 @@ phase 2: user interface to input stats (like feh combat sim or pokemon showdown)
 phase 3: animate replays including fast forward and rewind, import and export - battle sim exports replay
 phase 4: backend db to store replays and share via link
 
-side: self play ai? prerequisite: stat calculator
+possible ideas
+
+skill planner for team
+
+side: self play ai?
 e.g. generate 100 random builds -> round robin best of 100
 fitness
 win: 2
@@ -14,14 +18,8 @@ normalise score -> use as probability for pool selection
 
 ---
 todo for phase 1
-bomb bounce back
 evo wine / shield wall
-
----
-todo for phase 2
-validate build
-on fighter change, update weapon
-reuse button component
+can mi/dodge then counterattack
 
 ---
 

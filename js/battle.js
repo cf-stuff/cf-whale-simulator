@@ -240,7 +240,7 @@ function useSkill(state, playerIndex, skill) {
     console.log(`time: ${state.timer / 1000}s, ${Utils.clamp(throwbackProbability, min, max)}`)
     if (Utils.testProbability(Utils.clamp(throwbackProbability, min, max))) {
       console.log("pass")
-      const newSkill = createSkillForBattle(skill.name);
+      const newSkill = Utils.deepClone(skill);
       newSkill.name += " Throwback";
       newSkill.canBeThrownBack = false;
       if (useSkill(state, playerIndex ^ 1, newSkill)) {

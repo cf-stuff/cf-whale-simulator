@@ -346,7 +346,7 @@ function handleSkillEffects(state, playerIndex, skill, damage, preventHealing) {
     const healAmount = preventHealing ? 0 : Math.floor(damage * skill.effect.percentDamageHealedOnHit / 100);
     updateStat(state, playerIndex, Stats.hp.name, healAmount, skill.name);
   }
-  if (skill.effect.removeEnemySpByYourSpPercent) {
+  if (skill.effect.removeEnemySpByYourSpPercent) { // todo: bacteria interaction
     const spToRemove = Math.floor(state.players[playerIndex].stats.initial.sp * skill.effect.removeEnemySpByYourSpPercent / 100);
     updateStat(state, playerIndex ^ 1, Stats.sp.name, -spToRemove, skill.name);
   }

@@ -119,7 +119,8 @@ const Status = {
       immuneToFireDamage: true,
       removeIgnitedOnInflict: true
     },
-    removeWhenAttacked: true
+    removeWhenAttacked: true,
+    doesNotTriggerFuryBurst: true
   },
   ignited: {
     name: "Ignited",

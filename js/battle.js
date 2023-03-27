@@ -18,6 +18,7 @@ export function simulateBattle(left, right, debug = false) {
   let currentIndex = [0, 0];
   while (currentIndex[0] < left.length && currentIndex[1] < right.length) {
     let state = {
+      debug,
       players: [leftPlayers[currentIndex[0]], rightPlayers[currentIndex[1]]],
       timer: 0,
       someoneDied: false,
@@ -275,6 +276,7 @@ function useSkill(state, playerIndex, skill) {
   }
   if (skill.damage) [damage, preventHealing] = handleSkillDamage(state, playerIndex, skill, attackedSkill);
   if (skill.effect) handleSkillEffects(state, playerIndex, skill, damage, preventHealing);
+  if (skill.damage) handlePostDamageEffects(state, playerIndex ^ 1);
   return true;
 }
 
@@ -313,14 +315,17 @@ function handleSkillDamage(state, playerIndex, skill, attackedSkill) {
     const damageToBeReflected = damage - Math.floor(damage * damageTakenMultiplier);
     dealDamage(state, playerIndex, damageToBeReflected, {
       source: attackedSkill.name,
-      type: DamageType.other
-    }, state.players[playerIndex ^ 1].status.some(x => x.effect.percentDamageReflectedWhenAttacked));
+      type: DamageType.other,
+      skipOnDeath: state.players[playerIndex ^ 1].status.some(x => x.effect.percentDamageReflectedWhenAttacked)
+    });
   }
   damage = Math.floor(damage * damageTakenMultiplier);
   let preventHealing = dealDamage(state, playerIndex ^ 1, damage, {
     source: skill.name,
     type: DamageType.attack,
-    isFire: skill.type === SkillType.fire.name
+    isFire: skill.type === SkillType.fire.name,
+    skipOnDeath: true,
+    skipFury: true
   });
   handleWhenAttackedStatusEffects(state, playerIndex ^ 1, damage, skill);
   handleOnHitStatusEffects(state, playerIndex, damage, preventHealing);
@@ -499,7 +504,6 @@ function removeStatus(state, playerIndex, name) {
 
 function handleStartOfTurnStatusEffects(state, playerIndex) {
   state.players[playerIndex].status.forEach(x => {
-    // decrement turn count
     if (x.removeAfterTurns) {
       x.turnsRemaining -= 1;
       if (x.turnsRemaining <= 0) {
@@ -605,7 +609,7 @@ function handleOnHitStatusEffects(state, playerIndex, damage, preventHealing) {
   });
 }
 
-function dealDamage(state, playerIndex, amount, options, preventOnDeathSkills = false) {
+function dealDamage(state, playerIndex, amount, options) {
   let preventHealing = false;
   state.players[playerIndex].status.forEach(x => {
     if (options.type === DamageType.attack && x.effect.immuneToAttackDamage
@@ -633,13 +637,26 @@ function dealDamage(state, playerIndex, amount, options, preventOnDeathSkills = 
   }
   state.players[playerIndex].status.filter(x => x.effect.storeDamageTaken).forEach(x => x.damageTaken += amount);
   updateStat(state, playerIndex, Stats.hp.name, -amount, options.source);
+  if (!options.skipFury) {
+    gainFury(state, playerIndex);
+  }
+  if (!options.skipOnDeath) {
+    if (state.players[playerIndex].stats.current.hp <= 0) {
+      if (!tryToUseSkillFromPhase(state, playerIndex, SkillPhase.onDeath)) {
+        state.someoneDied = true;
+      }
+    }
+  }
+  return preventHealing;
+}
+
+function handlePostDamageEffects(state, playerIndex) {
   gainFury(state, playerIndex);
-  if (!preventOnDeathSkills && state.players[playerIndex].stats.current.hp <= 0) {
+  if (state.players[playerIndex].stats.current.hp <= 0) {
     if (!tryToUseSkillFromPhase(state, playerIndex, SkillPhase.onDeath)) {
       state.someoneDied = true;
     }
   }
-  return preventHealing;
 }
 
 function updateStat(state, playerIndex, stat, amount, source) {
@@ -652,13 +669,12 @@ function updateStat(state, playerIndex, stat, amount, source) {
 }
 
 function gainFury(state, playerIndex, overrideAmount) {
-  if (state.players[playerIndex].fury < FURY_BURST_THRESHOLD) {
-    const furyPoints = overrideAmount || state.players[playerIndex].stats.current.furyReversion;
-    state.players[playerIndex].fury += furyPoints;
-    state.log.push(`${state.players[playerIndex].id}: gained ${furyPoints} fury, ${state.players[playerIndex].fury}/${FURY_BURST_THRESHOLD}`);
-  }
+  const furyPoints = overrideAmount || state.players[playerIndex].stats.current.furyReversion;
+  state.players[playerIndex].fury += furyPoints;
+  if (state.players[playerIndex].fury > FURY_BURST_THRESHOLD) state.players[playerIndex].fury = FURY_BURST_THRESHOLD;
+  state.log.push(`${state.players[playerIndex].id}: gained ${furyPoints} fury, ${state.players[playerIndex].fury}/${FURY_BURST_THRESHOLD}`);
   if (state.players[playerIndex].fury >= FURY_BURST_THRESHOLD) {
-    if (getDebuffs(state, playerIndex).length > 0) {
+    if (getDebuffs(state, playerIndex).filter(x => !x.doesNotTriggerFuryBurst).length > 0) {
       state.players[playerIndex].furyBursts += 1;
       state.log.push(`${state.players[playerIndex].id}: fury burst`);
       getAllSkillsEligibleToBeUsed(state, playerIndex, SkillPhase.onFuryBurst).forEach(skill => useSkill(state, playerIndex, skill));

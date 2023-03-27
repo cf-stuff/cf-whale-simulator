@@ -90,11 +90,11 @@ const Grade = () => {
   }
 
   const getGrade = score => {
-    if (score > 80) return "S";
-    if (score > 70) return "A";
-    if (score > 60) return "B";
-    if (score > 50) return "C";
-    if (score > 40) return "D";
+    if (score >= 80) return "S";
+    if (score >= 70) return "A";
+    if (score >= 60) return "B";
+    if (score >= 50) return "C";
+    if (score >= 40) return "D";
     return "F";
   }
 

@@ -21,7 +21,7 @@ const Other = ({ state, setState }) => {
   }
   const exportCode = async () => {
     const url = await submitPaste(state.name, textArea.current.value);
-    navigator.clipboard.writeText(url);
+    await navigator.clipboard.writeText(url);
     alert(`Copied url to clipboard: ${url}`);
   }
   const player = toPlayer(state);

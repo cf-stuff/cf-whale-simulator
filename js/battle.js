@@ -238,9 +238,8 @@ function useSkill(state, playerIndex, skill) {
     const throwbackProbability = skill.throwbackPercentPerTenSeconds * Math.floor(state.timer / 10000) / 100;
     const min = skill.minThrowbackPercent / 100;
     const max = skill.maxThrowbackPercent / 100;
-    console.log(`time: ${state.timer / 1000}s, ${Utils.clamp(throwbackProbability, min, max)}`)
+    if (state.debug) console.log(`[DEBUG] time: ${state.timer / 1000}s, throwback: ${Utils.clamp(throwbackProbability, min, max)}`);
     if (Utils.testProbability(Utils.clamp(throwbackProbability, min, max))) {
-      console.log("pass")
       const newSkill = Utils.deepClone(skill);
       newSkill.name += " Throwback";
       newSkill.canBeThrownBack = false;

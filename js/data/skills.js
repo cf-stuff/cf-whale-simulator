@@ -38,6 +38,9 @@ const Skills = {
     name: "Freezing Skill",
     iconId: 5,
     type: SkillType.water.name,
+    damage: {
+      atkMultiplier: 0
+    },
     effect: {
       status: Status.frozen.name,
       target: SkillTarget.enemy

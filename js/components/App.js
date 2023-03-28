@@ -27,6 +27,7 @@ const App = () => {
     ${activeTab === "Battle" && html`<${Battle} />`}
     ${activeTab === "Grade" && html`<${Grade} />`}
     <hr/>
+    Version 1.5.1<br/>
     Feel free to report any issues<br/>
     LINE ID: derpidgey<br/>
     Discord: CF99#9616

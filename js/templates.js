@@ -1433,7 +1433,7 @@ Players.brkSpdsterN = {
       "Thunderclap Quake",
       "Assassinate",
       "Magic Stealing",
-      "Shield Wall"
+      "Moving Illusion"
   ],
   "expertise": [
       "Water",

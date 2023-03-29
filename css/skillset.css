@@ -1,0 +1,46 @@
+.skill-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skill-container>.skill {
+  cursor: pointer;
+}
+
+.skillset {
+  background-color: #391400;
+  padding: 10px 15px;
+  border-radius: 15px;
+  outline: 3px solid black;
+}
+
+.skills>* {
+  min-width: 30%;
+  flex-grow: 1;
+}
+
+.skill-frame {
+  background-image: url("../img/skill/skillSlot.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 75px;
+  height: 75px;
+}
+
+.skill-frame>.skill {
+  padding-top: 5px;
+}
+
+.phy-container {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.phy-indicator {
+  position: absolute;
+  top: 0;
+  left: calc(100% / 2 + 27.5px);
+}

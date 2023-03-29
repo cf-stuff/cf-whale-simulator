@@ -9,6 +9,7 @@ export const ImageType = {
   petSkill: "petSkill",
   skill: "skill",
   skillType: "skillType",
+  skillSlot: "skillSlot",
   totem: "totem"
 }
 
@@ -35,6 +36,8 @@ export const getImagePath = (type, id, intVersion = false) => {
       return basePath + `skillIcon/skillIcon${id}.png`;
     case ImageType.skillType:
       return basePath + `skillSet/skillSet${id}.png`;
+    case ImageType.skillSlot:
+      return basePath + `skill/${id}.png`;
     case ImageType.totem:
       return basePath + `totems/tuten${id}.png`;
   }

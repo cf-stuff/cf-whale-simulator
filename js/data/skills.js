@@ -627,7 +627,7 @@ const Skills = {
     iconId: 20,
     type: SkillType.cursedSealJutsu.name,
     effect: {
-      damageTakenMultiplier: 0.55,
+      damageTakenMultiplier: 0.45,
       reflectRemainingDamage: true
     },
     phase: SkillPhase.duringAllEnemyAttacks,

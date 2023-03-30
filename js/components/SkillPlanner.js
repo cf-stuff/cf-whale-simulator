@@ -16,9 +16,7 @@ const SkillPlanner = () => {
       if (position !== 0) {
         for (let set of newSkills) {
           for (let i = 0; i < set.length; ++i) {
-            if (set[i] === Number(id) && i !== 0) {
-              set[i] = 0;
-            }
+            if (set[i] === Number(id) && i !== 0) set[i] = 0;
           }
         }
       }
@@ -28,7 +26,8 @@ const SkillPlanner = () => {
   }
 
   return html`
-  <div class="row pt-3">
+  <div class="row">
+    <span>Does not work on touch screens</span>
     <div class="skill-container">
     ${CFDB.getSkills().filter(skill => skill.name !== "Normal Attack").map(skill => html`
     <img class="skill" draggable ondragstart=${e => e.dataTransfer.setData("id", skill.iconId)}

@@ -4,7 +4,7 @@
   gap: 10px;
 }
 
-.skill-container>.skill {
+.skill-container .skill {
   cursor: pointer;
 }
 
@@ -43,4 +43,8 @@
   position: absolute;
   top: 0;
   left: calc(100% / 2 + 27.5px);
+}
+
+.skillset-number {
+  width: 40%;
 }

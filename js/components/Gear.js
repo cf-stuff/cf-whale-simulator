@@ -52,19 +52,33 @@ const Gear = ({ fighterWeaponType, gear, type, setGear }) => {
       gearGems.push(html`<${GearGem} options=${fusionGemOptions} gem=${gear.gems[1] || emptyGem} setGem=${handleGem(1)} />`);
     }
   }
+  const getBaseStats = () => {
+    const baseStats = Object.entries(gearInfo.stats);
+    let baseStatsFormatted = baseStats.map(x => html`<span>${CFDB.getStatFromName(x[0]).displayName}: ${x[1]}</span>`);
+    if (gearInfo.exclusiveStat) {
+      const exclusiveStat = gearInfo.exclusiveStat;
+      const exclusiveStatStat = Object.entries(exclusiveStat.stat);
+      const exclusiveStatFormatted = html`<span>${CFDB.getStatFromName(exclusiveStatStat[0][0]).displayName}: ${exclusiveStatStat[0][1]} (${exclusiveStat.fighter} exclusive)</span>`;
+      baseStatsFormatted = [...baseStatsFormatted, exclusiveStatFormatted];
+    }
+    return html`<div class="d-flex flex-column">${baseStatsFormatted}</div>`;
+  }
+  const baseStats = gear.name === "None" ? "" : getBaseStats();
 
   return html`
   <div class="col mb-3">
-    <${SelectInput} value=${gear.name} options=${options} onChange=${e => setGear({ ...gear, name: e.target.value })} />
+    <div class="input-group">
+      <${SelectInput} value=${gear.name} options=${options} onChange=${e => setGear({ ...gear, name: e.target.value })} />
+      <label class="input-group-text" for="gear-${gearType.name}-enhance">+</label>
+      <${NumberInput} id="gear-${gearType.name}-enhance" value=${gear.enhancement}
+      onInput=${e => setGear({ ...gear, enhancement: e.target.value })} style=${{maxWidth: "4rem"}} />
+    </div>
     <div class="row">
       <div class="col-auto">
         <img class="item-frame" src=${gearImage} />
       </div>
-      <div class="col">
-        <div class="input-group">
-          <label class="input-group-text" for="gear-${gearType.name}-enhance">+</label>
-          <${NumberInput} id="gear-${gearType.name}-enhance" value=${gear.enhancement} onInput=${e => setGear({ ...gear, enhancement: e.target.value })} />
-        </div>
+      <div class="col" style=${{maxHeight: "64px"}}>
+        ${baseStats}
       </div>
     </div>
     ${gear.name !== "None" && html`

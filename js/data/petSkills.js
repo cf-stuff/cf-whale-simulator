@@ -165,7 +165,6 @@ const PetSkills = {
     },
     phase: SkillPhase.duringAllEnemyAttacks,
     triggerPercent: 10,
-
   },
   foxSpecialStat: {
     name: "50EVA (Gale Fox Special)",

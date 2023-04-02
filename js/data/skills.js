@@ -633,6 +633,7 @@ const Skills = {
     phase: SkillPhase.duringAllEnemyAttacks,
     triggerPercent: 15,
     spConsumption: 5,
+    notAnAction: true,
     getNormalVersion: function () {
       this.triggerPercent = 15;
     },
@@ -791,12 +792,13 @@ const Skills = {
     phase: SkillPhase.onDeath,
     triggerPercent: 90,
     spConsumption: 25,
+    notAnAction: true,
     getNormalVersion: function () {
       this.gainPercentHp = 20;
     },
     getExpertiseVersion: function () {
       this.gainPercentHp = 25;
-    }
+    },
   },
   bloodSacrifice: {
     name: "Blood Sacrifice",

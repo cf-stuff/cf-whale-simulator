@@ -172,12 +172,11 @@ export function startBattle(state) {
     handleTimerRelatedStatusEffects(state);
   }
   state.log.push(`${state.players[1].stats.current.hp > 0 ? state.players[1].id : state.players[0].id} wins`);
-  // return state;
 }
 
 function getAllSkillsEligibleToBeUsed(state, playerIndex, phase) {
-  if (state.players[playerIndex].status.some(x => x.effect.skipActions)) return [];
   return state.players[playerIndex].skills.filter(skill => skill.phase === phase)
+    .filter(skill => state.players[playerIndex].status.some(x => x.effect.skipActions) ? skill.notAnAction : true)
     .filter(skill => skill.spConsumption ? state.players[playerIndex].stats.current.sp >= skill.spConsumption : true)
     .filter(skill => areActiveSkillsDisabled(state, playerIndex, phase) ? skill.bypassDisableActiveSkills : true)
     .filter(skill => skill.maxTriggerTimes ? skill.remainingUses > 0 : true)

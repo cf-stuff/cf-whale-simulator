@@ -273,8 +273,14 @@ function useSkill(state, playerIndex, skill) {
     }
   }
   if (skill.damage) [damage, preventHealing] = handleSkillDamage(state, playerIndex, skill, attackedSkill);
-  if (skill.effect) handleSkillEffects(state, playerIndex, skill, damage, preventHealing);
-  if (skill.damage) handlePostDamageEffects(state, playerIndex ^ 1);
+  if (skill.effect) handlePreFurySkillEffects(state, playerIndex, skill);
+  gainFury(state, playerIndex ^ 1);
+  if (skill.effect) handlePostFurySkillEffects(state, playerIndex, skill, damage, preventHealing);
+  if (state.players[playerIndex].stats.current.hp <= 0) {
+    if (!tryToUseSkillFromPhase(state, playerIndex ^ 1, SkillPhase.onDeath)) {
+      state.someoneDied = true;
+    }
+  }
   return true;
 }
 
@@ -333,10 +339,7 @@ function handleSkillDamage(state, playerIndex, skill, attackedSkill) {
   return [damage, preventHealing];
 }
 
-function handleSkillEffects(state, playerIndex, skill, damage, preventHealing) {
-  if (skill.effect.removeThunderGod) {
-    removeStatus(state, playerIndex, Status.thunderGod.name);
-  }
+function handlePreFurySkillEffects(state, playerIndex, skill) {
   if (skill.effect.status) {
     let targetIndices = [];
     if (skill.effect.target === SkillTarget.both) {
@@ -348,6 +351,12 @@ function handleSkillEffects(state, playerIndex, skill, damage, preventHealing) {
       expertise: skill.useExpertiseEffect,
       effectIncrease: skill.effectIncrease
     }));
+  }
+}
+
+function handlePostFurySkillEffects(state, playerIndex, skill, damage, preventHealing) {
+  if (skill.effect.removeThunderGod) {
+    removeStatus(state, playerIndex, Status.thunderGod.name);
   }
   if (skill.effect.removeRandomDebuff) {
     removeRandomDebuff(state, playerIndex);
@@ -646,15 +655,6 @@ function dealDamage(state, playerIndex, amount, options) {
     }
   }
   return preventHealing;
-}
-
-function handlePostDamageEffects(state, playerIndex) {
-  gainFury(state, playerIndex);
-  if (state.players[playerIndex].stats.current.hp <= 0) {
-    if (!tryToUseSkillFromPhase(state, playerIndex, SkillPhase.onDeath)) {
-      state.someoneDied = true;
-    }
-  }
 }
 
 function updateStat(state, playerIndex, stat, amount, source) {

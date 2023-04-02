@@ -34,6 +34,7 @@ const App = () => {
     Discord: CF99#9616
     <hr/>
     <h3>Changelog</h3>
+    <p>2023-04-03: 1.5.4 - Fixed freezing/rebirth and needle/healing burst interactions</p>
     <p>2023-03-31: 1.5.3 - Added skill planner</p>
     <p>2023-03-30: 1.5.2 - Fixed esw damage</p>
     <p>2023-03-28: 1.5.1 - Fixed ice to be more consistent with in game</p>

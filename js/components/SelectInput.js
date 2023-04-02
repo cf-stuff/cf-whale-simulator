@@ -1,8 +1,8 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 
-const SelectInput = ({ value, onChange, options, includeNone = true, width, disabled = false }) => {
+const SelectInput = ({ value, onChange, options, includeNone = true, style, disabled = false }) => {
   return html`
-  <select class="form-select" value=${value} onChange=${onChange} style=${{width}}, disabled=${disabled}>
+  <select class="form-select" value=${value} onChange=${onChange} style=${style} disabled=${disabled}>
     ${includeNone && html`<option value="None">-</option>`}
     ${options.map(option => html`<option value=${option}>${option}</option>`)}
   </select>

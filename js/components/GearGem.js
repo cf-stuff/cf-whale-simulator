@@ -10,7 +10,7 @@ const GearGem = ({ options, gem, setGem }) => {
   <div class="input-group">
     <${SelectInput} value=${gem.name} options=${options} onChange=${e => setGem({ ...gem, name: e.target.value })} />
     <span class="input-group-text">+</span>
-    <${NumberInput} value=${gem.plus} onInput=${e => setGem({ ...gem, plus: e.target.value })} />
+    <${NumberInput} value=${gem.plus} onInput=${e => setGem({ ...gem, plus: e.target.value })} style=${{maxWidth: "4rem"}} />
     <span class="input-group-text">
       ${id ? html`<img class="icon" src=${getImagePath(ImageType.item, `${id}_${gem.plus + 1}`)} />`
       : html`<span class="icon" />`}

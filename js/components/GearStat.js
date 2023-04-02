@@ -15,7 +15,7 @@ const GearStat = ({ options, stat, value, setStat, gearLevel, purple = false }) 
   return html`
   <div class="input-group${purple ? " purple-stat" : ""}">
     <${SelectInput} value=${stat === "None" ? "None" : CFDB.getStatFromName(stat).displayName} options=${options} onChange=${handleSelect} />
-    <${NumberInput} value=${value} onInput=${e => setStat(stat, e.target.value)} />
+    <${NumberInput} value=${value} onInput=${e => setStat(stat, e.target.value)} style=${{maxWidth: "5rem"}} />
     <${Button} onClick=${() => setStat(stat, maxStat)} width="6rem">(Max${maxStat === 0 ? "" : ` ${maxStat}`})</${Button}>
   </div>
   `;

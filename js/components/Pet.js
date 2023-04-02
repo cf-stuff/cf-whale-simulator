@@ -63,7 +63,7 @@ const Pet = ({ pet, setPet }) => {
     <div class="col-auto">
       <div class="input-group">
         <label class="input-group-text" for="pet-plus">+</label>
-        <${NumberInput} id="pet-plus" value=${pet.plus} width="4rem" onInput=${e => setPet({ plus: e.target.value })} />
+        <${NumberInput} id="pet-plus" value=${pet.plus} style=${{width:"4rem"}} onInput=${e => setPet({ plus: e.target.value })} />
         <label class="input-group-text" for="pet-evolved">Evolved</label>
         <div class="input-group-text">
           <input type="checkbox" id="pet-evolved" checked=${pet.evolved} onClick=${() => setPet({ evolved: !pet.evolved })} />

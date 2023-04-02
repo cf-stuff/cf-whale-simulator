@@ -40,7 +40,7 @@ const Form = ({ state, dispatch }) => {
         <label class="col-form-label" for="player-level">Level</label>
       </div>
       <div class="col-auto">
-        <${NumberInput} id="player-level" value=${state.level} onInput=${e => dispatch({ type: ActionType.level, payload: e.target.value })} width="5rem" />
+        <${NumberInput} id="player-level" value=${state.level} onInput=${e => dispatch({ type: ActionType.level, payload: e.target.value })} style=${{width: "5rem"}} />
       </div>
     </div>
     <div class="row">

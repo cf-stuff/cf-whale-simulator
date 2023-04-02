@@ -28,7 +28,7 @@ const Fighter = ({ fighter, setFighter }) => {
     <div class="col-auto">
       <div class="input-group">
         <label class="input-group-text" for="fighter-plus">+</label>
-        <${NumberInput} id="fighter-plus" value=${fighter.plus} width="4rem" onInput=${e => setFighter({ plus: e.target.value })} />
+        <${NumberInput} id="fighter-plus" value=${fighter.plus} style=${{width:"4rem"}} onInput=${e => setFighter({ plus: e.target.value })} />
         <label class="input-group-text" for="fighter-evolved">Evolved</label>
         <div class="input-group-text">
           <input type="checkbox" id="fighter-evolved" checked=${fighter.evolved} onClick=${() => setFighter({ evolved: !fighter.evolved })} />

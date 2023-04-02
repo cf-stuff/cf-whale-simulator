@@ -1,6 +1,6 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
 import CFDB from "../data/CFDB.js";
-import Soul from "./Soul.js";
+import NexusSoul from "./Soul.js";
 
 const Nexus = ({ nexus, setNexus }) => {
   const selectedSouls = nexus.map(soul => soul.stat);
@@ -16,7 +16,7 @@ const Nexus = ({ nexus, setNexus }) => {
     const soul = nexus[i] || { stat: "None", level: 12 };
     const options = nexusStats.map(stat => stat.name)
       .filter(stat => stat === soul.stat || !selectedSouls.includes(stat));
-    nexusElements.push(html`<div class="row"><${Soul} soul=${soul} setSoul=${setSoul(i)} options=${options} /></div>`);
+    nexusElements.push(html`<div class="row"><${NexusSoul} soul=${soul} setSoul=${setSoul(i)} options=${options} /></div>`);
   }
 
   return html`${nexusElements}`;

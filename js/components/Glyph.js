@@ -1,4 +1,6 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
+import CFDB from "../data/CFDB.js";
+import { getImagePath, ImageType } from "../image.js";
 import NumberInput from "./NumberInput.js";
 import SelectInput from "./SelectInput.js";
 
@@ -15,6 +17,10 @@ const Glyph = ({ glyph, setGlyph, options, phyPlus }) => {
 
   return html`
     <div class="input-group">
+      <span class="input-group-text">
+        ${glyph.stat !== "None" ? html`<img class="icon" src=${getImagePath(ImageType.glyph, `${CFDB.getGlyph(glyph.stat).iconId}`)} />`
+        : html`<span class="icon" />`}
+      </span>
       <${SelectInput} value=${glyph.stat} options=${options} onChange=${e => setGlyph({ stat: e.target.value, plus: glyph.plus })} />
       <span class="input-group-text">+</span>
       <${NumberInput} value=${glyph.plus} onInput=${e => setGlyph({ stat: glyph.stat, plus: e.target.value })} />

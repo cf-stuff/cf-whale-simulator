@@ -4,6 +4,7 @@ import Fighters from "./fighters.js";
 import FighterSkills from "./fighterSkills.js";
 import { GearMaxValues, Gears, GearSuits } from "./gears.js";
 import Gems from "./gems.js";
+import glyphs from "./glyph.js";
 import Nexus from "./nexus.js";
 import Pets from "./pets.js";
 import PetSkills from "./petSkills.js";
@@ -100,6 +101,9 @@ CFDB.getPhylacteryInfo = (type, plus) => {
   if (plus >= 18) glyphMultiplier += 0.4;
   return { bmvAmount, glyphMultiplier, stats };
 }
+
+CFDB.getGlyphs = () => Object.values(glyphs);
+CFDB.getGlyph = name => CFDB.getGlyphs().find(glyph => glyph.name === name);
 
 CFDB.getNexusStats = () => Object.values(Nexus);
 CFDB.getNexusStat = name => CFDB.getNexusStats().find(stat => stat.name === name);

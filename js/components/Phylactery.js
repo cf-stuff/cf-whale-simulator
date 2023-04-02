@@ -10,10 +10,7 @@ import SelectInput from "./SelectInput.js";
 
 const info = CFDB.getPhylactery("4B");
 
-const glyphStats = [
-  Stats.def.displayName, Stats.brk.displayName, Stats.crt.displayName,
-  Stats.eva.displayName, Stats.hit.displayName, Stats.res.displayName
-];
+const glyphStats = CFDB.getGlyphs().map(glyph => glyph.name);
 
 const Phylactery = ({ phylactery, setPhylactery }) => {
   const handleMax = () => setPhylactery({ plus: 20 });

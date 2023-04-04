@@ -90,6 +90,7 @@ const Grade = () => {
   }
 
   const getGrade = score => {
+    if (score >= 90) return "SS";
     if (score >= 80) return "S";
     if (score >= 70) return "A";
     if (score >= 60) return "B";

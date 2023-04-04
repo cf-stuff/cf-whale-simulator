@@ -274,9 +274,9 @@ function useSkill(state, playerIndex, skill) {
   }
   if (skill.damage) [damage, preventHealing] = handleSkillDamage(state, playerIndex, skill, attackedSkill);
   if (skill.effect) handlePreFurySkillEffects(state, playerIndex, skill);
-  gainFury(state, playerIndex ^ 1);
+  if (skill.damage) gainFury(state, playerIndex ^ 1);
   if (skill.effect) handlePostFurySkillEffects(state, playerIndex, skill, damage, preventHealing);
-  if (state.players[playerIndex ^ 1].stats.current.hp <= 0) {
+  if (skill.damage && state.players[playerIndex ^ 1].stats.current.hp <= 0) {
     if (!tryToUseSkillFromPhase(state, playerIndex ^ 1, SkillPhase.onDeath)) {
       state.someoneDied = true;
     }

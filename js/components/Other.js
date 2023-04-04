@@ -22,7 +22,7 @@ const Other = ({ state, setState }) => {
   const exportCode = async () => {
     const url = await submitPaste(state.name, textArea.current.value);
     await navigator.clipboard.writeText(url);
-    alert(`Copied url to clipboard: ${url}`);
+    alert(`Copied url to clipboard: ${url}\nNote: link lasts 2 weeks`);
   }
   const player = toPlayer(state);
   const secondsPerAttack = Math.ceil(10000 / player.stats.spd) / 10;

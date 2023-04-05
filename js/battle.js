@@ -220,9 +220,7 @@ function tryToUseSkillFromPhase(state, playerIndex, phase) {
   return false;
 }
 
-function useSkill(state, playerIndex, skill) {
-  if (state.someoneDied) return;
-  state.log.push(`${state.players[playerIndex].id}: ${skill.name}`);
+function consumeSp(state, playerIndex, skill) {
   if (skill.spConsumption > 0) {
     let spConsumptionMultiplier = 1;
     state.players[playerIndex].status.forEach(x => spConsumptionMultiplier *= x.effect.spConsumptionMultiplier || 1);
@@ -230,6 +228,12 @@ function useSkill(state, playerIndex, skill) {
     state.players[playerIndex].status.filter(x => x.removeWhenSpConsumed)
       .forEach(x => removeStatus(state, playerIndex, x.name));
   }
+}
+
+function useSkill(state, playerIndex, skill) {
+  if (state.someoneDied) return;
+  state.log.push(`${state.players[playerIndex].id}: ${skill.name}`);
+  consumeSp(state, playerIndex, skill);
   if (skill.maxTriggerTimes) {
     --skill.remainingUses;
   }
@@ -258,6 +262,7 @@ function useSkill(state, playerIndex, skill) {
     attackedSkill = Utils.randomElement(eligibleAttackedSkills);
     if (attackedSkill) {
       state.log.push(`${state.players[playerIndex ^ 1].id}: ${attackedSkill.name}`);
+      consumeSp(state, playerIndex ^ 1, attackedSkill);
       if (attackedSkill.effect.dodgeAttack) {
         return false;
       }

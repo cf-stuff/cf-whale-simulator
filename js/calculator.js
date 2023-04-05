@@ -94,7 +94,7 @@ const toStats = build => {
   const fighterInfo = CFDB.getFighter(build.fighter.name);
   if (fighterInfo) {
     stats.hp = Math.floor(stats.hp * (1 + (stats.hpPercent + Math.floor(stats.sta / fighterInfo.bmv[2])) / 100));
-    stats.sp = Math.floor((stats.sp + stats.sta / fighterInfo.bmv[2]) * (1 + (stats.spPercent) / 100));
+    stats.sp = Math.floor(stats.sp + stats.sta / fighterInfo.bmv[2] + stats.spPercent);
     stats.minAtk = Math.floor(stats.minAtk * (1 + (stats.atkPercent + stats.str / fighterInfo.bmv[0]) / 100));
     stats.maxAtk = Math.floor(stats.maxAtk * (1 + (stats.atkPercent + stats.str / fighterInfo.bmv[0]) / 100));
     stats.spd = Math.floor(stats.spd + stats.dex / fighterInfo.bmv[1]);

@@ -34,6 +34,7 @@ const App = () => {
     Discord: CF99#9616
     <hr/>
     <h3>Changelog</h3>
+    <p>2023-04-04: 1.5.6 - Updated SP% calculation to be consistent with in game; consume SP for ESW</p>
     <p>2023-04-04: 1.5.5 - Fixed fury gained on every skill activation; skill planner improvements</p>
     <p>2023-04-03: 1.5.4 - Fixed freezing/rebirth and needle/healing burst interactions</p>
     <p>2023-03-31: 1.5.3 - Added skill planner</p>

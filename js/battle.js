@@ -189,12 +189,13 @@ function getAllSkillsEligibleToBeUsed(state, playerIndex, phase) {
 }
 
 function getSkillTriggerProbability(state, playerIndex, skill) {
-  let flatTriggerPercent = 0;
-  if (Utils.equalsAny(skill.phase, SkillPhase.beforeYourAttack, SkillPhase.duringYourAttack, SkillPhase.afterYourAttack, SkillPhase.beforeEnemyAttack)) {
-    flatTriggerPercent += state.players[playerIndex].stats.current.hit * SKILL_TRIGGER_PERCENT_PER_HIT;
+  let hitFlatTriggerPercent = 0;
+  if (Utils.equalsAny(skill.phase, SkillPhase.beforeYourAttack, SkillPhase.duringYourAttack, SkillPhase.afterYourAttack,)) {
+    hitFlatTriggerPercent += state.players[playerIndex].stats.current.hit * SKILL_TRIGGER_PERCENT_PER_HIT;
   }
+  let modifiedBaseFlatTriggerPercent = 0;
   if (skill.effect?.reduceTriggerPercentPerTenSeconds) {
-    flatTriggerPercent -= Math.floor(state.timer / 10000) * skill.effect.reduceTriggerPercentPerTenSeconds;
+    modifiedBaseFlatTriggerPercent -= Math.floor(state.timer / 10000) * skill.effect.reduceTriggerPercentPerTenSeconds;
   }
   let triggerProbabilityMultiplier = 1;
   state.players[playerIndex].status.forEach(x => {
@@ -205,9 +206,9 @@ function getSkillTriggerProbability(state, playerIndex, skill) {
       triggerProbabilityMultiplier *= (100 - x.effect.decreasePetBlockAndMovingIllusionPercent) / 100;
     }
   });
-  const probabilty = (skill.triggerPercent + flatTriggerPercent) * triggerProbabilityMultiplier / 100;
-  if (state.debug) state.log.push(`[DEBUG] Probability forcast: ${state.players[playerIndex].id} ${skill.name} ${probabilty.toFixed(2)}`);
-  return probabilty
+  const probability = ((skill.triggerPercent + modifiedBaseFlatTriggerPercent) * triggerProbabilityMultiplier + hitFlatTriggerPercent) / 100;
+  if (state.debug) state.log.push(`[DEBUG] Probability forecast: ${state.players[playerIndex].id} ${skill.name} ${probability.toFixed(2)}`);
+  return probability
 }
 
 function tryToUseSkillFromPhase(state, playerIndex, phase) {
@@ -286,6 +287,7 @@ function useSkill(state, playerIndex, skill) {
       state.someoneDied = true;
     }
   }
+  if (skill.effect) handlePostOnDeathSkillEffects(state, playerIndex, skill, damage, preventHealing);
   return true;
 }
 
@@ -398,13 +400,6 @@ function handlePostFurySkillEffects(state, playerIndex, skill, damage, preventHe
   if (skill.effect.removePoison) {
     removeStatus(state, playerIndex, Status.poisoned.name);
   }
-  if (skill.effect.combosWithBloodFrenzy) {
-    // call recursively while probabilty check passes
-    if (state.players[playerIndex].status.some(status => status.name === Status.bloodFrenzy.name)) {
-      const comboProbability = getSkillTriggerProbability(state, playerIndex, skill);
-      if (Utils.testProbability(comboProbability)) useSkill(state, playerIndex, skill);
-    }
-  }
   if (skill.effect.resetTriggerTimes) {
     const skillToReset = state.players[playerIndex].skills.find(x => x.name === skill.effect.resetTriggerTimes);
     if (skillToReset) {
@@ -418,6 +413,16 @@ function handlePostFurySkillEffects(state, playerIndex, skill, damage, preventHe
     const skillToIncrease = state.players[playerIndex].skills.find(x => x.name === skill.effect.increaseTriggerPercent);
     if (skillToIncrease) {
       skillToIncrease.triggerProbability += skill.effect.increaseTriggerPercentAmount / 100;
+    }
+  }
+}
+
+function handlePostOnDeathSkillEffects(state, playerIndex, skill) {
+  if (skill.effect.combosWithBloodFrenzy) {
+    // call recursively while probabilty check passes
+    if (state.players[playerIndex].status.some(status => status.name === Status.bloodFrenzy.name)) {
+      const comboProbability = getSkillTriggerProbability(state, playerIndex, skill);
+      if (Utils.testProbability(comboProbability)) useSkill(state, playerIndex, skill);
     }
   }
 }

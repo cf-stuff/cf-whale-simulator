@@ -1,6 +1,6 @@
 import Stats from "./stats.js";
 
-const glyphs = {
+const Glyphs = {
   hit: {
     name: Stats.hit.displayName,
     iconId: 1
@@ -27,4 +27,4 @@ const glyphs = {
   }
 };
 
-export default glyphs;
+export default Glyphs;

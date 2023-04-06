@@ -18,7 +18,6 @@ const getPetSkillLimit = plus => {
 
 const Pet = ({ pet, setPet }) => {
   const [int, setInt] = useState(false);
-  console.log(int)
   const petSkillSelect = [];
 
   const handleMax = () => setPet({

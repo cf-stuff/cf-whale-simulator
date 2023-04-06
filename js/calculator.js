@@ -1,7 +1,5 @@
 import { GearType, PetSkillType } from "./data/categories.js";
 import CFDB from "./data/CFDB.js";
-import Utils from "./utils.js";
-
 
 const addStat = (stat, value, total) => total[stat] += value;
 const addStats = (stats, total) => Object.entries(stats).forEach(([key, value]) => total[key] += value);

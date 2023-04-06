@@ -3,6 +3,8 @@ import toPlayer from "../calculator.js";
 import LZString from "../lib/lz-string.min.js";
 import { submitPaste } from "../pastee.js";
 import Button from "./Button.js";
+import { randomBuild } from "../build.js";
+
 
 const Other = ({ state, setState }) => {
   const textArea = useRef(null);
@@ -24,6 +26,9 @@ const Other = ({ state, setState }) => {
     await navigator.clipboard.writeText(url);
     alert(`Copied url to clipboard: ${url}\nNote: link lasts 2 weeks`);
   }
+  const setRandomBuild = () => {
+    setState(randomBuild());
+  }
   const player = toPlayer(state);
   const secondsPerAttack = Math.ceil(10000 / player.stats.spd) / 10;
   return html`
@@ -44,6 +49,11 @@ const Other = ({ state, setState }) => {
   <div class="row">
     <div class="col">
       <textarea class="form-control" rows="10" ref=${textArea} onClick="${() => textArea.current.select()}">${code}</textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <${Button} onClick=${() => setRandomBuild()}>Ultimate Bravery</${Button}>
     </div>
   </div>
   `;

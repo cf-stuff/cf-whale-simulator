@@ -28,7 +28,7 @@ export const getPlayer = name => {
   return Utils.deepClone(player);
 }
 
-const maxAltar = {
+export const maxAltar = {
   str: 240,
   dex: 240,
   sta: 240,
@@ -46,7 +46,7 @@ const maxAltar = {
   maxAtk: 50
 }
 
-const maxTotemStats = {
+export const maxTotemStats = {
   hit: 120,
   brk: 120,
   crt: 120,

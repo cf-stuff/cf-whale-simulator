@@ -131,7 +131,7 @@ export const reducer = (state, action) => {
         });
         gear.gems.forEach(gem => {
           if (!gem) return;
-          gem.plus = Utils.clamp(gem.plus, 0, CFDB.getGearMaxValue(gearInfo));
+          gem.plus = Utils.clamp(gem.plus, 0, CFDB.getGemMaxLevel(gearInfo));
         });
       });
       return { ...state, gears };

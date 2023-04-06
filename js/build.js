@@ -1,7 +1,7 @@
 import { calculateFighterStats } from "./calculator.js";
 import CFDB from "./data/CFDB.js";
 import ArenaTitle from "./data/arena.js";
-import { FighterSkillType, PetSkillType, SkillType } from "./data/categories.js";
+import { FighterSkillType, GearType, PetSkillType, SkillType } from "./data/categories.js";
 import FighterSkills from "./data/fighterSkills.js";
 import { Gears } from "./data/gears.js";
 import Gems from "./data/gems.js";
@@ -16,13 +16,14 @@ import Utils from "./utils.js";
 // hp, sp, spd, atk, hit, eva, brk, def, crt, res, element
 export function randomBuild(weights) {
   if (!weights) weights = Array(10).fill().map(() => Math.random());
+  const fighter = randomFighter(weights);
   const pet = Utils.randomElement(CFDB.getPets());
   const skillSet = Utils.randomElements(CFDB.getSkills().filter(skill => skill.name !== "Normal Attack"), 7).map(x => x.name);
   const build = {
     name: crypto.randomUUID().substring(0, 13),
     level: 100,
     fighter: {
-      name: randomFighter(weights),
+      name: fighter.name,
       plus: 21,
       evolved: true,
       potentials: {
@@ -41,63 +42,14 @@ export function randomBuild(weights) {
       skills: randomPetSkills(pet),
       evoSkills: randomEvoPetSkills(),
     },
-    gears: [
-      {
-        name: Gears.tyrantCallousSword.name,
-        enhancement: 10,
-        stats: [{ res: 135 }, { def: 125 }, { hit: 120 }, { brk: 150 }],
-        gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.topaz.name, plus: 9 }, { name: Gems.topaz.name, plus: 9 }]
-      },
-      {
-        name: Gears.tyrantBloodthirstyHelmet.name,
-        enhancement: 10,
-        stats: [{ res: 135 }, { def: 125 }, { hit: 120 }, { brk: 150 }],
-        gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
-      },
-      {
-        name: Gears.tyrantBloodthirstyNecklace.name,
-        enhancement: 10,
-        stats: [{ res: 135 }, { def: 125 }, { hit: 120 }, { brk: 150 }],
-        gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
-      },
-      {
-        name: Gears.tyrantAgileBoots.name,
-        enhancement: 10,
-        stats: [{ res: 135 }, { def: 125 }, { hit: 120 }, { brk: 150 }],
-        gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
-      },
-      {
-        name: Gears.tyrantAgileArmor.name,
-        enhancement: 10,
-        stats: [{ sta: 137 }, { def: 130 }, { hit: 124 }, { brk: 156 }],
-        gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
-      },
-      {
-        name: Gears.tyrantCallousGloves.name,
-        enhancement: 10,
-        stats: [{ sta: 137 }, { def: 130 }, { hit: 124 }, { brk: 156 }],
-        gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
-      },
-      {
-        name: Gears.tyrantCallousLeggings.name,
-        enhancement: 10,
-        stats: [{ res: 140 }, { def: 130 }, { hit: 124 }, { brk: 156 }],
-        gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
-      },
-      {
-        name: Gears.viperRing.name,
-        enhancement: 10,
-        stats: [{ sta: 127 }, { def: 110 }, { hit: 108 }, { brk: 132 }],
-        gems: [{ name: Gems.topaz.name, plus: 8 }, { name: Gems.emerald.name, plus: 8 }]
-      }
-    ],
+    gears: CFDB.getGearTypes().map(gearType => randomGear(gearType.name, fighter)),
     phylactery: {
       plus: 20,
       skill: skillSet.pop(),
       stats: Utils.randomElements([Stats.str, Stats.str, Stats.dex, Stats.dex, Stats.sta, Stats.sta], 3).map(x => x.displayName),
-      glyphs: Utils.randomElements(CFDB.getGlyphs(), 4).map(x => ({stat: x.name, plus: 6}))
+      glyphs: Utils.randomElements(CFDB.getGlyphs(), 4).map(x => ({ stat: x.name, plus: 6 }))
     },
-    nexus: Utils.randomElements(CFDB.getNexusStats(), 8).map(x => ({stat: x.name, level: 12})),
+    nexus: Utils.randomElements(CFDB.getNexusStats(), 8).map(x => ({ stat: x.name, level: 12 })),
     altar: maxAltar,
     totem: {
       name: Utils.randomElement(CFDB.getTotems()).name,
@@ -117,7 +69,7 @@ function randomFighter(weights) {
   const scores = fighters.map(fighter => scoreFighter(fighter, weights));
   const sum = Utils.sum(scores);
   const normalisedScores = scores.map(score => score * 100 / sum);
-  return fighters[Utils.randomWeightedIndex(normalisedScores)].name;
+  return fighters[Utils.randomWeightedIndex(normalisedScores)];
 }
 
 function scoreFighter(fighter, weights) {
@@ -142,10 +94,39 @@ function randomPetSkills(pet) {
 }
 
 function randomEvoPetSkills() {
-  const pickPassive = Utils.testProbability(0.5);
-  const pickActive = Utils.testProbability(0.5);
+  const pickPassive = Utils.testProbability(0.8);
+  const pickActive = Utils.testProbability(0.8);
   const stats = Utils.randomElements(CFDB.getPetSkills(PetSkillType.evolvedStat), 4 + pickActive + pickPassive);
   if (pickPassive) stats.push(Utils.randomElement(CFDB.getPetPassives()));
   if (pickActive) stats.push(Utils.randomElement(CFDB.getPetActives()));
   return stats.map(x => x.name);
+}
+
+function randomGear(gearType, fighter) { // todo: pick tyrant that matches lowest bmv (random if tie)
+  // {
+  //   name: Gears.tyrantBloodthirstyHelmet.name,
+  //   enhancement: 10,
+  //   stats: [{ res: 135 }, { def: 125 }, { hit: 120 }, { brk: 150 }],
+  //   gems: [{ name: Gems.topaz.name, plus: 9 }, { name: Gems.emerald.name, plus: 9 }]
+  // },
+  const gear = Utils.randomElement(CFDB.getGears(gearType)
+    .filter(gear => gearType === GearType.weapon.name ? gear.weaponType === fighter.weaponType : true));
+  return {
+    name: gear.name,
+    enhancement: 10,
+    stats: Utils.randomElements(CFDB.getGearStats(), 4)
+      .map((x, i) => ({ [x.name]: CFDB.getGearMaxValue(gear.level, x.name, i === 3) })),
+    gems: randomGems(gear),
+  };
+}
+
+function randomGems(gear) {
+  const gemMaxLevel = CFDB.getGemMaxLevel(gear);
+  if (gear.type === GearType.weapon.name) {
+    return Array(3).fill().map(() => ({ name: Utils.randomElement(CFDB.getNormalGems()).name, plus: gemMaxLevel }));
+  }
+  return [
+    { name: Utils.randomElement(CFDB.getNormalGems()).name, plus: gemMaxLevel },
+    { name: Utils.randomElement(CFDB.getFusionGems()).name, plus: gemMaxLevel }
+  ];
 }

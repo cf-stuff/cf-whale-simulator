@@ -51,8 +51,9 @@ CFDB.getPetCombatSkills = () => [...CFDB.getPetSkills(PetSkillType.skill), ...CF
 
 CFDB.getGearTypes = () => Object.values(GearType);
 CFDB.getGearType = name => CFDB.getGearTypes().find(gearType => gearType.name === name);
-CFDB.getGears = () => Object.values(Gears);
+CFDB.getGears = type => type ? Object.values(Gears).filter(gear => gear.type === type) : Object.values(Gears);
 CFDB.getGear = name => CFDB.getGears().find(gear => gear.name === name);
+CFDB.getGearStats = () => CFDB.getStats().filter(stat => stat !== Stats.furyReversion);
 CFDB.getGearMaxValue = (level, stat, purple = false) => {
   if (purple) {
     if (level >= 96) return GearMaxValues.purple96[stat];
@@ -75,6 +76,7 @@ CFDB.getGems = () => Object.values(Gems);
 CFDB.getGem = name => CFDB.getGems().find(gem => gem.name === name);
 CFDB.getNormalGems = () => CFDB.getGems().filter(gem => gem.type === GemType.normal);
 CFDB.getFusionGems = () => CFDB.getGems().filter(gem => gem.type === GemType.fusion);
+CFDB.getGemMaxLevel = gear => Math.floor((gear.level - 1) / 10);
 
 CFDB.getTotems = () => Object.values(Totems);
 CFDB.getTotem = name => CFDB.getTotems().find(totem => totem.name === name);

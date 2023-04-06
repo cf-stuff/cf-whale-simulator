@@ -15,7 +15,7 @@ const Gear = ({ fighterWeaponType, gear, type, setGear }) => {
   const gearInfo = CFDB.getGear(gear.name);
   const gearType = CFDB.getGearType(type);
 
-  const options = CFDB.getGears().filter(gear => gear.type === type)
+  const options = CFDB.getGears(type)
     .filter(gear => type === GearType.weapon.name ? gear.weaponType === fighterWeaponType : true).map(gear => gear.name);
 
   const gearImage = gear.name === "None" ? getImagePath(ImageType.gearType, gearType.iconId) : getImagePath(ImageType.gear, gearInfo.iconId);
@@ -30,14 +30,14 @@ const Gear = ({ fighterWeaponType, gear, type, setGear }) => {
     const selectedStats = gear.stats.filter(stat => stat).map(stat => Object.keys(stat)[0]);
     for (let i = 0; i < 4; ++i) {
       const [stat, value] = Object.entries(gear.stats[i] || { "None": 0 })[0];
-      const options = CFDB.getStats()
-        .filter(statInfo => statInfo !== Stats.furyReversion && (statInfo.name === stat || !selectedStats.includes(statInfo.name)))
+      const options = CFDB.getGearStats()
+        .filter(statInfo => statInfo.name === stat || !selectedStats.includes(statInfo.name))
         .map(stat => stat.displayName);
       gearStats.push(html`<${GearStat} options=${options} stat=${stat} value=${value} setStat=${handleGearStat(i)} gearLevel=${gearInfo.level} purple=${i === 3} />`);
     }
     const normalGemOptions = normalGems.map(gem => gem.name);
     const fusionGemOptions = fusionGems.map(gem => gem.name);
-    const gemMaxLevel = Math.floor(gearInfo.level / 10);
+    const gemMaxLevel = CFDB.getGemMaxLevel(gearInfo);
     const emptyGem = { name: "None", plus: gemMaxLevel };
     const handleGem = position => gem => {
       gear.gems[position] = (gem.name === "None") ? null : gem;

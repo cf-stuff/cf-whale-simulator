@@ -199,7 +199,7 @@ function getSkillTriggerProbability(state, playerIndex, skill) {
   }
   let triggerProbabilityMultiplier = 1;
   state.players[playerIndex].status.forEach(x => {
-    if (!Utils.equalsAny(skill.phase, SkillPhase.petAttack, SkillPhase.onPetBlock)) {
+    if (!Utils.equalsAny(skill.phase, SkillPhase.petAttack, SkillPhase.onPetBlock, SkillPhase.onDeath) && skill.name !== PetSkills.block.name) {
       triggerProbabilityMultiplier *= x.effect.triggerProbabilityMultiplier || 1;
     }
     if (x.effect.decreasePetBlockAndMovingIllusionPercent && Utils.equalsAny(skill.name, Skills.movingIllusion.name, PetSkills.block.name)) {

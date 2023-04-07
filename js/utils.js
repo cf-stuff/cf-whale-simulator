@@ -2,7 +2,7 @@ const Utils = {};
 
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 Utils.shuffle = array => {
-  let currentIndex = array.length,  randomIndex;
+  let currentIndex = array.length, randomIndex;
 
   // While there remain elements to shuffle.
   while (currentIndex != 0) {
@@ -29,11 +29,13 @@ Utils.equalsAny = (x, ...values) => values.some(value => x === value);
 Utils.includesAny = (superset, subset) => subset.some(x => superset.includes(x));
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-Utils.getRandomIntInclusive = function (min, max) {
+Utils.randomIntInclusive = function (min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+Utils.randomFloat = (min, max) => Math.random() * (max - min) + min;
 
 Utils.removeElement = function (array, value) {
   const index = array.indexOf(value);
@@ -45,15 +47,28 @@ Utils.removeElement = function (array, value) {
 Utils.sum = array => array.reduce((a, b) => a + b, 0);
 
 Utils.randomWeightedIndex = percentages => {
-  let random = Utils.getRandomIntInclusive(1, 100);
+  let random = Utils.randomIntInclusive(1, 100);
   for (let i = 0; i < percentages.length; ++i) {
     if (random <= percentages[i]) {
       return i;
     }
     random -= percentages[i];
   }
-  console.warn(`invalid percentages ${percentages}`);
+  console.warn(`invalid percentages: ${Utils.sum(percentages)}, ${percentages}`);
   return 0;
+}
+
+Utils.randomWeightedIndices = (percentages, n) => {
+  let array = [...percentages];
+  const output = [];
+  for (; n > 0; --n) {
+    let index = 0;
+    do {
+      index = Utils.randomWeightedIndex(array);
+    } while (output.includes(index));
+    output.push(index);
+  }
+  return output;
 }
 
 export default Utils;

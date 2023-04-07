@@ -748,7 +748,7 @@ function parryTest(res) {
 function calculateDamage(state, atatckerIndex, options) {
   const attackerStats = state.players[atatckerIndex].stats.current;
   const defenderStats = state.players[atatckerIndex ^ 1].stats.current;
-  const atk = Utils.getRandomIntInclusive(attackerStats.minAtk, attackerStats.maxAtk);
+  const atk = Utils.randomIntInclusive(attackerStats.minAtk, attackerStats.maxAtk);
   const baseMultiplier = defenderStats.def > attackerStats.brk
     ? (1 / (1 + (defenderStats.def - attackerStats.brk) * (1 / 1500)))
     : (1 + ((attackerStats.brk - defenderStats.def) * (1 / 500)));

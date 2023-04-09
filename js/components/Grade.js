@@ -40,6 +40,11 @@ const Grade = () => {
     setCurrentOpponent(0);
   }
 
+  const reset = () => {
+    setStage(0);
+    scroll({ top: 0, left: 0, behavior: "instant" });
+  }
+
   useEffect(() => {
     if (stage !== 1 || currentOpponent >= opponents.length) return;
     const percentPerOpponent = 100 / opponents.length;
@@ -147,13 +152,13 @@ const Grade = () => {
       </div>
       <div class="col">
         <h2 class="text-center">Total: ${score}% ${getGrade(score)}</h2>
-        <canvas ref=${weightedScoresRef} class="report" style=${{maxHeight: "100px"}} />
+        <canvas ref=${weightedScoresRef} class="report" style=${{ maxHeight: "100px" }} />
         <canvas ref=${winratesRef} class="report" />
       </div>
     </div>
     <div class="row pt-3">
       <div class="col">
-      <${Button} onClick=${() => setStage(0)}>Back</${Button}>
+      <${Button} onClick=${() => reset()}>Back</${Button}>
       </div>
     </div>
     `;

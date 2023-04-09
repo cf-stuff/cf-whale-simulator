@@ -19,8 +19,8 @@ const Grade = () => {
   const [currentOpponent, setCurrentOpponent] = useState(0);
   const [scores, setScores] = useState([]);
   const [progress, setProgress] = useState(0);
-  const canvas1Ref = useRef(null);
-  const canvas2Ref = useRef(null);
+  const winratesRef = useRef(null);
+  const weightedScoresRef = useRef(null);
 
   const options = getSavedKeys();
   options.push(...getBuildNames().filter(name => !options.includes(name)));
@@ -63,7 +63,7 @@ const Grade = () => {
 
   useEffect(() => {
     if (stage === 2) {
-      new Chart(canvas1Ref.current, {
+      new Chart(winratesRef.current, {
         type: "bar",
         data: {
           labels: opponents.map(opponent => opponent.name),
@@ -87,7 +87,7 @@ const Grade = () => {
           }
         }
       });
-      new Chart(canvas2Ref.current, {
+      new Chart(weightedScoresRef.current, {
         type: "bar",
         data: {
           labels: [""],
@@ -147,8 +147,8 @@ const Grade = () => {
       </div>
       <div class="col">
         <h2 class="text-center">Total: ${score}% ${getGrade(score)}</h2>
-        <canvas ref=${canvas1Ref} class="report" />
-        <canvas ref=${canvas2Ref} class="report" style=${{maxHeight: "100px"}} />
+        <canvas ref=${weightedScoresRef} class="report" style=${{maxHeight: "100px"}} />
+        <canvas ref=${winratesRef} class="report" />
       </div>
     </div>
     <div class="row pt-3">

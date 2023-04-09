@@ -11,6 +11,7 @@ import Utils from "../utils.js";
 
 const opponents = getPlayerNames().map(name => getPlayer(name));
 const weights = opponents.map(o => Number(o.name.substring(o.name.indexOf("(") + 1, o.name.indexOf("%"))) / 100);
+const backgroundColours = ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"];
 
 const Grade = () => {
   const [stage, setStage] = useState(0);
@@ -18,7 +19,8 @@ const Grade = () => {
   const [currentOpponent, setCurrentOpponent] = useState(0);
   const [scores, setScores] = useState([]);
   const [progress, setProgress] = useState(0);
-  const canvasRef = useRef(null);
+  const canvas1Ref = useRef(null);
+  const canvas2Ref = useRef(null);
 
   const options = getSavedKeys();
   options.push(...getBuildNames().filter(name => !options.includes(name)));
@@ -43,8 +45,8 @@ const Grade = () => {
     const percentPerOpponent = 100 / opponents.length;
     const o = opponents[currentOpponent];
     console.log(`${player.name} VS ${o.name}`);
-    const winsOnLeft = handleBattle([player], [o], 20, 10);
-    const winsOnRight = handleBattle([o], [player], 20, 10);
+    const winsOnLeft = handleBattle([player], [o], 200);
+    const winsOnRight = handleBattle([o], [player], 200);
     const wins = [winsOnLeft[0] + winsOnRight[1], winsOnLeft[1] + winsOnRight[0]];
     console.log(`Score: ${wins[0] / (wins[0] + wins[1])}`);
     setProgress(progress + percentPerOpponent);
@@ -61,14 +63,13 @@ const Grade = () => {
 
   useEffect(() => {
     if (stage === 2) {
-      const canvas = canvasRef.current;
-      new Chart(canvas, {
+      new Chart(canvas1Ref.current, {
         type: "bar",
         data: {
-          labels: opponents.map(o => o.name),
+          labels: opponents.map(opponent => opponent.name),
           datasets: [{
             data: scores.map((score, i) => Math.round(score * 1000 / weights[i]) / 10),
-            backgroundColor: ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"]
+            backgroundColor: backgroundColours
           }]
         },
         options: {
@@ -86,21 +87,45 @@ const Grade = () => {
           }
         }
       });
+      new Chart(canvas2Ref.current, {
+        type: "bar",
+        data: {
+          labels: [""],
+          datasets: opponents.map((opponent, i) => ({
+            label: opponent.name,
+            data: [scores[i] * 100],
+            backgroundColor: backgroundColours[i % 7]
+          }))
+        },
+        options: {
+          indexAxis: "y",
+          plugins: {
+            legend: { display: false },
+            title: {
+              display: true,
+              text: "Weighted Scores (%)"
+            }
+          },
+          scales: {
+            x: {
+              stacked: true
+            },
+            y: {
+              stacked: true
+            }
+          }
+        }
+      });
     }
   }, [stage]);
 
-  const handleBattle = (left, right, rounds, batches = 1) => {
-    const totalWins = [0, 0];
+  const handleBattle = (left, right, rounds) => {
+    const wins = [0, 0];
     for (let i = 0; i < rounds; ++i) {
       const battleSim = simulateBattle(left, right);
-      totalWins[battleSim.winner] += 1;
+      wins[battleSim.winner] += 1;
     }
-    if (--batches > 0) {
-      const wins = handleBattle(left, right, rounds, batches);
-      totalWins[0] += wins[0];
-      totalWins[1] += wins[1];
-    }
-    return totalWins;
+    return wins;
   }
 
   const getGrade = score => {
@@ -122,7 +147,8 @@ const Grade = () => {
       </div>
       <div class="col">
         <h2 class="text-center">Total: ${score}% ${getGrade(score)}</h2>
-        <canvas ref=${canvasRef} id="report"/>
+        <canvas ref=${canvas1Ref} class="report" />
+        <canvas ref=${canvas2Ref} class="report" style=${{maxHeight: "100px"}} />
       </div>
     </div>
     <div class="row pt-3">

@@ -10,6 +10,7 @@ import Carousel from "./Carousel.js";
 import Utils from "../utils.js";
 
 const opponents = getPlayerNames().map(name => getPlayer(name));
+const weights = opponents.map(o => Number(o.name.substring(o.name.indexOf("(") + 1, o.name.indexOf("%"))) / 100);
 
 const Grade = () => {
   const [stage, setStage] = useState(0);
@@ -41,7 +42,6 @@ const Grade = () => {
     if (stage !== 1 || currentOpponent >= opponents.length) return;
     const percentPerOpponent = 100 / opponents.length;
     const o = opponents[currentOpponent];
-    const weight = Number(o.name.substring(o.name.indexOf("(") + 1, o.name.indexOf("%"))) / 100;
     console.log(`${player.name} VS ${o.name}`);
     const winsOnLeft = handleBattle([player], [o], 20, 10);
     const winsOnRight = handleBattle([o], [player], 20, 10);
@@ -49,7 +49,7 @@ const Grade = () => {
     console.log(`Score: ${wins[0] / (wins[0] + wins[1])}`);
     setProgress(progress + percentPerOpponent);
     setCurrentOpponent(currentOpponent + 1);
-    const weightedScore = (wins[0] / (wins[0] + wins[1])) * weight;
+    const weightedScore = (wins[0] / (wins[0] + wins[1])) * weights[currentOpponent];
     setScores(scores => {
       scores[currentOpponent] = weightedScore;
       return scores;
@@ -63,13 +63,27 @@ const Grade = () => {
     if (stage === 2) {
       const canvas = canvasRef.current;
       new Chart(canvas, {
-        type: "doughnut",
+        type: "bar",
         data: {
           labels: opponents.map(o => o.name),
           datasets: [{
-            data: scores.map(score => Math.round(score * 1000) / 10),
+            data: scores.map((score, i) => Math.round(score * 1000 / weights[i]) / 10),
             backgroundColor: ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"]
           }]
+        },
+        options: {
+          plugins: {
+            legend: { display: false },
+            title: {
+              display: true,
+              text: "Record vs Builds (%)"
+            }
+          },
+          scales: {
+            y: {
+              max: 100
+            }
+          }
         }
       });
     }

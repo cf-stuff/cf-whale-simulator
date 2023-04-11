@@ -669,6 +669,25 @@ export const Gears = {
       fighter: Fighters.chrome.name,
       stat: { def: 80 }
     }
+  },
+  noctisKatana: {
+    name: "Noctis Katana",
+    iconId: 4086,
+    level: 86,
+    type: GearType.weapon.name,
+    weaponType: WeaponType.sword,
+    stats: {
+      minAtk: 269,
+      maxAtk: 348,
+    },
+    statsPerEnhance: {
+      minAtk: 20,
+      maxAtk: 20
+    },
+    exclusiveStat: {
+      fighter: Fighters.toadmeister.name,
+      stat: { crt: 80 }
+    }
   }
 };
 

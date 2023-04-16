@@ -1,14 +1,14 @@
 import { getImagePath, ImageType } from "./image.js";
 import CFDB from "./data/CFDB.js";
 
-export async function createCanvas(player) {
+export async function createCanvas(player, bg = 11) {
   const canvas = document.createElement("canvas");
   canvas.width = 512;
   canvas.height = 720;
   const ctx = canvas.getContext("2d");
   const promises = [];
-
-  await asyncDraw(ctx, "img/display/background.png", 0, 0);
+  await asyncDraw(ctx, `img/display/background${bg}.png`, 0, 0);
+  await asyncDraw(ctx, "img/display/hud.png", 5, 5);
 
   if (!player) return canvas;
 

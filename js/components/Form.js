@@ -21,7 +21,7 @@ const tabs = [
   ["Altar", "Totem", "Arena", "Skills", "Other"]
 ];
 
-const Form = ({ state, dispatch }) => {
+const Form = ({ state, dispatch, bg, setBg }) => {
   const [activeTab, setActiveTab] = useState(tabs[0][0]);
 
   const createDispatch = type => payload => dispatch({ type, payload });
@@ -63,7 +63,7 @@ const Form = ({ state, dispatch }) => {
     ${activeTab === "Skills" && html`<${Skills} skills=${state.skills} setSkills=${createDispatch(ActionType.skills)}
     expertise=${state.expertise} setExpertise=${createDispatch(ActionType.expertise)}
     resistance=${state.resistance} setResistance=${createDispatch(ActionType.resistance)} />`}
-    ${activeTab === "Other" && html`<${Other} state=${state} setState=${createDispatch(ActionType.import)} />`}
+    ${activeTab === "Other" && html`<${Other} state=${state} setState=${createDispatch(ActionType.import)} bg=${bg} setBg=${setBg} />`}
   </div>
   `;
 }

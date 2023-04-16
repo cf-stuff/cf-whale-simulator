@@ -4,9 +4,10 @@ import LZString from "../lib/lz-string.min.js";
 import { submitPaste } from "../pastee.js";
 import Button from "./Button.js";
 import { randomBuild } from "../build.js";
+import SelectInput from "./SelectInput.js";
 
 
-const Other = ({ state, setState }) => {
+const Other = ({ state, setState, bg, setBg }) => {
   const textArea = useRef(null);
   const code = LZString.compressToBase64(JSON.stringify(state));
   const importFromTextArea = () => {
@@ -33,7 +34,15 @@ const Other = ({ state, setState }) => {
   const secondsPerAttack = Math.ceil(10000 / player.stats.spd) / 10;
   return html`
   <div class="row">
-    <span>STR: ${player.stats.str}, DEX: ${player.stats.dex}, STA: ${player.stats.sta}</span>
+    <div class="col">
+      <span>STR: ${player.stats.str}, DEX: ${player.stats.dex}, STA: ${player.stats.sta}</span>
+    </div>
+    <div class="col-auto">
+      <div class="input-group">
+        <span class="input-group-text">Background</span>
+        <${SelectInput} value=${bg} options=${Array(11).fill().map((_, i) => i + 1)} onChange=${e => setBg(e.target.value)} includeNone=${false}/>
+      </div>
+    </div>
   </div>
   <div class="row">
     <span>SPD TIER: <b>${Math.ceil(1000 / secondsPerAttack)}</b><br/>SECONDS/ATTACK: <b>${secondsPerAttack}</b></span>

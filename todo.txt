@@ -5,21 +5,30 @@ phase 4: backend db to store replays and share via link
 
 possible ideas
 
-skill planner for team
-
 side: self play ai?
+Array of weights for each stat
+Array used as a seed to generate random build OR random seed to generate deterministic build
+For mutation, modify the weights
 e.g. generate 100 random builds -> round robin best of 100
 fitness
 win: 2
 draw: 1
 loss: 0
-some measure of stat quality
+fitness function -> NN?
 normalise score -> use as probability for pool selection
 
 ---
 todo for phase 1
-evo wine / shield wall
+net eva multiplier
 can mi/dodge then counterattack
+
+arena icons
+
+new branch for:
+localStorage => indexedDB
+fix typos
+state to store ID instead of name - fighter, pet, gears, gems, skill, totem, pro/res, arena title
+migration script to convert all saved builds into indexedDB
 
 ---
 

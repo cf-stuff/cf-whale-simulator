@@ -1,4 +1,5 @@
 export const ImageType = {
+  arena: "arena",
   fighter: "fighter",
   fighterSkill: "fighterSkill",
   gear: "gear",
@@ -16,6 +17,8 @@ export const ImageType = {
 export const getImagePath = (type, id, intVersion = false) => {
   const basePath = "img/";
   switch (type) {
+    case ImageType.arena:
+      return basePath + `arena/r-${id}.png`;
     case ImageType.fighter:
       return basePath + `coatIcon/coat_icon_${id}.png`;
     case ImageType.fighterSkill:

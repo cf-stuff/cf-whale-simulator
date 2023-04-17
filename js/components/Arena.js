@@ -20,7 +20,7 @@ const Arena = ({ arenaTitle, setArenaTitle }) => {
       <p>HP +${titleStats.hpPercent}%<br/>HIT +${titleStats.hit}</p>
     </div>
     <div class="col-auto">
-      <img src=${getImagePath(ImageType.arena, titleInfo.id)} />
+      <img src=${getImagePath(ImageType.arena, titleInfo.id)} style="margin-top: -8px;" />
     </div>
   </div>
   `;

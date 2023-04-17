@@ -109,6 +109,8 @@ function prepareSkills(state) {
       }
       if (player.mastery.toLowerCase() === skill.type?.toLowerCase()) {
         skill.triggerPercent += 5;
+        // temp workaround
+        if (skill.name === Skills.rebirth.name) skill.triggerPercent += 5;
       }
       if (skill.maxTriggerTimes && CFDB.getSkill(skill.name)) {
         skill.remainingUses = skill.maxTriggerTimes;
@@ -282,6 +284,7 @@ function useSkill(state, playerIndex, skill) {
   if (skill.effect) handlePreFurySkillEffects(state, playerIndex, skill);
   if (skill.damage) gainFury(state, playerIndex ^ 1);
   if (skill.effect) handlePostFurySkillEffects(state, playerIndex, skill, damage, preventHealing);
+  if (skill.secondaryEffect) handleSecondaryEffects(state, playerIndex, skill);
   if (skill.damage && state.players[playerIndex ^ 1].stats.current.hp <= 0) {
     if (!tryToUseSkillFromPhase(state, playerIndex ^ 1, SkillPhase.onDeath)) {
       state.someoneDied = true;
@@ -347,7 +350,7 @@ function handleSkillDamage(state, playerIndex, skill, attackedSkill) {
 }
 
 function handlePreFurySkillEffects(state, playerIndex, skill) {
-  if (skill.effect.status) {
+  if (skill.effect.status && !skill.effect.applyAfterFury) {
     let targetIndices = [];
     if (skill.effect.target === SkillTarget.both) {
       targetIndices = [0, 1];
@@ -362,6 +365,18 @@ function handlePreFurySkillEffects(state, playerIndex, skill) {
 }
 
 function handlePostFurySkillEffects(state, playerIndex, skill, damage, preventHealing) {
+  if (skill.effect.status && skill.effect.applyAfterFury) {
+    let targetIndices = [];
+    if (skill.effect.target === SkillTarget.both) {
+      targetIndices = [0, 1];
+    } else {
+      targetIndices.push(skill.effect.target ^ playerIndex);
+    }
+    targetIndices.forEach(index => addStatus(state, index, skill.effect.status, {
+      expertise: skill.useExpertiseEffect,
+      effectIncrease: skill.effectIncrease
+    }));
+  }
   if (skill.effect.removeThunderGod) {
     removeStatus(state, playerIndex, Status.thunderGod.name);
   }
@@ -417,6 +432,21 @@ function handlePostFurySkillEffects(state, playerIndex, skill, damage, preventHe
   }
 }
 
+function handleSecondaryEffects(state, playerIndex, skill) {
+  if (skill.secondaryEffect.status) {
+    let targetIndices = [];
+    if (skill.secondaryEffect.target === SkillTarget.both) {
+      targetIndices = [0, 1];
+    } else {
+      targetIndices.push(skill.secondaryEffect.target ^ playerIndex);
+    }
+    targetIndices.forEach(index => addStatus(state, index, skill.secondaryEffect.status, {
+      expertise: skill.useExpertiseEffect,
+      effectIncrease: skill.effectIncrease
+    }));
+  }
+}
+
 function handlePostOnDeathSkillEffects(state, playerIndex, skill) {
   if (skill.effect.combosWithBloodFrenzy) {
     // call recursively while probabilty check passes
@@ -441,20 +471,21 @@ function getAtkMultiplierFromStatusEffects(state, playerIndex) {
   return atkMultiplier;
 }
 
-function addStatus(state, playerIndex, name, options) {
+function addStatus(state, playerIndex, name, options = {}) {
   const existingStatus = state.players[playerIndex].status.find(x => x.name === name);
   if (existingStatus) {
     if (existingStatus.stackable) {
       // add stack to existing status
       existingStatus.stacks += 1;
       state.log.push(`${state.players[playerIndex].id}: gained a stack of ${name}, total: ${existingStatus.stacks}`);
+      createStatus(state, playerIndex, name, options);
       return;
     } else {
       removeStatus(state, playerIndex, name);
     }
   }
-  state.players[playerIndex].status.push(createStatus(state, playerIndex, name, options));
   state.log.push(`${state.players[playerIndex].id}: gained status ${name}`);
+  state.players[playerIndex].status.push(createStatus(state, playerIndex, name, options));
 }
 
 function createStatus(state, playerIndex, name, options) {
@@ -492,7 +523,19 @@ function createStatus(state, playerIndex, name, options) {
     status.betrayalPercent = 0;
   }
   if (status.effect.increaseCrt) {
-    state.players[playerIndex].stats.current.crt += status.effect.increaseCrt;
+    updateStat(state, playerIndex, Stats.crt.name, status.effect.increaseCrt, name);
+  }
+  if (status.effect.decreaseCrt) {
+    updateStat(state, playerIndex, Stats.crt.name, -status.effect.decreaseCrt, name);
+  }
+  if (status.effect.decreaseEva) {
+    updateStat(state, playerIndex, Stats.eva.name, -status.effect.decreaseEva, name);
+  }
+  if (status.effect.decreaseBrk) {
+    updateStat(state, playerIndex, Stats.brk.name, -status.effect.decreaseBrk, name);
+  }
+  if (status.effect.decreaseDef) {
+    updateStat(state, playerIndex, Stats.def.name, -status.effect.decreaseDef, name);
   }
   if (status.removeAfterDuration) {
     let statusDuration = status.removeAfterDuration;
@@ -513,7 +556,7 @@ function removeStatus(state, playerIndex, name) {
   if (indexOfStatus >= 0) {
     const [removedStatus] = state.players[playerIndex].status.splice(indexOfStatus, 1);
     if (removedStatus.effect.increaseCrt) {
-      state.players[playerIndex].stats.current.crt -= removedStatus.effect.increaseCrt;
+      updateStat(state, playerIndex, Stats.crt.name, -removedStatus.effect.increaseCrt, removedStatus.name);
     }
     state.log.push(`${state.players[playerIndex].id}: lost status ${name}`);
   }
@@ -571,7 +614,7 @@ function handleStatusBetrayal(state) {
   let betrayed = [];
   state.players.forEach(player => player.status.forEach(x => {
     if (!betrayed.includes(x.name) && x.betrayalPercent && Utils.testProbability(x.betrayalPercent / 100)) {
-      if (state.debug) state.log.push("[DEBUG] top 10 anime betrayals");
+      state.log.push("Top 10 anime betrayals");
       removeStatus(state, player.index, x.name);
       state.players[player.index ^ 1].status.push(x);
       state.log.push(`${state.players[player.index ^ 1].id}: gained status ${x.name}`);
@@ -670,8 +713,9 @@ function dealDamage(state, playerIndex, amount, options) {
 function updateStat(state, playerIndex, stat, amount, source) {
   const stats = state.players[playerIndex].stats;
   stats.current[stat] += amount;
+  stats.current[stat] = Math.max(0, stats.current[stat]);
   if (stat === Stats.hp.name || stat === Stats.sp.name) {
-    stats.current[stat] = Utils.clamp(stats.current[stat], 0, stats.initial[stat]);
+    stats.current[stat] = Math.min(stats.current[stat], stats.initial[stat]);
   }
   state.log.push(`${state.players[playerIndex].id}: ${amount} ${stat} from ${source}, ${stats.current[stat]}/${stats.initial[stat]}`);
 }
@@ -682,7 +726,7 @@ function gainFury(state, playerIndex, overrideAmount) {
   if (state.players[playerIndex].fury > FURY_BURST_THRESHOLD) state.players[playerIndex].fury = FURY_BURST_THRESHOLD;
   state.log.push(`${state.players[playerIndex].id}: gained ${furyPoints} fury, ${state.players[playerIndex].fury}/${FURY_BURST_THRESHOLD}`);
   if (state.players[playerIndex].fury >= FURY_BURST_THRESHOLD) {
-    if (getDebuffs(state, playerIndex).filter(x => !x.doesNotTriggerFuryBurst).length > 0) {
+    if (getDebuffs(state, playerIndex).length > 0) {
       state.players[playerIndex].furyBursts += 1;
       state.log.push(`${state.players[playerIndex].id}: fury burst`);
       getAllSkillsEligibleToBeUsed(state, playerIndex, SkillPhase.onFuryBurst).forEach(skill => useSkill(state, playerIndex, skill));
@@ -732,7 +776,7 @@ function isFullHp(state, playerIndex) {
 
 function evaTest(state, playerIndex) {
   let evaMultiplier = 1;
-  const eva = state.players[playerIndex].stats.current.eva * evaMultiplier;
+  const eva = state.players[playerIndex].stats.current.eva * evaMultiplier; //todo multiplier??????
   if (state.players[playerIndex ^ 1].stats.current.hit > eva) return false;
   return Utils.testProbability((eva - state.players[playerIndex ^ 1].stats.current.hit) * DODGE_PERCENT_PER_EVA / 100);
 }

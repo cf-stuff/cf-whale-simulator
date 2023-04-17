@@ -790,7 +790,7 @@ const Skills = {
       reduceTriggerPercentPerTenSeconds: 5
     },
     phase: SkillPhase.onDeath,
-    triggerPercent: 90,
+    triggerPercent: 80,
     spConsumption: 25,
     notAnAction: true,
     getNormalVersion: function () {

@@ -34,6 +34,7 @@ const App = () => {
     Discord: CF99#9616
     <hr/>
     <h3>Changelog</h3>
+    <p>2023-04-17: 1.7.0 - Implemented shield wall burst and strong wine stat decreases; Rebirth chance down to 80% (90% with mastery)</p>
     <p>2023-04-07: 1.6.1 - Rebirth and pet block no are longer affected by frenzy</p>
     <p>2023-04-05: 1.6.0 - Increased crit probability; adjusted skill proc formula; fixed fire spam not triggering revive</p>
     <p>2023-04-05: 1.5.6 - Updated SP% calculation to be consistent with in game; consume SP for ESW</p>

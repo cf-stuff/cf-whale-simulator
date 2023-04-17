@@ -143,8 +143,12 @@ const FighterSkills = {
     effect: {
       gainPercentHp: 15,
       gainPercentSp: 15,
-      status: Status.wine.name, // todo -200 hit and eva
+      status: Status.wine.name,
       target: SkillTarget.both
+    },
+    secondaryEffect: {
+      status: Status.clumsy.name,
+      target: SkillTarget.enemy
     },
     phase: SkillPhase.onFuryBurst,
     numberOfFuryBursts: 2,
@@ -159,8 +163,12 @@ const FighterSkills = {
     effect: {
       gainPercentHp: 15,
       gainPercentSp: 15,
-      status: Status.shieldWall.name, // todo -200 brk and def
+      status: Status.shieldWall.name,
       target: SkillTarget.self
+    },
+    secondaryEffect: {
+      status: Status.feeble.name,
+      target: SkillTarget.enemy
     },
     phase: SkillPhase.onFuryBurst,
     numberOfFuryBursts: 2,

@@ -321,7 +321,8 @@ const PetSkills = {
     },
     effect: {
       status: Status.frozen.name,
-      target: SkillTarget.enemy
+      target: SkillTarget.enemy,
+      applyAfterFury: true
     },
     phase: SkillPhase.petAttack,
     triggerPercent: 10,
@@ -431,7 +432,8 @@ const PetSkills = {
     },
     effect: {
       status: Status.frozen.name,
-      target: SkillTarget.enemy
+      target: SkillTarget.enemy,
+      applyAfterFury: true
     },
     phase: SkillPhase.petAttack,
     triggerPercent: 10,

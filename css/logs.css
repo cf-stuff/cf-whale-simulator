@@ -5,3 +5,7 @@
   flex-direction: column;
   overflow-y: scroll;
 }
+
+.logs span:nth-child(2n) {
+  background-color: rgb(235, 235, 235);
+}

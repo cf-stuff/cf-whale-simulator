@@ -120,7 +120,6 @@ const Status = {
       removeIgnitedOnInflict: true
     },
     removeWhenAttacked: true,
-    doesNotTriggerFuryBurst: true
   },
   ignited: {
     name: "Ignited",
@@ -292,7 +291,25 @@ const Status = {
     effect: {
       decreasePetBlockAndMovingIllusionPercent: 4
     },
-  }
+  },
+  feeble: {
+    name: "Feeble",
+    type: StatusType.other,
+    effect: {
+      decreaseBrk: 200,
+      decreaseDef: 200
+    },
+    stackable: true,
+  },
+  clumsy: {
+    name: "Clumsy",
+    type: StatusType.other,
+    effect: {
+      decreaseHit: 200,
+      decreaseEva: 200
+    },
+    stackable: true,
+  },
 };
 
 export default Status;

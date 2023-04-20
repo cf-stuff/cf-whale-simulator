@@ -6,6 +6,7 @@ import Button from "./Button.js";
 import { randomBuild } from "../build.js";
 import SelectInput from "./SelectInput.js";
 
+const NUMBER_OF_BACKGROUNDS = 14;
 
 const Other = ({ state, setState, bg, setBg }) => {
   const textArea = useRef(null);
@@ -40,7 +41,8 @@ const Other = ({ state, setState, bg, setBg }) => {
     <div class="col-auto">
       <div class="input-group">
         <span class="input-group-text">Background</span>
-        <${SelectInput} value=${bg} options=${Array(11).fill().map((_, i) => i + 1)} onChange=${e => setBg(e.target.value)} includeNone=${false}/>
+        <${SelectInput} value=${bg} options=${Array(NUMBER_OF_BACKGROUNDS).fill().map((_, i) => i + 1)}
+        onChange=${e => setBg(e.target.value)} includeNone=${false}/>
       </div>
     </div>
   </div>

@@ -136,7 +136,7 @@ const Fighters = {
     evoName: "Nami",
     iconId: 95,
     weaponType: WeaponType.cudgel,
-    isv: [34, 28, 24],
+    isv: [34, 38, 24],
     growthRate: [1.75, 1.9, 1.55],
     bmv: [10, 8, 16],
     mastery: SkillType.thunder.name

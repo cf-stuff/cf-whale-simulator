@@ -184,8 +184,7 @@ function getAllSkillsEligibleToBeUsed(state, playerIndex, phase) {
     .filter(skill => skill.maxTriggerTimes ? skill.remainingUses > 0 : true)
     .filter(skill => skill.effect?.removeRandomDebuff ? getDebuffs(state, playerIndex).length > 0 : true)
     .filter(skill => skill.cantUseIfThunderGodIsActive ? !isThunderGodActive(state) : true)
-    .filter(skill => skill.canUseIfHpNotFull ? !isFullHp(state, playerIndex) : true)
-    .filter(skill => skill.canUseIfPoisoned ? state.players[playerIndex].status.some(status => status.name === Status.poisoned.name) : true)
+    .filter(skill => skill.canUseIfHpNotFullOrPoisoned ? isHpNotFullOrPoisoned(state, playerIndex) : true)
     .filter(skill => skill.numberOfFuryBursts ? state.players[playerIndex].furyBursts % skill.numberOfFuryBursts === 0 : true)
     .filter(skill => Utils.testProbability(getSkillTriggerProbability(state, playerIndex, skill)));
 }
@@ -392,7 +391,7 @@ function handlePostFurySkillEffects(state, playerIndex, skill, damage, preventHe
   if (skill.effect.increaseSpd) {
     updateStat(state, playerIndex, Stats.spd.name, skill.effect.increaseSpd, skill.name);
   }
-  if (skill.effect.percentDamageHealedOnHit && state.players[playerIndex].stats.current.hp > 0) {
+if (skill.effect.percentDamageHealedOnHit && state.players[playerIndex].stats.current.hp > 0) {
     const healAmount = preventHealing ? 0 : Math.floor(damage * skill.effect.percentDamageHealedOnHit / 100);
     updateStat(state, playerIndex, Stats.hp.name, healAmount, skill.name);
   }
@@ -455,7 +454,7 @@ function handlePostOnDeathSkillEffects(state, playerIndex, skill) {
       if (Utils.testProbability(comboProbability)) useSkill(state, playerIndex, skill);
     }
   }
-}
+  }
 
 function getAtkMultiplierFromStatusEffects(state, playerIndex) {
   let atkMultiplier = 1;
@@ -772,6 +771,10 @@ function isThunderGodActive(state) {
 
 function isFullHp(state, playerIndex) {
   return state.players[playerIndex].stats.initial.hp === state.players[playerIndex].stats.current.hp;
+}
+
+function isHpNotFullOrPoisoned(state, playerIndex) {
+  return !isFullHp(state, playerIndex) || state.players[playerIndex].status.some(status => status.name === Status.poisoned.name);
 }
 
 function evaTest(state, playerIndex) {

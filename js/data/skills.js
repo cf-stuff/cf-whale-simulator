@@ -768,8 +768,7 @@ const Skills = {
     },
     phase: SkillPhase.duringEnemyAttack,
     triggerPercent: 25,
-    canUseIfHpNotFull: true,
-    canUseIfPoisoned: true,
+    canUseIfHpNotFullOrPoisoned: true,
     maxTriggerTimes: 3,
     spConsumption: 6,
     getNormalVersion: function () {

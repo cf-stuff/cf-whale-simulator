@@ -22,8 +22,6 @@ todo for phase 1
 net eva multiplier
 can mi/dodge then counterattack
 
-arena icons
-
 new branch for:
 localStorage => indexedDB
 fix typos
@@ -40,6 +38,13 @@ check how ps does it
 https://github.com/smogon/pokemon-showdown
 https://replay.pokemonshowdown.com/oumonotype-82345404.json
 https://replay.pokemonshowdown.com/oumonotype-82345404.log
+
+animations needed
+skills
+most status effects
+dodge / parry
+win / lose
+generic avatar since can't get actual sprites
 
 replay format
 

@@ -19,7 +19,6 @@ normalise score -> use as probability for pool selection
 
 ---
 todo for phase 1
-net eva multiplier
 can mi/dodge then counterattack
 
 arena icons

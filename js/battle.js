@@ -779,7 +779,8 @@ function isHpNotFullOrPoisoned(state, playerIndex) {
 
 function evaTest(state, playerIndex) {
   let evaMultiplier = 1;
-  const eva = state.players[playerIndex].stats.current.eva * evaMultiplier; //todo multiplier??????
+  state.players[playerIndex].status.forEach(x => evaMultiplier *= x.effect.evaMultiplier || 1);
+  const eva = state.players[playerIndex].stats.current.eva * evaMultiplier;
   if (state.players[playerIndex ^ 1].stats.current.hit > eva) return false;
   return Utils.testProbability((eva - state.players[playerIndex ^ 1].stats.current.hit) * DODGE_PERCENT_PER_EVA / 100);
 }

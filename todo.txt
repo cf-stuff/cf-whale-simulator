@@ -63,7 +63,7 @@ explosive blow explosiveblow.png
 gallop gallop.png
 counter (no sprite)
 bomb bomb.png
-poison
+poison poison.png
 time bomb timebomb.png
 wine wine.png
 mask mask.png
@@ -93,7 +93,7 @@ frozen ice.png
 ignited ignited.png
 net net.png
 stunned (no sprite, character shakes size to size)
-rooted thorns.png
+rooted rooted.png
 paralyzed paralyzed.png
 aotg aotg-cloud.png aotg-lightning.png
 poisoned
@@ -115,8 +115,9 @@ numbers / stat changes:
 - sp blue
 
 todo
-skill22 yanwu1-1 is poison cloud but not green
+poisoned can't find sprite
 skill26 cleanse
+skill26-2 fury burst
 
 replay format
 

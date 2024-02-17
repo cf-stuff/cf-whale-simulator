@@ -40,94 +40,99 @@ https://replay.pokemonshowdown.com/oumonotype-82345404.json
 https://replay.pokemonshowdown.com/oumonotype-82345404.log
 
 animations needed
-skills
-most status effects
+skills:
+bacteria bacteria.png
+ice (no sprite)
+cleanse
+bubble (no animation)
+meteorite firemeteorite.png
+fire shield fireshield.png
+frenzy bloodfrenzy.png
+bell bell.png
+net net.png
+quake quake.png
+thorns thorns.png
+lightning ball lightningball.png in an arc
+tbox lightningball.png in straight line
+aotg (no animation, it just appears)
+storm box stormboxing.png
+fast move fastmove.png
+violence violence.png
+hammer hammer.png
+explosive blow explosiveblow.png
+gallop gallop.png
+counter (no sprite)
+bomb bomb.png
+poison
+time bomb timebomb.png
+wine wine.png
+mask mask.png
+shackles shackles.png
+esw esw.png
+barb barb.png
+assassinate assassinate.png
+curse curse.png
+mi (no sprite)
+shield wall (no animation)
+needle needle.png
+rejuv rejuv.png
+revive revive-wing.png
+
+pet block
+pet attack
+
+status:
+bubble bubble.png
+frenzy frenzy.png
+bell bell.png
+violent violent.png
+horns horns.png
+shield wall shieldwall.png
+sick sick.png
+frozen ice.png
+ignited ignited.png
+net net.png
+stunned (no sprite, character shakes size to size)
+rooted thorns.png
+paralyzed paralyzed.png
+aotg aotg-cloud.png aotg-lightning.png
+poisoned
+time bomb timebomb.png timebomb.explode.png
+drunk drunk.png
+weakened mask.png
+silenced chains.png
+cursed cursed.png
+dizzy (same as stunned)
+
 dodge / parry
-win / lose
+fury burst
+win / dead
 generic avatar since can't get actual sprites
+numbers / stat changes:
+- crt dmg red
+- heal blue
+- normal dmg yellow
+- sp blue
+
+todo
+skill22 yanwu1-1 is poison cloud but not green
+skill26 cleanse
 
 replay format
 
-{
-  timestamp // not used in animation, probably useful for logging purposes
-  left: [players], // for now size will be 1
-  right: [players],
-  battles: [
-    ...
-  ]
-}
+|player|id|<player json>
+id = starts from 0 and increments, even = left, odd = right
 
-battle format
-{
-  left: 1, // id of first left player
-  right: 2, // id of first right player
-  events: [ // array of events, can undo and redo
-    {
-      owner: 2, // id of player
-      type: "skill"
-      skill: "barb"
-      
-    },
-    {
-      owner: 1,
-      type: "skill",
-      skill: "frenzy"
-    },
-    {
-      owner: 1,
-      type: "normal attack",
-      // frenzy dmage and attack damage on enemy
-    },
-    {
-      owner: 1,
-      type: "skill",
-      skill: "tbox",
-      damage: 500
-    }
-  ]
-}
+|vs|<L id>|<R id>
 
-
-event format
-{
-  id: 1,
-  type: "use skill"
-  playerId: 1
-  skill: barb
-}
-{
-  id: 1,
-  type: "use skill"
-  playerId: 1
-  skill: "tbox"
-}
-{
-  id: 2,
-  type: "damage",
-  playerId: 1,
-  source: poison
-  amount: 100
-  hp: 2000
-}
-{
-  id: 3,
-  type: "heal",
-
-}
-
-alternate event format
-{player}|status|add|{status}
-{player}|skill|{skill name}
-{player}|hp|{amount}|{resulting amount}
-{player}|sp|{amount}|{resulting amount}
-
-
-e.g.
-0|skill|barbarism
-0|status|add|horns
-0|skill|tbox|crit|parry
-0|sp|-5|275
-1|hp|-100|10000
-1|status|add|tbox
-0|skill|tbox
-1|skill|mi
+|turn|<id>|<seconds>
+|skill|<id>|<name>
+|status|add|<id>|<name>
+|status|remove|<id>|<name>
+|stat|add|<id>|<stat = hp/sp/fury>|<amount>|<resulting amount>
+|stat|remove|<id>|<stat = hp/sp/fury>|<amount>|<resulting amount>|<isCrt, default false>
+|furyburst|<id>
+|dodge|<id>
+|parry|<id>
+|win|<id>
+|dead|<id>

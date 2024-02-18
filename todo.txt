@@ -30,8 +30,6 @@ migration script to convert all saved builds into indexedDB
 
 ---
 
-2 arrays of players, returns replay object
-createGame (leftPlayers, rightPlayers)
 
 import/export replay json
 check how ps does it
@@ -43,7 +41,7 @@ animations needed
 skills:
 bacteria bacteria.png
 ice (no sprite)
-cleanse
+cleanse cleanse.png
 bubble (no animation)
 meteorite firemeteorite.png
 fire shield fireshield.png
@@ -54,7 +52,7 @@ quake quake.png
 thorns thorns.png
 lightning ball lightningball.png in an arc
 tbox lightningball.png in straight line
-aotg (no animation, it just appears)
+aotg (no cast animation)
 storm box stormboxing.png
 fast move fastmove.png
 violence violence.png
@@ -72,11 +70,11 @@ esw esw.png
 barb barb.png
 assassinate assassinate.png
 curse curse.png
-mi (no sprite)
-shield wall (no animation)
+mi (split into 2 at lower opacity)
+shield wall (no cast animation)
 needle needle.png
 rejuv rejuv.png
-revive revive-wing.png
+revive revive.png
 
 pet block
 pet attack
@@ -105,9 +103,9 @@ cursed cursed.png
 dizzy (same as stunned)
 
 dodge / parry
-fury burst
+fury burst furyburst.png
 win / dead
-generic avatar since can't get actual sprites
+generic avatar char.png
 numbers / stat changes:
 - crt dmg red
 - heal blue
@@ -116,8 +114,6 @@ numbers / stat changes:
 
 todo
 poisoned can't find sprite
-skill26 cleanse
-skill26-2 fury burst
 
 replay format
 
@@ -130,10 +126,33 @@ id = starts from 0 and increments, even = left, odd = right
 |skill|<id>|<name>
 |status|add|<id>|<name>
 |status|remove|<id>|<name>
-|stat|add|<id>|<stat = hp/sp/fury>|<amount>|<resulting amount>
-|stat|remove|<id>|<stat = hp/sp/fury>|<amount>|<resulting amount>|<isCrt, default false>
+|stat|add|<id>|<stat>|<amount>|<current>|<initial>|source|
+|stat|remove|<id>|<stat>|<amount>|<current>|<initial>|source[|crt]
+- only animate for hp/sp/crt
+|fury|<id>|<amount>|<current>|
 |furyburst|<id>
 |dodge|<id>
 |parry|<id>
 |win|<id>
-|dead|<id>
+
+ignore when animating, used for logging purposes
+|info|message
+|debug|message
+
+requirements
+initial state
+desktop: profiles on left, logs on right
+mobile: profiles on top, logs on bottom
+
+left + right profile with scrolling
+logs same height as battle, 300px on mobile
+
+upon fighter select, hud is populated (including little heads for multiple fighters)
+
+after log generated, button to replay last fight (play button located left of score)
+- replace profile with bg
+
+during fight button layout TBD
+
+
+import anime from "https://animejs.com/lib/anime.es.js";

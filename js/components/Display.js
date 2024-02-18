@@ -1,12 +1,12 @@
 import { html, useState, useEffect } from "https://unpkg.com/htm/preact/standalone.module.js"
-import { createCanvas } from "../display.js";
+import { createProfile } from "../display.js";
 
-const Display = ({ player, bg = 11 }) => {
+const Display = ({ player, bg = 11, left = true }) => {
   const [src, setSrc] = useState("");
   useEffect(() => {
     let url;
     const createPlayerImage = async () => {
-      const canvas = await createCanvas(player, bg);
+      const canvas = await createProfile(player, { bg, left });
       const blob = await new Promise(resolve => canvas.toBlob(resolve));
       url = URL.createObjectURL(blob);
       setSrc(url);

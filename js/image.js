@@ -11,7 +11,8 @@ export const ImageType = {
   skill: "skill",
   skillType: "skillType",
   skillSlot: "skillSlot",
-  totem: "totem"
+  totem: "totem",
+  bg: "bg"
 }
 
 export const getImagePath = (type, id, intVersion = false) => {
@@ -43,6 +44,8 @@ export const getImagePath = (type, id, intVersion = false) => {
       return basePath + `skill/${id}.png`;
     case ImageType.totem:
       return basePath + `totems/tuten${id}.png`;
+    case ImageType.bg:
+      return basePath + `display/background${id}.png`;
   }
 }
 

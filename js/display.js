@@ -63,7 +63,7 @@ function renderStatBox(ctx, fighter, options) {
   }
 }
 
-function renderTotem(ctx, playerTotem, options, promises) {
+async function renderTotem(ctx, playerTotem, options, promises) {
   if (!playerTotem.name) return;
   const totem = CFDB.getTotem(playerTotem.name);
   if (options.left) {
@@ -73,7 +73,7 @@ function renderTotem(ctx, playerTotem, options, promises) {
   }
 }
 
-function renderFighterDetails(ctx, playerFighter, options, promises) {
+async function renderFighterDetails(ctx, playerFighter, options, promises) {
   const fighter = CFDB.getFighter(playerFighter.name);
   if (options.left) {
     promises.push(asyncDraw(ctx, getImagePath(ImageType.fighter, fighter.iconId), 35, 20));
@@ -93,7 +93,7 @@ function renderFighterDetails(ctx, playerFighter, options, promises) {
   ctx.fillText(` +${playerFighter.plus}`, x + fighterNameWidth, 180);
 }
 
-function renderPetDetails(ctx, playerPet, options, promises) {
+async function renderPetDetails(ctx, playerPet, options, promises) {
   if (playerPet.name === "None") return;
   const pet = CFDB.getPet(playerPet.name);
   if (options.left) {
@@ -113,7 +113,7 @@ function renderPetDetails(ctx, playerPet, options, promises) {
   ctx.fillText(` +${playerPet.plus}`, x + petNameWidth, 200);
 }
 
-function renderResistances(ctx, resistance, options, promises) {
+async function renderResistances(ctx, resistance, options, promises) {
   ctx.font = "19px arial";
   ctx.fillStyle = "#ffffff";
   const x = options.left ? 15 : ctx.canvas.width - 227 + 15;

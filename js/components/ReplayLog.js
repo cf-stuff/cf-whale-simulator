@@ -19,7 +19,7 @@ const ReplayLog = ({ logs }) => {
       parsedLogs.push(`${id} wins`);
     } else if (log.startsWith("|skill")) {
       const [, , id, name] = log.split("|");
-      parsedLogs.push(`${id}: ${name}`);
+      parsedLogs.push(`${id}: ${name.replace("Anit", "Anti")}`); // workaround for typo
     } else if (log.startsWith("|dodge")) {
       const [, , id] = log.split("|");
       parsedLogs.push(`${id} dodged the attack`);

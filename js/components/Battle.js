@@ -106,7 +106,7 @@ const Battle = () => {
     <div class="col-md order-1 order-md-2">
       <div class="row" ref=${scoreRef}>
         <div class="col">
-          <img src=${getImagePath(ImageType.replayBtn, "play")} />
+          <img src=${getImagePath(ImageType.replayBtn, "play")} style=${{ height: "51px" }} />
         </div>
         <div class="col-auto">
           <span class="text-center h2">${leftWins}-${rightWins}</span>

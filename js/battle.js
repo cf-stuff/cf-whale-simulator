@@ -13,11 +13,11 @@ export function simulateBattle(left, right, debug = false) {
   const rightPlayers = right.map(player => createPlayerForBattle(player, 1));
   leftPlayers.forEach((player, i) => {
     player.id = i * 2;
-    logs.push(`|player|${player.id}|${JSON.stringify(player)}`);
+    logs.push(`|player|${player.id}|${JSON.stringify(left[i])}`);
   });
   rightPlayers.forEach((player, i) => {
     player.id = i * 2 + 1;
-    logs.push(`|player|${player.id}|${JSON.stringify(player)}`);
+    logs.push(`|player|${player.id}|${JSON.stringify(right[i])}`);
   });
   let currentIndex = [0, 0];
   while (currentIndex[0] < left.length && currentIndex[1] < right.length) {
@@ -230,7 +230,7 @@ function consumeSp(state, playerIndex, skill) {
   if (skill.spConsumption > 0) {
     let spConsumptionMultiplier = 1;
     state.players[playerIndex].status.forEach(x => spConsumptionMultiplier *= x.effect.spConsumptionMultiplier || 1);
-    updateStat(state, playerIndex, Stats.sp.name, false, skill.spConsumption * spConsumptionMultiplier, "skill cost");
+    updateStat(state, playerIndex, Stats.sp.name, false, -skill.spConsumption * spConsumptionMultiplier, "skill cost");
     state.players[playerIndex].status.filter(x => x.removeWhenSpConsumed)
       .forEach(x => removeStatus(state, playerIndex, x.name));
   }
@@ -723,7 +723,7 @@ function updateStat(state, playerIndex, stat, add, amount, source, isCrt) {
     stats.current[stat] = Math.min(stats.current[stat], stats.initial[stat]);
   }
   if (isCrt) state.log.push("|info|It's a critical hit!");
-  state.log.push(`|stat|${add ? "add" : "remove"}|${state.players[playerIndex].id}|${stat}|${amount}|${stats.current[stat]}|${stats.initial[stat]}|${source}${isCrt ? "|crt" : ""}`);
+  state.log.push(`|stat|${add ? "add" : "remove"}|${state.players[playerIndex].id}|${stat}|${amount}|${stats.current[stat]}|${stats.initial[stat]}|${source}|${isCrt ? "crt" : "noCrt"}`);
 }
 
 function gainFury(state, playerIndex, overrideAmount) {

@@ -127,8 +127,9 @@ id = starts from 0 and increments, even = left, odd = right
 |status|add|<id>|<name>
 |status|remove|<id>|<name>
 |stat|add|<id>|<stat>|<amount>|<current>|<initial>|source|
-|stat|remove|<id>|<stat>|<amount>|<current>|<initial>|source[|crt]
-- only animate for hp/sp/crt
+|stat|remove|<id>|<stat>|<amount>|<current>|<initial>|source|crt
+- only animate for hp/sp (red number if crt)
+- crt = true/false
 |fury|<id>|<amount>|<current>|
 |furyburst|<id>
 |dodge|<id>
@@ -147,12 +148,9 @@ mobile: profiles on top, logs on bottom
 left + right profile with scrolling
 logs same height as battle, 300px on mobile
 
-upon fighter select, hud is populated (including little heads for multiple fighters)
-
-after log generated, button to replay last fight (play button located left of score)
-- replace profile with bg
+> after log generated, button to replay last fight (play button located left of score)
+- replace profile with battle bg
+(include little heads for multiple fighters in replay)
 
 during fight button layout TBD
-
-
-import anime from "https://animejs.com/lib/anime.es.js";
+- button to restart replay

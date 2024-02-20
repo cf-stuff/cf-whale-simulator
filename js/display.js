@@ -1,4 +1,4 @@
-import { getImagePath, ImageType } from "./image.js";
+import { getImage, getImagePath, ImageType } from "./image.js";
 import CFDB from "./data/CFDB.js";
 
 
@@ -18,20 +18,14 @@ export async function createProfile(player, options = { bg: 11, left: true }) {
 
   if (!player) return canvas;
 
-  renderPlayerDetails(ctx, player, options);
+  if (player.fighter.name === "None") {
+    renderPlayerDetails(ctx, player, options);
+    return canvas;
+  }
 
-  if (player.fighter.name === "None") return canvas;
-
-  renderStatBox(ctx, player.fighter, options);
-  renderTotem(ctx, player.totem, options, promises);
-  renderFighterDetails(ctx, player.fighter, options, promises);
-  renderPetDetails(ctx, player.pet, options, promises);
-  lineSeparator(ctx, 210, options.left);
-  renderResistances(ctx, player.resistance, options, promises);
-  lineSeparator(ctx, 250, options.left);
-  renderStats(ctx, player.stats, options);
-  lineSeparator(ctx, 400, options.left);
-  await renderSkills(ctx, player, options, promises);
+  await renderBackgroundSprites(ctx, player, options, promises);
+  await renderStatBox(ctx, player, options, promises);
+  await renderHudDetails(ctx, player, options, promises);
   await Promise.allSettled(promises);
   return canvas;
 }
@@ -50,37 +44,63 @@ function renderPlayerDetails(ctx, player, options) {
   if (!options.left) ctx.textAlign = "left";
 }
 
-function renderStatBox(ctx, fighter, options) {
+export async function renderStatBox(ctx, player, options, promises) {
   ctx.fillStyle = "rgba(25, 0, 21, 0.85)";
   ctx.strokeStyle = "#ffffff";
   ctx.lineWidth = 4;
   if (options.left) {
-    ctx.roundRect(-20, 150, 250, fighter?.skills?.length > 0 ? 500 : 430, 20);
+    ctx.roundRect(-20, 150, 250, player.fighter?.skills?.length > 0 ? 500 : 430, 20);
   } else {
     ctx.scale(-1, 1);
-    ctx.roundRect(-20 + ctx.canvas.width * -1, 150, 250, fighter?.skills?.length > 0 ? 500 : 430, 20);
+    ctx.roundRect(-20 + ctx.canvas.width * -1, 150, 250, player.fighter?.skills?.length > 0 ? 500 : 430, 20);
     ctx.scale(-1, 1);
   }
+  renderPetDetails(ctx, player.pet, options);
+  renderFighterDetails(ctx, player.fighter, options, promises);
+  lineSeparator(ctx, 210, options.left);
+  renderResistances(ctx, player.resistance, options, promises);
+  lineSeparator(ctx, 250, options.left);
+  renderStats(ctx, player.stats, options);
+  lineSeparator(ctx, 400, options.left);
+  await renderSkills(ctx, player, options, promises);
+}
+
+export async function renderBackgroundSprites(ctx, player, options, promises) {
+  renderTotem(ctx, player.totem, options, promises);
+  await renderPetSprite(ctx, player.pet, options, promises);
+}
+
+export async function renderHudDetails(ctx, player, options, promises) {
+  renderPlayerDetails(ctx, player, options);
+  const fighter = CFDB.getFighter(player.fighter.name);
+  if (options.left) {
+    promises.push(asyncDraw(ctx, getImagePath(ImageType.fighter, fighter.iconId), 35, 20));
+  } else {
+    promises.push(asyncDrawFlipped(ctx, getImagePath(ImageType.fighter, fighter.iconId), 35, 20));
+  }
+  
+  ctx.font = "21px arial";
+  ctx.fillStyle = "#FFFFFF";
+  if (!options.left) ctx.textAlign = "right";
+  const hpX = options.left ? 235 : ctx.canvas.width - 235;
+  const spX = options.left ? 285 : ctx.canvas.width - 285;
+  ctx.fillText(`${options.hpOverride ? options.hp : player.stats.hp}/${player.stats.hp}`, hpX, 53);
+  ctx.fillText(`${options.spOverride ? options.sp : player.stats.sp}/${player.stats.sp}`, spX, 82);
+  if (!options.left) ctx.textAlign = "left";
 }
 
 async function renderTotem(ctx, playerTotem, options, promises) {
   if (!playerTotem.name) return;
   const totem = CFDB.getTotem(playerTotem.name);
   if (options.left) {
-    promises.push(asyncDraw(ctx, getImagePath(ImageType.totem, totem.iconId), 300, 400));
+    promises.push(asyncDraw(ctx, getImagePath(ImageType.totem, totem.iconId), 350, 400));
   } else {
-    promises.push(asyncDrawFlipped(ctx, getImagePath(ImageType.totem, totem.iconId), 300, 400));
+    promises.push(asyncDrawFlipped(ctx, getImagePath(ImageType.totem, totem.iconId), 350, 400));
   }
 }
 
 async function renderFighterDetails(ctx, playerFighter, options, promises) {
   const fighter = CFDB.getFighter(playerFighter.name);
-  if (options.left) {
-    promises.push(asyncDraw(ctx, getImagePath(ImageType.fighter, fighter.iconId), 35, 20));
-  } else {
-    promises.push(asyncDrawFlipped(ctx, getImagePath(ImageType.fighter, fighter.iconId), 35, 20));
-  }
-
   const fighterDisplayName = playerFighter.evolved ? fighter.evoName : fighter.name;
   const x = options.left ? 15 : ctx.canvas.width - 227 + 15;
   ctx.font = "bold 16px arial";
@@ -93,15 +113,9 @@ async function renderFighterDetails(ctx, playerFighter, options, promises) {
   ctx.fillText(` +${playerFighter.plus}`, x + fighterNameWidth, 180);
 }
 
-async function renderPetDetails(ctx, playerPet, options, promises) {
+function renderPetDetails(ctx, playerPet, options) {
   if (playerPet.name === "None") return;
   const pet = CFDB.getPet(playerPet.name);
-  if (options.left) {
-    promises.push(asyncDraw(ctx, getImagePath(ImageType.pet, playerPet.evolved ? pet.evoIconId : pet.iconId), 250, 500));
-  } else {
-    promises.push(asyncDrawFlipped(ctx, getImagePath(ImageType.pet, playerPet.evolved ? pet.evoIconId : pet.iconId), 250, 500));
-  }
-
   ctx.font = "bold 16px arial";
   ctx.fillStyle = "#a15f08";
   const petDisplayName = playerPet.evolved ? pet.evoName : pet.name;
@@ -111,6 +125,16 @@ async function renderPetDetails(ctx, playerPet, options, promises) {
   ctx.font = "16px arial";
   ctx.fillStyle = "#c2ac3d";
   ctx.fillText(` +${playerPet.plus}`, x + petNameWidth, 200);
+}
+
+async function renderPetSprite(ctx, playerPet, options) {
+  if (playerPet.name === "None") return;
+  const pet = CFDB.getPet(playerPet.name);
+  if (options.left) {
+    await asyncDraw(ctx, getImagePath(ImageType.pet, playerPet.evolved ? pet.evoIconId : pet.iconId), 200, 500);
+  } else {
+    await asyncDrawFlipped(ctx, getImagePath(ImageType.pet, playerPet.evolved ? pet.evoIconId : pet.iconId), 200, 500);
+  }
 }
 
 async function renderResistances(ctx, resistance, options, promises) {
@@ -125,15 +149,6 @@ async function renderResistances(ctx, resistance, options, promises) {
 }
 
 function renderStats(ctx, stats, options) {
-  ctx.font = "21px arial";
-  ctx.fillStyle = "#FFFFFF";
-  if (!options.left) ctx.textAlign = "right";
-  const hpX = options.left ? 235 : ctx.canvas.width - 235;
-  const spX = options.left ? 285 : ctx.canvas.width - 285;
-  ctx.fillText(`${stats.hp}/${stats.hp}`, hpX, 53);
-  ctx.fillText(`${stats.sp}/${stats.sp}`, spX, 82);
-  if (!options.left) ctx.textAlign = "left";
-
   const x = options.left ? 15 : ctx.canvas.width - 227 + 15;
   ctx.font = "18px arial";
   ctx.fillStyle = "#ffffff";
@@ -196,11 +211,11 @@ async function renderSkills(ctx, player, options, promises) {
   }
 }
 
-function getImage(path) {
-  const image = document.createElement("img");
-  image.src = path;
-  return new Promise(resolve => image.onload = () => resolve(image));
-}
+// function getImage(path) {
+//   const image = document.createElement("img");
+//   image.src = path;
+//   return new Promise(resolve => image.onload = () => resolve(image));
+// }
 
 async function asyncDraw(ctx, path, x, y, w, h) {
   await getImage(path).then(image => {

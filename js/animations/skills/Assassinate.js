@@ -24,7 +24,7 @@ export default class Assassinate {
 
   /**
    * notes @ 30 fps
-   * frames 1-23 dash
+   * frames 1-23 dash / wind up
    * frames 24-49 black
    * frames 24-31 draw img
    * frames 31-49 fade out img

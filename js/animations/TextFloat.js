@@ -13,8 +13,9 @@ export default class TextFloat {
   }
 
   update() {
-    this.opacity -= 0.01;
     this.y -= 4;
+    this.opacity -= 0.01;
+    if (this.imgOpacity <= 0) this.imgOpacity = 0;
   }
 
   draw(ctx) {

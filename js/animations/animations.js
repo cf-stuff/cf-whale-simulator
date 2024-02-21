@@ -3,15 +3,16 @@ import HpBar from "./HpBar.js";
 import SpBar from "./SpBar.js";
 import TextFloat from "./TextFloat.js";
 import Assassinate from "./skills/Assassinate.js";
+import Barbarism from "./skills/Barbarism.js";
 import FireShield from "./skills/FireShield.js";
+import GoldenShield from "./skills/GoldenShield.js";
 
 export const Layer = {
   BACKGROUND: 0, // bg, totems
   CHARACTERS: 1, // pet, fighter
-  STATUS: 2,
-  EFFECTS: 3, // most skills
-  UI: 4,
-  EFFECTS2: 5, // assassinate make screen go black
+  EFFECTS: 2, // most skills
+  UI: 3,
+  EFFECTS2: 4, // assassinate make screen go black
 }
 
 const AnimationDefinitions = {
@@ -19,8 +20,10 @@ const AnimationDefinitions = {
   SpBar,
   FuryBar,
   TextFloat,
+  GoldenShield,
   Assassinate,
-  FireShield
+  FireShield,
+  Barbarism
 }
 
 export default AnimationDefinitions;

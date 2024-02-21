@@ -1,6 +1,17 @@
-import { getImage, getImagePath, ImageType } from "./image.js";
+import { getImage, getImageAsync, getImagePath, ImageType } from "./image.js";
 import CFDB from "./data/CFDB.js";
+import Status from "./data/status.js";
 
+const hud = getImage("img/display/hud.png");
+const skillFrame = getImage("img/display/skill-frame.png");
+const evoSkillFrame = getImage("img/display/skill-evo-frame.png");
+
+const battleBg = getImage("img/display/battle-bg.png");
+const battleHud = getImage("img/display/battle-hud.png");
+const char = getImage("img/display/char.png");
+const horns = getImage("img/display/effects/horns.png");
+const bell = getImage("img/display/effects/bell.png");
+const frenzy = getImage("img/display/effects/frenzy.png");
 
 export async function createProfile(player, options = { bg: 11, left: true }) {
   const canvas = document.createElement("canvas");
@@ -10,10 +21,12 @@ export async function createProfile(player, options = { bg: 11, left: true }) {
   const promises = [];
   if (options.left) {
     await asyncDraw(ctx, getImagePath(ImageType.bg, options.bg), 0, 0);
-    await asyncDraw(ctx, "img/display/hud.png", 5, 5);
+    ctx.drawImage(hud, 5, 5);
   } else {
     await asyncDrawFlipped(ctx, getImagePath(ImageType.bg, options.bg), 0, 0);
-    await asyncDrawFlipped(ctx, "img/display/hud.png", 5, 5);
+    ctx.scale(-1, 1);
+    ctx.drawImage(hud, 5 + ctx.canvas.width * -1, 5);
+    ctx.scale(-1, 1);
   }
 
   if (!player) return canvas;
@@ -30,6 +43,79 @@ export async function createProfile(player, options = { bg: 11, left: true }) {
   return canvas;
 }
 
+export async function renderTimeline(ctx, timeline) {
+  const promises = [];
+  ctx.drawImage(battleBg, 0, 0);
+  const leftActive = timeline.left[timeline.leftIndex];
+  const rightActive = timeline.right[timeline.rightIndex];
+
+  renderTotem(ctx, leftActive.totem, { left: true }, promises);
+  await renderTotem(ctx, rightActive.totem, { left: false }, promises);
+
+  ctx.drawImage(char, 300 - char.width / 2, 450 - char.height / 2);
+  ctx.scale(-1, 1);
+  ctx.drawImage(char, 300 - char.width / 2 + ctx.canvas.width * -1, 450 - char.height / 2);
+  ctx.scale(-1, 1);
+
+  renderPetSprite(ctx, leftActive.pet, { left: true }, promises);
+  await renderPetSprite(ctx, rightActive.pet, { left: false }, promises);
+
+  timeline.left[timeline.leftIndex].current.status.forEach(status => {
+    if (status === Status.barbarism.name) {
+      ctx.drawImage(horns, 0, 0, 104, 82, 300 - 104 / 2, 400 - 20 - 82 / 2, 104, 82);
+    } else if (status === Status.goldenShield.name) {
+      ctx.drawImage(bell, 0, 0, 146, 148, 250 - 146 / 2, 400 - 148 / 2, 146 * 2, 148 * 2);
+    } else if (status === Status.bloodFrenzy.name) {
+      ctx.drawImage(frenzy, 0, 0, frenzy.width, frenzy.height, 300 - frenzy.width / 2, 450, frenzy.width, frenzy.height);
+    }
+  });
+  timeline.right[timeline.rightIndex].current.status.forEach(status => {
+    if (status === Status.barbarism.name) {
+      ctx.scale(-1, 1);
+      ctx.drawImage(horns, 0, 0, 104, 82, 300 + ctx.canvas.width * -1 - 104 / 2, 400 - 20 - 82 / 2, 104, 82);
+      ctx.scale(-1, 1);
+    } else if (status === Status.goldenShield.name) {
+      ctx.scale(-1, 1);
+      ctx.drawImage(bell, 0, 0, 146, 148, 250 + ctx.canvas.width * -1 - 146 / 2, 400 - 148 / 2, 146 * 2, 148 * 2);
+      ctx.scale(-1, 1);
+    } else if (status === Status.bloodFrenzy.name) {
+      ctx.scale(-1, 1);
+      ctx.drawImage(frenzy, 0, 0, frenzy.width, frenzy.height, 300 + ctx.canvas.width * -1 - frenzy.width / 2, 450, frenzy.width, frenzy.height);
+      ctx.scale(-1, 1);
+    }
+  });
+  timeline.ongoingAnimations.sort((a, b) => a.layer - b.layer);
+  timeline.ongoingAnimations.forEach(animation => {
+    animation.update();
+    animation.draw(ctx);
+  });
+
+  renderStatBox(ctx, timeline.left[timeline.leftIndex], { left: true }, promises);
+  renderStatBox(ctx, timeline.right[timeline.rightIndex], { left: false }, promises);
+
+  ctx.drawImage(battleHud, 0, 0);
+  Object.values(timeline.left[timeline.leftIndex].animations).forEach(animation => {
+    animation.update();
+    animation.draw(ctx);
+  });
+  Object.values(timeline.right[timeline.rightIndex].animations).forEach(animation => {
+    animation.update();
+    animation.draw(ctx);
+  });
+  renderHudDetails(ctx, timeline.left[timeline.leftIndex], {
+    left: true,
+    hpOverride: true, hp: timeline.left[timeline.leftIndex].current.hp,
+    spOverride: true, sp: timeline.left[timeline.leftIndex].current.sp
+  }, promises);
+  renderHudDetails(ctx, timeline.right[timeline.rightIndex], {
+    left: false,
+    hpOverride: true, hp: timeline.right[timeline.rightIndex].current.hp,
+    spOverride: true, sp: timeline.right[timeline.rightIndex].current.sp
+  }, promises);
+  // todo: mini heads
+  await Promise.allSettled(promises);
+}
+
 function renderPlayerDetails(ctx, player, options) {
   ctx.font = "bold 21px arial";
   ctx.fillStyle = "#000000";
@@ -44,7 +130,7 @@ function renderPlayerDetails(ctx, player, options) {
   if (!options.left) ctx.textAlign = "left";
 }
 
-export async function renderStatBox(ctx, player, options, promises) {
+async function renderStatBox(ctx, player, options, promises) {
   ctx.fillStyle = "rgba(25, 0, 21, 0.85)";
   ctx.strokeStyle = "#ffffff";
   ctx.lineWidth = 4;
@@ -62,15 +148,15 @@ export async function renderStatBox(ctx, player, options, promises) {
   lineSeparator(ctx, 250, options.left);
   renderStats(ctx, player.stats, options);
   lineSeparator(ctx, 400, options.left);
-  await renderSkills(ctx, player, options, promises);
+  renderSkills(ctx, player, options, promises);
 }
 
-export async function renderBackgroundSprites(ctx, player, options, promises) {
+async function renderBackgroundSprites(ctx, player, options, promises) {
   renderTotem(ctx, player.totem, options, promises);
   await renderPetSprite(ctx, player.pet, options, promises);
 }
 
-export async function renderHudDetails(ctx, player, options, promises) {
+async function renderHudDetails(ctx, player, options, promises) {
   renderPlayerDetails(ctx, player, options);
   const fighter = CFDB.getFighter(player.fighter.name);
   if (options.left) {
@@ -78,7 +164,7 @@ export async function renderHudDetails(ctx, player, options, promises) {
   } else {
     promises.push(asyncDrawFlipped(ctx, getImagePath(ImageType.fighter, fighter.iconId), 35, 20));
   }
-  
+
   ctx.font = "21px arial";
   ctx.fillStyle = "#FFFFFF";
   if (!options.left) ctx.textAlign = "right";
@@ -176,7 +262,6 @@ async function renderSkills(ctx, player, options, promises) {
   let skillIndex = 0;
   let petSkillIndex = 0;
   let phySkillRendered = false;
-  const skillFrame = await getImage("img/display/skill-frame.png");
   const xOffset = options.left ? 15 : ctx.canvas.width - 227 + 15;
   for (let y = 0; y < 3; ++y) {
     for (let x = 0; x < 4; ++x) {
@@ -200,7 +285,6 @@ async function renderSkills(ctx, player, options, promises) {
   if (player.fighter.skills.length > 0) {
     lineSeparator(ctx, 575, options.left);
     let fighterSkillIndex = 0;
-    const evoSkillFrame = await getImage("img/display/skill-evo-frame.png");
     for (let x = 0; x < 4; ++x) {
       ctx.drawImage(evoSkillFrame, xOffset + x * 50, 590, 45, 45);
       if (fighterSkillIndex < player.fighter.skills.length) {
@@ -211,14 +295,8 @@ async function renderSkills(ctx, player, options, promises) {
   }
 }
 
-// function getImage(path) {
-//   const image = document.createElement("img");
-//   image.src = path;
-//   return new Promise(resolve => image.onload = () => resolve(image));
-// }
-
 async function asyncDraw(ctx, path, x, y, w, h) {
-  await getImage(path).then(image => {
+  await getImageAsync(path).then(image => {
     if (!w) {
       ctx.drawImage(image, x, y);
     } else {
@@ -228,7 +306,7 @@ async function asyncDraw(ctx, path, x, y, w, h) {
 }
 
 async function asyncDrawFlipped(ctx, path, x, y, w, h) {
-  await getImage(path).then(image => {
+  await getImageAsync(path).then(image => {
     ctx.save();
     ctx.scale(-1, 1);
     if (!w) {

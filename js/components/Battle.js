@@ -61,9 +61,12 @@ const Battle = () => {
       battleSim = simulateBattle(leftPlayers, rightPlayers);
       battleSim.winner === 0 ? setLeftWins(wins => wins + 1) : setRightWins(wins => wins + 1);
     }
+    if (--batches > 0) {
+      setTimeout(() => handleBattle(rounds, batches), 0);
+    } else if (batches === 0) {
     if (battleSim) setBattle(battleSim);
-    if (--batches > 0) setTimeout(() => handleBattle(rounds, batches), 0);
-    if (batches === 0) setShowReplay(true);
+      setShowReplay(true);
+    }
   }
   return html`
   <div class="row pt-3">

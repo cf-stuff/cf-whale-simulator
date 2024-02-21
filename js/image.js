@@ -52,10 +52,16 @@ export const getImagePath = (type, id, intVersion = false) => {
   }
 }
 
-export function getImage(path) {
-  const image = document.createElement("img");
+export function getImageAsync(path) {
+  const image = new Image();
   image.src = path;
   return new Promise(resolve => image.onload = () => resolve(image));
+}
+
+export function getImage(path) {
+  const image = new Image();
+  image.src = path;
+  return image;
 }
 
 export const preload = url => new Image().src = url;

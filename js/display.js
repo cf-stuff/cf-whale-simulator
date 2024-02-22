@@ -46,41 +46,41 @@ export async function createProfile(player, options = { bg: 11, left: true }) {
 export async function renderTimeline(ctx, timeline) {
   const promises = [];
   ctx.drawImage(battleBg, 0, 0);
-  const leftActive = timeline.left[timeline.leftIndex];
-  const rightActive = timeline.right[timeline.rightIndex];
+  const left = timeline.left[timeline.leftIndex];
+  const right = timeline.right[timeline.rightIndex];
 
-  renderTotem(ctx, leftActive.totem, { left: true }, promises);
-  await renderTotem(ctx, rightActive.totem, { left: false }, promises);
+  renderTotem(ctx, left.totem, { left: true }, promises);
+  await renderTotem(ctx, right.totem, { left: false }, promises);
 
-  ctx.drawImage(char, 300 - char.width / 2, 450 - char.height / 2);
+  ctx.drawImage(char, left.pos.x - char.width / 2, left.pos.y - char.height);
   ctx.scale(-1, 1);
-  ctx.drawImage(char, 300 - char.width / 2 + ctx.canvas.width * -1, 450 - char.height / 2);
+  ctx.drawImage(char, right.pos.x - char.width / 2 + ctx.canvas.width * -1, right.pos.y - char.height);
   ctx.scale(-1, 1);
 
-  renderPetSprite(ctx, leftActive.pet, { left: true }, promises);
-  await renderPetSprite(ctx, rightActive.pet, { left: false }, promises);
+  renderPetSprite(ctx, left.pet, { left: true }, promises);
+  await renderPetSprite(ctx, right.pet, { left: false }, promises);
 
-  timeline.left[timeline.leftIndex].current.status.forEach(status => {
+  left.current.status.forEach(status => {
     if (status === Status.barbarism.name) {
-      ctx.drawImage(horns, 0, 0, 104, 82, 300 - 104 / 2, 400 - 20 - 82 / 2, 104, 82);
+      ctx.drawImage(horns, left.pos.x - horns.width / 2, left.pos.y - char.height - horns.height / 4);
     } else if (status === Status.goldenShield.name) {
-      ctx.drawImage(bell, 0, 0, 146, 148, 250 - 146 / 2, 400 - 148 / 2, 146 * 2, 148 * 2);
+      ctx.drawImage(bell, 0, 0, bell.width, bell.height, left.pos.x - bell.width, left.pos.y - bell.height * 1.8, bell.width * 2, bell.height * 2);
     } else if (status === Status.bloodFrenzy.name) {
-      ctx.drawImage(frenzy, 0, 0, frenzy.width, frenzy.height, 300 - frenzy.width / 2, 450, frenzy.width, frenzy.height);
+      ctx.drawImage(frenzy, 0, 0, frenzy.width, frenzy.height, left.pos.x - frenzy.width * 0.9, left.pos.y - frenzy.height * 2, frenzy.width * 2, frenzy.height * 2);
     }
   });
-  timeline.right[timeline.rightIndex].current.status.forEach(status => {
+  right.current.status.forEach(status => {
     if (status === Status.barbarism.name) {
       ctx.scale(-1, 1);
-      ctx.drawImage(horns, 0, 0, 104, 82, 300 + ctx.canvas.width * -1 - 104 / 2, 400 - 20 - 82 / 2, 104, 82);
+      ctx.drawImage(horns, right.pos.x + ctx.canvas.width * -1 - horns.width / 2, right.pos.y - char.height - horns.height / 4);
       ctx.scale(-1, 1);
     } else if (status === Status.goldenShield.name) {
       ctx.scale(-1, 1);
-      ctx.drawImage(bell, 0, 0, 146, 148, 250 + ctx.canvas.width * -1 - 146 / 2, 400 - 148 / 2, 146 * 2, 148 * 2);
+      ctx.drawImage(bell, 0, 0, bell.width, bell.height, right.pos.x + ctx.canvas.width * -1 - bell.width, right.pos.y - bell.height * 1.8, bell.width * 2, bell.height * 2);
       ctx.scale(-1, 1);
     } else if (status === Status.bloodFrenzy.name) {
       ctx.scale(-1, 1);
-      ctx.drawImage(frenzy, 0, 0, frenzy.width, frenzy.height, 300 + ctx.canvas.width * -1 - frenzy.width / 2, 450, frenzy.width, frenzy.height);
+      ctx.drawImage(frenzy, 0, 0, frenzy.width, frenzy.height, right.pos.x + ctx.canvas.width * -1 - frenzy.width * 0.9, right.pos.y - frenzy.height * 2, frenzy.width * 2, frenzy.height * 2);
       ctx.scale(-1, 1);
     }
   });
@@ -90,27 +90,27 @@ export async function renderTimeline(ctx, timeline) {
     animation.draw(ctx);
   });
 
-  renderStatBox(ctx, timeline.left[timeline.leftIndex], { left: true }, promises);
-  renderStatBox(ctx, timeline.right[timeline.rightIndex], { left: false }, promises);
+  renderStatBox(ctx, left, { left: true }, promises);
+  renderStatBox(ctx, right, { left: false }, promises);
 
   ctx.drawImage(battleHud, 0, 0);
-  Object.values(timeline.left[timeline.leftIndex].animations).forEach(animation => {
+  Object.values(left.animations).forEach(animation => {
     animation.update();
     animation.draw(ctx);
   });
-  Object.values(timeline.right[timeline.rightIndex].animations).forEach(animation => {
+  Object.values(right.animations).forEach(animation => {
     animation.update();
     animation.draw(ctx);
   });
-  renderHudDetails(ctx, timeline.left[timeline.leftIndex], {
+  renderHudDetails(ctx, left, {
     left: true,
-    hpOverride: true, hp: timeline.left[timeline.leftIndex].current.hp,
-    spOverride: true, sp: timeline.left[timeline.leftIndex].current.sp
+    hpOverride: true, hp: left.current.hp,
+    spOverride: true, sp: left.current.sp
   }, promises);
-  renderHudDetails(ctx, timeline.right[timeline.rightIndex], {
+  renderHudDetails(ctx, right, {
     left: false,
-    hpOverride: true, hp: timeline.right[timeline.rightIndex].current.hp,
-    spOverride: true, sp: timeline.right[timeline.rightIndex].current.sp
+    hpOverride: true, hp: right.current.hp,
+    spOverride: true, sp: right.current.sp
   }, promises);
   // todo: mini heads
   await Promise.allSettled(promises);
@@ -142,7 +142,7 @@ async function renderStatBox(ctx, player, options, promises) {
     ctx.scale(-1, 1);
   }
   renderPetDetails(ctx, player.pet, options);
-  renderFighterDetails(ctx, player.fighter, options, promises);
+  renderFighterDetails(ctx, player.fighter, options);
   lineSeparator(ctx, 210, options.left);
   renderResistances(ctx, player.resistance, options, promises);
   lineSeparator(ctx, 250, options.left);
@@ -185,7 +185,7 @@ async function renderTotem(ctx, playerTotem, options, promises) {
   }
 }
 
-async function renderFighterDetails(ctx, playerFighter, options, promises) {
+async function renderFighterDetails(ctx, playerFighter, options) {
   const fighter = CFDB.getFighter(playerFighter.name);
   const fighterDisplayName = playerFighter.evolved ? fighter.evoName : fighter.name;
   const x = options.left ? 15 : ctx.canvas.width - 227 + 15;

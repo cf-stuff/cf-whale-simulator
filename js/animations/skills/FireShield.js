@@ -7,7 +7,7 @@ export default class FireShield {
   constructor(left) {
     this.layer = Layer.EFFECTS
     this.left = left;
-    this.x = 300; // center coords
+    this.x = 300;
     this.y = 550;
     this.w = 189;
     this.h = 73;

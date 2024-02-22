@@ -31,6 +31,10 @@ const createTimeline = logs => {
         sp: new AnimationDefinitions.SpBar(left),
         fury: new AnimationDefinitions.FuryBar(left)
       }
+      object.pos = {
+        x: 300, // mid
+        y: 550 // bot
+      }
       if (left) {
         timeline.left.push(object);
       } else {
@@ -50,6 +54,12 @@ const createTimeline = logs => {
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Assassinate(id % 2 === 0))
         });
         timestamp += 1800;
+      } else if (name === Skills.bloodFrenzy.name) {
+        timeline.events.push({
+          timestamp,
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.BloodFrenzy(id % 2 === 0))
+        });
+        timestamp += 1200;
       } else if (name === Skills.fireShield.name) {
         timeline.events.push({
           timestamp,
@@ -93,6 +103,7 @@ const createTimeline = logs => {
         }
       }
     } else if (log.startsWith("|stat|")) {
+      // idea: if previous log was a stat add small delay
       let [, , action, id, stat, amount, current, initial, source, crt] = log.split("|");
       if (stat === "hp") {
         timeline.events.push({
@@ -177,7 +188,7 @@ const createTimeline = logs => {
                 } else if (action === "add") {
                   amount = "+" + amount;
                 }
-                timeline.ongoingAnimations.push(new TextFloat(amount, canvas.width - 300, 250, "rgb(9,252,230)", "rgb(0,178,254)"));
+                timeline.ongoingAnimations.push(new TextFloat(amount, 1024 - 300, 250, "rgb(9,252,230)", "rgb(0,178,254)"));
               }
             }
           }
@@ -197,6 +208,27 @@ const createTimeline = logs => {
           }
         }
       });
+    } else if (log.startsWith("|win|")) {
+      const [, , id] = log.split("|");
+      timestamp += 1000;
+      if (id % 2 == 0) {
+        timeline.events.push({
+          timestamp,
+          callback: () => {
+            ++timeline.rightIndex;
+            timeline.left[timeline.leftIndex].current.status = new Set();
+          }
+        });
+      } else {
+        timeline.events.push({
+          timestamp,
+          callback: () => {
+            ++timeline.leftIndex;
+            timeline.right[timeline.rightIndex].current.status = new Set();
+          }
+        });
+      }
+      timestamp += 1000;
     }
   });
   return timeline;
@@ -210,39 +242,33 @@ const Replay = ({ logs, play = false }) => {
     if (!canvasRef) return;
 
     const timeline = createTimeline(logs);
-
-    let req;
-    const start = new Date();
-
     const canvas = document.createElement("canvas");
     canvas.width = 1024;
     canvas.height = 720;
     const ctx = canvas.getContext("2d");
+    let req;
+    const start = new Date();
 
     async function animate() {
       const elaspedTime = new Date() - start;
       timeline.events.forEach(event => {
         if (elaspedTime >= event.timestamp) event.callback();
       });
+      if (timeline.leftIndex >= timeline.left.length || timeline.rightIndex >= timeline.right.length) return;
       timeline.events = timeline.events.filter(event => elaspedTime < event.timestamp);
-
       await renderTimeline(ctx, timeline);
-
       timeline.ongoingAnimations = timeline.ongoingAnimations.filter(animation => !animation.isFinished());
-
       if (canvasRef.current) {
         canvasRef.current.getContext("2d").drawImage(canvas, 0, 0);
-
-        // this causes canvas to freeze before the hud / ui fully updates
-        // last frame of last ongoing animation(s) will still show
-        if (timeline.ongoingAnimations.length > 0 || timeline.events.length > 0) {
-          req = requestAnimationFrame(animate);
-        }
+        req = requestAnimationFrame(animate);
       }
     }
 
     animate();
-    return () => cancelAnimationFrame(req);
+    return () => {
+      cancelAnimationFrame(req);
+      timeline.leftIndex = 100;
+    };
   }, [logs]);
   return html`<canvas class="replay" ref=${canvasRef} width="1024" height="720" />`;
 }

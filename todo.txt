@@ -124,12 +124,9 @@ id = starts from 0 and increments, even = left, odd = right
 
 |turn|<id>|<seconds>
 |skill|<id>|<name>
-|status|add|<id>|<name>
-|status|remove|<id>|<name>
+|status|add/remove|<id>|<name>
 |stat|add|<id>|<stat>|<amount>|<current>|<initial>|source|
-|stat|remove|<id>|<stat>|<amount>|<current>|<initial>|source|crt
-- only animate for hp/sp (red number if crt)
-- crt = true/false
+|stat|remove|<id>|<stat>|<amount>|<current>|<initial>|source|crt/noCrt
 |fury|<id>|<amount>|<current>|
 |furyburst|<id>
 |dodge|<id>

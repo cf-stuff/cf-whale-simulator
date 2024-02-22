@@ -4,6 +4,7 @@ import SpBar from "./SpBar.js";
 import TextFloat from "./TextFloat.js";
 import Assassinate from "./skills/Assassinate.js";
 import Barbarism from "./skills/Barbarism.js";
+import BloodFrenzy from "./skills/BloodFrenzy.js";
 import FireShield from "./skills/FireShield.js";
 import GoldenShield from "./skills/GoldenShield.js";
 
@@ -20,10 +21,11 @@ const AnimationDefinitions = {
   SpBar,
   FuryBar,
   TextFloat,
-  GoldenShield,
-  Assassinate,
   FireShield,
-  Barbarism
+  BloodFrenzy,
+  GoldenShield,
+  Barbarism,
+  Assassinate,
 }
 
 export default AnimationDefinitions;

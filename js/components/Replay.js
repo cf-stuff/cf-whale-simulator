@@ -14,7 +14,7 @@ const createTimeline = logs => {
     events: [],
     ongoingAnimations: []
   }
-  let timestamp = 1000; // idea use frame counter instead of real time
+  let frame = 100;
   logs.forEach(log => {
     if (log.startsWith("|player|")) {
       const [, , id, player] = log.split("|");
@@ -44,60 +44,60 @@ const createTimeline = logs => {
       const [, , id, name] = log.split("|");
       if (name === Skills.goldenShield.name) {
         timeline.events.push({
-          timestamp,
+          frame,
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.GoldenShield(id % 2 === 0))
         });
-        timestamp += 1200;
+        frame += 38;
       } else if (name === Skills.assassinate.name) {
         timeline.events.push({
-          timestamp,
+          frame,
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Assassinate(id % 2 === 0))
         });
-        timestamp += 1800;
+        frame += 49;
       } else if (name === Skills.bloodFrenzy.name) {
         timeline.events.push({
-          timestamp,
+          frame,
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.BloodFrenzy(id % 2 === 0))
         });
-        timestamp += 1200;
+        frame += 31;
       } else if (name === Skills.fireShield.name) {
         timeline.events.push({
-          timestamp,
+          frame,
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.FireShield(id % 2 === 0))
         });
-        timestamp += 1500;
+        frame += 37;
       } else if (name === Skills.barbarism.name) {
         timeline.events.push({
-          timestamp,
+          frame,
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Barbarism(id % 2 === 0))
         });
-        timestamp += 1800;
+        frame += 80;
       } else {
-        timestamp += 400; // temp hardcode for unhandled skills
+        frame += 30; // temp hardcode for unhandled skills
       }
     } else if (log.startsWith("|status|")) {
       const [, , action, id, name] = log.split("|");
       if (id % 2 === 0) {
         if (action === "add") {
           timeline.events.push({
-            timestamp,
+            frame,
             callback: () => timeline.left[timeline.leftIndex].current.status.add(name)
           });
         } else {
           timeline.events.push({
-            timestamp,
+            frame,
             callback: () => timeline.left[timeline.leftIndex].current.status.delete(name)
           });
         }
       } else {
         if (action === "add") {
           timeline.events.push({
-            timestamp,
+            frame,
             callback: () => timeline.right[timeline.rightIndex].current.status.add(name)
           });
         } else {
           timeline.events.push({
-            timestamp,
+            frame,
             callback: () => timeline.right[timeline.rightIndex].current.status.delete(name)
           });
         }
@@ -107,7 +107,7 @@ const createTimeline = logs => {
       let [, , action, id, stat, amount, current, initial, source, crt] = log.split("|");
       if (stat === "hp") {
         timeline.events.push({
-          timestamp,
+          frame,
           callback: () => {
             if (id % 2 == 0) {
               timeline.left[timeline.leftIndex].animations.hp.setTarget(Math.floor(current / initial * 100));
@@ -162,7 +162,7 @@ const createTimeline = logs => {
         });
       } else if (stat === "sp") {
         timeline.events.push({
-          timestamp,
+          frame,
           callback: () => {
             if (id % 2 == 0) {
               timeline.left[timeline.leftIndex].animations.sp.setTarget(Math.floor(current / initial * 100));
@@ -197,7 +197,7 @@ const createTimeline = logs => {
     } else if (log.startsWith("|fury|")) {
       const [, , id, amount, current] = log.split("|");
       timeline.events.push({
-        timestamp,
+        frame,
         callback: () => {
           if (id % 2 == 0) {
             timeline.left[timeline.leftIndex].animations.fury.setTarget(Math.floor(current / FURY_BURST_THRESHOLD * 100));
@@ -210,10 +210,10 @@ const createTimeline = logs => {
       });
     } else if (log.startsWith("|win|")) {
       const [, , id] = log.split("|");
-      timestamp += 1000;
+      frame += 30;
       if (id % 2 == 0) {
         timeline.events.push({
-          timestamp,
+          frame,
           callback: () => {
             ++timeline.rightIndex;
             timeline.left[timeline.leftIndex].current.status = new Set();
@@ -221,14 +221,14 @@ const createTimeline = logs => {
         });
       } else {
         timeline.events.push({
-          timestamp,
+          frame,
           callback: () => {
             ++timeline.leftIndex;
             timeline.right[timeline.rightIndex].current.status = new Set();
           }
         });
       }
-      timestamp += 1000;
+      frame += 30;
     }
   });
   return timeline;
@@ -247,15 +247,15 @@ const Replay = ({ logs, play = false }) => {
     canvas.height = 720;
     const ctx = canvas.getContext("2d");
     let req;
-    const start = new Date();
+    let frames = 0;
 
     async function animate() {
-      const elaspedTime = new Date() - start;
+      ++frames;
       timeline.events.forEach(event => {
-        if (elaspedTime >= event.timestamp) event.callback();
+        if (frames >= event.frame) event.callback();
       });
       if (timeline.leftIndex >= timeline.left.length || timeline.rightIndex >= timeline.right.length) return;
-      timeline.events = timeline.events.filter(event => elaspedTime < event.timestamp);
+      timeline.events = timeline.events.filter(event => frames < event.frame);
       await renderTimeline(ctx, timeline);
       timeline.ongoingAnimations = timeline.ongoingAnimations.filter(animation => !animation.isFinished());
       if (canvasRef.current) {

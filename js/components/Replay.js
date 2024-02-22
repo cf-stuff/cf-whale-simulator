@@ -4,6 +4,7 @@ import AnimationDefinitions from "../animations/animations.js";
 import { FURY_BURST_THRESHOLD } from "../config.js";
 import TextFloat from "../animations/TextFloat.js";
 import Skills from "../data/skills.js";
+import { FighterState } from "../animations/Fighter.js";
 
 const createTimeline = logs => {
   const timeline = {
@@ -14,7 +15,7 @@ const createTimeline = logs => {
     events: [],
     ongoingAnimations: []
   }
-  let frame = 100;
+  let frame = 30;
   logs.forEach(log => {
     if (log.startsWith("|player|")) {
       const [, , id, player] = log.split("|");
@@ -35,6 +36,7 @@ const createTimeline = logs => {
         x: 300, // mid
         y: 550 // bot
       }
+      object.sprite = new AnimationDefinitions.Fighter(object.pos, left)
       if (left) {
         timeline.left.push(object);
       } else {
@@ -42,7 +44,20 @@ const createTimeline = logs => {
       }
     } else if (log.startsWith("|skill|")) {
       const [, , id, name] = log.split("|");
-      if (name === Skills.goldenShield.name) {
+      if (name === Skills.normal.name) {
+        if (id % 2 === 0) {
+          timeline.events.push({
+            frame,
+            callback: () => timeline.left[timeline.leftIndex].sprite.state = FighterState.hitAndRun
+          });
+        } else {
+          timeline.events.push({
+            frame,
+            callback: () => timeline.right[timeline.rightIndex].sprite.state = FighterState.hitAndRun
+          });
+        }
+        frame += 57;
+      } if (name === Skills.goldenShield.name) {
         timeline.events.push({
           frame,
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.GoldenShield(id % 2 === 0))
@@ -54,6 +69,19 @@ const createTimeline = logs => {
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Assassinate(id % 2 === 0))
         });
         frame += 49;
+      } else if (name === Skills.movingIllusion.name) {
+        if (id % 2 === 0) {
+          timeline.events.push({
+            frame,
+            callback: () => timeline.left[timeline.leftIndex].sprite.state = FighterState.movingIllusion
+          });
+        } else {
+          timeline.events.push({
+            frame,
+            callback: () => timeline.right[timeline.rightIndex].sprite.state = FighterState.movingIllusion
+          });
+        }
+        frame += 57;
       } else if (name === Skills.bloodFrenzy.name) {
         timeline.events.push({
           frame,
@@ -210,7 +238,7 @@ const createTimeline = logs => {
       });
     } else if (log.startsWith("|win|")) {
       const [, , id] = log.split("|");
-      frame += 30;
+      frame += 60;
       if (id % 2 == 0) {
         timeline.events.push({
           frame,

@@ -15,7 +15,7 @@ export default class GoldenShield {
   update() {
     ++this.frame;
     if (this.frame > 13 && this.frame < 23) {
-      this.y += 45;
+      this.y += 48;
     }
   }
 

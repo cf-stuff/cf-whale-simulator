@@ -28,9 +28,9 @@ export default class Barbarism {
    * notes @ 30 fps
    * frames 1-10 wind up
    * frames 11-68 cow head
-   * frame 14 enter horns
+   * frame  14 enter horns
    * frames 69-80 fade out
-   * frame 76 is when status is added
+   * frame  76 is when status is added
    */
   draw(ctx) {
     if (this.left) {

@@ -1,3 +1,4 @@
+import Fighter from "./Fighter.js";
 import FuryBar from "./FuryBar.js";
 import HpBar from "./HpBar.js";
 import SpBar from "./SpBar.js";
@@ -17,6 +18,7 @@ export const Layer = {
 }
 
 const AnimationDefinitions = {
+  Fighter,
   HpBar,
   SpBar,
   FuryBar,

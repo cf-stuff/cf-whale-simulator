@@ -12,6 +12,16 @@ const char = getImage("img/display/char.png");
 const horns = getImage("img/display/effects/horns.png");
 const bell = getImage("img/display/effects/bell.png");
 const frenzy = getImage("img/display/effects/frenzy.png");
+const bubble = getImage("img/display/effects/bubble.png");
+const ice = getImage("img/display/effects/ice.png");
+const paralyzed = getImage("img/display/effects/paralyzed.png");
+const shieldWall = getImage("img/display/effects/shieldwall.png");
+const ignited = getImage("img/display/effects/ignited.png");
+const net = getImage("img/display/effects/net.png");
+const chains = getImage("img/display/effects/chains.png");
+const cloud = getImage("img/display/effects/aotg-cloud.png");
+const cursed = getImage("img/display/effects/cursed.png");
+const rooted = getImage("img/display/effects/rooted.png");
 
 export async function createProfile(player, options = { bg: 11, left: true }) {
   const canvas = document.createElement("canvas");
@@ -50,40 +60,19 @@ export async function renderTimeline(ctx, timeline) {
   const right = timeline.right[timeline.rightIndex];
 
   renderTotem(ctx, left.totem, { left: true }, promises);
-  await renderTotem(ctx, right.totem, { left: false }, promises);
+  renderTotem(ctx, right.totem, { left: false }, promises);
+  await Promise.allSettled(promises);
 
-  ctx.drawImage(char, left.pos.x - char.width / 2, left.pos.y - char.height);
-  ctx.scale(-1, 1);
-  ctx.drawImage(char, right.pos.x - char.width / 2 + ctx.canvas.width * -1, right.pos.y - char.height);
-  ctx.scale(-1, 1);
+  left.sprite.update();
+  left.sprite.draw(ctx);
+  right.sprite.update();
+  right.sprite.draw(ctx);
 
   renderPetSprite(ctx, left.pet, { left: true }, promises);
   await renderPetSprite(ctx, right.pet, { left: false }, promises);
 
-  left.current.status.forEach(status => {
-    if (status === Status.barbarism.name) {
-      ctx.drawImage(horns, left.pos.x - horns.width / 2, left.pos.y - char.height - horns.height / 4);
-    } else if (status === Status.goldenShield.name) {
-      ctx.drawImage(bell, 0, 0, bell.width, bell.height, left.pos.x - bell.width, left.pos.y - bell.height * 1.8, bell.width * 2, bell.height * 2);
-    } else if (status === Status.bloodFrenzy.name) {
-      ctx.drawImage(frenzy, 0, 0, frenzy.width, frenzy.height, left.pos.x - frenzy.width * 0.9, left.pos.y - frenzy.height * 2, frenzy.width * 2, frenzy.height * 2);
-    }
-  });
-  right.current.status.forEach(status => {
-    if (status === Status.barbarism.name) {
-      ctx.scale(-1, 1);
-      ctx.drawImage(horns, right.pos.x + ctx.canvas.width * -1 - horns.width / 2, right.pos.y - char.height - horns.height / 4);
-      ctx.scale(-1, 1);
-    } else if (status === Status.goldenShield.name) {
-      ctx.scale(-1, 1);
-      ctx.drawImage(bell, 0, 0, bell.width, bell.height, right.pos.x + ctx.canvas.width * -1 - bell.width, right.pos.y - bell.height * 1.8, bell.width * 2, bell.height * 2);
-      ctx.scale(-1, 1);
-    } else if (status === Status.bloodFrenzy.name) {
-      ctx.scale(-1, 1);
-      ctx.drawImage(frenzy, 0, 0, frenzy.width, frenzy.height, right.pos.x + ctx.canvas.width * -1 - frenzy.width * 0.9, right.pos.y - frenzy.height * 2, frenzy.width * 2, frenzy.height * 2);
-      ctx.scale(-1, 1);
-    }
-  });
+  left.current.status.forEach(status => renderStatusEffect(ctx, status, left.pos.x, left.pos.y, true));
+  right.current.status.forEach(status => renderStatusEffect(ctx, status, right.pos.x, right.pos.y, false));
   timeline.ongoingAnimations.sort((a, b) => a.layer - b.layer);
   timeline.ongoingAnimations.forEach(animation => {
     animation.update();
@@ -292,6 +281,45 @@ async function renderSkills(ctx, player, options, promises) {
         promises.push(asyncDraw(ctx, getImagePath(ImageType.fighterSkill, fighterSkill.iconIds[2]), xOffset + 2 + x * 50, 592, 41, 41));
       }
     }
+  }
+}
+
+function renderStatusEffect(ctx, status, x, y, left = true) {
+  if (!left) {
+    x += ctx.canvas.width * -1;
+    ctx.scale(-1, 1);
+  }
+  if (status === Status.frozen.name) {
+    ctx.drawImage(ice, x - ice.width / 2, y - ice.height);
+  } else if (status === Status.energyShield.name) {
+    ctx.drawImage(bubble, x - bubble.width / 2, y - bubble.height);
+  } else if (status === Status.ignited.name) {
+    ctx.globalAlpha = 0.5;
+    ctx.drawImage(ignited, x - ignited.width / 2, y - ignited.height);
+    ctx.globalAlpha = 1.0;
+  } else if (status === Status.goldenShield.name) {
+    ctx.drawImage(bell, 0, 0, bell.width, bell.height, x - bell.width, y - bell.height * 1.8, bell.width * 2, bell.height * 2);
+  } else if (status === Status.netted.name) {
+    ctx.drawImage(net, x - net.width / 2, y - net.height);
+  } else if (status === Status.rooted.name) {
+    ctx.drawImage(rooted, x - rooted.width / 2, y - rooted.height); // could be a bit higher but idk
+  } else if (status === Status.paralyzed.name) {
+    ctx.drawImage(paralyzed, x - paralyzed.width / 2, y - paralyzed.height);
+  } else if (status === Status.thunderGod.name) {
+    ctx.drawImage(cloud, x - cloud.width / 2, y - char.height - cloud.height);
+  } else if (status === Status.bloodFrenzy.name) {
+    ctx.drawImage(frenzy, 0, 0, frenzy.width, frenzy.height, x - frenzy.width * 0.9, y - frenzy.height * 2, frenzy.width * 2, frenzy.height * 2);
+  } else if (status === Status.silenced.name) {
+    ctx.drawImage(chains, x - chains.width / 2, y - chains.height);
+  } else if (status === Status.barbarism.name) {
+    ctx.drawImage(horns, x - horns.width / 2, y - char.height - horns.height / 4);
+  } else if (status === Status.cursed.name) {
+    ctx.drawImage(cursed, x - cursed.width / 2, y - char.height - cursed.height);
+  } else if (status === Status.shieldWall.name) {
+    ctx.drawImage(shieldWall, x - shieldWall.width / 2, y - shieldWall.height);
+  }
+  if (!left) {
+    ctx.scale(-1, 1);
   }
 }
 

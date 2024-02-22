@@ -44,9 +44,6 @@ ice (no sprite)
 cleanse cleanse.png
 bubble (no animation)
 meteorite firemeteorite.png
-fire shield fireshield.png
-frenzy bloodfrenzy.png
-bell bell.png
 net net.png
 quake quake.png
 thorns thorns.png
@@ -59,7 +56,7 @@ violence violence.png
 hammer hammer.png
 explosive blow explosiveblow.png
 gallop gallop.png
-counter (no sprite)
+counter (do a lil tilt thing)
 bomb bomb.png
 poison poison.png
 time bomb timebomb.png
@@ -67,11 +64,7 @@ wine wine.png
 mask mask.png
 shackles shackles.png
 esw esw.png
-barb barb.png
-assassinate assassinate.png
 curse curse.png
-mi (split into 2 at lower opacity)
-shield wall (no cast animation)
 needle needle.png
 rejuv rejuv.png
 revive revive.png
@@ -80,37 +73,18 @@ pet block
 pet attack
 
 status:
-bubble bubble.png
-frenzy frenzy.png
-bell bell.png
 violent violent.png
-horns horns.png
-shield wall shieldwall.png
 sick sick.png
-frozen ice.png
-ignited ignited.png
-net net.png
 stunned (no sprite, character shakes size to size)
-rooted rooted.png
-paralyzed paralyzed.png
-aotg aotg-cloud.png aotg-lightning.png
 poisoned
 time bomb timebomb.png timebomb.explode.png
 drunk drunk.png
 weakened mask.png
-silenced chains.png
-cursed cursed.png
 dizzy (same as stunned)
 
 dodge / parry
-fury burst furyburst.png
+fury burst furyburst.png - can skip if lazy
 win / dead
-generic avatar char.png
-numbers / stat changes:
-- crt dmg red
-- heal blue
-- normal dmg yellow
-- sp blue
 
 todo
 poisoned can't find sprite

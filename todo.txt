@@ -1,7 +1,6 @@
-phase 1: battle simulator
-phase 2: user interface to input stats (like feh combat sim or pokemon showdown)
-phase 3: animate replays including fast forward and rewind, import and export - battle sim exports replay
-phase 4: backend db to store replays and share via link
+phase 1: battle simulator + user interface to input stats (like feh combat sim or pokemon showdown)
+phase 2: animate replays including fast forward and rewind, import and export - battle sim exports replay
+phase 3: backend db to store replays and share via link
 
 possible ideas
 
@@ -21,6 +20,8 @@ normalise score -> use as probability for pool selection
 todo for phase 1
 net eva multiplier
 can mi/dodge then counterattack
+should be able to eng shield when enemy frozen
+assassinate should not heal after win
 
 new branch for:
 localStorage => indexedDB
@@ -42,14 +43,10 @@ skills:
 bacteria bacteria.png
 ice (no sprite)
 cleanse cleanse.png
-bubble (no animation)
 meteorite firemeteorite.png
 net net.png
 quake quake.png
 thorns thorns.png
-lightning ball lightningball.png in an arc
-tbox lightningball.png in straight line
-aotg (no cast animation)
 storm box stormboxing.png
 fast move fastmove.png
 violence violence.png
@@ -65,9 +62,7 @@ mask mask.png
 shackles shackles.png
 esw esw.png
 curse curse.png
-needle needle.png
 rejuv rejuv.png
-revive revive.png
 
 pet block
 pet attack
@@ -84,7 +79,6 @@ dizzy (same as stunned)
 
 dodge / parry
 fury burst furyburst.png - can skip if lazy
-win / dead
 
 todo
 poisoned can't find sprite
@@ -125,3 +119,6 @@ logs same height as battle, 300px on mobile
 
 during fight button layout TBD
 - button to restart replay
+
+possible idea: fixed max frames for bar updates
+use turn to determine who is drawn first (useful in cases of overlap e.g lightningball)

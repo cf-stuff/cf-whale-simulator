@@ -128,7 +128,7 @@ const Battle = () => {
   </div>
   <div class="row">
     <span>Note: Due to the nature of this game, it is impossible to 100% accurately depict certain behaviours 
-    (for example crit chance, dodge chance, bomb throwback chance). The best we can do is approximate them, so take the battle results with a grain a salt.</span>
+    (for example crit chance, dodge chance, bomb throwback chance, aotg switch chance). The best we can do is approximate them, so take the battle results with a grain a salt.</span>
   </div>
   `;
 }

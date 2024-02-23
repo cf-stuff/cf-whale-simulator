@@ -3,7 +3,8 @@ img.src = "img/display/char.png";
 
 export const FighterState = {
   idle: 0,
-  attack: 3
+  attack: 3,
+  die: 4
 }
 
 export default class Fighter {
@@ -14,7 +15,7 @@ export default class Fighter {
     this.angle = 0;
     this.frames = 0;
     this.opacity = 1.0;
-    this.pauseDuration = 0;
+    this.pivot = "center";
   }
 
   set state(state) {
@@ -23,6 +24,9 @@ export default class Fighter {
     if (state === FighterState.idle) {
       this.pos.x = 300;
       this.pos.y = 550;
+      this.angle = 0;
+      this.opacity = 1.0;
+      this.pivot = "center";
     }
   }
 
@@ -47,18 +51,35 @@ export default class Fighter {
     }
   }
 
+  /**
+   * notes @ 30 fps
+   * frames 1-14 stand
+   * frames 15-20 fall down
+   * frames 21-47 lie down
+   */
+  die() {
+    if (this.frames === 1) {
+      this.pivot = "bottom";
+    } else if (this.frames < 15) {
+    } else if (this.frames < 21) {
+      this.angle += Math.PI / 12;
+    } else if (this.frames === 21) {
+      this.angle = Math.PI / 2;
+    }
+  }
+
   update() {
     ++this.frames;
     if (this._state === FighterState.attack) {
       this.hitAndRun();
-    } else if (this._state === FighterState.hitPauseRun) {
-      this.hitPauseRun();
+    } else if (this._state === FighterState.die) {
+      this.die();
     }
   }
 
   draw(ctx) {
     ctx.globalAlpha = this.opacity;
-    drawAtAngle(ctx, img, this.pos.x - img.width / 2, this.pos.y - img.height, this.angle, this.left);
+    drawAtAngle(ctx, img, this.pos.x - img.width / 2, this.pos.y - img.height, this.angle, this.pivot, this.left);
     ctx.globalAlpha = 1.0;
   }
 
@@ -67,12 +88,13 @@ export default class Fighter {
   }
 }
 
-function drawAtAngle(ctx, img, x, y, angle, left) {
+function drawAtAngle(ctx, img, x, y, angle, pivot, left) {
+  const pivotX = img.width / 2;
+  const pivotY = pivot === "center" ? img.height / 2 : img.height * 3 / 4;
   if (!left) x = ctx.canvas.width - img.width - x;
-  ctx.translate(x, y);
-  ctx.translate(img.width / 2, img.height / 2);
+  ctx.translate(x + pivotX, y + pivotY);
   if (!left) ctx.scale(-1, 1);
   ctx.rotate(angle);
-  ctx.drawImage(img, -img.width / 2, -img.height / 2);
+  ctx.drawImage(img, -pivotX, -pivotY);
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 }

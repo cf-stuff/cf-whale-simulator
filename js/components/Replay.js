@@ -55,17 +55,11 @@ const createTimeline = logs => {
     } else if (log.startsWith("|skill|")) {
       const [, , id, name] = log.split("|");
       if (name === Skills.normal.name) {
-        if (id % 2 === 0) {
-          timeline.events.push({
-            frame,
-            callback: () => timeline.left[timeline.leftIndex].sprite.state = FighterState.attack
-          });
-        } else {
-          timeline.events.push({
-            frame,
-            callback: () => timeline.right[timeline.rightIndex].sprite.state = FighterState.attack
-          });
-        }
+        const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
+        timeline.events.push({
+          frame,
+          callback: () => sprite.state = FighterState.attack
+        });
         frame += 57;
       } else if (name === Skills.goldenShield.name) {
         timeline.events.push({
@@ -80,6 +74,13 @@ const createTimeline = logs => {
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.LightningBall(id % 2 === 0, sprite))
         });
         frame += 83;
+      } else if (name === Skills.thunderboltBoxing.name) {
+        const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
+        timeline.events.push({
+          frame,
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.ThunderboltBoxing(id % 2 === 0, sprite))
+        });
+        frame += 62;
       } else if (name === Skills.assassinate.name) {
         timeline.events.push({
           frame,
@@ -115,24 +116,16 @@ const createTimeline = logs => {
         const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
         timeline.events.push({
           frame,
-          callback: () => {
-            // if (id % 2 === 0) {
-            //   timeline.left[timeline.leftIndex].sprite.state = FighterState.hitPauseRun;
-            //   timeline.left[timeline.leftIndex].sprite.pauseDuration = 41;
-            // } else {
-            //   timeline.right[timeline.rightIndex].sprite.state = FighterState.hitPauseRun;
-            //   timeline.right[timeline.rightIndex].sprite.pauseDuration = 41;
-            // }
-            timeline.ongoingAnimations.push(new AnimationDefinitions.DrawPower(id % 2 === 0, sprite));
-          }
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.DrawPower(id % 2 === 0, sprite))
         });
         frame += 76;
       } else if (name === Skills.rebirth.name) {
-        // timeline.events.push({
-        //   frame,
-        //   callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Barbarism(id % 2 === 0))
-        // });
-        frame += 80;
+        const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
+        timeline.events.push({
+          frame,
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Rebirth(id % 2 === 0, sprite))
+        });
+        frame += 81;
       } else if (skillsWithNoCastAnimation.some(x => x.name === name)) {
         // skills with no cast animation
       } else {
@@ -178,7 +171,7 @@ const createTimeline = logs => {
               timeline.left[timeline.leftIndex].current.hp = current;
               let gradTop;
               let gradBot;
-              let startY = 300; // temp, idk where to position these
+              let startY = 300; // todo temp, idk where to position these
               if (action === "remove") {
                 if (!amount.startsWith("-")) {
                   amount = "-" + amount;
@@ -224,6 +217,14 @@ const createTimeline = logs => {
             }
           }
         });
+        if (current === "0") {
+          const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
+          timeline.events.push({
+            frame,
+            callback: () => sprite.state = FighterState.die
+          });
+          frame += 47;
+        }
       } else if (stat === "sp") {
         timeline.events.push({
           frame,
@@ -274,7 +275,7 @@ const createTimeline = logs => {
       });
     } else if (log.startsWith("|win|")) {
       const [, , id] = log.split("|");
-      frame += 60;
+      frame += 14;
       if (id % 2 == 0) {
         timeline.events.push({
           frame,
@@ -292,7 +293,8 @@ const createTimeline = logs => {
           }
         });
       }
-      frame += 30;
+    } else if (log.startsWith("|turn|")) {
+      frame += 4;
     }
   });
   return timeline;

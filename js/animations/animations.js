@@ -11,6 +11,8 @@ import FireShield from "./skills/FireShield.js";
 import GoldenShield from "./skills/GoldenShield.js";
 import LightningBall from "./skills/LightningBall.js";
 import MovingIllusion from "./skills/MovingIllusion.js";
+import Rebirth from "./skills/Rebirth.js";
+import ThunderboltBoxing from "./skills/ThunderboltBoxing.js";
 
 export const Layer = {
   BACKGROUND: 0, // bg, totems
@@ -30,10 +32,12 @@ const AnimationDefinitions = {
   BloodFrenzy,
   GoldenShield,
   LightningBall, 
+  ThunderboltBoxing,
   Barbarism,
   Assassinate,
   MovingIllusion,
-  DrawPower, 
+  DrawPower,
+  Rebirth
 }
 
 export default AnimationDefinitions;

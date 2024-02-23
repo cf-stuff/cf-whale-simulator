@@ -1,27 +1,11 @@
+import Bar from "./Bar.js";
+
 const img = new Image();
 img.src = "img/display/BLOOD-RED.png";
 
-export default class HpBar {
+export default class HpBar extends Bar {
   constructor(left) {
-    this.left = left;
-    this.x = 110;
-    this.y = 37;
-    this.w = 289;
-    this.h = 25;
-    this.percent = 100;
-    this.targetPercent = 100;
-  }
-
-  setTarget(percent) {
-    this.targetPercent = percent;
-  }
-
-  update() {
-    if (this.percent < this.targetPercent) {
-      ++this.percent;
-    } else if (this.percent > this.targetPercent) {
-      --this.percent;
-    }
+    super(left, { x: 110, y: 37, w: 289, h: 25, initialPercent: 100 });
   }
 
   draw(ctx) {

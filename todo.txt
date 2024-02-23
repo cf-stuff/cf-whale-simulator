@@ -120,5 +120,5 @@ logs same height as battle, 300px on mobile
 during fight button layout TBD
 - button to restart replay
 
-possible idea: fixed max frames for bar updates
+possible idea:
 use turn to determine who is drawn first (useful in cases of overlap e.g lightningball)

@@ -273,7 +273,22 @@ const createTimeline = logs => {
           }
         }
       });
-    } else if (log.startsWith("|win|")) {
+    } else if (log.startsWith("|furyburst|")) {
+      const [, , id] = log.split("|");
+      timeline.events.push({
+        frame,
+        callback: () => {
+          if (id % 2 == 0) {
+            timeline.left[timeline.leftIndex].animations.fury.setTarget(0);
+            timeline.left[timeline.leftIndex].current.fury = 0;
+          } else {
+            timeline.right[timeline.rightIndex].animations.fury.setTarget(0);
+            timeline.right[timeline.rightIndex].current.fury = 0;
+          }
+        }
+      });
+      // todo animation
+    }  else if (log.startsWith("|win|")) {
       const [, , id] = log.split("|");
       frame += 14;
       if (id % 2 == 0) {

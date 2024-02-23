@@ -1,27 +1,11 @@
+import Bar from "./Bar.js";
+
 const img = new Image();
 img.src = "img/display/nu-cao2.png";
 
-export default class FuryBar {
+export default class FuryBar extends Bar {
   constructor(left) {
-    this.left = left;
-    this.x = 418;
-    this.y = 1;
-    this.w = 65;
-    this.h = 94;
-    this.percent = 0;
-    this.targetPercent = 0;
-  }
-
-  setTarget(percent) {
-    this.targetPercent = percent;
-  }
-
-  update() {
-    if (this.percent < this.targetPercent) {
-      ++this.percent;
-    } else if (this.percent > this.targetPercent) {
-      this.percent -= 3;
-    }
+    super(left, { x: 418, y: 1, w: 65, h: 94, initialPercent: 0 });
   }
 
   draw(ctx) {

@@ -1,27 +1,11 @@
+import Bar from "./Bar.js";
+
 const img = new Image();
 img.src = "img/display/BLOOD-BLUE.png";
 
-export default class SpBar {
+export default class SpBar extends Bar {
   constructor(left) {
-    this.left = left;
-    this.x = 234;
-    this.y = 65;
-    this.w = 187;
-    this.h = 19;
-    this.percent = 100;
-    this.targetPercent = 100;
-  }
-
-  setTarget(percent) {
-    this.targetPercent = percent;
-  }
-
-  update() {
-    if (this.percent < this.targetPercent) {
-      ++this.percent;
-    } else if (this.percent > this.targetPercent) {
-      --this.percent;
-    }
+    super(left, { x: 234, y: 65, w: 187, h: 19, initialPercent: 100 });
   }
 
   draw(ctx) {

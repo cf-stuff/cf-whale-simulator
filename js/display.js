@@ -68,7 +68,7 @@ export async function renderTimeline(ctx, timeline) {
   right.sprite.update();
   right.sprite.draw(ctx);
 
-  renderPetSprite(ctx, left.pet, { left: true }, promises);
+  await renderPetSprite(ctx, left.pet, { left: true }, promises);
   await renderPetSprite(ctx, right.pet, { left: false }, promises);
 
   left.current.status.forEach(status => renderStatusEffect(ctx, status, left.pos.x, left.pos.y, true));

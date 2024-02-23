@@ -6,8 +6,10 @@ import TextFloat from "./TextFloat.js";
 import Assassinate from "./skills/Assassinate.js";
 import Barbarism from "./skills/Barbarism.js";
 import BloodFrenzy from "./skills/BloodFrenzy.js";
+import DrawPower from "./skills/DrawPower.js";
 import FireShield from "./skills/FireShield.js";
 import GoldenShield from "./skills/GoldenShield.js";
+import LightningBall from "./skills/LightningBall.js";
 
 export const Layer = {
   BACKGROUND: 0, // bg, totems
@@ -26,8 +28,10 @@ const AnimationDefinitions = {
   FireShield,
   BloodFrenzy,
   GoldenShield,
+  LightningBall, 
   Barbarism,
   Assassinate,
+  DrawPower, 
 }
 
 export default AnimationDefinitions;

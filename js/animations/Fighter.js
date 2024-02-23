@@ -3,10 +3,7 @@ img.src = "img/display/char.png";
 
 export const FighterState = {
   idle: 0,
-  jumping: 1,
-  arc: 2,
-  hitAndRun: 3,
-  hitPauseRun: 4,
+  attack: 3,
   movingIllusion: 5
 }
 
@@ -18,19 +15,16 @@ export default class Fighter {
     this.angle = 0;
     this.frames = 0;
     this.opacity = 1.0;
+    this.pauseDuration = 0;
   }
 
   set state(state) {
     this.frames = 0;
     this._state = state;
-  }
-
-  jump() {
-
-  }
-
-  arc() {
-
+    if (state === FighterState.idle) {
+      this.pos.x = 300;
+      this.pos.y = 550;
+    }
   }
 
   /**
@@ -42,36 +36,14 @@ export default class Fighter {
    */
   hitAndRun() {
     if (this.frames < 18) {
-      this.pos.x += 15
+      this.pos.x += 15;
     } else if (this.frames < 37) {
-      this.angle = Math.PI / 4;
+      this.angle = Math.PI / 6;
     } else if (this.frames < 46) {
       this.angle = 0;
     } else if (this.frames < 56) {
-      this.pos.x -= 21
+      this.pos.x -= 21;
     } else {
-      this.pos.x = 300;
-      this.state = FighterState.idle;
-    }
-  }
-
-  /**
-   * notes @ 30 fps
-   * frames 1-17 run up
-   * frames 18-45 pause
-   * frames 46-57 run
-   */
-  hitPauseRun() {
-    if (this.frames < 18) {
-      this.pos.x += 15
-    } else if (this.frames < 45) {
-      this.angle = Math.PI / 4;
-    } else if (this.frames < 46) {
-      this.angle = 0;
-    } else if (this.frames < 56) {
-      this.pos.x -= 21
-    } else {
-      this.pos.x = 300;
       this.state = FighterState.idle;
     }
   }
@@ -105,8 +77,10 @@ export default class Fighter {
 
   update() {
     ++this.frames;
-    if (this._state === FighterState.hitAndRun) {
+    if (this._state === FighterState.attack) {
       this.hitAndRun();
+    } else if (this._state === FighterState.hitPauseRun) {
+      this.hitPauseRun();
     } else if (this._state === FighterState.movingIllusion) {
       this.movingIllusion();
     }

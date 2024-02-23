@@ -6,6 +6,16 @@ import TextFloat from "../animations/TextFloat.js";
 import Skills from "../data/skills.js";
 import { FighterState } from "../animations/Fighter.js";
 
+const skillsWithNoCastAnimation = [
+  Skills.energyShield,
+  Skills.woundInfection,
+  Skills.arrivalOfThunderGod,
+  Skills.antiDamageChop,
+  Skills.magicStealing,
+  Skills.shieldWall,
+  Skills.bloodSacrifice
+]
+
 const createTimeline = logs => {
   const timeline = {
     left: [],
@@ -48,21 +58,28 @@ const createTimeline = logs => {
         if (id % 2 === 0) {
           timeline.events.push({
             frame,
-            callback: () => timeline.left[timeline.leftIndex].sprite.state = FighterState.hitAndRun
+            callback: () => timeline.left[timeline.leftIndex].sprite.state = FighterState.attack
           });
         } else {
           timeline.events.push({
             frame,
-            callback: () => timeline.right[timeline.rightIndex].sprite.state = FighterState.hitAndRun
+            callback: () => timeline.right[timeline.rightIndex].sprite.state = FighterState.attack
           });
         }
         frame += 57;
-      } if (name === Skills.goldenShield.name) {
+      } else if (name === Skills.goldenShield.name) {
         timeline.events.push({
           frame,
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.GoldenShield(id % 2 === 0))
         });
         frame += 38;
+      } else if (name === Skills.lightningBall.name) {
+        const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
+        timeline.events.push({
+          frame,
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.LightningBall(id % 2 === 0, sprite))
+        });
+        frame += 83;
       } else if (name === Skills.assassinate.name) {
         timeline.events.push({
           frame,
@@ -100,6 +117,30 @@ const createTimeline = logs => {
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Barbarism(id % 2 === 0))
         });
         frame += 80;
+      } else if (name === Skills.drawPower.name) {
+        const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
+        timeline.events.push({
+          frame,
+          callback: () => {
+            // if (id % 2 === 0) {
+            //   timeline.left[timeline.leftIndex].sprite.state = FighterState.hitPauseRun;
+            //   timeline.left[timeline.leftIndex].sprite.pauseDuration = 41;
+            // } else {
+            //   timeline.right[timeline.rightIndex].sprite.state = FighterState.hitPauseRun;
+            //   timeline.right[timeline.rightIndex].sprite.pauseDuration = 41;
+            // }
+            timeline.ongoingAnimations.push(new AnimationDefinitions.DrawPower(id % 2 === 0, sprite));
+          }
+        });
+        frame += 76;
+      } else if (name === Skills.rebirth.name) {
+        // timeline.events.push({
+        //   frame,
+        //   callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Barbarism(id % 2 === 0))
+        // });
+        frame += 80;
+      } else if (skillsWithNoCastAnimation.some(x => x.name === name)) {
+        // skills with no cast animation
       } else {
         frame += 30; // temp hardcode for unhandled skills
       }
@@ -130,6 +171,7 @@ const createTimeline = logs => {
           });
         }
       }
+      frame += 10;
     } else if (log.startsWith("|stat|")) {
       // idea: if previous log was a stat add small delay
       let [, , action, id, stat, amount, current, initial, source, crt] = log.split("|");

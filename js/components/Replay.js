@@ -87,18 +87,12 @@ const createTimeline = logs => {
         });
         frame += 49;
       } else if (name === Skills.movingIllusion.name) {
-        if (id % 2 === 0) {
-          timeline.events.push({
-            frame,
-            callback: () => timeline.left[timeline.leftIndex].sprite.state = FighterState.movingIllusion
-          });
-        } else {
-          timeline.events.push({
-            frame,
-            callback: () => timeline.right[timeline.rightIndex].sprite.state = FighterState.movingIllusion
-          });
-        }
-        frame += 57;
+        const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
+        timeline.events.push({
+          frame,
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.MovingIllusion(id % 2 === 0, sprite))
+        });
+        frame += 22;
       } else if (name === Skills.bloodFrenzy.name) {
         timeline.events.push({
           frame,

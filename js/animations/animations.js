@@ -10,6 +10,7 @@ import DrawPower from "./skills/DrawPower.js";
 import FireShield from "./skills/FireShield.js";
 import GoldenShield from "./skills/GoldenShield.js";
 import LightningBall from "./skills/LightningBall.js";
+import MovingIllusion from "./skills/MovingIllusion.js";
 
 export const Layer = {
   BACKGROUND: 0, // bg, totems
@@ -31,6 +32,7 @@ const AnimationDefinitions = {
   LightningBall, 
   Barbarism,
   Assassinate,
+  MovingIllusion,
   DrawPower, 
 }
 

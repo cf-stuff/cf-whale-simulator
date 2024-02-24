@@ -536,6 +536,9 @@ function createStatus(state, playerIndex, name, options) {
   if (status.effect.decreaseEva) {
     updateStat(state, playerIndex, Stats.eva.name, false, -status.effect.decreaseEva, name);
   }
+  if (status.effect.decreaseHit) {
+    updateStat(state, playerIndex, Stats.hit.name, false, -status.effect.decreaseEva, name);
+  }
   if (status.effect.decreaseBrk) {
     updateStat(state, playerIndex, Stats.brk.name, false, -status.effect.decreaseBrk, name);
   }

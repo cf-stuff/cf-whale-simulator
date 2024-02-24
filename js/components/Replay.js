@@ -112,7 +112,13 @@ const createTimeline = logs => {
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Barbarism(id % 2 === 0))
         });
         frame += 80;
-      } else if (name === Skills.drawPower.name) {
+      } else if (name === Skills.earthStyleWall.name) {
+        timeline.events.push({
+          frame,
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.EarthStyleWall(id % 2 === 0))
+        });
+        frame += 62;
+      }  else if (name === Skills.drawPower.name) {
         const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
         timeline.events.push({
           frame,

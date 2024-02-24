@@ -7,6 +7,7 @@ import Assassinate from "./skills/Assassinate.js";
 import Barbarism from "./skills/Barbarism.js";
 import BloodFrenzy from "./skills/BloodFrenzy.js";
 import DrawPower from "./skills/DrawPower.js";
+import EarthStyleWall from "./skills/EarthStyleWall.js";
 import FireShield from "./skills/FireShield.js";
 import GoldenShield from "./skills/GoldenShield.js";
 import LightningBall from "./skills/LightningBall.js";
@@ -36,6 +37,7 @@ const AnimationDefinitions = {
   Barbarism,
   Assassinate,
   MovingIllusion,
+  EarthStyleWall,
   DrawPower,
   Rebirth
 }

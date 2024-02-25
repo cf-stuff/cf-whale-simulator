@@ -16,7 +16,7 @@ export default class MovingIllusion {
     ++this.frame;
     if (this.frame === 1) {
       this.sprite.opacity = 0;
-    }else if (this.frame > 4 && this.frame < 14) {
+    } else if (this.frame > 4 && this.frame < 14) {
       this.opacity = 1 - 0.12 * this.frame - 5;
     } else if (this.frame === 14) {
       this.opacity = 0.9;

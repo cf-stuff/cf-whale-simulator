@@ -53,14 +53,12 @@ violence violence.png
 hammer hammer.png
 explosive blow explosiveblow.png
 gallop gallop.png
-counter (do a lil tilt thing)
 bomb bomb.png
 poison poison.png
 time bomb timebomb.png
 wine wine.png
 mask mask.png
 shackles shackles.png
-esw esw.png
 curse curse.png
 rejuv rejuv.png
 

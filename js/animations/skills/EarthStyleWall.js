@@ -5,7 +5,7 @@ img.src = "img/display/effects/esw.png";
 
 export default class EarthStyleWall {
   constructor(left) {
-    this.layer = Layer.EFFECTS2
+    this.layer = Layer.EFFECTS;
     this.left = left;
     this.x = 350;
     this.y = 400;

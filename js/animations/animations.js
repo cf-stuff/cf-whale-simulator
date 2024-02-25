@@ -6,6 +6,7 @@ import TextFloat from "./TextFloat.js";
 import Assassinate from "./skills/Assassinate.js";
 import Barbarism from "./skills/Barbarism.js";
 import BloodFrenzy from "./skills/BloodFrenzy.js";
+import Counterattack from "./skills/Counterattack.js";
 import DrawPower from "./skills/DrawPower.js";
 import EarthStyleWall from "./skills/EarthStyleWall.js";
 import FireShield from "./skills/FireShield.js";
@@ -13,6 +14,7 @@ import GoldenShield from "./skills/GoldenShield.js";
 import LightningBall from "./skills/LightningBall.js";
 import MovingIllusion from "./skills/MovingIllusion.js";
 import Rebirth from "./skills/Rebirth.js";
+import Rejuvenation from "./skills/Rejuvenation.js";
 import ThunderboltBoxing from "./skills/ThunderboltBoxing.js";
 
 export const Layer = {
@@ -34,11 +36,13 @@ const AnimationDefinitions = {
   GoldenShield,
   LightningBall, 
   ThunderboltBoxing,
+  Counterattack,
   Barbarism,
   Assassinate,
   MovingIllusion,
   EarthStyleWall,
   DrawPower,
+  Rejuvenation,
   Rebirth
 }
 

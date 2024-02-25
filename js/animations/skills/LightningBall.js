@@ -22,12 +22,12 @@ export default class LightningBall {
       this.sprite.pos.y += 75;
     } else if (this.frame < 30) {
     } else if (this.frame < 46) {
-      this.sprite.pos.x -= 1;
+      this.sprite.pos.x -= 2;
       this.sprite.pos.y += 3;
     } else if (this.frame < 69) {
       this.sprite.angle = 0;
     } else if (this.frame < 83) {
-      this.sprite.pos.x -= 21;
+      this.sprite.pos.x -= 20;
     } else {
       this.sprite.pos.x = 300;
       this.sprite.pos.y = 550;

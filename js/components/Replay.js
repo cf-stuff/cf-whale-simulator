@@ -81,6 +81,13 @@ const createTimeline = logs => {
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.ThunderboltBoxing(id % 2 === 0, sprite))
         });
         frame += 62;
+      } else if (name === Skills.counterattack.name) {
+        const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
+        timeline.events.push({
+          frame,
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Counterattack(id % 2 === 0, sprite))
+        });
+        frame += 26;
       } else if (name === Skills.assassinate.name) {
         timeline.events.push({
           frame,
@@ -118,13 +125,19 @@ const createTimeline = logs => {
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.EarthStyleWall(id % 2 === 0))
         });
         frame += 62;
-      }  else if (name === Skills.drawPower.name) {
+      } else if (name === Skills.drawPower.name) {
         const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
         timeline.events.push({
           frame,
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.DrawPower(id % 2 === 0, sprite))
         });
         frame += 76;
+      } else if (name === Skills.rejuvenation.name) {
+        timeline.events.push({
+          frame,
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Rejuvenation(id % 2 === 0))
+        });
+        frame += 30;
       } else if (name === Skills.rebirth.name) {
         const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
         timeline.events.push({
@@ -293,8 +306,9 @@ const createTimeline = logs => {
           }
         }
       });
+      frame += 15;
       // todo animation
-    }  else if (log.startsWith("|win|")) {
+    } else if (log.startsWith("|win|")) {
       const [, , id] = log.split("|");
       frame += 14;
       if (id % 2 == 0) {
@@ -321,7 +335,7 @@ const createTimeline = logs => {
   return timeline;
 }
 
-const Replay = ({ logs, play = false }) => {
+const Replay = ({ logs, play = true }) => {
   const canvasRef = useRef(null);
   console.log(logs);
 

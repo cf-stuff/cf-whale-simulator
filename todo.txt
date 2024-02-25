@@ -53,7 +53,6 @@ violence violence.png
 hammer hammer.png
 explosive blow explosiveblow.png
 gallop gallop.png
-bomb bomb.png
 time bomb timebomb.png
 wine wine.png
 mask mask.png
@@ -67,7 +66,6 @@ status:
 violent violent.png
 sick sick.png
 stunned (no sprite, character shakes size to size)
-poisoned
 time bomb timebomb.png timebomb.explode.png
 drunk drunk.png
 weakened mask.png

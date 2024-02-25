@@ -6,6 +6,7 @@ import TextFloat from "./TextFloat.js";
 import Assassinate from "./skills/Assassinate.js";
 import Barbarism from "./skills/Barbarism.js";
 import BloodFrenzy from "./skills/BloodFrenzy.js";
+import Bomb from "./skills/Bomb.js";
 import Counterattack from "./skills/Counterattack.js";
 import DrawPower from "./skills/DrawPower.js";
 import EarthStyleWall from "./skills/EarthStyleWall.js";
@@ -20,7 +21,7 @@ import ThunderboltBoxing from "./skills/ThunderboltBoxing.js";
 
 export const Layer = {
   BACKGROUND: 0, // bg, totems
-  CHARACTERS: 1, // pet, fighter
+  CHARACTERS: 1, // pet, fighter, status
   EFFECTS: 2, // most skills
   UI: 3,
   EFFECTS2: 4, // assassinate make screen go black
@@ -38,6 +39,7 @@ const AnimationDefinitions = {
   LightningBall, 
   ThunderboltBoxing,
   Counterattack,
+  Bomb,
   PoisonousFog,
   Barbarism,
   Assassinate,

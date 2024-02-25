@@ -3,6 +3,9 @@ import { Layer } from "../animations.js";
 const ball = new Image();
 ball.src = "img/display/effects/poisonball.png";
 
+const fog = new Image();
+fog.src = "img/display/effects/poisonfog.png";
+
 export default class PoisonousFog {
   constructor(left, sprite) {
     this.layer = Layer.EFFECTS
@@ -36,12 +39,15 @@ export default class PoisonousFog {
       this.ballOffsetX -= 15;
       this.ballOffsetY -= 15;
     } else if (this.frame < 29) {
-      this.ballOffsetX += 10;
-      this.ballOffsetY += 25;
+      this.sprite.angle = Math.PI / 6;
+      this.ballOffsetX += 12;
+      this.ballOffsetY += 32;
     } else if (this.frame < 34) {
     } else if (this.frame < 49) {
       if (this.sprite.pos.y < 550) this.sprite.pos.y += 15;
-      // fog effects
+      else this.sprite.angle = 0;
+    } else if (this.frame < 59) {
+      this.fogOpacity -= 0.1;
     } else if (this.frame < 66) {
     } else if (this.frame < 82) {
       this.sprite.pos.x -= 15;
@@ -65,7 +71,7 @@ export default class PoisonousFog {
    * frames 66-82 run back
    */
   draw(ctx) {
-    if (this.frame > 13 && this.frame < 33) {
+    if (this.frame > 13 && this.frame < 34) {
       if (this.left) {
         ctx.globalAlpha = this.ballOpacity;
         ctx.drawImage(ball, this.sprite.pos.x + this.ballOffsetX, this.sprite.pos.y + this.ballOffsetY);
@@ -74,6 +80,18 @@ export default class PoisonousFog {
         ctx.globalAlpha = this.ballOpacity;
         ctx.scale(-1, 1);
         ctx.drawImage(ball, this.sprite.pos.x + this.ballOffsetX + ctx.canvas.width * -1, this.sprite.pos.y + this.ballOffsetY);
+        ctx.scale(-1, 1);
+        ctx.globalAlpha = 1.0;
+      }
+    } else if (this.frame > 33 && this.frame < 59) {
+      if (this.left) {
+        ctx.globalAlpha = this.fogOpacity;
+        ctx.drawImage(fog, 724 - fog.width / 2, 550 - fog.height);
+        ctx.globalAlpha = 1.0;
+      } else {
+        ctx.globalAlpha = this.fogOpacity;
+        ctx.scale(-1, 1);
+        ctx.drawImage(fog, 724 - fog.width / 2 + ctx.canvas.width * -1, 550 - fog.height);
         ctx.scale(-1, 1);
         ctx.globalAlpha = 1.0;
       }

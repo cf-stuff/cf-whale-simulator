@@ -1,7 +1,7 @@
 import { Layer } from "../animations.js";
 
 const beam = new Image();
-beam.src = "img/display/effects/beam.png";
+beam.src = "img/display/effects/rejuvbeam.png";
 
 const img = new Image();
 img.src = "img/display/effects/rejuv.png";

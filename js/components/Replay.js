@@ -88,6 +88,12 @@ const createTimeline = logs => {
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Counterattack(id % 2 === 0, sprite))
         });
         frame += 26;
+      } else if (name === Skills.bomb.name || name === "Bomb Throwback") {
+        timeline.events.push({
+          frame,
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Bomb(id % 2 === 0))
+        });
+        frame += 30;
       } else if (name === Skills.poisonousFog.name) {
         const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
         timeline.events.push({

@@ -22,6 +22,7 @@ const chains = getImage("img/display/effects/chains.png");
 const cloud = getImage("img/display/effects/aotg-cloud.png");
 const cursed = getImage("img/display/effects/cursed.png");
 const rooted = getImage("img/display/effects/rooted.png");
+const poisoned = getImage("img/display/effects/poisoned.png")
 
 export async function createProfile(player, options = { bg: 11, left: true }) {
   const canvas = document.createElement("canvas");
@@ -309,6 +310,8 @@ function renderStatusEffect(ctx, status, x, y, left = true) {
     ctx.drawImage(cloud, x - cloud.width / 2, y - char.height - cloud.height);
   } else if (status === Status.bloodFrenzy.name) {
     ctx.drawImage(frenzy, 0, 0, frenzy.width, frenzy.height, x - frenzy.width * 0.9, y - frenzy.height * 2, frenzy.width * 2, frenzy.height * 2);
+  } else if (status === Status.poisoned.name) {
+    ctx.drawImage(poisoned, x - poisoned.width / 2, y - poisoned.height);
   } else if (status === Status.silenced.name) {
     ctx.drawImage(chains, x - chains.width / 2, y - chains.height);
   } else if (status === Status.barbarism.name) {

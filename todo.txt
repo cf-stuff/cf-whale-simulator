@@ -54,13 +54,11 @@ hammer hammer.png
 explosive blow explosiveblow.png
 gallop gallop.png
 bomb bomb.png
-poison poison.png
 time bomb timebomb.png
 wine wine.png
 mask mask.png
 shackles shackles.png
 curse curse.png
-rejuv rejuv.png
 
 pet block
 pet attack

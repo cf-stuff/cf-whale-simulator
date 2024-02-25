@@ -13,6 +13,7 @@ import FireShield from "./skills/FireShield.js";
 import GoldenShield from "./skills/GoldenShield.js";
 import LightningBall from "./skills/LightningBall.js";
 import MovingIllusion from "./skills/MovingIllusion.js";
+import PoisonousFog from "./skills/PoisonousFog.js";
 import Rebirth from "./skills/Rebirth.js";
 import Rejuvenation from "./skills/Rejuvenation.js";
 import ThunderboltBoxing from "./skills/ThunderboltBoxing.js";
@@ -37,6 +38,7 @@ const AnimationDefinitions = {
   LightningBall, 
   ThunderboltBoxing,
   Counterattack,
+  PoisonousFog,
   Barbarism,
   Assassinate,
   MovingIllusion,

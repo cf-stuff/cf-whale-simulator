@@ -37,7 +37,7 @@ export default class BloodFrenzy {
   draw(ctx) {
     if (this.left) {
       if (this.frame > 10 && this.frame < 30) {
-        ctx.drawImage(img, this.x - img.width / 2, this.y - img.height);
+        ctx.drawImage(img, this.x - img.width / 2, this.y - img.height * 0.75);
       }
       if (this.frame > 10 && this.frame < 14) {
         ctx.drawImage(flame, 0, 0, flame.width, flame.height, this.x - flame.width / 2, this.y - flame.height / 2, flame.width, flame.height / 2);
@@ -51,7 +51,7 @@ export default class BloodFrenzy {
     } else {
       ctx.scale(-1, 1);
       if (this.frame > 10 && this.frame < 30) {
-        ctx.drawImage(img, this.x + ctx.canvas.width * -1 - img.width / 2, this.y - img.height);
+        ctx.drawImage(img, this.x + ctx.canvas.width * -1 - img.width / 2, this.y - img.height * 0.75);
       }
       if (this.frame > 10 && this.frame < 14) {
         ctx.drawImage(flame, 0, 0, flame.width, flame.height, this.x + ctx.canvas.width * -1 - flame.width / 2, this.y - flame.height / 2, flame.width, flame.height / 2);

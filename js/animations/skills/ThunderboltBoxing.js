@@ -9,7 +9,7 @@ export default class ThunderboltBoxing {
     this.left = left;
     this.sprite = sprite;
     this.frame = 0;
-    this.offsetX = -100;
+    this.offsetX = -50;
   }
 
   update() {

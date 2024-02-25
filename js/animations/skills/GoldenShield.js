@@ -8,14 +8,14 @@ export default class GoldenShield {
     this.layer = Layer.EFFECTS
     this.left = left;
     this.x = 300;
-    this.y = -148;
+    this.y = 100;
     this.frame = 0;
   }
 
   update() {
     ++this.frame;
     if (this.frame > 13 && this.frame < 23) {
-      this.y += 48;
+      this.y += 50;
     }
   }
 
@@ -28,12 +28,12 @@ export default class GoldenShield {
   draw(ctx) {
     if (this.left) {
       if (this.frame > 13) {
-        ctx.drawImage(img, 0, 0, img.width, img.height, this.x - img.width, this.y, img.width * 2, img.height * 2);
+        ctx.drawImage(img, 0, 0, img.width, img.height, this.x - img.width, this.y - img.height * 1.8, img.width * 2, img.height * 2);
       }
     } else {
       if (this.frame > 13) {
         ctx.scale(-1, 1);
-        ctx.drawImage(img, 0, 0, img.width, img.height, this.x + ctx.canvas.width * -1 - img.width, this.y, img.width * 2, img.height * 2);
+        ctx.drawImage(img, 0, 0, img.width, img.height, this.x + ctx.canvas.width * -1 - img.width, this.y - img.height * 1.8, img.width * 2, img.height * 2);
         ctx.scale(-1, 1);
       }
     }

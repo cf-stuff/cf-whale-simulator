@@ -444,7 +444,7 @@ const Skills = {
       atkMultiplier: 2.5,
     },
     effect: {
-      selfstatus: Status.tired.name,
+      status: Status.tired.name,
       target: SkillTarget.self
     },
     phase: SkillPhase.duringYourAttack,

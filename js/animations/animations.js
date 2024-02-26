@@ -10,6 +10,7 @@ import Bomb from "./skills/Bomb.js";
 import Counterattack from "./skills/Counterattack.js";
 import DrawPower from "./skills/DrawPower.js";
 import EarthStyleWall from "./skills/EarthStyleWall.js";
+import ExplosiveBlow from "./skills/ExplosiveBlow.js";
 import FireShield from "./skills/FireShield.js";
 import GoldenShield from "./skills/GoldenShield.js";
 import LightningBall from "./skills/LightningBall.js";
@@ -39,6 +40,7 @@ const AnimationDefinitions = {
   LightningBall, 
   ThunderboltBoxing,
   Counterattack,
+  ExplosiveBlow,
   Bomb,
   PoisonousFog,
   Barbarism,

@@ -88,6 +88,12 @@ const createTimeline = logs => {
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Counterattack(id % 2 === 0, sprite))
         });
         frame += 26;
+      } else if (name === Skills.explosiveBlow.name) {
+        timeline.events.push({
+          frame,
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.ExplosiveBlow(id % 2 === 0))
+        });
+        frame += 59;
       } else if (name === Skills.bomb.name || name === "Bomb Throwback") {
         timeline.events.push({
           frame,

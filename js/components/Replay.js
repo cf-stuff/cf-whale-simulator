@@ -105,6 +105,18 @@ const createTimeline = logs => {
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.ThunderboltBoxing(id % 2 === 0, sprite))
         });
         frame += 62;
+      } else if (name === Skills.heavyHammer.name) {
+        timeline.events.push({
+          frame,
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.HeavyHammer(id % 2 === 0))
+        });
+        frame += 106;
+      } else if (name === Skills.explosiveBlow.name) {
+        timeline.events.push({
+          frame,
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.ExplosiveBlow(id % 2 === 0))
+        });
+        frame += 59;
       } else if (name === Skills.counterattack.name) {
         const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
         timeline.events.push({
@@ -112,12 +124,6 @@ const createTimeline = logs => {
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Counterattack(id % 2 === 0, sprite))
         });
         frame += 26;
-      } else if (name === Skills.explosiveBlow.name) {
-        timeline.events.push({
-          frame,
-          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.ExplosiveBlow(id % 2 === 0))
-        });
-        frame += 59;
       } else if (name === Skills.bomb.name || name === "Bomb Throwback") {
         timeline.events.push({
           frame,
@@ -374,6 +380,7 @@ const Replay = ({ logs, play = true }) => {
     if (!canvasRef) return;
 
     const timeline = createTimeline(logs);
+    console.log(timeline.events.length);
     const canvas = document.createElement("canvas");
     canvas.width = 1024;
     canvas.height = 720;

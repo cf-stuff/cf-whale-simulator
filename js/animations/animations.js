@@ -13,6 +13,7 @@ import EarthStyleWall from "./skills/EarthStyleWall.js";
 import ExplosiveBlow from "./skills/ExplosiveBlow.js";
 import FireShield from "./skills/FireShield.js";
 import GoldenShield from "./skills/GoldenShield.js";
+import HeavyHammer from "./skills/HeavyHammer.js";
 import InescapableNet from "./skills/InescapableNet.js";
 import LightningBall from "./skills/LightningBall.js";
 import MovingIllusion from "./skills/MovingIllusion.js";
@@ -43,8 +44,9 @@ const AnimationDefinitions = {
   ThornShield,
   LightningBall, 
   ThunderboltBoxing,
-  Counterattack,
+  HeavyHammer,
   ExplosiveBlow,
+  Counterattack,
   Bomb,
   PoisonousFog,
   Barbarism,

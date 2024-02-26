@@ -13,11 +13,13 @@ import EarthStyleWall from "./skills/EarthStyleWall.js";
 import ExplosiveBlow from "./skills/ExplosiveBlow.js";
 import FireShield from "./skills/FireShield.js";
 import GoldenShield from "./skills/GoldenShield.js";
+import InescapableNet from "./skills/InescapableNet.js";
 import LightningBall from "./skills/LightningBall.js";
 import MovingIllusion from "./skills/MovingIllusion.js";
 import PoisonousFog from "./skills/PoisonousFog.js";
 import Rebirth from "./skills/Rebirth.js";
 import Rejuvenation from "./skills/Rejuvenation.js";
+import ThornShield from "./skills/ThornShield.js";
 import ThunderboltBoxing from "./skills/ThunderboltBoxing.js";
 
 export const Layer = {
@@ -37,6 +39,8 @@ const AnimationDefinitions = {
   FireShield,
   BloodFrenzy,
   GoldenShield,
+  InescapableNet,
+  ThornShield,
   LightningBall, 
   ThunderboltBoxing,
   Counterattack,

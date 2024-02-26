@@ -61,12 +61,36 @@ const createTimeline = logs => {
           callback: () => sprite.state = FighterState.attack
         });
         frame += 57;
+      } else if (name === Skills.fireShield.name) {
+        timeline.events.push({
+          frame,
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.FireShield(id % 2 === 0))
+        });
+        frame += 37;
+      } else if (name === Skills.bloodFrenzy.name) {
+        timeline.events.push({
+          frame,
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.BloodFrenzy(id % 2 === 0))
+        });
+        frame += 31;
       } else if (name === Skills.goldenShield.name) {
         timeline.events.push({
           frame,
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.GoldenShield(id % 2 === 0))
         });
         frame += 38;
+      } else if (name === Skills.inescapableNet.name) {
+        timeline.events.push({
+          frame,
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.InescapableNet(id % 2 === 0))
+        });
+        frame += 40;
+      } else if (name === Skills.thornShield.name) {
+        timeline.events.push({
+          frame,
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.ThornShield(id % 2 === 0))
+        });
+        frame += 52;
       } else if (name === Skills.lightningBall.name) {
         const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
         timeline.events.push({
@@ -107,6 +131,18 @@ const createTimeline = logs => {
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.PoisonousFog(id % 2 === 0, sprite))
         });
         frame += 82;
+      } else if (name === Skills.earthStyleWall.name) {
+        timeline.events.push({
+          frame,
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.EarthStyleWall(id % 2 === 0))
+        });
+        frame += 62;
+      } else if (name === Skills.barbarism.name) {
+        timeline.events.push({
+          frame,
+          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Barbarism(id % 2 === 0))
+        });
+        frame += 80;
       } else if (name === Skills.assassinate.name) {
         timeline.events.push({
           frame,
@@ -120,30 +156,6 @@ const createTimeline = logs => {
           callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.MovingIllusion(id % 2 === 0, sprite))
         });
         frame += 22;
-      } else if (name === Skills.bloodFrenzy.name) {
-        timeline.events.push({
-          frame,
-          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.BloodFrenzy(id % 2 === 0))
-        });
-        frame += 31;
-      } else if (name === Skills.fireShield.name) {
-        timeline.events.push({
-          frame,
-          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.FireShield(id % 2 === 0))
-        });
-        frame += 37;
-      } else if (name === Skills.barbarism.name) {
-        timeline.events.push({
-          frame,
-          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Barbarism(id % 2 === 0))
-        });
-        frame += 80;
-      } else if (name === Skills.earthStyleWall.name) {
-        timeline.events.push({
-          frame,
-          callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.EarthStyleWall(id % 2 === 0))
-        });
-        frame += 62;
       } else if (name === Skills.drawPower.name) {
         const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
         timeline.events.push({

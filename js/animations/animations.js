@@ -12,6 +12,7 @@ import DrawPower from "./skills/DrawPower.js";
 import EarthStyleWall from "./skills/EarthStyleWall.js";
 import ExplosiveBlow from "./skills/ExplosiveBlow.js";
 import FireShield from "./skills/FireShield.js";
+import GhoulBlock from "./skills/GhoulBlock.js";
 import GoldenShield from "./skills/GoldenShield.js";
 import HeavyHammer from "./skills/HeavyHammer.js";
 import InescapableNet from "./skills/InescapableNet.js";
@@ -22,6 +23,7 @@ import Rebirth from "./skills/Rebirth.js";
 import Rejuvenation from "./skills/Rejuvenation.js";
 import ThornShield from "./skills/ThornShield.js";
 import ThunderboltBoxing from "./skills/ThunderboltBoxing.js";
+import Wine from "./skills/Wine.js";
 
 export const Layer = {
   BACKGROUND: 0, // bg, totems
@@ -49,6 +51,8 @@ const AnimationDefinitions = {
   Counterattack,
   Bomb,
   PoisonousFog,
+  Wine,
+  GhoulBlock,
   Barbarism,
   Assassinate,
   MovingIllusion,

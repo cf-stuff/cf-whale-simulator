@@ -703,7 +703,7 @@ function dealDamage(state, playerIndex, amount, options) {
       removeStatus(state, playerIndex, statusWithHpShield.name);
     }
   }
-  state.players[playerIndex].status.filter(x => x.effect.storeDamageTaken).forEach(x => x.damageTaken += amount);
+  state.players[playerIndex].status.filter(x => x.effect.storeDamageTaken).forEach(x => x.storedDamage += amount);
   updateStat(state, playerIndex, Stats.hp.name, false, -amount, options.source, options.isCrt);
   if (!options.skipFury) {
     gainFury(state, playerIndex);

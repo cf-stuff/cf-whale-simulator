@@ -22,6 +22,7 @@ import MovingIllusion from "./skills/MovingIllusion.js";
 import PoisonousFog from "./skills/PoisonousFog.js";
 import Rebirth from "./skills/Rebirth.js";
 import Rejuvenation from "./skills/Rejuvenation.js";
+import SkillShackles from "./skills/SkillShackles.js";
 import ThornShield from "./skills/ThornShield.js";
 import ThunderboltBoxing from "./skills/ThunderboltBoxing.js";
 import Wine from "./skills/Wine.js";
@@ -54,11 +55,12 @@ const AnimationDefinitions = {
   PoisonousFog,
   Wine,
   GhoulBlock,
+  SkillShackles,
+  EarthStyleWall,
   Barbarism,
   Assassinate,
   DarkCurse,
   MovingIllusion,
-  EarthStyleWall,
   DrawPower,
   Rejuvenation,
   Rebirth

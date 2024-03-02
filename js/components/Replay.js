@@ -145,6 +145,13 @@ const parseNextLog = timeline => {
         callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.GhoulBlock(id % 2 === 0))
       });
       timeline.frame += 116;
+    } else if (name === Skills.skillShackles.name) {
+      const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
+      timeline.events.push({
+        frame: timeline.frame,
+        callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.SkillShackles(id % 2 === 0, sprite))
+      });
+      timeline.frame += 130;
     } else if (name === Skills.earthStyleWall.name) {
       timeline.events.push({
         frame: timeline.frame,

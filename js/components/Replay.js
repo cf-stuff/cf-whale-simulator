@@ -163,6 +163,13 @@ const parseNextLog = timeline => {
         callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Assassinate(id % 2 === 0))
       });
       timeline.frame += 49;
+    } else if (name === Skills.darkCurse.name) {
+      const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
+      timeline.events.push({
+        frame: timeline.frame,
+        callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.DarkCurse(id % 2 === 0, sprite))
+      });
+      timeline.frame += 85;
     } else if (name === Skills.movingIllusion.name) {
       const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
       timeline.events.push({

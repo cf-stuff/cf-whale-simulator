@@ -8,6 +8,7 @@ import Barbarism from "./skills/Barbarism.js";
 import BloodFrenzy from "./skills/BloodFrenzy.js";
 import Bomb from "./skills/Bomb.js";
 import Counterattack from "./skills/Counterattack.js";
+import DarkCurse from "./skills/DarkCurse.js";
 import DrawPower from "./skills/DrawPower.js";
 import EarthStyleWall from "./skills/EarthStyleWall.js";
 import ExplosiveBlow from "./skills/ExplosiveBlow.js";
@@ -55,6 +56,7 @@ const AnimationDefinitions = {
   GhoulBlock,
   Barbarism,
   Assassinate,
+  DarkCurse,
   MovingIllusion,
   EarthStyleWall,
   DrawPower,

@@ -56,6 +56,12 @@ const parseNextLog = timeline => {
         callback: () => sprite.state = FighterState.attack
       });
       timeline.frame += 57;
+    } else if (name === Skills.cleanse.name) {
+      timeline.events.push({
+        frame: timeline.frame,
+        callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Cleanse(id % 2 === 0))
+      });
+      timeline.frame += 34;
     } else if (name === Skills.fireShield.name) {
       timeline.events.push({
         frame: timeline.frame,
@@ -366,7 +372,11 @@ const parseNextLog = timeline => {
       }
     });
     timeline.frame += 15;
-    // todo animation
+    timeline.events.push({
+      frame: timeline.frame,
+      callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.FuryBurst(id % 2 === 0))
+    });
+    timeline.frame += 34;
   } else if (log.startsWith("|win|")) {
     const [, , id] = log.split("|");
     timeline.frame += 14;

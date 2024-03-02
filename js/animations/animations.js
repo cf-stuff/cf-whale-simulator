@@ -7,12 +7,14 @@ import Assassinate from "./skills/Assassinate.js";
 import Barbarism from "./skills/Barbarism.js";
 import BloodFrenzy from "./skills/BloodFrenzy.js";
 import Bomb from "./skills/Bomb.js";
+import Cleanse from "./skills/Cleanse.js";
 import Counterattack from "./skills/Counterattack.js";
 import DarkCurse from "./skills/DarkCurse.js";
 import DrawPower from "./skills/DrawPower.js";
 import EarthStyleWall from "./skills/EarthStyleWall.js";
 import ExplosiveBlow from "./skills/ExplosiveBlow.js";
 import FireShield from "./skills/FireShield.js";
+import FuryBurst from "./skills/FuryBurst.js";
 import GhoulBlock from "./skills/GhoulBlock.js";
 import GoldenShield from "./skills/GoldenShield.js";
 import HeavyHammer from "./skills/HeavyHammer.js";
@@ -41,6 +43,8 @@ const AnimationDefinitions = {
   SpBar,
   FuryBar,
   TextFloat,
+  FuryBurst,
+  Cleanse,
   FireShield,
   BloodFrenzy,
   GoldenShield,

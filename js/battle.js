@@ -160,11 +160,11 @@ export function startBattle(state) {
       const skipActions = player.status.some(x => x.effect.skipActions);
       handleStartOfTurnStatusEffects(state, player.index);
       handleStatusBetrayal(state);
-      if (skipActions) return;
       do {
         delete player.restartTurnAfterNextAttack;
-        tryToUseSkillFromPhase(state, player.index, SkillPhase.beforeYourAttack);
         tryToUseSkillFromPhase(state, player.index ^ 1, SkillPhase.beforeEnemyAttack);
+        if (skipActions) return;
+        tryToUseSkillFromPhase(state, player.index, SkillPhase.beforeYourAttack);
         if (tryToUseSkillFromPhase(state, player.index, SkillPhase.duringYourAttack)) {
           tryToUseSkillFromPhase(state, player.index ^ 1, SkillPhase.duringEnemyAttack);
         }

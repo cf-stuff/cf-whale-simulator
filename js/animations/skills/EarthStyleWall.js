@@ -32,7 +32,7 @@ export default class EarthStyleWall {
     } else {
       if (this.frame > 26 && this.frame < 56) {
         ctx.scale(-1, 1);
-        ctx.drawImage(img, this.x + ctx.canvas.width * -1, this.y);
+        ctx.drawImage(img, this.x - ctx.canvas.width, this.y);
         ctx.scale(-1, 1);
       }
     }

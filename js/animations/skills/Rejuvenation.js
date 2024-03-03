@@ -43,12 +43,12 @@ export default class Rejuvenation {
     } else {
       if (this.frame < 13) {
         ctx.scale(-1, 1);
-        ctx.drawImage(beam, this.x + ctx.canvas.width * -1 - beam.width / 2, this.beamY - beam.height);
+        ctx.drawImage(beam, this.x - ctx.canvas.width - beam.width / 2, this.beamY - beam.height);
         ctx.scale(-1, 1);
       }
       if (this.frame > 5) {
         ctx.scale(-1, 1);
-        ctx.drawImage(img, this.x + ctx.canvas.width * -1 - img.width / 2, this.y - img.height);
+        ctx.drawImage(img, this.x - ctx.canvas.width - img.width / 2, this.y - img.height);
         ctx.scale(-1, 1);
       }
     }

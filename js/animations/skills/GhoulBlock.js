@@ -68,14 +68,14 @@ export default class GhoulBlock {
         ctx.globalAlpha = 1.0;
       } else if (this.frame > 94) {
         ctx.scale(-1, 1);
-        ctx.drawImage(img, 0, 0, img.width, img.height, this.x + ctx.canvas.width * -1, this.y, img.width * this.scale, img.height * this.scale);
+        ctx.drawImage(img, 0, 0, img.width, img.height, this.x - ctx.canvas.width, this.y, img.width * this.scale, img.height * this.scale);
         ctx.scale(-1, 1);
       }
     } else {
       if (this.frame > 18 && this.frame < 63) {
         ctx.scale(-1, 1);
         ctx.globalAlpha = this.opacity;
-        ctx.drawImage(img, 0, 0, img.width, img.height, this.x + ctx.canvas.width * -1, this.y, img.width * this.scale, img.height * this.scale);
+        ctx.drawImage(img, 0, 0, img.width, img.height, this.x - ctx.canvas.width, this.y, img.width * this.scale, img.height * this.scale);
         ctx.globalAlpha = 1.0;
         ctx.scale(-1, 1);
       } else if (this.frame > 94) {

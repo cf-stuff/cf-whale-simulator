@@ -14,7 +14,7 @@ export default class HpBar extends Bar {
       ctx.drawImage(img, 0, 0, w, this.h, this.x, this.y, w, this.h);
     } else {
       ctx.scale(-1, 1);
-      ctx.drawImage(img, 0, 0, w, this.h, this.x + ctx.canvas.width * -1, this.y, w, this.h);
+      ctx.drawImage(img, 0, 0, w, this.h, this.x - ctx.canvas.width, this.y, w, this.h);
       ctx.scale(-1, 1);
     }
   }

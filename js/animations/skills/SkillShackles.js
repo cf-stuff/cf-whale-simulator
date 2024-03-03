@@ -44,7 +44,7 @@ export default class SkillShackles {
     if (this.left) {
       if (this.frame > 87) {
         ctx.scale(-1, 1);
-        ctx.drawImage(lower, 300 - lower.width / 2 + ctx.canvas.width * -1, this.y - lower.height);
+        ctx.drawImage(lower, 300 - lower.width / 2 - ctx.canvas.width, this.y - lower.height);
         ctx.scale(-1, 1);
       }
       if (this.frame > 39 && this.frame < 114) {
@@ -56,7 +56,7 @@ export default class SkillShackles {
       }
       if (this.frame > 39 && this.frame < 114) {
         ctx.scale(-1, 1);
-        ctx.drawImage(upper, this.x - upper.width / 2 + ctx.canvas.width * -1, this.y - upper.height);
+        ctx.drawImage(upper, this.x - upper.width / 2 - ctx.canvas.width, this.y - upper.height);
         ctx.scale(-1, 1);
       }
     }

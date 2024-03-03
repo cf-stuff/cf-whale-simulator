@@ -54,9 +54,9 @@ export default class MovingIllusion {
         ctx.drawImage(img, this.sprite.pos.x + horizontalOffset - img.width / 2, this.sprite.pos.y - verticalOffset - img.height);
       } else {
         ctx.scale(-1, 1);
-        ctx.drawImage(img, this.sprite.pos.x - horizontalOffset - img.width / 2 + ctx.canvas.width * -1, this.sprite.pos.y + verticalOffset - img.height);
-        ctx.drawImage(img, this.sprite.pos.x - img.width / 2 + ctx.canvas.width * -1, this.sprite.pos.y - img.height);
-        ctx.drawImage(img, this.sprite.pos.x + horizontalOffset - img.width / 2 + ctx.canvas.width * -1, this.sprite.pos.y - verticalOffset - img.height);
+        ctx.drawImage(img, this.sprite.pos.x - horizontalOffset - img.width / 2 - ctx.canvas.width, this.sprite.pos.y + verticalOffset - img.height);
+        ctx.drawImage(img, this.sprite.pos.x - img.width / 2 - ctx.canvas.width, this.sprite.pos.y - img.height);
+        ctx.drawImage(img, this.sprite.pos.x + horizontalOffset - img.width / 2 - ctx.canvas.width, this.sprite.pos.y - verticalOffset - img.height);
         ctx.scale(-1, 1);
       }
       ctx.globalAlpha = 1.0;
@@ -69,8 +69,8 @@ export default class MovingIllusion {
         ctx.drawImage(img, this.sprite.pos.x + horizontalOffset - img.width / 2, this.sprite.pos.y - verticalOffset - img.height);
       } else {
         ctx.scale(-1, 1);
-        ctx.drawImage(img, this.sprite.pos.x - horizontalOffset - img.width / 2 + ctx.canvas.width * -1, this.sprite.pos.y + verticalOffset - img.height);
-        ctx.drawImage(img, this.sprite.pos.x + horizontalOffset - img.width / 2 + ctx.canvas.width * -1, this.sprite.pos.y - verticalOffset - img.height);
+        ctx.drawImage(img, this.sprite.pos.x - horizontalOffset - img.width / 2 - ctx.canvas.width, this.sprite.pos.y + verticalOffset - img.height);
+        ctx.drawImage(img, this.sprite.pos.x + horizontalOffset - img.width / 2 - ctx.canvas.width, this.sprite.pos.y - verticalOffset - img.height);
         ctx.scale(-1, 1);
       }
       ctx.globalAlpha = 1.0;
@@ -83,8 +83,8 @@ export default class MovingIllusion {
         ctx.drawImage(img, this.sprite.pos.x + horizontalOffset - img.width / 2, this.sprite.pos.y - verticalOffset - img.height);
       } else {
         ctx.scale(-1, 1);
-        ctx.drawImage(img, this.sprite.pos.x - horizontalOffset - img.width / 2 + ctx.canvas.width * -1, this.sprite.pos.y + verticalOffset - img.height);
-        ctx.drawImage(img, this.sprite.pos.x + horizontalOffset - img.width / 2 + ctx.canvas.width * -1, this.sprite.pos.y - verticalOffset - img.height);
+        ctx.drawImage(img, this.sprite.pos.x - horizontalOffset - img.width / 2 - ctx.canvas.width, this.sprite.pos.y + verticalOffset - img.height);
+        ctx.drawImage(img, this.sprite.pos.x + horizontalOffset - img.width / 2 - ctx.canvas.width, this.sprite.pos.y - verticalOffset - img.height);
         ctx.scale(-1, 1);
       }
       ctx.globalAlpha = 1.0;
@@ -94,7 +94,7 @@ export default class MovingIllusion {
         ctx.drawImage(img, this.sprite.pos.x - img.width / 2, this.sprite.pos.y - img.height);
       } else {
         ctx.scale(-1, 1);
-        ctx.drawImage(img, this.sprite.pos.x + ctx.canvas.width * -1 - img.width / 2, this.sprite.pos.y - img.height);
+        ctx.drawImage(img, this.sprite.pos.x - ctx.canvas.width - img.width / 2, this.sprite.pos.y - img.height);
         ctx.scale(-1, 1);
       }
       ctx.globalAlpha = 1.0;
@@ -103,7 +103,7 @@ export default class MovingIllusion {
         ctx.drawImage(img, this.sprite.pos.x - img.width / 2, this.sprite.pos.y - img.height);
       } else {
         ctx.scale(-1, 1);
-        ctx.drawImage(img, this.sprite.pos.x + ctx.canvas.width * -1 - img.width / 2, this.sprite.pos.y - img.height);
+        ctx.drawImage(img, this.sprite.pos.x - ctx.canvas.width - img.width / 2, this.sprite.pos.y - img.height);
         ctx.scale(-1, 1);
       }
     }

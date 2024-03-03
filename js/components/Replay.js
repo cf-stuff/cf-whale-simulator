@@ -106,6 +106,19 @@ const parseNextLog = timeline => {
         callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.ThunderboltBoxing(id % 2 === 0, sprite))
       });
       timeline.frame += 62;
+    } else if (name === Skills.stormBoxing.name) {
+      const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
+      timeline.events.push({
+        frame: timeline.frame,
+        callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.StormBoxing(id % 2 === 0, sprite))
+      });
+      timeline.frame += 67;
+    }  else if (name === Skills.fastMove.name) {
+      timeline.events.push({
+        frame: timeline.frame,
+        callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.FastMove(id % 2 === 0))
+      });
+      timeline.frame += 67;
     } else if (name === Skills.heavyHammer.name) {
       timeline.events.push({
         frame: timeline.frame,

@@ -47,7 +47,7 @@ export default class Rebirth {
     } else {
       if (this.frame > 13 && this.frame < 63) {
         ctx.scale(-1, 1);
-        ctx.drawImage(img, this.x - img.width / 2 + ctx.canvas.width * -1, this.y);
+        ctx.drawImage(img, this.x - img.width / 2 - ctx.canvas.width, this.y);
         ctx.scale(-1, 1);
       }
     }

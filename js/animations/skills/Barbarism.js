@@ -46,9 +46,9 @@ export default class Barbarism {
       if (this.frame > 15) {
         ctx.scale(-1, 1);
         ctx.globalAlpha = this.imgOpacity;
-        ctx.drawImage(cowFace, this.x + ctx.canvas.width * -1 - cowFace.width / 2, this.y);
+        ctx.drawImage(cowFace, this.x - ctx.canvas.width - cowFace.width / 2, this.y);
         if (this.frame > 13) {
-          ctx.drawImage(horns, this.x + ctx.canvas.width * -1 - horns.width / 2, this.y - horns.height / 4);
+          ctx.drawImage(horns, this.x - ctx.canvas.width - horns.width / 2, this.y - horns.height / 4);
         }
         ctx.globalAlpha = 1.0;
         ctx.scale(-1, 1);

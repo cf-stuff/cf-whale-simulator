@@ -13,6 +13,7 @@ import DarkCurse from "./skills/DarkCurse.js";
 import DrawPower from "./skills/DrawPower.js";
 import EarthStyleWall from "./skills/EarthStyleWall.js";
 import ExplosiveBlow from "./skills/ExplosiveBlow.js";
+import FastMove from "./skills/FastMove.js";
 import FireShield from "./skills/FireShield.js";
 import FuryBurst from "./skills/FuryBurst.js";
 import GhoulBlock from "./skills/GhoulBlock.js";
@@ -25,6 +26,7 @@ import PoisonousFog from "./skills/PoisonousFog.js";
 import Rebirth from "./skills/Rebirth.js";
 import Rejuvenation from "./skills/Rejuvenation.js";
 import SkillShackles from "./skills/SkillShackles.js";
+import StormBoxing from "./skills/StormBoxing.js";
 import ThornShield from "./skills/ThornShield.js";
 import ThunderboltBoxing from "./skills/ThunderboltBoxing.js";
 import Wine from "./skills/Wine.js";
@@ -52,6 +54,8 @@ const AnimationDefinitions = {
   ThornShield,
   LightningBall, 
   ThunderboltBoxing,
+  StormBoxing,
+  FastMove,
   HeavyHammer,
   ExplosiveBlow,
   Counterattack,

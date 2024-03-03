@@ -49,7 +49,7 @@ export default class ThunderboltBoxing {
         ctx.drawImage(img, this.sprite.pos.x + this.offsetX, this.sprite.pos.y - img.height);
       } else {
         ctx.scale(-1, 1);
-        ctx.drawImage(img, this.sprite.pos.x + this.offsetX + ctx.canvas.width * -1, this.sprite.pos.y - img.height);
+        ctx.drawImage(img, this.sprite.pos.x + this.offsetX - ctx.canvas.width, this.sprite.pos.y - img.height);
         ctx.scale(-1, 1);
       }
     }

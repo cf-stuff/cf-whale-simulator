@@ -50,7 +50,7 @@ export default class DrawPower {
     } else {
       if (this.frame > 13 && this.frame < 63) {
         ctx.scale(-1, 1);
-        ctx.drawImage(img, this.x + ctx.canvas.width * -1, this.y);
+        ctx.drawImage(img, this.x - ctx.canvas.width, this.y);
         ctx.scale(-1, 1);
       }
     }

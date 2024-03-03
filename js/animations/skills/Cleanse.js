@@ -30,7 +30,7 @@ export default class Cleanse {
     } else {
       if (this.frame > 9) {
         ctx.scale(-1, 1);
-        ctx.drawImage(img, this.x - img.width / 2 + ctx.canvas.width * -1, this.y);
+        ctx.drawImage(img, this.x - img.width / 2 - ctx.canvas.width, this.y);
         ctx.scale(-1, 1);
       }
     }

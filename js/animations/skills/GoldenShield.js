@@ -33,7 +33,7 @@ export default class GoldenShield {
     } else {
       if (this.frame > 13) {
         ctx.scale(-1, 1);
-        ctx.drawImage(img, 0, 0, img.width, img.height, this.x + ctx.canvas.width * -1 - img.width, this.y - img.height * 1.8, img.width * 2, img.height * 2);
+        ctx.drawImage(img, 0, 0, img.width, img.height, this.x - ctx.canvas.width - img.width, this.y - img.height * 1.8, img.width * 2, img.height * 2);
         ctx.scale(-1, 1);
       }
     }

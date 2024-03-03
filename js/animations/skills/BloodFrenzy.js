@@ -51,15 +51,15 @@ export default class BloodFrenzy {
     } else {
       ctx.scale(-1, 1);
       if (this.frame > 10 && this.frame < 30) {
-        ctx.drawImage(img, this.x + ctx.canvas.width * -1 - img.width / 2, this.y - img.height * 0.75);
+        ctx.drawImage(img, this.x - ctx.canvas.width - img.width / 2, this.y - img.height * 0.75);
       }
       if (this.frame > 10 && this.frame < 14) {
-        ctx.drawImage(flame, 0, 0, flame.width, flame.height, this.x + ctx.canvas.width * -1 - flame.width / 2, this.y - flame.height / 2, flame.width, flame.height / 2);
+        ctx.drawImage(flame, 0, 0, flame.width, flame.height, this.x - ctx.canvas.width - flame.width / 2, this.y - flame.height / 2, flame.width, flame.height / 2);
       } else if (this.frame === 14) {
-        ctx.drawImage(flame, this.x + ctx.canvas.width * -1 - flame.width / 2, this.y - flame.height);
+        ctx.drawImage(flame, this.x - ctx.canvas.width - flame.width / 2, this.y - flame.height);
       } else if (this.frame > 14) {
         ctx.globalAlpha = this.flameOpacity;
-        ctx.drawImage(flame, 0, 0, flame.width, flame.height, this.x + ctx.canvas.width * -1 - flame.width / 2, this.y - flame.height * 2, flame.width, flame.height * 2);
+        ctx.drawImage(flame, 0, 0, flame.width, flame.height, this.x - ctx.canvas.width - flame.width / 2, this.y - flame.height * 2, flame.width, flame.height * 2);
         ctx.globalAlpha = 1.0;
       }
       ctx.scale(-1, 1);

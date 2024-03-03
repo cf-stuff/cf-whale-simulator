@@ -38,7 +38,7 @@ export async function createProfile(player, options = { bg: 11, left: true }) {
   } else {
     await asyncDrawFlipped(ctx, getImagePath(ImageType.bg, options.bg), 0, 0);
     ctx.scale(-1, 1);
-    ctx.drawImage(hud, 5 + ctx.canvas.width * -1, 5);
+    ctx.drawImage(hud, 5 - ctx.canvas.width, 5);
     ctx.scale(-1, 1);
   }
 
@@ -130,7 +130,7 @@ async function renderStatBox(ctx, player, options, promises) {
     ctx.roundRect(-20, 150, 250, player.fighter?.skills?.length > 0 ? 500 : 430, 20);
   } else {
     ctx.scale(-1, 1);
-    ctx.roundRect(-20 + ctx.canvas.width * -1, 150, 250, player.fighter?.skills?.length > 0 ? 500 : 430, 20);
+    ctx.roundRect(-20 - ctx.canvas.width, 150, 250, player.fighter?.skills?.length > 0 ? 500 : 430, 20);
     ctx.scale(-1, 1);
   }
   renderPetDetails(ctx, player.pet, options);
@@ -347,9 +347,9 @@ async function asyncDrawFlipped(ctx, path, x, y, w, h) {
     ctx.save();
     ctx.scale(-1, 1);
     if (!w) {
-      ctx.drawImage(image, x + ctx.canvas.width * -1, y);
+      ctx.drawImage(image, x - ctx.canvas.width, y);
     } else {
-      ctx.drawImage(image, x + ctx.canvas.width * -1, y, w, h);
+      ctx.drawImage(image, x - ctx.canvas.width, y, w, h);
     }
     ctx.restore();
   });

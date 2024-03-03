@@ -79,7 +79,7 @@ export default class PoisonousFog {
       } else {
         ctx.globalAlpha = this.ballOpacity;
         ctx.scale(-1, 1);
-        ctx.drawImage(ball, this.sprite.pos.x + this.ballOffsetX + ctx.canvas.width * -1, this.sprite.pos.y + this.ballOffsetY);
+        ctx.drawImage(ball, this.sprite.pos.x + this.ballOffsetX - ctx.canvas.width, this.sprite.pos.y + this.ballOffsetY);
         ctx.scale(-1, 1);
         ctx.globalAlpha = 1.0;
       }
@@ -91,7 +91,7 @@ export default class PoisonousFog {
       } else {
         ctx.globalAlpha = this.fogOpacity;
         ctx.scale(-1, 1);
-        ctx.drawImage(fog, 724 - fog.width / 2 + ctx.canvas.width * -1, 550 - fog.height);
+        ctx.drawImage(fog, 724 - fog.width / 2 - ctx.canvas.width, 550 - fog.height);
         ctx.scale(-1, 1);
         ctx.globalAlpha = 1.0;
       }

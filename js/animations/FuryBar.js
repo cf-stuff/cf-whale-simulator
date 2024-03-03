@@ -14,7 +14,7 @@ export default class FuryBar extends Bar {
       ctx.drawImage(img, 0, this.h - h, this.w, h, this.x, this.y + this.h - h, this.w, h);
     } else {
       ctx.scale(-1, 1);
-      ctx.drawImage(img, 0, this.h - h, this.w, h, this.x + ctx.canvas.width * -1, this.y + this.h - h, this.w, h);
+      ctx.drawImage(img, 0, this.h - h, this.w, h, this.x - ctx.canvas.width, this.y + this.h - h, this.w, h);
       ctx.scale(-1, 1);
     }
   }

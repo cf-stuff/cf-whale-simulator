@@ -51,7 +51,7 @@ export default class LightningBall {
     } else {
       if (this.frame < 31) {
         ctx.scale(-1, 1);
-        ctx.drawImage(img, this.sprite.pos.x + ctx.canvas.width * -1, this.sprite.pos.y - img.height / 2);
+        ctx.drawImage(img, this.sprite.pos.x - ctx.canvas.width, this.sprite.pos.y - img.height / 2);
         ctx.scale(-1, 1);
       }
     }

@@ -49,7 +49,7 @@ export default class DarkCurse {
         ctx.drawImage(img, this.x - img.width / 2, this.y - img.height);
       } else {
         ctx.scale(-1, 1);
-        ctx.drawImage(img, this.x - img.width / 2 + ctx.canvas.width * -1, this.y - img.height);
+        ctx.drawImage(img, this.x - img.width / 2 - ctx.canvas.width, this.y - img.height);
         ctx.scale(-1, 1);
       }
     }

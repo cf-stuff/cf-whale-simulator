@@ -53,7 +53,7 @@ export default class FireShield {
         ctx.globalAlpha = this.imgOpacity;
         const w = this.w * this.scale;
         const h = this.h * this.scale;
-        ctx.drawImage(img, 0, 0, this.w, this.h, this.x + ctx.canvas.width * -1 - w / 2, this.y - h / 2, w, h);
+        ctx.drawImage(img, 0, 0, this.w, this.h, this.x - ctx.canvas.width - w / 2, this.y - h / 2, w, h);
         ctx.globalAlpha = 1.0;
         ctx.scale(-1, 1);
       }

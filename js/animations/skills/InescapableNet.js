@@ -41,7 +41,7 @@ export default class InescapableNet {
     } else {
       if (this.frame > 11 && this.frame % 3 !== 2) {
         ctx.scale(-1, 1);
-        ctx.drawImage(img, this.x + ctx.canvas.width - img.width / 2, this.y - img.height / 2);
+        ctx.drawImage(img, this.x - ctx.canvas.width - img.width / 2, this.y - img.height / 2);
         ctx.scale(-1, 1);
       }
     }

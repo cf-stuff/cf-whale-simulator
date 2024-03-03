@@ -47,12 +47,12 @@ export default class ExplosiveBlow {
         if (this.frame > 41) {
           const h = beam.height * 0.8 - 0.1 * this.frame - 42;
           ctx.scale(-1, 1);
-          ctx.drawImage(beam, 0, 0, beam.width, beam.height, this.x + 20 + ctx.canvas.width * -1, this.y - h / 2, this.x * 5, h);
+          ctx.drawImage(beam, 0, 0, beam.width, beam.height, this.x + 20 - ctx.canvas.width, this.y - h / 2, this.x * 5, h);
           ctx.scale(-1, 1);
         }
         ctx.globalAlpha = this.opacity;
         ctx.scale(-1, 1);
-        ctx.drawImage(img, 0, 0, img.width, img.height, this.x + ctx.canvas.width * -1, this.y - img.height * 1.5, img.width * 3, img.height * 3);
+        ctx.drawImage(img, 0, 0, img.width, img.height, this.x - ctx.canvas.width, this.y - img.height * 1.5, img.width * 3, img.height * 3);
         ctx.scale(-1, 1);
         ctx.globalAlpha = 1.0;
       }

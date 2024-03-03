@@ -44,7 +44,7 @@ export default class Assassinate {
         ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         ctx.globalAlpha = this.imgOpacity;
         ctx.scale(-1, 1);
-        ctx.drawImage(img, 0, 0, this.w, this.h, this.x + ctx.canvas.width * -1, this.y, this.w * 4, this.h * 4);
+        ctx.drawImage(img, 0, 0, this.w, this.h, this.x - ctx.canvas.width, this.y, this.w * 4, this.h * 4);
         ctx.globalAlpha = 1.0;
         ctx.scale(-1, 1);
       }

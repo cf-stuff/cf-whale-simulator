@@ -52,12 +52,12 @@ export default class HeavyHammer {
       ctx.scale(-1, 1);
       if (this.frame < 65) {
       } else if (this.frame < 81) {
-        ctx.drawImage(front, 0, 0, front.width, front.height, this.x + ctx.canvas.width * -1 - front.width, this.y - front.height * 2, front.width * 2, front.height * 2);
+        ctx.drawImage(front, 0, 0, front.width, front.height, this.x - ctx.canvas.width - front.width, this.y - front.height * 2, front.width * 2, front.height * 2);
       } else if (this.frame < 84) {
-        ctx.drawImage(prep, 0, 0, prep.width, prep.height, this.x + ctx.canvas.width * -1 - prep.width, this.y - prep.height * 2, prep.width * 2, prep.height * 2);
+        ctx.drawImage(prep, 0, 0, prep.width, prep.height, this.x - ctx.canvas.width - prep.width, this.y - prep.height * 2, prep.width * 2, prep.height * 2);
       } else {
         ctx.globalAlpha = this.opacity;
-        ctx.drawImage(impact, 0, 0, impact.width, impact.height, this.x + ctx.canvas.width * -1 - impact.width, this.y - impact.height * 2, impact.width * 2, impact.height * 2);
+        ctx.drawImage(impact, 0, 0, impact.width, impact.height, this.x - ctx.canvas.width - impact.width, this.y - impact.height * 2, impact.width * 2, impact.height * 2);
         ctx.globalAlpha = 1.0;
       }
       ctx.scale(-1, 1);

@@ -30,6 +30,7 @@ import SkillShackles from "./skills/SkillShackles.js";
 import StormBoxing from "./skills/StormBoxing.js";
 import ThornShield from "./skills/ThornShield.js";
 import ThunderboltBoxing from "./skills/ThunderboltBoxing.js";
+import ThunderclapQuake from "./skills/ThunderclapQuake.js";
 import Violence from "./skills/Violence.js";
 import Wine from "./skills/Wine.js";
 
@@ -54,6 +55,7 @@ const AnimationDefinitions = {
   BloodFrenzy,
   GoldenShield,
   InescapableNet,
+  ThunderclapQuake,
   ThornShield,
   LightningBall, 
   ThunderboltBoxing,

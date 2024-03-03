@@ -126,6 +126,12 @@ const parseNextLog = timeline => {
         callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.FastMove(id % 2 === 0))
       });
       timeline.frame += 67;
+    } else if (name === Skills.violence.name) {
+      timeline.events.push({
+        frame: timeline.frame,
+        callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Violence(id % 2 === 0))
+      });
+      timeline.frame += 46;
     } else if (name === Skills.heavyHammer.name) {
       timeline.events.push({
         frame: timeline.frame,

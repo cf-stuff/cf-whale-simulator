@@ -30,6 +30,7 @@ import SkillShackles from "./skills/SkillShackles.js";
 import StormBoxing from "./skills/StormBoxing.js";
 import ThornShield from "./skills/ThornShield.js";
 import ThunderboltBoxing from "./skills/ThunderboltBoxing.js";
+import Violence from "./skills/Violence.js";
 import Wine from "./skills/Wine.js";
 
 export const Layer = {
@@ -58,6 +59,7 @@ const AnimationDefinitions = {
   ThunderboltBoxing,
   StormBoxing,
   FastMove,
+  Violence,
   HeavyHammer,
   ExplosiveBlow,
   Counterattack,

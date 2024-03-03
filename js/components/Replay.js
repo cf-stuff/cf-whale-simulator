@@ -62,6 +62,13 @@ const parseNextLog = timeline => {
         callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Cleanse(id % 2 === 0))
       });
       timeline.frame += 34;
+    } else if (name === Skills.fireMeteorite.name) {
+      const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
+      timeline.events.push({
+        frame: timeline.frame,
+        callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.FireMeteorite(id % 2 === 0, sprite))
+      });
+      timeline.frame += 57;
     } else if (name === Skills.fireShield.name) {
       timeline.events.push({
         frame: timeline.frame,
@@ -113,7 +120,7 @@ const parseNextLog = timeline => {
         callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.StormBoxing(id % 2 === 0, sprite))
       });
       timeline.frame += 67;
-    }  else if (name === Skills.fastMove.name) {
+    } else if (name === Skills.fastMove.name) {
       timeline.events.push({
         frame: timeline.frame,
         callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.FastMove(id % 2 === 0))

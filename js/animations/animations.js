@@ -14,6 +14,7 @@ import DrawPower from "./skills/DrawPower.js";
 import EarthStyleWall from "./skills/EarthStyleWall.js";
 import ExplosiveBlow from "./skills/ExplosiveBlow.js";
 import FastMove from "./skills/FastMove.js";
+import FireMeteorite from "./skills/FireMeteorite.js";
 import FireShield from "./skills/FireShield.js";
 import FuryBurst from "./skills/FuryBurst.js";
 import GhoulBlock from "./skills/GhoulBlock.js";
@@ -47,6 +48,7 @@ const AnimationDefinitions = {
   TextFloat,
   FuryBurst,
   Cleanse,
+  FireMeteorite,
   FireShield,
   BloodFrenzy,
   GoldenShield,

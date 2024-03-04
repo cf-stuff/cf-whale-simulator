@@ -4,6 +4,7 @@ import HpBar from "./HpBar.js";
 import SpBar from "./SpBar.js";
 import TextFloat from "./TextFloat.js";
 import Assassinate from "./skills/Assassinate.js";
+import Bacteria from "./skills/Bacteria.js";
 import Barbarism from "./skills/Barbarism.js";
 import BloodFrenzy from "./skills/BloodFrenzy.js";
 import Bomb from "./skills/Bomb.js";
@@ -49,6 +50,7 @@ const AnimationDefinitions = {
   FuryBar,
   TextFloat,
   FuryBurst,
+  Bacteria,
   Cleanse,
   FireMeteorite,
   FireShield,

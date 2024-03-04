@@ -56,6 +56,12 @@ const parseNextLog = timeline => {
         callback: () => sprite.state = FighterState.attack
       });
       timeline.frame += 57;
+    } else if (name === Skills.bacteria.name) {
+      timeline.events.push({
+        frame: timeline.frame,
+        callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Bacteria(id % 2 === 0))
+      });
+      timeline.frame += 45;
     } else if (name === Skills.cleanse.name) {
       timeline.events.push({
         frame: timeline.frame,

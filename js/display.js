@@ -27,6 +27,7 @@ const drunk = getImage("img/display/effects/drunk.png");
 const mask = getImage("img/display/effects/mask.png");
 const violent = getImage("img/display/effects/violent.png");
 const stunned = getImage("img/display/effects/stunned.png");
+const sick = getImage("img/display/effects/sick.png");
 
 export async function createProfile(player, options = { bg: 11, left: true }) {
   const canvas = document.createElement("canvas");
@@ -330,8 +331,10 @@ function renderStatusEffect(ctx, status, x, y, left = true) {
     ctx.drawImage(shieldWall, x - shieldWall.width / 2, y - shieldWall.height);
   } else if (status === Status.violent.name) {
     ctx.drawImage(violent, x - violent.width / 2, y - violent.height);
-  } else if (status === Status.stunned.name) {
+  } else if (status === Status.stunned.name || status === Status.dizzy.name) {
     ctx.drawImage(stunned, x - stunned.width / 2, y - 150 - stunned.height);
+  } else if (status === Status.sick.name) {
+    ctx.drawImage(sick, x - sick.width / 2, y - sick.height);
   }
   if (!left) {
     ctx.scale(-1, 1);

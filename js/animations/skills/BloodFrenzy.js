@@ -8,12 +8,12 @@ flame.src = "img/display/effects/bloodfrenzy2.png";
 
 export default class BloodFrenzy {
   constructor(left) {
-    this.layer = Layer.EFFECTS2
+    this.layer = Layer.EFFECTS
     this.left = left;
     this.x = 300;
     this.y = 550;
     this.frame = 0;
-    this.flameOpacity = 1.0
+    this.flameOpacity = 1.0;
   }
 
   update() {

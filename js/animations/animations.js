@@ -17,6 +17,7 @@ import ExplosiveBlow from "./skills/ExplosiveBlow.js";
 import FastMove from "./skills/FastMove.js";
 import FireMeteorite from "./skills/FireMeteorite.js";
 import FireShield from "./skills/FireShield.js";
+import FreezingSkill from "./skills/FreezingSkill.js";
 import FuryBurst from "./skills/FuryBurst.js";
 import GhoulBlock from "./skills/GhoulBlock.js";
 import GoldenShield from "./skills/GoldenShield.js";
@@ -51,6 +52,7 @@ const AnimationDefinitions = {
   TextFloat,
   FuryBurst,
   Bacteria,
+  FreezingSkill,
   Cleanse,
   FireMeteorite,
   FireShield,

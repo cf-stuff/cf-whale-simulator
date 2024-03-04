@@ -62,6 +62,13 @@ const parseNextLog = timeline => {
         callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Bacteria(id % 2 === 0))
       });
       timeline.frame += 45;
+    } else if (name === Skills.freezingSkill.name) {
+      const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
+      timeline.events.push({
+        frame: timeline.frame,
+        callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.FreezingSkill(id % 2 === 0, sprite))
+      });
+      timeline.frame += 130;
     } else if (name === Skills.cleanse.name) {
       timeline.events.push({
         frame: timeline.frame,

@@ -63,8 +63,8 @@ export async function createProfile(player, options = { bg: 11, left: true }) {
 export async function renderTimeline(ctx, timeline) {
   const promises = [];
   ctx.drawImage(battleBg, 0, 0);
-  const left = timeline.left[timeline.leftIndex];
-  const right = timeline.right[timeline.rightIndex];
+  const left = timeline.left[Math.min(timeline.leftIndex, timeline.left.length - 1)];
+  const right = timeline.right[Math.min(timeline.rightIndex, timeline.right.length - 1)];
 
   renderTotem(ctx, left.totem, { left: true }, promises);
   renderTotem(ctx, right.totem, { left: false }, promises);

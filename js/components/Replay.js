@@ -273,7 +273,7 @@ const parseNextLog = timeline => {
       });
       timeline.frame += 81;
     } else if (skillsWithNoCastAnimation.some(x => x.name === name)) {
-      // skills with no cast animation
+      // timeline.frame += 30;
     } else if (petAttacks.some(x => x.name === name)) {
       const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].petSprite : timeline.right[timeline.rightIndex].petSprite;
       const isBlock = name === PetSkills.block.name;
@@ -452,16 +452,18 @@ const parseNextLog = timeline => {
       timeline.events.push({
         frame: timeline.frame,
         callback: () => {
-          ++timeline.rightIndex;
-          timeline.left[timeline.leftIndex].current.status = new Set();
+          if (++timeline.rightIndex < timeline.right.length) {
+            timeline.left[timeline.leftIndex].current.status = new Set();
+          }
         }
       });
     } else {
       timeline.events.push({
         frame: timeline.frame,
         callback: () => {
-          ++timeline.leftIndex;
-          timeline.right[timeline.rightIndex].current.status = new Set();
+          if (++timeline.leftIndex < timeline.left.length) {
+            timeline.right[timeline.rightIndex].current.status = new Set();
+          }
         }
       });
     }
@@ -533,6 +535,7 @@ const Replay = ({ logs, play = true }) => {
     const ctx = canvas.getContext("2d");
     let req;
     let frames = 0;
+    let framesAfterEnd = 0;
 
     async function animate() {
       ++frames;
@@ -540,7 +543,9 @@ const Replay = ({ logs, play = true }) => {
       timeline.events.forEach(event => {
         if (frames >= event.frame) event.callback();
       });
-      if (timeline.leftIndex >= timeline.left.length || timeline.rightIndex >= timeline.right.length) return;
+      if ((timeline.leftIndex >= timeline.left.length || timeline.rightIndex >= timeline.right.length) && ++framesAfterEnd >= 60) {
+        return;
+      }
       timeline.events = timeline.events.filter(event => frames < event.frame);
       await renderTimeline(ctx, timeline);
       timeline.ongoingAnimations = timeline.ongoingAnimations.filter(animation => !animation.isFinished());

@@ -10,8 +10,11 @@ export const FighterState = {
 }
 
 export default class Fighter {
-  constructor(pos, left) {
-    this.pos = pos;
+  constructor(left) {
+    this.pos = {
+      x: 300, // mid
+      y: 550 // bot
+    };
     this.left = left;
     this._state = FighterState.idle;
     this.angle = 0;
@@ -78,7 +81,7 @@ export default class Fighter {
    */
   dodge() {
     if (this.frames === 1) {
-      this.clone = new Fighter({ x: this.pos.x, y: this.pos.y }, this.left);
+      this.clone = new Fighter(this.left);
     }
     if (this.frames > 3 && this.frames < 9) {
       this.opacity -= 0.1;

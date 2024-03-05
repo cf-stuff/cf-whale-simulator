@@ -5,6 +5,10 @@ import { FURY_BURST_THRESHOLD } from "../config.js";
 import TextFloat from "../animations/TextFloat.js";
 import Skills from "../data/skills.js";
 import { FighterState } from "../animations/Fighter.js";
+import CFDB from "../data/CFDB.js";
+import { PetSkillType } from "../data/categories.js";
+import { PetState } from "../animations/Pet.js";
+import PetSkills from "../data/petSkills.js";
 
 const skillsWithNoCastAnimation = [
   Skills.energyShield,
@@ -15,6 +19,8 @@ const skillsWithNoCastAnimation = [
   Skills.shieldWall,
   Skills.bloodSacrifice
 ];
+
+const petAttacks = [...CFDB.getPetSkills(PetSkillType.skill), ...CFDB.getPetActives(), ...CFDB.getTotemPetAttacks()];
 
 const parsePlayerLog = (log, timeline) => {
   const [, , id, player] = log.split("|");
@@ -31,11 +37,8 @@ const parsePlayerLog = (log, timeline) => {
     sp: new AnimationDefinitions.SpBar(left),
     fury: new AnimationDefinitions.FuryBar(left)
   }
-  object.pos = {
-    x: 300, // mid
-    y: 550 // bot
-  }
-  object.sprite = new AnimationDefinitions.Fighter(object.pos, left)
+  object.sprite = new AnimationDefinitions.Fighter(left);
+  object.petSprite = new AnimationDefinitions.Pet(object.pet, left);
   if (left) {
     timeline.left.push(object);
   } else {
@@ -271,6 +274,14 @@ const parseNextLog = timeline => {
       timeline.frame += 81;
     } else if (skillsWithNoCastAnimation.some(x => x.name === name)) {
       // skills with no cast animation
+    } else if (petAttacks.some(x => x.name === name)) {
+      const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].petSprite : timeline.right[timeline.rightIndex].petSprite;
+      const isBlock = name === PetSkills.block.name;
+      timeline.events.push({
+        frame: timeline.frame,
+        callback: () => sprite.state = isBlock ? PetState.block : PetState.attack
+      });
+      timeline.frame += isBlock ? 39 : 45;
     } else {
       timeline.frame += 30; // temp hardcode for unhandled skills
     }

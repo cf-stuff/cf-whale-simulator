@@ -80,6 +80,7 @@ CFDB.getGemMaxLevel = gear => Math.floor((gear.level - 1) / 10);
 
 CFDB.getTotems = () => Object.values(Totems);
 CFDB.getTotem = name => CFDB.getTotems().find(totem => totem.name === name);
+CFDB.getTotemPetAttacks = () => [Totems.purple, Totems.blue, Totems.green, Totems.orange, Totems.red];
 
 CFDB.getPhylactery = type => Object.values(Phylactery).find(phy => phy.type === type);
 CFDB.getPhylacteryExtraTriggerPercent = level => {

@@ -37,11 +37,6 @@ https://github.com/smogon/pokemon-showdown
 https://replay.pokemonshowdown.com/oumonotype-82345404.json
 https://replay.pokemonshowdown.com/oumonotype-82345404.log
 
-animations needed
-pet block
-pet attack
-
-dodge / parry
 
 funny bug: healing reset cheating death does not update state back to idle
 

@@ -1,6 +1,7 @@
 import Fighter from "./Fighter.js";
 import FuryBar from "./FuryBar.js";
 import HpBar from "./HpBar.js";
+import Pet from "./Pet.js";
 import SpBar from "./SpBar.js";
 import TextFloat from "./TextFloat.js";
 import Assassinate from "./skills/Assassinate.js";
@@ -48,6 +49,7 @@ export const Layer = {
 
 const AnimationDefinitions = {
   Fighter,
+  Pet,
   HpBar,
   SpBar,
   FuryBar,
@@ -63,7 +65,7 @@ const AnimationDefinitions = {
   InescapableNet,
   ThunderclapQuake,
   ThornShield,
-  LightningBall, 
+  LightningBall,
   ThunderboltBoxing,
   StormBoxing,
   FastMove,

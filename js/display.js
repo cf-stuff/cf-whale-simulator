@@ -75,11 +75,13 @@ export async function renderTimeline(ctx, timeline) {
   right.sprite.update();
   right.sprite.draw(ctx);
 
-  await renderPetSprite(ctx, left.pet, { left: true }, promises);
-  await renderPetSprite(ctx, right.pet, { left: false }, promises);
+  left.petSprite.update();
+  left.petSprite.draw(ctx);
+  right.petSprite.update();
+  right.petSprite.draw(ctx);
 
-  left.current.status.forEach(status => renderStatusEffect(ctx, status, left.pos.x, left.pos.y, true));
-  right.current.status.forEach(status => renderStatusEffect(ctx, status, right.pos.x, right.pos.y, false));
+  left.current.status.forEach(status => renderStatusEffect(ctx, status, left.sprite.pos.x, left.sprite.pos.y, true));
+  right.current.status.forEach(status => renderStatusEffect(ctx, status, right.sprite.pos.x, right.sprite.pos.y, false));
   timeline.ongoingAnimations.sort((a, b) => a.layer - b.layer);
   timeline.ongoingAnimations.forEach(animation => {
     animation.update();

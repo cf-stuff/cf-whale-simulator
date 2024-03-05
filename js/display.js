@@ -28,6 +28,7 @@ const mask = getImage("img/display/effects/mask.png");
 const violent = getImage("img/display/effects/violent.png");
 const stunned = getImage("img/display/effects/stunned.png");
 const sick = getImage("img/display/effects/sick.png");
+const timeBomb = getImage("img/display/effects/timebomb.png");
 
 export async function createProfile(player, options = { bg: 11, left: true }) {
   const canvas = document.createElement("canvas");
@@ -335,6 +336,8 @@ function renderStatusEffect(ctx, status, x, y, left = true) {
     ctx.drawImage(stunned, x - stunned.width / 2, y - 150 - stunned.height);
   } else if (status === Status.sick.name) {
     ctx.drawImage(sick, x - sick.width / 2, y - sick.height);
+  } else if (status === Status.timeBomb.name) {
+    ctx.drawImage(timeBomb, x - timeBomb.width / 2, y - timeBomb.height);
   }
   if (!left) {
     ctx.scale(-1, 1);

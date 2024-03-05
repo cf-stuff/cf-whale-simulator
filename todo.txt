@@ -20,7 +20,6 @@ normalise score -> use as probability for pool selection
 todo for phase 1
 net eva multiplier
 can mi/dodge then counterattack
-should be able to eng shield when enemy frozen
 assassinate should not heal after win
 
 new branch for:
@@ -39,43 +38,12 @@ https://replay.pokemonshowdown.com/oumonotype-82345404.json
 https://replay.pokemonshowdown.com/oumonotype-82345404.log
 
 animations needed
-skills:
-bacteria bacteria.png
-ice (no sprite)
-cleanse cleanse.png
-meteorite firemeteorite.png
-net net.png
-quake quake.png
-thorns thorns.png
-storm box stormboxing.png
-fast move fastmove.png
-violence violence.png
-hammer hammer.png
-explosive blow explosiveblow.png
-gallop gallop.png
-time bomb timebomb.png
-wine wine.png
-mask mask.png
-shackles shackles.png
-curse curse.png
-
 pet block
 pet attack
 
-status:
-violent violent.png
-sick sick.png
-stunned (no sprite, character shakes size to size)
-time bomb timebomb.png timebomb.explode.png
-drunk drunk.png
-weakened mask.png
-dizzy (same as stunned)
-
 dodge / parry
-fury burst furyburst.png - can skip if lazy
 
-todo
-poisoned can't find sprite
+funny bug: healing reset cheating death does not update state back to idle
 
 replay format
 

@@ -600,7 +600,7 @@ function handleTimerRelatedStatusEffects(state) {
       if (status.timeRemaining <= 0) {
         if (status.effect.takeStoredDamageAfterDuration) {
           dealDamage(state, player.index, status.storedDamage, {
-            souce: status.name,
+            source: status.name,
             type: DamageType.other
           })
         }

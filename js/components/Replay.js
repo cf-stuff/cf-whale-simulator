@@ -164,6 +164,12 @@ const parseNextLog = timeline => {
         callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.ExplosiveBlow(id % 2 === 0))
       });
       timeline.frame += 59;
+    } else if (name === Skills.gallop.name) {
+      timeline.events.push({
+        frame: timeline.frame,
+        callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.Gallop(id % 2 === 0))
+      });
+      timeline.frame += 30;
     } else if (name === Skills.counterattack.name) {
       const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
       timeline.events.push({
@@ -184,6 +190,13 @@ const parseNextLog = timeline => {
         callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.PoisonousFog(id % 2 === 0, sprite))
       });
       timeline.frame += 82;
+    } else if (name === Skills.timeBomb.name) {
+      const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
+      timeline.events.push({
+        frame: timeline.frame,
+        callback: () => timeline.ongoingAnimations.push(new AnimationDefinitions.TimeBomb(id % 2 === 0, sprite))
+      });
+      timeline.frame += 75;
     } else if (name === Skills.wine.name) {
       const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
       timeline.events.push({

@@ -19,6 +19,7 @@ import FireMeteorite from "./skills/FireMeteorite.js";
 import FireShield from "./skills/FireShield.js";
 import FreezingSkill from "./skills/FreezingSkill.js";
 import FuryBurst from "./skills/FuryBurst.js";
+import Gallop from "./skills/Gallop.js";
 import GhoulBlock from "./skills/GhoulBlock.js";
 import GoldenShield from "./skills/GoldenShield.js";
 import HeavyHammer from "./skills/HeavyHammer.js";
@@ -33,6 +34,7 @@ import StormBoxing from "./skills/StormBoxing.js";
 import ThornShield from "./skills/ThornShield.js";
 import ThunderboltBoxing from "./skills/ThunderboltBoxing.js";
 import ThunderclapQuake from "./skills/ThunderclapQuake.js";
+import TimeBomb from "./skills/TimeBomb.js";
 import Violence from "./skills/Violence.js";
 import Wine from "./skills/Wine.js";
 
@@ -68,9 +70,11 @@ const AnimationDefinitions = {
   Violence,
   HeavyHammer,
   ExplosiveBlow,
+  Gallop,
   Counterattack,
   Bomb,
   PoisonousFog,
+  TimeBomb,
   Wine,
   GhoulBlock,
   SkillShackles,

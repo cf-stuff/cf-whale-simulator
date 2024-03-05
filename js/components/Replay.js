@@ -282,8 +282,6 @@ const parseNextLog = timeline => {
         callback: () => sprite.state = isBlock ? PetState.block : PetState.attack
       });
       timeline.frame += isBlock ? 39 : 45;
-    } else {
-      timeline.frame += 30; // temp hardcode for unhandled skills
     }
   } else if (log.startsWith("|status|")) {
     const [, , action, id, name] = log.split("|");

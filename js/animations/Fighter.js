@@ -3,8 +3,10 @@ img.src = "img/display/char.png";
 
 export const FighterState = {
   idle: 0,
-  attack: 3,
-  die: 4
+  attack: 1,
+  die: 2,
+  dodge: 3,
+  parry: 4
 }
 
 export default class Fighter {
@@ -68,12 +70,48 @@ export default class Fighter {
     }
   }
 
+  /**
+   * notes @ 30 fps
+   * frames 1-3 wind up
+   * frames 4-8 opacity decrease, clone move left
+   * frames 9-16 wait
+   */
+  dodge() {
+    if (this.frames === 1) {
+      this.clone = new Fighter({ x: this.pos.x, y: this.pos.y }, this.left);
+    }
+    if (this.frames > 3 && this.frames < 9) {
+      this.opacity -= 0.1;
+      this.clone.pos.x -= 15;
+    } else if (this.frames === 17) {
+      this.state = FighterState.idle;
+      delete this.clone;
+    }
+  }
+
+  /**
+   * notes @ 30 fps
+   * frames 1-3 into parry position
+   * frames 4-11 hold
+   */
+  parry() {
+    if (this.frames < 4) {
+      this.angle += Math.PI / 18;
+    } else if (this.frames === 12) {
+      this.state = FighterState.idle;
+    }
+  }
+
   update() {
     ++this.frames;
     if (this._state === FighterState.attack) {
       this.hitAndRun();
     } else if (this._state === FighterState.die) {
       this.die();
+    } else if (this._state === FighterState.dodge) {
+      this.dodge();
+    } else if (this._state === FighterState.parry) {
+      this.parry();
     }
   }
 
@@ -81,6 +119,9 @@ export default class Fighter {
     ctx.globalAlpha = this.opacity;
     drawAtAngle(ctx, img, this.pos.x - img.width / 2, this.pos.y - img.height, this.angle, this.pivot, this.left);
     ctx.globalAlpha = 1.0;
+    if (this.clone) {
+      this.clone.draw(ctx);
+    }
   }
 
   isFinished() {

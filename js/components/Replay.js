@@ -458,6 +458,22 @@ const parseNextLog = timeline => {
     }
   } else if (log.startsWith("|turn|")) {
     timeline.frame += 4;
+  } else if (log.startsWith("|dodge|")) {
+    const [, , id] = log.split("|");
+    const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
+    timeline.events.push({
+      frame: timeline.frame,
+      callback: () => sprite.state = FighterState.dodge
+    });
+    timeline.frame += 16;
+  } else if (log.startsWith("|parry|")) {
+    const [, , id] = log.split("|");
+    const sprite = id % 2 === 0 ? timeline.left[timeline.leftIndex].sprite : timeline.right[timeline.rightIndex].sprite;
+    timeline.events.push({
+      frame: timeline.frame,
+      callback: () => sprite.state = FighterState.parry
+    });
+    timeline.frame += 11;
   }
   return true;
 }

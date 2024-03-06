@@ -128,7 +128,7 @@ const Battle = () => {
           <img class="img-btn" src=${getImagePath(ImageType.replayBtn, "redo")} style=${{ height: "51px" }} onClick=${() => restartReplay()} />
         </div>
         <div class="col-auto">
-          <img class="img-btn" src=${getImagePath(ImageType.replayBtn, "play")} style=${{ height: "51px" }} onClick=${() => togglePlay()} />
+          <img class="img-btn" src=${getImagePath(ImageType.replayBtn, play ? "pause" : "play")} style=${{ height: "51px" }} onClick=${() => togglePlay()} />
         </div>
         <div class="col-auto">
           <span class="text-center h2">${leftWins}-${rightWins}</span>

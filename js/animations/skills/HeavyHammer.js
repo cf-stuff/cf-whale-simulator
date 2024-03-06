@@ -7,7 +7,7 @@ const prep = new Image();
 prep.src = "img/display/effects/hammerprep.png";
 
 const impact = new Image();
-impact.src = "img/display/effects/hammerImpact.png";
+impact.src = "img/display/effects/hammerimpact.png";
 
 export default class HeavyHammer {
   constructor(left) {

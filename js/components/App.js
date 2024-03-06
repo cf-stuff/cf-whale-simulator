@@ -34,7 +34,7 @@ const App = () => {
     Discord: CF99#9616
     <hr/>
     <h3>Changelog</h3>
-    <0>2024-03-07: 1.8.0 - Animated fights; fixed tired not being applied after explosive blow; time bomb stored damage now works properly</p>
+    <p>2024-03-07: 1.8.0 - Animated fights; fixed tired not being applied after explosive blow; time bomb stored damage now works properly</p>
     <p>2024-02-16: 1.7.1 - Fixed bug causing rejuv not triggering in most situations</p>
     <p>2023-04-17: 1.7.0 - Implemented shield wall burst and strong wine stat decreases; Rebirth chance down to 80% (90% with mastery)</p>
     <p>2023-04-07: 1.6.1 - Rebirth and pet block no are longer affected by frenzy</p>

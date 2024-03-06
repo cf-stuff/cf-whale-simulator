@@ -60,7 +60,11 @@ export async function createProfile(player, options = { bg: 11, left: true }) {
   return canvas;
 }
 
-export async function renderTimeline(ctx, timeline) {
+export async function renderTimeline(timeline) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 1024;
+  canvas.height = 720;
+  const ctx = canvas.getContext("2d");
   const promises = [];
   ctx.drawImage(battleBg, 0, 0);
   const left = timeline.left[Math.min(timeline.leftIndex, timeline.left.length - 1)];
@@ -112,6 +116,7 @@ export async function renderTimeline(ctx, timeline) {
   }, promises);
   // todo: mini heads
   await Promise.allSettled(promises);
+  return canvas;
 }
 
 function renderPlayerDetails(ctx, player, options) {

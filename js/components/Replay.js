@@ -521,46 +521,45 @@ const createTimeline = logs => {
   return timeline;
 }
 
-const Replay = ({ logs, play = true }) => {
+const Replay = ({ logs, play = true, restart = 0 }) => {
+  const [timeline, setTimeline] = useState(null);
+  const [currentFrame, setCurrentFrame] = useState(0);
   const canvasRef = useRef(null);
-  console.log(logs);
 
   useEffect(() => {
-    if (!canvasRef) return;
+    setTimeline(createTimeline(logs));
+    setCurrentFrame(0);
+  }, [logs, restart]);
 
-    const timeline = createTimeline(logs);
-    const canvas = document.createElement("canvas");
-    canvas.width = 1024;
-    canvas.height = 720;
-    const ctx = canvas.getContext("2d");
-    let req;
-    let frames = 0;
-    let framesAfterEnd = 0;
+  useEffect(() => {
+    let intervalId;
+    if (play) {
+      intervalId = setInterval(() => {
+        setCurrentFrame(prev => prev + 1);
+      }, 17);
+    }
 
+    return () => clearInterval(intervalId);
+  }, [play]);
+
+  useEffect(() => {
+    if (!timeline) return;
     async function animate() {
-      ++frames;
       addEvents(timeline);
       timeline.events.forEach(event => {
-        if (frames >= event.frame) event.callback();
+        if (currentFrame >= event.frame) event.callback();
       });
-      if ((timeline.leftIndex >= timeline.left.length || timeline.rightIndex >= timeline.right.length) && ++framesAfterEnd >= 60) {
-        return;
-      }
-      timeline.events = timeline.events.filter(event => frames < event.frame);
-      await renderTimeline(ctx, timeline);
+      timeline.events = timeline.events.filter(event => currentFrame < event.frame);
+      const frameContent = await renderTimeline(timeline);
       timeline.ongoingAnimations = timeline.ongoingAnimations.filter(animation => !animation.isFinished());
       if (canvasRef.current) {
-        canvasRef.current.getContext("2d").drawImage(canvas, 0, 0);
-        req = requestAnimationFrame(animate);
+        canvasRef.current.getContext("2d").drawImage(frameContent, 0, 0);
       }
+      setTimeline(timeline);
     }
 
     animate();
-    return () => {
-      cancelAnimationFrame(req);
-      timeline.leftIndex = 100;
-    };
-  }, [logs]);
+  }, [currentFrame]);
   return html`<canvas class="replay" ref=${canvasRef} width="1024" height="720" />`;
 }
 

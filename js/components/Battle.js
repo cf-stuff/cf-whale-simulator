@@ -19,6 +19,8 @@ const Battle = () => {
   const [rightWins, setRightWins] = useState(0);
   const [logHeight, setLogHeight] = useState(0);
   const [showReplay, setShowReplay] = useState(false);
+  const [play, setPlay] = useState(false);
+  const [restart, setRestart] = useState(0);
   const scoreRef = useRef(null);
   const heightRef = useCallback(node => {
     if (node !== null) {
@@ -52,6 +54,7 @@ const Battle = () => {
     setLeftWins(0);
     setRightWins(0);
     setShowReplay(false);
+    setPlay(false);
   }
 
   const handleBattle = (rounds, batches = 1) => {
@@ -64,10 +67,23 @@ const Battle = () => {
     if (--batches > 0) {
       setTimeout(() => handleBattle(rounds, batches), 0);
     } else if (batches === 0) {
-    if (battleSim) setBattle(battleSim);
+      if (battleSim) setBattle(battleSim);
       setShowReplay(true);
+      setPlay(true);
     }
   }
+
+  const togglePlay = () => {
+    if (!showReplay) return;
+    setPlay(prev => !prev);
+  }
+
+  const restartReplay = () => {
+    if (!showReplay) return;
+    setRestart(prev => prev + 1);
+    setPlay(true);
+  }
+
   return html`
   <div class="row pt-3">
     <div class="col">
@@ -95,7 +111,7 @@ const Battle = () => {
     <div class="col-md-8 order-2 order-md-1">
       <div class="row g-0" ref=${heightRef}>
         ${showReplay ? html`
-        <${Replay} logs=${battle.logs} />
+        <${Replay} logs=${battle.logs} play=${play} restart=${restart} />
         ` : html`
         <div class="col-md-6 col-sm-12">
           ${leftPlayers.length > 0 && html`<${Carousel} id="left-display" images=${leftPlayers.map(player => html`<${Display} player=${player} />`)} />`}
@@ -108,8 +124,11 @@ const Battle = () => {
     </div>
     <div class="col-md order-1 order-md-2">
       <div class="row" ref=${scoreRef}>
-        <div class="col">
-          <img src=${getImagePath(ImageType.replayBtn, "play")} style=${{ height: "51px" }} />
+        <div class="col-auto">
+          <img class="img-btn" src=${getImagePath(ImageType.replayBtn, "redo")} style=${{ height: "51px" }} onClick=${() => restartReplay()} />
+        </div>
+        <div class="col-auto">
+          <img class="img-btn" src=${getImagePath(ImageType.replayBtn, "play")} style=${{ height: "51px" }} onClick=${() => togglePlay()} />
         </div>
         <div class="col-auto">
           <span class="text-center h2">${leftWins}-${rightWins}</span>

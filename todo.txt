@@ -1,7 +1,6 @@
-phase 1: battle simulator
-phase 2: user interface to input stats (like feh combat sim or pokemon showdown)
-phase 3: animate replays including fast forward and rewind, import and export - battle sim exports replay
-phase 4: backend db to store replays and share via link
+phase 1: battle simulator + user interface to input stats (like feh combat sim or pokemon showdown)
+phase 2: animate replays including fast forward and rewind, import and export - battle sim exports replay
+phase 3: backend db to store replays and share via link
 
 possible ideas
 
@@ -20,8 +19,7 @@ normalise score -> use as probability for pool selection
 ---
 todo for phase 1
 can mi/dodge then counterattack
-
-arena icons
+assassinate should not heal after win
 
 new branch for:
 localStorage => indexedDB
@@ -31,8 +29,6 @@ migration script to convert all saved builds into indexedDB
 
 ---
 
-2 arrays of players, returns replay object
-createGame (leftPlayers, rightPlayers)
 
 import/export replay json
 check how ps does it
@@ -40,88 +36,45 @@ https://github.com/smogon/pokemon-showdown
 https://replay.pokemonshowdown.com/oumonotype-82345404.json
 https://replay.pokemonshowdown.com/oumonotype-82345404.log
 
+
+funny bug: healing reset cheating death does not update state back to idle
+
 replay format
 
-{
-  timestamp // not used in animation, probably useful for logging purposes
-  left: [players], // for now size will be 1
-  right: [players],
-  battles: [
-    ...
-  ]
-}
+|player|id|<player json>
+id = starts from 0 and increments, even = left, odd = right
 
-battle format
-{
-  left: 1, // id of first left player
-  right: 2, // id of first right player
-  events: [ // array of events, can undo and redo
-    {
-      owner: 2, // id of player
-      type: "skill"
-      skill: "barb"
-      
-    },
-    {
-      owner: 1,
-      type: "skill",
-      skill: "frenzy"
-    },
-    {
-      owner: 1,
-      type: "normal attack",
-      // frenzy dmage and attack damage on enemy
-    },
-    {
-      owner: 1,
-      type: "skill",
-      skill: "tbox",
-      damage: 500
-    }
-  ]
-}
+|vs|<L id>|<R id>
 
+|turn|<id>|<seconds>
+|skill|<id>|<name>
+|status|add/remove|<id>|<name>
+|stat|add|<id>|<stat>|<amount>|<current>|<initial>|source|
+|stat|remove|<id>|<stat>|<amount>|<current>|<initial>|source|crt/noCrt
+|fury|<id>|<amount>|<current>|
+|furyburst|<id>
+|dodge|<id>
+|parry|<id>
+|win|<id>
 
-event format
-{
-  id: 1,
-  type: "use skill"
-  playerId: 1
-  skill: barb
-}
-{
-  id: 1,
-  type: "use skill"
-  playerId: 1
-  skill: "tbox"
-}
-{
-  id: 2,
-  type: "damage",
-  playerId: 1,
-  source: poison
-  amount: 100
-  hp: 2000
-}
-{
-  id: 3,
-  type: "heal",
+ignore when animating, used for logging purposes
+|info|message
+|debug|message
 
-}
+requirements
+initial state
+desktop: profiles on left, logs on right
+mobile: profiles on top, logs on bottom
 
-alternate event format
-{player}|status|add|{status}
-{player}|skill|{skill name}
-{player}|hp|{amount}|{resulting amount}
-{player}|sp|{amount}|{resulting amount}
+left + right profile with scrolling
+logs same height as battle, 300px on mobile
 
+> after log generated, button to replay last fight (play button located left of score)
+- replace profile with battle bg
+(include little heads for multiple fighters in replay)
 
-e.g.
-0|skill|barbarism
-0|status|add|horns
-0|skill|tbox|crit|parry
-0|sp|-5|275
-1|hp|-100|10000
-1|status|add|tbox
-0|skill|tbox
-1|skill|mi
+during fight button layout TBD
+- button to restart replay
+
+possible idea:
+use turn to determine who is drawn first (useful in cases of overlap e.g lightningball)

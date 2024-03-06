@@ -11,7 +11,9 @@ export const ImageType = {
   skill: "skill",
   skillType: "skillType",
   skillSlot: "skillSlot",
-  totem: "totem"
+  totem: "totem",
+  bg: "bg",
+  replayBtn: "replayBtn"
 }
 
 export const getImagePath = (type, id, intVersion = false) => {
@@ -43,7 +45,23 @@ export const getImagePath = (type, id, intVersion = false) => {
       return basePath + `skill/${id}.png`;
     case ImageType.totem:
       return basePath + `totems/tuten${id}.png`;
+    case ImageType.bg:
+      return basePath + `display/background${id}.png`;
+    case ImageType.replayBtn:
+      return basePath + `display/buttons/${id}.png`;
   }
+}
+
+export function getImageAsync(path) {
+  const image = new Image();
+  image.src = path;
+  return new Promise(resolve => image.onload = () => resolve(image));
+}
+
+export function getImage(path) {
+  const image = new Image();
+  image.src = path;
+  return image;
 }
 
 export const preload = url => new Image().src = url;

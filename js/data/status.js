@@ -14,7 +14,7 @@ const Status = {
     }
   },
   bloodFrenzy: {
-    name: "Blood Frenzy",
+    name: "Frenzy",
     type: StatusType.buff,
     effect: {
       triggerProbabilityMultiplier: 1.5,
@@ -217,7 +217,7 @@ const Status = {
     }
   },
   wine: {
-    name: "Wine",
+    name: "Drunk",
     type: StatusType.debuff,
     effect: {
       atkMultiplier: 0.9,

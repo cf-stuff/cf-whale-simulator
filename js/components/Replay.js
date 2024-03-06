@@ -521,7 +521,7 @@ const createTimeline = logs => {
   return timeline;
 }
 
-const Replay = ({ logs, play = true, restart = 0 }) => {
+const Replay = ({ logs, play = true, restart = 0, delay = 17 }) => {
   const [timeline, setTimeline] = useState(null);
   const [currentFrame, setCurrentFrame] = useState(0);
   const canvasRef = useRef(null);
@@ -536,11 +536,11 @@ const Replay = ({ logs, play = true, restart = 0 }) => {
     if (play) {
       intervalId = setInterval(() => {
         setCurrentFrame(prev => prev + 1);
-      }, 17);
+      }, delay);
     }
 
     return () => clearInterval(intervalId);
-  }, [play]);
+  }, [play, delay]);
 
   useEffect(() => {
     if (!timeline) return;

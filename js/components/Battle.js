@@ -21,6 +21,7 @@ const Battle = () => {
   const [showReplay, setShowReplay] = useState(false);
   const [play, setPlay] = useState(false);
   const [restart, setRestart] = useState(0);
+  const [delay, setDelay] = useState(17);
   const scoreRef = useRef(null);
   const heightRef = useCallback(node => {
     if (node !== null) {
@@ -111,7 +112,7 @@ const Battle = () => {
     <div class="col-md-8 order-2 order-md-1">
       <div class="row g-0" ref=${heightRef}>
         ${showReplay ? html`
-        <${Replay} logs=${battle.logs} play=${play} restart=${restart} />
+        <${Replay} logs=${battle.logs} play=${play} restart=${restart} delay=${delay} />
         ` : html`
         <div class="col-md-6 col-sm-12">
           ${leftPlayers.length > 0 && html`<${Carousel} id="left-display" images=${leftPlayers.map(player => html`<${Display} player=${player} />`)} />`}
@@ -134,6 +135,7 @@ const Battle = () => {
           <span class="text-center h2">${leftWins}-${rightWins}</span>
         </div>
         <div class="col">
+          <input type="range" min="8" max="33" value=${41 - delay} onChange=${e => setDelay(41 - e.target.value)} />
         </div>
       </div>
       <div class="row">

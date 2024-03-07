@@ -61,12 +61,11 @@ export async function createProfile(player, options = { bg: 11, left: true }) {
 }
 
 export async function renderTimeline(timeline) {
-  const canvas = document.createElement("canvas");
-  canvas.width = 1024;
-  canvas.height = 720;
+  const canvas = new OffscreenCanvas(1024, 720);
   const ctx = canvas.getContext("2d");
   const promises = [];
   ctx.drawImage(battleBg, 0, 0);
+  if (timeline.leftIndex >= timeline.left.length || timeline.rightIndex >= timeline.right.length) ++timeline.framesAfterEnd;
   const left = timeline.left[Math.min(timeline.leftIndex, timeline.left.length - 1)];
   const right = timeline.right[Math.min(timeline.rightIndex, timeline.right.length - 1)];
 
@@ -138,10 +137,10 @@ async function renderStatBox(ctx, player, options, promises) {
   ctx.strokeStyle = "#ffffff";
   ctx.lineWidth = 4;
   if (options.left) {
-    ctx.roundRect(-20, 150, 250, player.fighter?.skills?.length > 0 ? 500 : 430, 20);
+    roundRect(ctx, -20, 150, 250, player.fighter?.skills?.length > 0 ? 500 : 430, 20);
   } else {
     ctx.scale(-1, 1);
-    ctx.roundRect(-20 - ctx.canvas.width, 150, 250, player.fighter?.skills?.length > 0 ? 500 : 430, 20);
+    roundRect(ctx, -20 - ctx.canvas.width, 150, 250, player.fighter?.skills?.length > 0 ? 500 : 430, 20);
     ctx.scale(-1, 1);
   }
   renderPetDetails(ctx, player.pet, options);
@@ -393,20 +392,20 @@ function lineSeparator(ctx, y, left = true) {
   ctx.restore();
 }
 
-CanvasRenderingContext2D.prototype.roundRect = function (x, y, width, height, radius = 5, stroke = true) {
-  this.beginPath();
-  this.moveTo(x + radius, y);
-  this.lineTo(x + width - radius, y);
-  this.quadraticCurveTo(x + width, y, x + width, y + radius);
-  this.lineTo(x + width, y + height - radius);
-  this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-  this.lineTo(x + radius, y + height);
-  this.quadraticCurveTo(x, y + height, x, y + height - radius);
-  this.lineTo(x, y + radius);
-  this.quadraticCurveTo(x, y, x + radius, y);
-  this.closePath();
+function roundRect(ctx, x, y, width, height, radius = 5, stroke = true) {
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + width - radius, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+  ctx.lineTo(x + width, y + height - radius);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  ctx.lineTo(x + radius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
   if (stroke) {
-    this.stroke();
+    ctx.stroke();
   }
-  this.fill();
+  ctx.fill();
 }

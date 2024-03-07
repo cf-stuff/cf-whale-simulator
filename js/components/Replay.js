@@ -507,7 +507,9 @@ const createTimeline = logs => {
     leftIndex: 0,
     rightIndex: 0,
     events: [],
-    ongoingAnimations: []
+    ongoingAnimations: [],
+    framesAfterEnd: 0,
+    isFinished: function () { return this.framesAfterEnd >= 60 }
   }
   for (let i = 0; i < logs.length; ++i) {
     const log = logs[i];
@@ -543,7 +545,7 @@ const Replay = ({ logs, play = true, restart = 0, delay = 17 }) => {
   }, [play, delay]);
 
   useEffect(() => {
-    if (!timeline) return;
+    if (!timeline || timeline.isFinished()) return;
     async function animate() {
       addEvents(timeline);
       timeline.events.forEach(event => {

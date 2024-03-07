@@ -68,9 +68,11 @@ const Battle = () => {
     if (--batches > 0) {
       setTimeout(() => handleBattle(rounds, batches), 0);
     } else if (batches === 0) {
-      if (battleSim) setBattle(battleSim);
-      setShowReplay(true);
-      setPlay(true);
+      if (battleSim) {
+        setBattle(battleSim);
+        setShowReplay(true);
+        setPlay(true);
+      }
     }
   }
 

@@ -52,15 +52,21 @@ export const getImagePath = (type, id, intVersion = false) => {
   }
 }
 
+const imageMap = new Map();
+
 export function getImageAsync(path) {
+  if (imageMap.has(path)) return new Promise(resolve => resolve(imageMap.get(path)));
   const image = new Image();
   image.src = path;
+  imageMap.set(path, image);
   return new Promise(resolve => image.onload = () => resolve(image));
 }
 
 export function getImage(path) {
+  if (imageMap.has(path)) return imageMap.get(path);
   const image = new Image();
   image.src = path;
+  imageMap.set(path, image);
   return image;
 }
 

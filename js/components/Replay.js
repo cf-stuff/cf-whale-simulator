@@ -1,5 +1,4 @@
 import { html, useState, useEffect, useRef } from "https://unpkg.com/htm/preact/standalone.module.js"
-import { renderTimeline } from "../display.js";
 import Timeline from "../Timeline.js";
 
 const Replay = ({ logs, play = true, restart = 0, delay = 17 }) => {
@@ -27,13 +26,8 @@ const Replay = ({ logs, play = true, restart = 0, delay = 17 }) => {
     if (!timeline || timeline.isFinished()) return;
     timeline.currentFrame = currentFrame;
     async function animate() {
-      timeline.addEvents();
-      timeline.events.forEach(event => {
-        if (currentFrame >= event.frame) event.callback();
-      });
-      timeline.events = timeline.events.filter(event => currentFrame < event.frame);
-      const frameContent = await renderTimeline(timeline);
-      timeline.ongoingAnimations = timeline.ongoingAnimations.filter(animation => !animation.isFinished());
+      timeline.update();
+      const frameContent = await timeline.render();
       if (canvasRef.current) {
         canvasRef.current.getContext("2d").drawImage(frameContent, 0, 0);
       }

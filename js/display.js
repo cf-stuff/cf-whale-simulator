@@ -6,8 +6,6 @@ const hud = getImage("img/display/hud.png");
 const skillFrame = getImage("img/display/skill-frame.png");
 const evoSkillFrame = getImage("img/display/skill-evo-frame.png");
 
-const battleBg = getImage("img/display/battle-bg.png");
-const battleHud = getImage("img/display/battle-hud.png");
 const char = getImage("img/display/char.png");
 const horns = getImage("img/display/effects/horns.png");
 const bell = getImage("img/display/effects/bell.png");
@@ -53,67 +51,10 @@ export async function createProfile(player, options = { bg: 11, left: true }) {
     return canvas;
   }
 
-  await renderBackgroundSprites(ctx, player, options, promises);
-  await renderStatBox(ctx, player, options, promises);
-  await renderHudDetails(ctx, player, options, promises);
-  await Promise.allSettled(promises);
-  return canvas;
-}
-
-export async function renderTimeline(timeline) {
-  const canvas = new OffscreenCanvas(1024, 720);
-  const ctx = canvas.getContext("2d");
-  const promises = [];
-  ctx.drawImage(battleBg, 0, 0);
-  if (timeline.leftIndex >= timeline.left.length || timeline.rightIndex >= timeline.right.length) ++timeline.framesAfterEnd;
-  const left = timeline.left[Math.min(timeline.leftIndex, timeline.left.length - 1)];
-  const right = timeline.right[Math.min(timeline.rightIndex, timeline.right.length - 1)];
-
-  renderTotem(ctx, left.totem, { left: true }, promises);
-  renderTotem(ctx, right.totem, { left: false }, promises);
-  await Promise.allSettled(promises);
-
-  left.sprite.update();
-  left.sprite.draw(ctx);
-  right.sprite.update();
-  right.sprite.draw(ctx);
-
-  left.petSprite.update();
-  left.petSprite.draw(ctx);
-  right.petSprite.update();
-  right.petSprite.draw(ctx);
-
-  left.current.status.forEach(status => renderStatusEffect(ctx, status, left.sprite.pos.x, left.sprite.pos.y, true));
-  right.current.status.forEach(status => renderStatusEffect(ctx, status, right.sprite.pos.x, right.sprite.pos.y, false));
-  timeline.ongoingAnimations.sort((a, b) => a.layer - b.layer);
-  timeline.ongoingAnimations.forEach(animation => {
-    animation.update();
-    animation.draw(ctx);
-  });
-
-  renderStatBox(ctx, left, { left: true }, promises);
-  renderStatBox(ctx, right, { left: false }, promises);
-
-  ctx.drawImage(battleHud, 0, 0);
-  Object.values(left.animations).forEach(animation => {
-    animation.update();
-    animation.draw(ctx);
-  });
-  Object.values(right.animations).forEach(animation => {
-    animation.update();
-    animation.draw(ctx);
-  });
-  renderHudDetails(ctx, left, {
-    left: true,
-    hpOverride: true, hp: left.current.hp,
-    spOverride: true, sp: left.current.sp
-  }, promises);
-  renderHudDetails(ctx, right, {
-    left: false,
-    hpOverride: true, hp: right.current.hp,
-    spOverride: true, sp: right.current.sp
-  }, promises);
-  // todo: mini heads
+  renderTotem(ctx, player.totem, options, promises);
+  await renderPetSprite(ctx, player.pet, options, promises);
+  renderStatBox(ctx, player, options, promises);
+  renderHudDetails(ctx, player, options, promises);
   await Promise.allSettled(promises);
   return canvas;
 }
@@ -132,7 +73,7 @@ function renderPlayerDetails(ctx, player, options) {
   if (!options.left) ctx.textAlign = "left";
 }
 
-async function renderStatBox(ctx, player, options, promises) {
+export function renderStatBox(ctx, player, options, promises) {
   ctx.fillStyle = "rgba(25, 0, 21, 0.85)";
   ctx.strokeStyle = "#ffffff";
   ctx.lineWidth = 4;
@@ -153,12 +94,7 @@ async function renderStatBox(ctx, player, options, promises) {
   renderSkills(ctx, player, options, promises);
 }
 
-async function renderBackgroundSprites(ctx, player, options, promises) {
-  renderTotem(ctx, player.totem, options, promises);
-  await renderPetSprite(ctx, player.pet, options, promises);
-}
-
-async function renderHudDetails(ctx, player, options, promises) {
+export function renderHudDetails(ctx, player, options, promises) {
   renderPlayerDetails(ctx, player, options);
   const fighter = CFDB.getFighter(player.fighter.name);
   if (options.left) {
@@ -177,7 +113,7 @@ async function renderHudDetails(ctx, player, options, promises) {
   if (!options.left) ctx.textAlign = "left";
 }
 
-async function renderTotem(ctx, playerTotem, options, promises) {
+export function renderTotem(ctx, playerTotem, options, promises) {
   if (!playerTotem.name) return;
   const totem = CFDB.getTotem(playerTotem.name);
   if (options.left) {
@@ -187,7 +123,7 @@ async function renderTotem(ctx, playerTotem, options, promises) {
   }
 }
 
-async function renderFighterDetails(ctx, playerFighter, options) {
+function renderFighterDetails(ctx, playerFighter, options) {
   const fighter = CFDB.getFighter(playerFighter.name);
   const fighterDisplayName = playerFighter.evolved ? fighter.evoName : fighter.name;
   const x = options.left ? 15 : ctx.canvas.width - 227 + 15;
@@ -225,7 +161,7 @@ async function renderPetSprite(ctx, playerPet, options) {
   }
 }
 
-async function renderResistances(ctx, resistance, options, promises) {
+function renderResistances(ctx, resistance, options, promises) {
   ctx.font = "19px arial";
   ctx.fillStyle = "#ffffff";
   const x = options.left ? 15 : ctx.canvas.width - 227 + 15;
@@ -260,7 +196,7 @@ function renderStats(ctx, stats, options) {
   ctx.fillText(` ${stats.res}`, x + 125, 380);
 }
 
-async function renderSkills(ctx, player, options, promises) {
+function renderSkills(ctx, player, options, promises) {
   let skillIndex = 0;
   let petSkillIndex = 0;
   let phySkillRendered = false;
@@ -297,7 +233,7 @@ async function renderSkills(ctx, player, options, promises) {
   }
 }
 
-function renderStatusEffect(ctx, status, x, y, left = true) {
+export function renderStatusEffect(ctx, status, x, y, left = true) {
   if (!left) {
     x += ctx.canvas.width * -1;
     ctx.scale(-1, 1);

@@ -6,6 +6,8 @@ import CFDB from "./data/CFDB.js";
 import { PetSkillType } from "./data/categories.js";
 import PetSkills from "./data/petSkills.js";
 import Skills from "./data/skills.js";
+import { renderHudDetails, renderStatBox, renderStatusEffect, renderTotem } from "./display.js";
+import { getImage } from "./image.js";
 
 const skillsWithNoCastAnimation = [
   Skills.energyShield,
@@ -18,6 +20,9 @@ const skillsWithNoCastAnimation = [
 ];
 
 const petAttacks = [...CFDB.getPetSkills(PetSkillType.skill), ...CFDB.getPetActives(), ...CFDB.getTotemPetAttacks()];
+
+const battleBg = getImage("img/display/battle-bg.png");
+const battleHud = getImage("img/display/battle-hud.png");
 
 export default class Timeline {
   constructor(logs) {
@@ -516,5 +521,70 @@ export default class Timeline {
 
   addEvents() {
     while (this.events.length < 10 && this.parseNextLog()) { }
+  }
+
+  update() {
+    this.addEvents();
+    this.events.forEach(event => {
+      if (this.currentFrame >= event.frame) event.callback();
+    });
+
+    if (this.leftIndex >= this.left.length || this.rightIndex >= this.right.length) ++this.framesAfterEnd;
+    const left = this.left[Math.min(this.leftIndex, this.left.length - 1)];
+    const right = this.right[Math.min(this.rightIndex, this.right.length - 1)];
+    left.sprite.update();
+    right.sprite.update();
+    left.petSprite.update();
+    right.petSprite.update();
+    this.ongoingAnimations.forEach(animation => animation.update());
+    Object.values(left.animations).forEach(animation => animation.update());
+    Object.values(right.animations).forEach(animation => animation.update());
+
+    this.events = this.events.filter(event => this.currentFrame < event.frame);
+    this.ongoingAnimations = this.ongoingAnimations.filter(animation => !animation.isFinished());
+  }
+
+  async render() {
+    const canvas = new OffscreenCanvas(1024, 720);
+    const ctx = canvas.getContext("2d");
+    const promises = [];
+    ctx.drawImage(battleBg, 0, 0);
+    const left = this.left[Math.min(this.leftIndex, this.left.length - 1)];
+    const right = this.right[Math.min(this.rightIndex, this.right.length - 1)];
+
+    renderTotem(ctx, left.totem, { left: true }, promises);
+    renderTotem(ctx, right.totem, { left: false }, promises);
+    await Promise.allSettled(promises);
+
+    left.sprite.draw(ctx);
+    right.sprite.draw(ctx);
+
+    left.petSprite.draw(ctx);
+    right.petSprite.draw(ctx);
+
+    left.current.status.forEach(status => renderStatusEffect(ctx, status, left.sprite.pos.x, left.sprite.pos.y, true));
+    right.current.status.forEach(status => renderStatusEffect(ctx, status, right.sprite.pos.x, right.sprite.pos.y, false));
+    this.ongoingAnimations.sort((a, b) => a.layer - b.layer);
+    this.ongoingAnimations.forEach(animation => animation.draw(ctx));
+
+    renderStatBox(ctx, left, { left: true }, promises);
+    renderStatBox(ctx, right, { left: false }, promises);
+
+    ctx.drawImage(battleHud, 0, 0);
+    Object.values(left.animations).forEach(animation => animation.draw(ctx));
+    Object.values(right.animations).forEach(animation => animation.draw(ctx));
+    renderHudDetails(ctx, left, {
+      left: true,
+      hpOverride: true, hp: left.current.hp,
+      spOverride: true, sp: left.current.sp
+    }, promises);
+    renderHudDetails(ctx, right, {
+      left: false,
+      hpOverride: true, hp: right.current.hp,
+      spOverride: true, sp: right.current.sp
+    }, promises);
+    // todo: mini heads
+    await Promise.allSettled(promises);
+    return canvas;
   }
 }

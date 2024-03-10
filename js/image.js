@@ -69,5 +69,3 @@ export function getImage(path) {
   imageMap.set(path, image);
   return image;
 }
-
-export const preload = url => new Image().src = url;

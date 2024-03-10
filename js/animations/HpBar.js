@@ -18,8 +18,4 @@ export default class HpBar extends Bar {
       ctx.scale(-1, 1);
     }
   }
-
-  isFinished() {
-    return false;
-  }
 }

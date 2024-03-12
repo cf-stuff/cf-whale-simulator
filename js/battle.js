@@ -738,8 +738,8 @@ function gainFury(state, playerIndex, overrideAmount) {
     if (getDebuffs(state, playerIndex).length > 0) {
       state.players[playerIndex].furyBursts += 1;
       state.log.push(`|furyburst|${state.players[playerIndex].id}`);
-      getAllSkillsEligibleToBeUsed(state, playerIndex, SkillPhase.onFuryBurst).forEach(skill => useSkill(state, playerIndex, skill));
       removeRandomDebuff(state, playerIndex);
+      getAllSkillsEligibleToBeUsed(state, playerIndex, SkillPhase.onFuryBurst).forEach(skill => useSkill(state, playerIndex, skill));
       state.players[playerIndex].fury = 0;
     }
   }
@@ -791,8 +791,11 @@ function evaTest(state, playerIndex) {
   let evaMultiplier = 1;
   state.players[playerIndex].status.forEach(x => evaMultiplier *= x.effect.evaMultiplier || 1);
   const eva = state.players[playerIndex].stats.current.eva * evaMultiplier;
-  if (state.players[playerIndex ^ 1].stats.current.hit > eva) return false;
-  return Utils.testProbability((eva - state.players[playerIndex ^ 1].stats.current.hit) * DODGE_PERCENT_PER_EVA / 100);
+  const hit = state.players[playerIndex ^ 1].stats.current.hit;
+  if (hit > eva) return false;
+  const probability = (eva - hit) * DODGE_PERCENT_PER_EVA / 100;
+  if (state.debug) state.log.push(`|debug|EVA Forecast: EVA=${eva} HIT=${hit} probability=${probability.toFixed(2)}`);
+  return Utils.testProbability(probability);
 }
 
 function crtTest(crt, res) {

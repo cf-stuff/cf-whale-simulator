@@ -682,7 +682,7 @@ Builds.hybrid = {
 }
 
 Players.bellTank = {
-  "name": "Bell Tank (20%)",
+  "name": "Bell Tank (16%)",
   "level": 100,
   "fighter": {
       "name": "Madara",
@@ -695,35 +695,35 @@ Players.bellTank = {
       ]
   },
   "pet": {
-      "name": "Rice Ball",
+      "name": "Psychic Dog",
       "plus": 21,
       "evolved": true,
       "skills": [
           "Defense",
-          "Healing (Rice Ball Special)",
+          "Seal (Psychic Dog Special)",
           "Fire (Active)",
           "Energy Shield (Passive)"
       ]
   },
   "weapon": "Tyrant Callous Sword",
   "stats": {
-      "str": 1161,
-      "dex": 1873,
+      "str": 1411,
+      "dex": 1623,
       "sta": 4057,
-      "brk": 330,
+      "brk": 382,
       "def": 2774,
-      "hit": 1958,
-      "eva": 454,
-      "res": 2062,
-      "crt": 382,
+      "hit": 1788,
+      "eva": 438,
+      "res": 2012,
+      "crt": 330,
       "atkPercent": 32,
-      "minAtk": 1317,
-      "maxAtk": 1507,
-      "hpPercent": 104,
-      "hp": 43636,
-      "spd": 334,
+      "minAtk": 1421,
+      "maxAtk": 1627,
+      "hpPercent": 79,
+      "hp": 44176,
+      "spd": 348,
       "spPercent": 0,
-      "sp": 769,
+      "sp": 819,
       "furyReversion": 30
   },
   "skills": [
@@ -754,13 +754,13 @@ Players.bellTank = {
       "extraTriggerPercent": 3
   },
   "totem": {
-      "name": "Positive Seal Totem",
+      "name": "Lightning Attack Totem",
       "level": 64
   }
 }
 
 Players.bubbleTank = {
-  "name": "Bubble Tank (20%)",
+  "name": "Bubble Tank (8%)",
   "level": 100,
   "fighter": {
       "name": "Madara",
@@ -790,16 +790,16 @@ Players.bubbleTank = {
       "sta": 4057,
       "brk": 382,
       "def": 2774,
-      "hit": 1660,
+      "hit": 1420,
       "eva": 461,
-      "res": 1732,
+      "res": 2012,
       "crt": 330,
       "atkPercent": 32,
       "minAtk": 1275,
       "maxAtk": 1459,
-      "hpPercent": 119,
-      "hp": 51223,
-      "spd": 341,
+      "hpPercent": 94,
+      "hp": 49479,
+      "spd": 371,
       "spPercent": 0,
       "sp": 789,
       "furyReversion": 30
@@ -811,84 +811,6 @@ Players.bubbleTank = {
       "Draw Power",
       "Rejuvenation",
       "Earth-Style Wall"
-  ],
-  "expertise": [
-      "Water",
-      "Fire",
-      "Earth",
-      "Thunder",
-      "Wind",
-      "Ninjutsu",
-      "Cursed Seal Jutsu",
-      "Genjutsu",
-      "Healing"
-  ],
-  "resistance": [
-      "Thunder",
-      "Genjutsu"
-  ],
-  "phylactery": {
-      "skill": "Moving Illusion",
-      "extraTriggerPercent": 3
-  },
-  "totem": {
-      "name": "Positive Seal Totem",
-      "level": 64
-  }
-}
-
-Players.brkTankS = {
-  "name": "BRK Tank S (22%)",
-  "level": 100,
-  "fighter": {
-      "name": "Susanoo",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Blood Frenzy Reset",
-          "Shield Wall Burst",
-          "Golden Shield Reset"
-      ]
-  },
-  "pet": {
-      "name": "Sleipnir",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Defense",
-          "Freezing (Sleipnir Special)",
-          "Barbarian (Active)",
-          "Energy Shield (Passive)"
-      ]
-  },
-  "weapon": "Tyrant Callous Axe",
-  "stats": {
-      "str": 1020,
-      "dex": 1565,
-      "sta": 3488,
-      "brk": 2520,
-      "def": 2304,
-      "hit": 2088,
-      "eva": 472,
-      "res": 1527,
-      "crt": 330,
-      "atkPercent": 107,
-      "minAtk": 1675,
-      "maxAtk": 2531,
-      "hpPercent": 89,
-      "hp": 31643,
-      "spd": 422,
-      "spPercent": 0,
-      "sp": 536,
-      "furyReversion": 25
-  },
-  "skills": [
-      "Thunderbolt Boxing",
-      "Draw Power",
-      "Blood Sacrifice",
-      "Golden Shield",
-      "Blood Frenzy",
-      "Thunderclap Quake"
   ],
   "expertise": [
       "Water",
@@ -915,17 +837,17 @@ Players.brkTankS = {
   }
 }
 
-Players.brkTankM = {
-  "name": "BRK Tank M (3%)",
+Players.brkTank = {
+  "name": "BRK Tank (11%)",
   "level": 100,
   "fighter": {
-      "name": "Madara",
+      "name": "Susanoo",
       "plus": 21,
       "evolved": true,
       "skills": [
           "Blood Frenzy Reset",
           "Shield Wall Burst",
-          "Thunderclap Quake Reset"
+          "Golden Shield Reset"
       ]
   },
   "pet": {
@@ -939,33 +861,33 @@ Players.brkTankM = {
           "Energy Shield (Passive)"
       ]
   },
-  "weapon": "Tyrant Callous Sword",
+  "weapon": "Tyrant Callous Axe",
   "stats": {
-      "str": 1061,
-      "dex": 1518,
-      "sta": 3397,
-      "brk": 2520,
+      "str": 1020,
+      "dex": 1565,
+      "sta": 3620,
+      "brk": 2620,
       "def": 2304,
       "hit": 2088,
-      "eva": 431,
-      "res": 1662,
+      "eva": 472,
+      "res": 942,
       "crt": 330,
       "atkPercent": 92,
-      "minAtk": 1652,
-      "maxAtk": 1891,
+      "minAtk": 1583,
+      "maxAtk": 2391,
       "hpPercent": 64,
-      "hp": 32858,
-      "spd": 401,
+      "hp": 31188,
+      "spd": 422,
       "spPercent": 0,
-      "sp": 675,
-      "furyReversion": 30
+      "sp": 642,
+      "furyReversion": 25
   },
   "skills": [
       "Blood Frenzy",
+      "Golden Shield",
       "Thunderclap Quake",
       "Thunderbolt Boxing",
       "Draw Power",
-      "Golden Shield",
       "Blood Sacrifice"
   ],
   "expertise": [
@@ -994,7 +916,7 @@ Players.brkTankM = {
 }
 
 Players.brkFire = {
-  "name": "BRK Fire (5%)",
+  "name": "BRK Fire (22%)",
   "level": 100,
   "fighter": {
       "name": "Stryker",
@@ -1002,7 +924,7 @@ Players.brkFire = {
       "evolved": true,
       "skills": [
           "Golden Shield Reset",
-          "Pray",
+          "Shield Wall Burst",
           "Blood Frenzy Reset"
       ]
   },
@@ -1018,32 +940,32 @@ Players.brkFire = {
   },
   "weapon": "Tyrant Bloodthirsty Sword",
   "stats": {
-      "str": 2555,
+      "str": 2807,
       "dex": 1020,
-      "sta": 2796,
-      "brk": 2570,
+      "sta": 2725,
+      "brk": 2620,
       "def": 2304,
-      "hit": 1964,
+      "hit": 2088,
       "eva": 398,
-      "res": 1327,
+      "res": 1012,
       "crt": 330,
-      "atkPercent": 92,
-      "minAtk": 3165,
-      "maxAtk": 5037,
-      "hpPercent": 99,
-      "hp": 22935,
+      "atkPercent": 67,
+      "minAtk": 3257,
+      "maxAtk": 5152,
+      "hpPercent": 74,
+      "hp": 21315,
       "spd": 348,
       "spPercent": 0,
-      "sp": 354,
-      "furyReversion": 25
+      "sp": 347,
+      "furyReversion": 30
   },
   "skills": [
-      "Golden Shield",
       "Assassinate",
       "Rebirth",
       "Fire Shield",
-      "Blood Frenzy",
-      "Barbarism"
+      "Barbarism",
+      "Moving Illusion",
+      "Golden Shield"
   ],
   "expertise": [
       "Water",
@@ -1061,17 +983,17 @@ Players.brkFire = {
       "Genjutsu"
   ],
   "phylactery": {
-      "skill": "Moving Illusion",
+      "skill": "Blood Frenzy",
       "extraTriggerPercent": 3
   },
   "totem": {
-      "name": "Time Vortex Totem",
+      "name": "Lightning Attack Totem",
       "level": 64
   }
 }
 
 Players.brkStun = {
-  "name": "BRK Stun (5%)",
+  "name": "BRK Stun (11%)",
   "level": 100,
   "fighter": {
       "name": "Lion Dancer",
@@ -1079,8 +1001,8 @@ Players.brkStun = {
       "evolved": true,
       "skills": [
           "Blood Frenzy Reset",
-          "Pray",
-          "Thunderclap Quake Reset"
+          "Shield Wall Burst",
+          "Golden Shield Reset"
       ]
   },
   "pet": {
@@ -1096,32 +1018,32 @@ Players.brkStun = {
   },
   "weapon": "Tyrant Bloodthirsty Fists",
   "stats": {
-      "str": 2109,
-      "dex": 1775,
-      "sta": 2510,
+      "str": 3062,
+      "dex": 1373,
+      "sta": 2673,
       "brk": 2620,
       "def": 2304,
       "hit": 2088,
-      "eva": 507,
-      "res": 1252,
+      "eva": 467,
+      "res": 482,
       "crt": 330,
-      "atkPercent": 92,
-      "minAtk": 2534,
-      "maxAtk": 3807,
-      "hpPercent": 64,
-      "hp": 21011,
-      "spd": 457,
+      "atkPercent": 67,
+      "minAtk": 2976,
+      "maxAtk": 4471,
+      "hpPercent": 74,
+      "hp": 22327,
+      "spd": 417,
       "spPercent": 0,
-      "sp": 351,
-      "furyReversion": 25
+      "sp": 367,
+      "furyReversion": 30
   },
   "skills": [
-      "Thunderclap Quake",
       "Thunderbolt Boxing",
       "Golden Shield",
-      "Blood Sacrifice",
-      "Lightning Ball",
-      "Blood Frenzy"
+      "Blood Frenzy",
+      "Assassinate",
+      "Rebirth",
+      "Fire Shield"
   ],
   "expertise": [
       "Water",
@@ -1131,8 +1053,8 @@ Players.brkStun = {
       "Wind",
       "Ninjutsu",
       "Genjutsu",
-      "Taijutsu",
-      "Healing"
+      "Healing",
+      "Cursed Seal Jutsu"
   ],
   "resistance": [
       "Thunder",
@@ -1148,8 +1070,8 @@ Players.brkStun = {
   }
 }
 
-Players.hybridFire = {
-  "name": "Hybrid Fire (5%)",
+Players.hybridHH = {
+  "name": "Hybrid HH (8%)",
   "level": 100,
   "fighter": {
       "name": "Stryker",
@@ -1157,7 +1079,7 @@ Players.hybridFire = {
       "evolved": true,
       "skills": [
           "Blood Frenzy Reset",
-          "Pray",
+          "Shield Wall Burst",
           "Golden Shield Reset"
       ]
   },
@@ -1168,7 +1090,6 @@ Players.hybridFire = {
       "skills": [
           "Defense",
           "Bloodsucking (Vampire Bat Special)",
-          "Barbarian (Active)",
           "Energy Shield (Passive)"
       ]
   },
@@ -1191,15 +1112,15 @@ Players.hybridFire = {
       "spd": 338,
       "spPercent": 0,
       "sp": 286,
-      "furyReversion": 25
+      "furyReversion": 30
   },
   "skills": [
       "Assassinate",
-      "Blood Sacrifice",
       "Moving Illusion",
       "Fire Shield",
       "Golden Shield",
-      "Rebirth"
+      "Rebirth",
+      "Barbarism"
   ],
   "expertise": [
       "Water",
@@ -1254,30 +1175,30 @@ Players.evaH = {
   "stats": {
       "str": 1061,
       "dex": 4052,
-      "sta": 1518,
-      "brk": 1290,
-      "def": 2229,
-      "hit": 1968,
+      "sta": 1968,
+      "brk": 330,
+      "def": 2334,
+      "hit": 2088,
       "eva": 3035,
-      "res": 330,
+      "res": 382,
       "crt": 330,
-      "atkPercent": 82,
-      "minAtk": 1589,
-      "maxAtk": 2388,
+      "atkPercent": 97,
+      "minAtk": 1684,
+      "maxAtk": 2530,
       "hpPercent": 99,
-      "hp": 14844,
+      "hp": 16707,
       "spd": 788,
       "spPercent": 0,
-      "sp": 201,
+      "sp": 231,
       "furyReversion": 25
   },
   "skills": [
       "Magic Stealing",
       "Blood Sacrifice",
-      "Cleanse",
       "Lightning Ball",
       "Thunderclap Quake",
-      "Shield Wall"
+      "Shield Wall",
+      "Cleanse"
   ],
   "expertise": [
       "Water",
@@ -1305,7 +1226,7 @@ Players.evaH = {
 }
 
 Players.evaC = {
-  "name": "EVA C (5%)",
+  "name": "EVA C (12%)",
   "level": 100,
   "fighter": {
       "name": "C.C",
@@ -1332,21 +1253,21 @@ Players.evaC = {
   "stats": {
       "str": 1032,
       "dex": 4023,
-      "sta": 1581,
+      "sta": 2031,
       "brk": 330,
       "def": 2304,
       "hit": 2088,
       "eva": 2929,
-      "res": 982,
+      "res": 482,
       "crt": 330,
       "atkPercent": 107,
       "minAtk": 1707,
       "maxAtk": 2565,
-      "hpPercent": 89,
-      "hp": 17169,
+      "hpPercent": 99,
+      "hp": 19890,
       "spd": 722,
       "spPercent": 0,
-      "sp": 258,
+      "sp": 303,
       "furyReversion": 25
   },
   "skills": [
@@ -1369,7 +1290,7 @@ Players.evaC = {
       "Healing"
   ],
   "resistance": [
-      "Fire",
+      "Thunder",
       "Genjutsu"
   ],
   "phylactery": {
@@ -1382,8 +1303,8 @@ Players.evaC = {
   }
 }
 
-Players.brkSpdsterN = {
-  "name": "BRK Spdster N (3%)",
+Players.brkSpdster = {
+  "name": "BRK Spdster (5%)",
   "level": 100,
   "fighter": {
       "name": "Nami",
@@ -1408,21 +1329,21 @@ Players.brkSpdsterN = {
   },
   "weapon": "Tyrant Agile Rod",
   "stats": {
-      "str": 1567,
-      "dex": 4013,
+      "str": 2017,
+      "dex": 4023,
       "sta": 1046,
       "brk": 2620,
       "def": 2304,
       "hit": 2088,
-      "eva": 831,
+      "eva": 832,
       "res": 482,
       "crt": 330,
       "atkPercent": 92,
-      "minAtk": 2977,
-      "maxAtk": 3295,
+      "minAtk": 2476,
+      "maxAtk": 3720,
       "hpPercent": 114,
       "hp": 14125,
-      "spd": 721,
+      "spd": 722,
       "spPercent": 0,
       "sp": 165,
       "furyReversion": 25
@@ -1460,86 +1381,8 @@ Players.brkSpdsterN = {
   }
 }
 
-Players.brkSpdsterC = {
-  "name": "BRK Spdster C (3%)",
-  "level": 100,
-  "fighter": {
-      "name": "C.C",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Thunderclap Quake Reset",
-          "Shield Wall Burst",
-          "Blood Frenzy Reset"
-      ]
-  },
-  "pet": {
-      "name": "Sleipnir",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Defense",
-          "Freezing (Sleipnir Special)",
-          "Barbarian (Active)",
-          "Energy Shield (Passive)"
-      ]
-  },
-  "weapon": "Tyrant Agile Staff",
-  "stats": {
-      "str": 1032,
-      "dex": 4023,
-      "sta": 2031,
-      "brk": 2620,
-      "def": 2304,
-      "hit": 2088,
-      "eva": 832,
-      "res": 482,
-      "crt": 330,
-      "atkPercent": 107,
-      "minAtk": 1707,
-      "maxAtk": 2891,
-      "hpPercent": 39,
-      "hp": 17315,
-      "spd": 722,
-      "spPercent": 0,
-      "sp": 303,
-      "furyReversion": 25
-  },
-  "skills": [
-      "Lightning Ball",
-      "Blood Frenzy",
-      "Moving Illusion",
-      "Blood Sacrifice",
-      "Thunderclap Quake",
-      "Cleanse"
-  ],
-  "expertise": [
-      "Water",
-      "Fire",
-      "Earth",
-      "Thunder",
-      "Wind",
-      "Ninjutsu",
-      "Cursed Seal Jutsu",
-      "Genjutsu",
-      "Healing"
-  ],
-  "resistance": [
-      "Thunder",
-      "Genjutsu"
-  ],
-  "phylactery": {
-      "skill": "Thunderbolt Boxing",
-      "extraTriggerPercent": 3
-  },
-  "totem": {
-      "name": "Lightning Attack Totem",
-      "level": 64
-  }
-}
-
 Players.hybridSpdster = {
-  "name": "Hybrid Spdster (1%)",
+  "name": "Hybrid Spd (1%)",
   "level": 100,
   "fighter": {
       "name": "Hanuman",
@@ -1547,7 +1390,7 @@ Players.hybridSpdster = {
       "evolved": true,
       "skills": [
           "Blood Frenzy Reset",
-          "Pray",
+          "Shield Wall Burst",
           "Thunderclap Quake Reset"
       ]
   },
@@ -1616,94 +1459,16 @@ Players.hybridSpdster = {
   }
 }
 
-Players.defSpdster = {
-  "name": "DEF spdster (1%)",
-  "level": 100,
-  "fighter": {
-      "name": "C.C",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Blood Frenzy Reset",
-          "Shield Wall Burst",
-          "Thunderclap Quake Reset"
-      ]
-  },
-  "pet": {
-      "name": "Psychic Dog",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Defense",
-          "Seal (Psychic Dog Special)",
-          "Barbarian (Active)",
-          "Energy Shield (Passive)"
-      ]
-  },
-  "weapon": "Tyrant Agile Staff",
-  "stats": {
-      "str": 1164,
-      "dex": 3527,
-      "sta": 2564,
-      "brk": 382,
-      "def": 2724,
-      "hit": 2028,
-      "eva": 770,
-      "res": 2012,
-      "crt": 330,
-      "atkPercent": 107,
-      "minAtk": 1759,
-      "maxAtk": 2643,
-      "hpPercent": 79,
-      "hp": 22111,
-      "spd": 720,
-      "spPercent": 0,
-      "sp": 356,
-      "furyReversion": 25
-  },
-  "skills": [
-      "Lightning Ball",
-      "Thunderclap Quake",
-      "Magic Stealing",
-      "Blood Sacrifice",
-      "Wound Infection",
-      "Moving Illusion"
-  ],
-  "expertise": [
-      "Water",
-      "Fire",
-      "Earth",
-      "Thunder",
-      "Wind",
-      "Ninjutsu",
-      "Cursed Seal Jutsu",
-      "Genjutsu",
-      "Healing"
-  ],
-  "resistance": [
-      "Thunder",
-      "Genjutsu"
-  ],
-  "phylactery": {
-      "skill": "Thunderbolt Boxing",
-      "extraTriggerPercent": 3
-  },
-  "totem": {
-      "name": "Lightning Attack Totem",
-      "level": 64
-  }
-}
-
 Players.reflect = {
-  "name": "Reflect (2%)",
+  "name": "Reflect (1%)",
   "level": 100,
   "fighter": {
-      "name": "Madara",
+      "name": "Cloud",
       "plus": 21,
       "evolved": true,
       "skills": [
           "Golden Shield Reset",
-          "Pray",
+          "Shield Wall Burst",
           "Energy Shield Reset"
       ]
   },
@@ -1717,34 +1482,34 @@ Players.reflect = {
           "Energy Shield (Passive)"
       ]
   },
-  "weapon": "Tyrant Callous Sword",
+  "weapon": "Tyrant Callous Axe",
   "stats": {
-      "str": 1968,
-      "dex": 1061,
-      "sta": 4052,
-      "brk": 2620,
+      "str": 2004,
+      "dex": 1018,
+      "sta": 4035,
+      "brk": 2570,
       "def": 794,
       "hit": 528,
-      "eva": 400,
+      "eva": 393,
       "res": 330,
-      "crt": 2042,
+      "crt": 1992,
       "atkPercent": 97,
-      "minAtk": 2802,
-      "maxAtk": 3167,
-      "hpPercent": 89,
-      "hp": 50645,
-      "spd": 190,
+      "minAtk": 3238,
+      "maxAtk": 3659,
+      "hpPercent": 99,
+      "hp": 45997,
+      "spd": 183,
       "spPercent": 0,
-      "sp": 768,
-      "furyReversion": 25
+      "sp": 744,
+      "furyReversion": 30
   },
   "skills": [
       "Anit-damage Chop",
       "Golden Shield",
-      "Rebirth",
       "Counterattack",
-      "Bomb",
-      "Energy Shield"
+      "Energy Shield",
+      "Earth-Style Wall",
+      "Barbarism"
   ],
   "expertise": [
       "Water",
@@ -1762,7 +1527,7 @@ Players.reflect = {
       "Healing"
   ],
   "phylactery": {
-      "skill": "Earth-Style Wall",
+      "skill": "Rebirth",
       "extraTriggerPercent": 3
   },
   "totem": {

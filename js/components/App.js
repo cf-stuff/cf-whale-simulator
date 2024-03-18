@@ -34,6 +34,7 @@ const App = () => {
     Discord: CF99#9616
     <hr/>
     <h3>Changelog</h3>
+    <p>2024-03-18: 1.8.2 - New builds in grading system to reflect current meta; fxied rebirth expertise effect not working</p>
     <p>2024-03-12: 1.8.1 - Fixed strong wine fury burst cleansing itself</p>
     <p>2024-03-07: 1.8.0 - Animated fights; fixed tired not being applied after explosive blow; time bomb stored damage now works properly</p>
     <p>2024-02-16: 1.7.1 - Fixed bug causing rejuv not triggering in most situations</p>

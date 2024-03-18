@@ -793,10 +793,10 @@ const Skills = {
     spConsumption: 25,
     notAnAction: true,
     getNormalVersion: function () {
-      this.gainPercentHp = 20;
+      this.effect.gainPercentHp = 20;
     },
     getExpertiseVersion: function () {
-      this.gainPercentHp = 25;
+      this.effect.gainPercentHp = 25;
     },
   },
   bloodSacrifice: {

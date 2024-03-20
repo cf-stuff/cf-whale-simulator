@@ -547,9 +547,11 @@ function createStatus(state, playerIndex, name, options) {
   }
   if (status.removeAfterDuration) {
     let statusDuration = status.removeAfterDuration;
+    state.players[playerIndex].status.filter(x => x.effect.statusDurationMultiplier)
+      .forEach(x => statusDuration *= x.effect.statusDurationMultiplier);
     if (status.type === StatusType.debuff) {
-      state.players[playerIndex].status.filter(x => x.effect.statusDurationMultiplier)
-        .forEach(x => statusDuration *= x.effect.statusDurationMultiplier);
+      state.players[playerIndex].status.filter(x => x.effect.debuffDurationMultiplier)
+        .forEach(x => statusDuration *= x.effect.debuffDurationMultiplier);
     }
     status.timeRemaining = statusDuration;
   }

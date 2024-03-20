@@ -78,7 +78,7 @@ const Status = {
     name: "Horny",
     type: StatusType.buff,
     effect: {
-      statusDurationMultiplier: 0.75,
+      debuffDurationMultiplier: 0.75,
       atkMultiplierPerHpPercentLost: 0.005
     },
     getExpertiseVersion: function () {

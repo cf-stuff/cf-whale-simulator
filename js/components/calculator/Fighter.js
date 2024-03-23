@@ -1,10 +1,10 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
-import { calculateFighterStats } from "../calculator.js";
-import CFDB from "../data/CFDB.js";
-import Button from "./Button.js";
+import { calculateFighterStats } from "../../calculator.js";
+import CFDB from "../../data/CFDB.js";
+import Button from "../forms/Button.js";
 import EvolvedFighter from "./EvolvedFighter.js";
-import NumberInput from "./NumberInput.js";
-import SelectInput from "./SelectInput.js";
+import NumberInput from "../forms/NumberInput.js";
+import SelectInput from "../forms/SelectInput.js";
 
 const Fighter = ({ fighter, setFighter }) => {
   const handleMax = () => setFighter({

@@ -1,12 +1,12 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
-import CFDB from "../data/CFDB.js";
-import Stats from "../data/stats.js";
-import { getImagePath, ImageType } from "../image.js";
-import Button from "./Button.js";
+import CFDB from "../../data/CFDB.js";
+import Stats from "../../data/stats.js";
+import { getImagePath, ImageType } from "../../image.js";
+import Button from "../forms/Button.js";
 import Glyph from "./Glyph.js";
-import ImageRadio from "./ImageRadio.js";
-import NumberInput from "./NumberInput.js";
-import SelectInput from "./SelectInput.js";
+import ImageRadio from "../forms/ImageRadio.js";
+import NumberInput from "../forms/NumberInput.js";
+import SelectInput from "../forms/SelectInput.js";
 
 const info = CFDB.getPhylactery("4B");
 

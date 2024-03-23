@@ -1,11 +1,11 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
-import { FighterSkillType } from "../data/categories.js";
-import CFDB from "../data/CFDB.js";
-import { getImagePath, ImageType } from "../image.js";
-import Utils from "../utils.js";
-import ImageCheckbox from "./ImageCheckbox.js";
-import ImageRadio from "./ImageRadio.js";
-import NumberInput from "./NumberInput.js";
+import { FighterSkillType } from "../../data/categories.js";
+import CFDB from "../../data/CFDB.js";
+import { getImagePath, ImageType } from "../../image.js";
+import Utils from "../../utils.js";
+import ImageCheckbox from "../forms/ImageCheckbox.js";
+import ImageRadio from "../forms/ImageRadio.js";
+import NumberInput from "../forms/NumberInput.js";
 
 const EvolvedFighter = ({ fighter, setFighter }) => {
   if (!fighter.evolved) return html``;

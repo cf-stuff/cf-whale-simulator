@@ -2,8 +2,8 @@ import { html, useState, useEffect, useRef } from "https://unpkg.com/htm/preact/
 import toPlayer from "../calculator.js";
 import { getBuild, getBuildNames, getPlayer, getPlayerNames } from "../templates.js";
 import { simulateBattle } from "../battle.js";
-import Button from "./Button.js";
-import SelectInput from "./SelectInput.js";
+import Button from "./forms/Button.js";
+import SelectInput from "./forms/SelectInput.js";
 import { getSavedKeys, load } from "../storage.js";
 import Display from "./Display.js";
 import Carousel from "./Carousel.js";

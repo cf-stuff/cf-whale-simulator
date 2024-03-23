@@ -1,11 +1,11 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
-import CFDB from "../data/CFDB.js";
-import NumberInput from "./NumberInput.js";
-import FixedStatInput from "./FixedStatInput.js";
-import { getImagePath, ImageType } from "../image.js";
-import ImageRadio from "./ImageRadio.js";
-import Button from "./Button.js";
-import Utils from "../utils.js";
+import CFDB from "../../data/CFDB.js";
+import NumberInput from "../forms/NumberInput.js";
+import FixedStatInput from "../forms/FixedStatInput.js";
+import { getImagePath, ImageType } from "../../image.js";
+import ImageRadio from "../forms/ImageRadio.js";
+import Button from "../forms/Button.js";
+import Utils from "../../utils.js";
 
 const maxStats = {
   hit: 120,

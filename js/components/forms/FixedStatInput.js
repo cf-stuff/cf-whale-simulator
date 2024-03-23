@@ -1,5 +1,5 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
-import Stats from "../data/stats.js";
+import Stats from "../../data/stats.js";
 import NumberInput from "./NumberInput.js";
 
 const decimalStats = [Stats.hpPercent.displayName, Stats.atkPercent.displayName, Stats.spd.displayName];

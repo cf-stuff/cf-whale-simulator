@@ -1,10 +1,10 @@
 import { html, useRef } from "https://unpkg.com/htm/preact/standalone.module.js"
-import toPlayer from "../calculator.js";
-import LZString from "../lib/lz-string.min.js";
-import { submitPaste } from "../pastee.js";
-import Button from "./Button.js";
-import { randomBuild } from "../build.js";
-import SelectInput from "./SelectInput.js";
+import toPlayer from "../../calculator.js";
+import LZString from "../../lib/lz-string.min.js";
+import { submitPaste } from "../../pastee.js";
+import Button from "../forms/Button.js";
+import { randomBuild } from "../../build.js";
+import SelectInput from "../forms/SelectInput.js";
 
 const NUMBER_OF_BACKGROUNDS = 14;
 

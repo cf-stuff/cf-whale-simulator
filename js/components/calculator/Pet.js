@@ -1,14 +1,14 @@
 import { html, useState } from "https://unpkg.com/htm/preact/standalone.module.js"
-import { PetSkillType } from "../data/categories.js";
-import CFDB from "../data/CFDB.js";
-import Pets from "../data/pets.js";
-import { getImagePath, ImageType } from "../image.js";
-import Utils from "../utils.js";
-import Button from "./Button.js";
+import { PetSkillType } from "../../data/categories.js";
+import CFDB from "../../data/CFDB.js";
+import Pets from "../../data/pets.js";
+import { getImagePath, ImageType } from "../../image.js";
+import Utils from "../../utils.js";
+import Button from "../forms/Button.js";
 import EvolvedPet from "./EvolvedPet.js";
-import ImageCheckbox from "./ImageCheckbox.js";
-import NumberInput from "./NumberInput.js";
-import SelectInput from "./SelectInput.js";
+import ImageCheckbox from "../forms/ImageCheckbox.js";
+import NumberInput from "../forms/NumberInput.js";
+import SelectInput from "../forms/SelectInput.js";
 
 const getPetSkillLimit = plus => {
   if (plus === 0) return 3;
@@ -62,7 +62,7 @@ const Pet = ({ pet, setPet }) => {
     <div class="col-auto">
       <div class="input-group">
         <label class="input-group-text" for="pet-plus">+</label>
-        <${NumberInput} id="pet-plus" value=${pet.plus} style=${{width:"4rem"}} onInput=${e => setPet({ plus: e.target.value })} />
+        <${NumberInput} id="pet-plus" value=${pet.plus} style=${{ width: "4rem" }} onInput=${e => setPet({ plus: e.target.value })} />
         <label class="input-group-text" for="pet-evolved">Evolved</label>
         <div class="input-group-text">
           <input type="checkbox" id="pet-evolved" checked=${pet.evolved} onClick=${() => setPet({ evolved: !pet.evolved })} />

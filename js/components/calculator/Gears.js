@@ -1,5 +1,5 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
-import CFDB from "../data/CFDB.js";
+import CFDB from "../../data/CFDB.js";
 import Gear from "./Gear.js";
 
 const Gears = ({ fighterWeaponType, gears, setGears }) => {

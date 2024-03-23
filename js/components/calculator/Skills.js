@@ -1,8 +1,8 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
-import CFDB from "../data/CFDB.js";
-import ImageCheckbox from "./ImageCheckbox.js";
-import { getImagePath, ImageType } from "../image.js";
-import Utils from "../utils.js";
+import CFDB from "../../data/CFDB.js";
+import ImageCheckbox from "../forms/ImageCheckbox.js";
+import { getImagePath, ImageType } from "../../image.js";
+import Utils from "../../utils.js";
 
 const Skills = ({ skills, setSkills, expertise, setExpertise, resistance, setResistance }) => {
   const handleSkillChange = e => {

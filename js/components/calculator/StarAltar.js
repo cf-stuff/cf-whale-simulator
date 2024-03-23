@@ -1,7 +1,7 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
-import CFDB from "../data/CFDB.js";
-import Button from "./Button.js";
-import FixedStatInput from "./FixedStatInput.js";
+import CFDB from "../../data/CFDB.js";
+import Button from "../forms/Button.js";
+import FixedStatInput from "../forms/FixedStatInput.js";
 
 const maxAltar = {};
 CFDB.getStarAltar().forEach(stat => maxAltar[stat.stat] = stat.max);

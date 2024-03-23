@@ -1,9 +1,9 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
-import { PetSkillType } from "../data/categories.js";
-import CFDB from "../data/CFDB.js";
-import { getImagePath, ImageType } from "../image.js";
-import Utils from "../utils.js";
-import ImageCheckbox from "./ImageCheckbox.js";
+import { PetSkillType } from "../../data/categories.js";
+import CFDB from "../../data/CFDB.js";
+import { getImagePath, ImageType } from "../../image.js";
+import Utils from "../../utils.js";
+import ImageCheckbox from "../forms/ImageCheckbox.js";
 
 const getPetSkillLimit = plus => {
   if (plus >= 21) return 6;

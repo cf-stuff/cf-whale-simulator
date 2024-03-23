@@ -1,8 +1,8 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
-import CFDB from "../data/CFDB.js";
-import { getImagePath, ImageType } from "../image.js";
-import NumberInput from "./NumberInput.js";
-import SelectInput from "./SelectInput.js";
+import CFDB from "../../data/CFDB.js";
+import { getImagePath, ImageType } from "../../image.js";
+import NumberInput from "../forms/NumberInput.js";
+import SelectInput from "../forms/SelectInput.js";
 
 const GearGem = ({ options, gem, setGem }) => {
   const id = CFDB.getGem(gem.name)?.iconId;

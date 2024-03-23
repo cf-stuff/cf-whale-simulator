@@ -1,6 +1,6 @@
 import { html, useState } from "https://unpkg.com/htm/preact/standalone.module.js"
-import Button from "./Button.js";
-import SelectInput from "./SelectInput.js";
+import Button from "./forms/Button.js";
+import SelectInput from "./forms/SelectInput.js";
 import { getBuild, getBuildNames } from "../templates.js";
 import { getSavedKeys, load, remove, save } from "../storage.js";
 import { initialState } from "../state.js";

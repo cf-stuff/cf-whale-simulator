@@ -2,9 +2,9 @@ import { html, useState, useRef } from "https://unpkg.com/htm/preact/standalone.
 import CFDB from "../data/CFDB.js";
 import { getImagePath, ImageType } from "../image.js";
 import SkillSet from "./SkillSet.js";
-import Button from "./Button.js";
-import ImageRadio from "./ImageRadio.js";
-import SelectInput from "./SelectInput.js";
+import Button from "./forms/Button.js";
+import ImageRadio from "./forms/ImageRadio.js";
+import SelectInput from "./forms/SelectInput.js";
 import { getSavedKeys, load } from "../storage.js";
 import { getBuild, getBuildNames } from "../templates.js";
 

@@ -1,10 +1,11 @@
 import { html, useState } from "https://unpkg.com/htm/preact/standalone.module.js"
 import Battle from "./Battle.js";
-import Calculator from "./Calculator.js";
+import Calculator from "./calculator/Calculator.js";
 import Grade from "./Grade.js";
 import SkillPlanner from "./SkillPlanner.js";
+import PetHouse from "./PetHouse.js";
 
-const tabs = ["Calculator", "Battle", "Grade", "Skill Planner"];
+const tabs = ["Calculator", "Battle", "Grade", "Skill Planner", "Pet House"];
 
 const App = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);
@@ -28,6 +29,7 @@ const App = () => {
     ${activeTab === "Battle" && html`<${Battle} />`}
     ${activeTab === "Grade" && html`<${Grade} />`}
     ${activeTab === "Skill Planner" && html`<${SkillPlanner} />`}
+    ${activeTab === "Pet House" && html`<${PetHouse} />`}
     <hr/>
     Feel free to report any issues<br/>
     LINE ID: derpidgey<br/>

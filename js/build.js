@@ -115,7 +115,7 @@ function scoreBmv(bmv) {
 }
 
 function randomPetSkills(pet) {
-  const eligiblePetSkills = [...CFDB.getPetSkills(PetSkillType.stat), CFDB.getPetSkillByIconId(`27_${pet.iconId}`)];
+  const eligiblePetSkills = [...CFDB.getPetSkills(PetSkillType.stat).filter(x => typeof x.iconId === "number"), CFDB.getPetSkillByIconId(`27_${pet.iconId}`)];
   return [PetSkills.block, CFDB.getPetSkillByIconId(`28_${pet.iconId}`), ...Utils.randomElements(eligiblePetSkills, 10)].map(x => x.name);
 }
 

@@ -1,9 +1,9 @@
 import { html, useReducer, useState } from "https://unpkg.com/htm/preact/standalone.module.js"
-import { initialState, reducer } from "../state.js";
-import Display from "./Display.js";
+import { initialState, reducer } from "../../state.js";
+import Display from "../Display.js";
 import Form from "./Form.js";
-import toPlayer from "../calculator.js";
-import Utils from "../utils.js";
+import toPlayer from "../../calculator.js";
+import Utils from "../../utils.js";
 
 const Calculator = () => {
   const [state, dispatch] = useReducer(reducer, initialState);

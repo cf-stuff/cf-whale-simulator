@@ -11,7 +11,6 @@ const SkillSet = ({ skillsetNumber, skills, setSkill, selectedSkill }) => {
       <div class="skill-frame phy-container text-center" onclick=${() => setSkill(0, selectedSkill)}
       ondragover=${e => e.preventDefault()} ondrop=${e => setSkill(0, e.dataTransfer.getData("id"))}>
         ${skills[0] !== 0 && html`<img class="skill" draggable ondragstart=${handleDragStart(0)} src=${getImagePath(ImageType.skill, skills[0])} />`}
-        <img class="phy-indicator" src=${getImagePath(ImageType.skillSlot, "phyIndicator")} />
       </div>
       <div style="width:75px" class="text-center"><img class="skillset-number" src=${getImagePath(ImageType.skillSlot, `set${skillsetNumber}`)} /></div>
       <div style="width:75px"></div>

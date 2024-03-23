@@ -1,9 +1,9 @@
 import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
-import ArenaTitles from "../data/arena.js";
-import CFDB from "../data/CFDB.js";
-import { getImagePath, ImageType } from "../image.js";
-import Button from "./Button.js";
-import SelectInput from "./SelectInput.js";
+import ArenaTitles from "../../data/arena.js";
+import CFDB from "../../data/CFDB.js";
+import { getImagePath, ImageType } from "../../image.js";
+import Button from "../forms/Button.js";
+import SelectInput from "../forms/SelectInput.js";
 
 const arenaTitles = CFDB.getArenaTitles();
 ImageType

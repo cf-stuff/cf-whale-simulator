@@ -27,7 +27,6 @@
   background-size: contain;
   width: 75px;
   height: 75px;
-  cursor: pointer;
 }
 
 .skill-frame>.skill {
@@ -40,12 +39,68 @@
   left: 0;
 }
 
-.phy-indicator {
+.phy-container::before {
+  content: "";
+  display: block;
   position: absolute;
   top: 0;
   left: calc(100% / 2 + 27.5px);
+  width: 20px;
+  height: 26px;
+  background-image: url("../img/skill/phyIndicator.png");
+  background-repeat: no-repeat;
 }
 
 .skillset-number {
   width: 40%;
+}
+
+.pet-skillset {
+  background-color: #e9a55f;
+  padding: 10px 15px;
+  border-radius: 15px;
+  outline: 3px solid black;
+  max-width: 360px;
+}
+
+.pet-skill-frame {
+  background-image: url("../img/petHouse/ji-9.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 75px;
+  height: 75px;
+}
+
+.pet-skill-frame>img {
+  width: 70%;
+  height: 70%;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.pet-skill-frame.unused {
+  background-image: url("../img/petHouse/bet-lock.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 75px;
+  height: 75px;
+}
+
+.locked {
+  position: relative;
+}
+
+.locked::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 21px;
+  height: 26px;
+  background-image: url("../img/petHouse/suo.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }

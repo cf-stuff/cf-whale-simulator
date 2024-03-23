@@ -1,19 +1,19 @@
 import { html, useState } from "https://unpkg.com/htm/preact/standalone.module.js"
-import CFDB from "../data/CFDB.js";
-import { ActionType } from "../state.js";
+import CFDB from "../../data/CFDB.js";
+import { ActionType } from "../../state.js";
 import Arena from "./Arena.js";
 import Fighter from "./Fighter.js";
 import Gears from "./Gears.js";
 import Nexus from "./Nexus.js";
-import NumberInput from "./NumberInput.js";
+import NumberInput from "../forms/NumberInput.js";
 import Pet from "./Pet.js";
 import Phylactery from "./Phylactery.js";
 import Skills from "./Skills.js";
 import StarAltar from "./StarAltar.js";
-import Button from "./Button.js";
-import TextInput from "./TextInput.js";
+import Button from "../forms/Button.js";
+import TextInput from "../forms/TextInput.js";
 import Totem from "./Totem.js";
-import BuildLoader from "./BuildLoader.js";
+import BuildLoader from "../BuildLoader.js";
 import Other from "./Other.js";
 
 const tabs = [

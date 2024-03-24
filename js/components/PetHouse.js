@@ -5,29 +5,49 @@ import { ImageType, getImagePath } from "../image.js";
 import CFDB from "../data/CFDB.js";
 import Button from "./forms/Button.js";
 import Utils from "../utils.js";
+import { getSavedKeys, load } from "../storage.js";
+import { getBuild, getBuildNames } from "../templates.js";
 
 const petPassives = CFDB.getPetPassives().map(x => x.iconId);
 const petActives = CFDB.getPetActives().map(x => x.iconId);
 
 const DOLLARS_PER_LOCK = 1 / 5.0625;
+const MAX_NORMAL_SKILLS = 12;
+const MAX_EVO_SKILLS = 6;
+
+const getPetSkillLimit = plus => {
+  if (plus === 0) return 3;
+  if (plus % 3 === 0) return getPetSkillLimit(plus - 3) + 1;
+  return getPetSkillLimit(plus - 1);
+}
+
+const getEvoPetSkillLimit = plus => {
+  if (plus >= 21) return 6;
+  if (plus >= 18) return 5;
+  if (plus >= 15) return 4;
+  if (plus >= 12) return 3;
+  if (plus >= 6) return 2;
+  return 1;
+}
 
 const PetHouse = () => {
   const [int, setInt] = useState(false);
   const [continuousLock, setContinuousLock] = useState(true);
   const [pet, setPet] = useState("None");
   const [normalSkills, setNormalSkills] = useState(Array(3).fill(0));
-  const [normalLocked, setNormalLocked] = useState(Array(12).fill(false));
+  const [normalLocked, setNormalLocked] = useState(Array(MAX_NORMAL_SKILLS).fill(false));
   const [evoSkills, setEvoSkills] = useState([]);
-  const [evoLocked, setEvoLocked] = useState(Array(6).fill(false));
+  const [evoLocked, setEvoLocked] = useState(Array(MAX_EVO_SKILLS).fill(false));
   const [locksUsed, setLocksUsed] = useState(0);
   const [moneySpent, setMoneySpent] = useState(0);
   const [timesTrained, setTimesTrained] = useState(0);
+  const [build, setBuild] = useState(0);
 
   let petInfo;
   if (pet !== "None") petInfo = CFDB.getPet(pet);
 
   const normalSkillElements = [];
-  for (let i = 0; i < 12; ++i) {
+  for (let i = 0; i < MAX_NORMAL_SKILLS; ++i) {
     if (i >= normalSkills.length) {
       normalSkillElements.push(html`<div class="pet-skill-frame unused"></div>`);
       continue;
@@ -48,7 +68,7 @@ const PetHouse = () => {
   }
 
   const evoSkillElements = [];
-  for (let i = 0; i < 6; ++i) {
+  for (let i = 0; i < MAX_EVO_SKILLS; ++i) {
     if (i >= evoSkills.length) {
       evoSkillElements.push(html`<div class="pet-skill-frame unused"></div>`);
       continue;
@@ -106,7 +126,7 @@ const PetHouse = () => {
       setLocksUsed(prev => prev + totalLocks);
       setMoneySpent(prev => prev + totalLocks * DOLLARS_PER_LOCK);
       if (!continuousLock) {
-        setNormalLocked(Array(12).fill(false));
+        setNormalLocked(Array(MAX_NORMAL_SKILLS).fill(false));
       }
     }
   }
@@ -145,7 +165,7 @@ const PetHouse = () => {
       setLocksUsed(prev => prev + totalLocks);
       setMoneySpent(prev => prev + totalLocks * DOLLARS_PER_LOCK);
       if (!continuousLock) {
-        setEvoLocked(Array(6).fill(false));
+        setEvoLocked(Array(MAX_EVO_SKILLS).fill(false));
       }
     }
   }
@@ -153,37 +173,54 @@ const PetHouse = () => {
   const changePet = name => {
     setPet(name);
     setNormalSkills(Array(3).fill(0));
-    setNormalLocked(Array(12).fill(false));
+    setNormalLocked(Array(MAX_NORMAL_SKILLS).fill(false));
     setEvoSkills([]);
-    setEvoLocked(Array(6).fill(false));
+    setEvoLocked(Array(MAX_EVO_SKILLS).fill(false));
     setLocksUsed(0);
     setMoneySpent(0);
   }
 
   const unlockNextSlot = () => {
     if (pet === "None") return;
-    if (normalSkills.length < 12) {
+    if (normalSkills.length < MAX_NORMAL_SKILLS) {
       setNormalSkills(prev => [...prev, 0]);
-    } else if (evoSkills.length < 6) {
+    } else if (evoSkills.length < MAX_EVO_SKILLS) {
       setEvoSkills(prev => [...prev, 0]);
     }
   }
 
   const unlockAllNormal = () => {
-    if (pet === "None" || normalSkills.length >= 12) return;
-    while (normalSkills.length < 12) {
+    if (pet === "None" || normalSkills.length >= MAX_NORMAL_SKILLS) return;
+    while (normalSkills.length < MAX_NORMAL_SKILLS) {
       normalSkills.push(0);
     }
     setNormalSkills([...normalSkills]);
   }
 
   const unlockAllEvo = () => {
-    if (pet === "None" || evoSkills.length >= 6) return;
+    if (pet === "None" || evoSkills.length >= MAX_EVO_SKILLS) return;
     unlockAllNormal();
-    while (evoSkills.length < 6) {
+    while (evoSkills.length < MAX_EVO_SKILLS) {
       evoSkills.push(0);
     }
     setEvoSkills([...evoSkills]);
+  }
+
+  const options = getSavedKeys();
+  options.push(...getBuildNames().filter(name => !options.includes(name)));
+
+  const loadPetFromBuild = () => {
+    if (build === "None") return;
+    const newPet = load(build).pet || getBuild(build).pet;
+    const normal = newPet.skills.map(x => CFDB.getPetSkill(x).iconId);
+    const normalSkillLimit = getPetSkillLimit(newPet.evolved ? 27 : newPet.plus);
+    while (normal.length < normalSkillLimit) normal.push(0);
+    const evo = newPet.evoSkills.map(x => CFDB.getPetSkill(x).iconId);
+    const evoSkillLimit = newPet.evolved ? getEvoPetSkillLimit(newPet.plus) : 0;
+    while (evo.length < evoSkillLimit) evo.push(0);
+    changePet(newPet.name);
+    setNormalSkills(normal);
+    setEvoSkills(evo);
   }
 
   return html`
@@ -204,6 +241,14 @@ const PetHouse = () => {
     <div class="col-auto">
       <${Button} onClick=${() => changePet(pet)}>Reset</${Button}>
     </div>
+  </div>
+  <div class="row pt-3">
+    <div class="col-sm-auto">
+      <${SelectInput} value=${build} options=${options} onChange=${e => setBuild(e.target.value)} />
+    </div>
+    <div class="col-sm-auto">
+      <${Button} onClick=${loadPetFromBuild}>Load Pet</${Button}>
+    </div>    
   </div>
   ${pet !== "None" && html`
   <div class="row pt-3">

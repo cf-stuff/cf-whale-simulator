@@ -72,20 +72,15 @@
   height: 75px;
 }
 
+.pet-skill-frame.unused {
+  background-image: url("../img/petHouse/bet-lock.png");
+}
+
 .pet-skill-frame>img {
   width: 70%;
   height: 70%;
   margin-top: 10px;
   cursor: pointer;
-}
-
-.pet-skill-frame.unused {
-  background-image: url("../img/petHouse/bet-lock.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  width: 75px;
-  height: 75px;
 }
 
 .locked {

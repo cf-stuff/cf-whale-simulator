@@ -178,6 +178,7 @@ const PetHouse = () => {
     setEvoLocked(Array(MAX_EVO_SKILLS).fill(false));
     setLocksUsed(0);
     setMoneySpent(0);
+    setTimesTrained(0);
   }
 
   const unlockNextSlot = () => {

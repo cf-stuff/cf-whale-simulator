@@ -5,12 +5,15 @@ import { ImageType, getImagePath } from "../image.js";
 import CFDB from "../data/CFDB.js";
 import Button from "./forms/Button.js";
 import Utils from "../utils.js";
-import { PetSkillType } from "../data/categories.js";
 
 const petPassives = CFDB.getPetPassives().map(x => x.iconId);
 const petActives = CFDB.getPetActives().map(x => x.iconId);
 
+const DOLLARS_PER_LOCK = 1 / 5.0625;
+
 const PetHouse = () => {
+  const [int, setInt] = useState(false);
+  const [continuousLock, setContinuousLock] = useState(true);
   const [pet, setPet] = useState("None");
   const [normalSkills, setNormalSkills] = useState(Array(3).fill(0));
   const [normalLocked, setNormalLocked] = useState(Array(12).fill(false));
@@ -18,6 +21,7 @@ const PetHouse = () => {
   const [evoLocked, setEvoLocked] = useState(Array(6).fill(false));
   const [locksUsed, setLocksUsed] = useState(0);
   const [moneySpent, setMoneySpent] = useState(0);
+  const [timesTrained, setTimesTrained] = useState(0);
 
   let petInfo;
   if (pet !== "None") petInfo = CFDB.getPet(pet);
@@ -33,7 +37,7 @@ const PetHouse = () => {
       normalSkillElements.push(html`<div class="pet-skill-frame"></div>`);
     } else {
       const locked = normalLocked[i];
-      const path = getImagePath(ImageType.petSkill, skill, false);
+      const path = getImagePath(ImageType.petSkill, skill, int);
       normalSkillElements.push(html`<div class="pet-skill-frame ${locked ? "locked " : ""}text-center">
         <img src=${path} onClick=${() => {
           normalLocked[i] = !normalLocked[i];
@@ -54,7 +58,7 @@ const PetHouse = () => {
       evoSkillElements.push(html`<div class="pet-skill-frame"></div>`);
     } else {
       const locked = evoLocked[i];
-      const path = getImagePath(ImageType.petSkill, skill, false);
+      const path = getImagePath(ImageType.petSkill, skill, int);
       evoSkillElements.push(html`<div class="pet-skill-frame ${locked ? "locked " : ""}text-center">
         <img src=${path} onClick=${() => {
           evoLocked[i] = !evoLocked[i];
@@ -86,9 +90,11 @@ const PetHouse = () => {
       `28_${petInfo.iconId}`
     ].filter(x => !normalSkills.includes(x));
     const randomSkill = Utils.randomElement(eligiblePetSkills);
+    const prevSkill = normalSkills[randomIndex];
     normalSkills[randomIndex] = randomSkill;
     setNormalSkills([...normalSkills]);
-    if (normalSkills.every(x => x !== 0)) {
+    setTimesTrained(prev => prev + 1);
+    if (prevSkill !== 0) {
       let locksToAdd = 1;
       let totalLocks = 0;
       normalLocked.forEach(x => {
@@ -98,8 +104,10 @@ const PetHouse = () => {
         }
       });
       setLocksUsed(prev => prev + totalLocks);
-      setMoneySpent(prev => prev + totalLocks / 5.0625);
-      setNormalLocked(Array(12).fill(false));
+      setMoneySpent(prev => prev + totalLocks * DOLLARS_PER_LOCK);
+      if (!continuousLock) {
+        setNormalLocked(Array(12).fill(false));
+      }
     }
   }
 
@@ -107,7 +115,11 @@ const PetHouse = () => {
     const randomIndex = getRandomSkillIndex(evoSkills, evoLocked);
     const skillAtIndex = evoSkills[randomIndex];
     if (randomIndex < 0) return;
-    const eligiblePetSkills = CFDB.getPetSkills(PetSkillType.evolvedStat).map(x => x.iconId).filter(x => !evoSkills.includes(x));
+    const eligiblePetSkills = [
+      ...Array(12).fill().map((_, i) => i + 31).filter(x => !evoSkills.includes(x)),
+      ...Array(12).fill().map((_, i) => i + 51).filter(x => !evoSkills.includes(x)),
+      ...Array(12).fill().map((_, i) => i + 71).filter(x => !evoSkills.includes(x)),
+    ];
     if (evoSkills.length >= 4 && (petPassives.every(x => !evoSkills.includes(x)) || petPassives.includes(skillAtIndex))) {
       const passives = petPassives.filter(x => !evoSkills.includes(x));
       eligiblePetSkills.push(...passives);
@@ -117,9 +129,11 @@ const PetHouse = () => {
       eligiblePetSkills.push(...actives);
     }
     const randomSkill = Utils.randomElement(eligiblePetSkills);
+    const prevSkill = evoSkills[randomIndex];
     evoSkills[randomIndex] = randomSkill;
     setEvoSkills([...evoSkills]);
-    if (evoSkills.every(x => x !== 0)) {
+    setTimesTrained(prev => prev + 1);
+    if (prevSkill !== 0) {
       let locksToAdd = 13;
       let totalLocks = 0;
       evoLocked.forEach(x => {
@@ -129,8 +143,10 @@ const PetHouse = () => {
         }
       });
       setLocksUsed(prev => prev + totalLocks);
-      setMoneySpent(prev => prev + totalLocks / 5.0625);
-      setEvoLocked(Array(6).fill(false));
+      setMoneySpent(prev => prev + totalLocks * DOLLARS_PER_LOCK);
+      if (!continuousLock) {
+        setEvoLocked(Array(6).fill(false));
+      }
     }
   }
 
@@ -190,7 +206,21 @@ const PetHouse = () => {
     </div>
   </div>
   ${pet !== "None" && html`
-  <div class="row pt-2">
+  <div class="row pt-3">
+    <div class="col-auto">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="int-icons" checked=${int} onClick=${e => setInt(e.target.checked)} />
+        <label class="form-check-label" for="int-icons">International icons</label>
+      </div>
+    </div>
+    <div class="col-auto">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="continuous-lock" checked=${continuousLock} onClick=${e => setContinuousLock(e.target.checked)} />
+        <label class="form-check-label" for="continuous-lock">Continuous lock</label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-auto">
       <img src=${getImagePath(ImageType.pet, evoSkills.length > 0 ? petInfo.evoIconId : petInfo.iconId)} />
     </div>
@@ -198,6 +228,9 @@ const PetHouse = () => {
       <span>Locks Used: ${locksUsed}</span>
       <br/>
       <span>Money Spent: \$${moneySpent.toFixed(2)}</span>
+    </div>
+    <div class="col-auto">
+      <span>Times Trained: ${timesTrained}</span>
     </div>
   </div>
   <div class="row pt-3">

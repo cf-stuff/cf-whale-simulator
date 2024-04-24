@@ -61,6 +61,16 @@ const Fighters = {
     bmv: [16, 8, 12],
     mastery: SkillType.wind.name
   },
+  ironMan: {
+    name: "Iron Man",
+    evoName: "Iron Man",
+    iconId: 82,
+    weaponType: WeaponType.gloves,
+    isv: [38, 38, 24],
+    growthRate: [1.9, 1.9, 1.2],
+    bmv: [8, 8, 20],
+    mastery: SkillType.taijutsu.name
+  },
   hel: {
     name: "Hel",
     evoName: "Hel",
@@ -412,9 +422,9 @@ const Fighters = {
     mastery: SkillType.ninjutsu.name
   },
   ironMan: {
-    name: "Iron Man",
-    evoName: "Iron Man",
-    iconId: 82,
+    name: "Killua",
+    evoName: "Killua",
+    iconId: 81,
     weaponType: WeaponType.gloves,
     isv: [40, 25, 25],
     growthRate: [2, 1.6, 1.6],

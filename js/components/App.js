@@ -36,6 +36,7 @@ const App = () => {
     Discord: CF99#9616
     <hr/>
     <h3>Changelog</h3>
+    <p>2024-03-24: 1.8.5 - Updated Iron Man to reflect announced stats</p>
     <p>2024-03-24: 1.8.4 - Added pet house</p>
     <p>2024-03-20: 1.8.3 - Yellow totem now applies to both positive and negative status</p>
     <p>2024-03-18: 1.8.2 - New builds in grading system to reflect current meta; fixed rebirth expertise effect not working</p>

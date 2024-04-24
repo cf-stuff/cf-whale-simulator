@@ -425,7 +425,7 @@ const Fighters = {
     name: "Killua",
     evoName: "Killua",
     iconId: 81,
-    weaponType: WeaponType.gloves,
+    weaponType: WeaponType.dagger,
     isv: [40, 25, 25],
     growthRate: [2, 1.6, 1.6],
     bmv: [7, 15, 15],

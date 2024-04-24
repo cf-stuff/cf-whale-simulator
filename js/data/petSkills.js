@@ -256,6 +256,12 @@ const PetSkills = {
     iconId: "27_17",
     stat: { spd: 10 }
   },
+  moleSpecialStat: {
+    name: "150EVA (Mole Special)",
+    type: PetSkillType.stat,
+    iconId: "27_69",
+    stat: { eva: 150 }
+  },
   foxSpecialSkill: {
     name: "Stun (Gale Fox Special)",
     type: PetSkillType.skill,
@@ -462,6 +468,20 @@ const PetSkills = {
     effect: {
       status: Status.rooted.name,
       target: SkillTarget.enemy
+    },
+    phase: SkillPhase.petAttack,
+    triggerPercent: 10,
+  },
+  moleSpecialSkill: {
+    name: "Burrow (Mole Special)",
+    type: PetSkillType.skill,
+    iconId: "28_69",
+    damage: {
+      atkMultiplier: 0.5
+    },
+    effect: {
+      status: Status.goldenShield.name,
+      target: SkillTarget.self
     },
     phase: SkillPhase.petAttack,
     triggerPercent: 10,

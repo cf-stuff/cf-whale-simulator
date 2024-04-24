@@ -89,6 +89,12 @@ const Pets = {
     iconId: 17,
     evoIconId: 1017,
   },
+  mole: {
+    name: "Mole",
+    evoName: "Mole",
+    iconId: 69,
+    evoIconId: 1069,
+  },
 };
 
 export default Pets;

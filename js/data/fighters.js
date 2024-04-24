@@ -421,7 +421,7 @@ const Fighters = {
     bmv: [8, 12, 17],
     mastery: SkillType.ninjutsu.name
   },
-  ironMan: {
+  killua: {
     name: "Killua",
     evoName: "Killua",
     iconId: 81,

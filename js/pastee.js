@@ -1,7 +1,7 @@
 export const submitPaste = async (title, content) => {
   const body = {
     expiration: 1209600,
-    description: `${title} (CF whale build, copy and import)`,
+    description: `${title} (CF whale build, go to the 'other' tab to import)`,
     sections: [{
       name: title,
       syntax: "text",

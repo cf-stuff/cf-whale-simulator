@@ -1,4 +1,4 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html } from "../lib/preact.standalone.module.js";
 import { FURY_BURST_THRESHOLD } from "../config.js";
 
 const ReplayLog = ({ logs }) => {

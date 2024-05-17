@@ -1,4 +1,4 @@
-import { html, useState, useRef, useCallback } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html, useState, useRef, useCallback } from "../lib/preact.standalone.module.js";
 import toPlayer from "../calculator.js";
 import { getBuild, getBuildNames } from "../templates.js";
 import { simulateBattle } from "../battle.js";

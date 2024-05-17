@@ -1,4 +1,4 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html } from "../../lib/preact.standalone.module.js"
 
 const SelectInput = ({ value, onChange, options, includeNone = true, style, disabled = false }) => {
   return html`

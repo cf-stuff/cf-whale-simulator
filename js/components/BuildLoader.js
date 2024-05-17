@@ -1,4 +1,4 @@
-import { html, useState } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html, useState } from "../lib/preact.standalone.module.js";
 import Button from "./forms/Button.js";
 import SelectInput from "./forms/SelectInput.js";
 import { getBuild, getBuildNames } from "../templates.js";

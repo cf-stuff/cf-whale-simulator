@@ -1,4 +1,4 @@
-import { html, useState } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html, useState } from "../lib/preact.standalone.module.js";
 import Battle from "./Battle.js";
 import Calculator from "./calculator/Calculator.js";
 import Grade from "./Grade.js";

@@ -1,4 +1,4 @@
-import { html, useState, useEffect } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html, useState, useEffect } from "../lib/preact.standalone.module.js";
 import { createProfile } from "../display.js";
 
 const Display = ({ player, bg = 11, left = true }) => {

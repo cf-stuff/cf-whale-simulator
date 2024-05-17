@@ -1,4 +1,4 @@
-import { html, useState, useRef } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html, useState, useRef } from "../lib/preact.standalone.module.js";
 import CFDB from "../data/CFDB.js";
 import { getImagePath, ImageType } from "../image.js";
 import SkillSet from "./SkillSet.js";

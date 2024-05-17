@@ -1,7 +1,6 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html } from "../../lib/preact.standalone.module.js"
 import { GearType } from "../../data/categories.js";
 import CFDB from "../../data/CFDB.js";
-import Stats from "../../data/stats.js";
 import { getImagePath, ImageType } from "../../image.js";
 import GearGem from "./GearGem.js";
 import GearStat from "./GearStat.js";

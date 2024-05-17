@@ -1,4 +1,4 @@
-import { html, useState } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html, useState } from "../lib/preact.standalone.module.js";
 
 const Carousel = ({ images }) => {
   const [activeSlide, setActiveSlide] = useState(0);

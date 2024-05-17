@@ -1,4 +1,4 @@
-import { html, useState, useEffect, useRef } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html, useState, useEffect, useRef } from "../lib/preact.standalone.module.js";
 import Timeline from "../Timeline.js";
 
 const Replay = ({ logs, play = true, restart = 0, delay = 17 }) => {

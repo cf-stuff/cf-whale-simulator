@@ -1,4 +1,4 @@
-import { html, useState } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html, useState } from "../../lib/preact.standalone.module.js"
 import CFDB from "../../data/CFDB.js";
 import { ActionType } from "../../state.js";
 import Arena from "./Arena.js";

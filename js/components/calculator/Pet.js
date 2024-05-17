@@ -1,4 +1,4 @@
-import { html, useState } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html, useState } from "../../lib/preact.standalone.module.js"
 import { PetSkillType } from "../../data/categories.js";
 import CFDB from "../../data/CFDB.js";
 import Pets from "../../data/pets.js";

@@ -1,4 +1,4 @@
-import { html, useState } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html, useState } from "../lib/preact.standalone.module.js";
 import Pets from "../data/pets.js";
 import SelectInput from "./forms/SelectInput.js";
 import { ImageType, getImagePath } from "../image.js";

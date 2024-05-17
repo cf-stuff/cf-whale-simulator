@@ -1,4 +1,4 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html } from "../../lib/preact.standalone.module.js"
 
 const ImageRadio = ({ id, value, name, src, checked, disabled, onClick, draggable, ondragstart, style }) => {
   return html`

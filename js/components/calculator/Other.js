@@ -1,4 +1,4 @@
-import { html, useRef } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html, useRef } from "../../lib/preact.standalone.module.js"
 import toPlayer from "../../calculator.js";
 import LZString from "../../lib/lz-string.min.js";
 import { submitPaste } from "../../pastee.js";

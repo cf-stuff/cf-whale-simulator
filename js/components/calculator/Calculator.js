@@ -1,4 +1,4 @@
-import { html, useReducer, useState } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html, useReducer, useState } from "../../lib/preact.standalone.module.js"
 import { initialState, reducer } from "../../state.js";
 import Display from "../Display.js";
 import Form from "./Form.js";

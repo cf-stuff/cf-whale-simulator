@@ -1,4 +1,4 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js"
+import { html } from "../../lib/preact.standalone.module.js"
 import CFDB from "../../data/CFDB.js";
 import ImageCheckbox from "../forms/ImageCheckbox.js";
 import { getImagePath, ImageType } from "../../image.js";

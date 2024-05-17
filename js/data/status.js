@@ -156,7 +156,7 @@ const Status = {
     effect: {
       skipTurn: true
     },
-    removeAfterDuration: 3500,
+    removeAfterDuration: 6000,
   },
   rooted: {
     name: "Rooted",

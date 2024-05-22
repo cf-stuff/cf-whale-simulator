@@ -557,11 +557,11 @@ function createStatus(state, playerIndex, name, options) {
   if (status.effect.decreaseCrt) {
     updateStat(state, playerIndex, Stats.crt.name, false, -status.effect.decreaseCrt, name);
   }
-  if (status.effect.increaseEva) {
-    updateStat(state, playerIndex, Stats.eva.name, true, status.effect.increaseEva, name);
+  if (status.effect.increaseRes) {
+    updateStat(state, playerIndex, Stats.res.name, true, status.effect.increaseRes, name);
   }
-  if (status.effect.decreaseEva) {
-    updateStat(state, playerIndex, Stats.eva.name, false, -status.effect.decreaseEva, name);
+  if (status.effect.decreaseRes) {
+    updateStat(state, playerIndex, Stats.res.name, false, -status.effect.decreaseRes, name);
   }
   if (status.removeAfterDuration) {
     let statusDuration = status.removeAfterDuration;
@@ -613,11 +613,11 @@ function removeStatus(state, playerIndex, name) {
     if (removedStatus.effect.decreaseCrt) {
       updateStat(state, playerIndex, Stats.crt.name, true, removedStatus.effect.decreaseCrt, removedStatus.name);
     }
-    if (removedStatus.effect.increaseEva) {
-      updateStat(state, playerIndex, Stats.eva.name, false, -removedStatus.effect.increaseEva, removedStatus.name);
+    if (removedStatus.effect.increaseRes) {
+      updateStat(state, playerIndex, Stats.res.name, false, -removedStatus.effect.increaseRes, removedStatus.name);
     }
-    if (removedStatus.effect.decreaseEva) {
-      updateStat(state, playerIndex, Stats.eva.name, true, removedStatus.effect.decreaseEva, removedStatus.name);
+    if (removedStatus.effect.decreaseRes) {
+      updateStat(state, playerIndex, Stats.res.name, true, removedStatus.effect.decreaseRes, removedStatus.name);
     }
     state.log.push(`|status|remove|${state.players[playerIndex].id}|${name}`);
   }

@@ -527,23 +527,41 @@ function createStatus(state, playerIndex, name, options) {
   if (status.effect.betrayalPercentPerTenSeconds) {
     status.betrayalPercent = 0;
   }
+  if (status.effect.increaseHit) {
+    updateStat(state, playerIndex, Stats.hit.name, true, status.effect.increaseHit, name);
+  }
+  if (status.effect.decreaseHit) {
+    updateStat(state, playerIndex, Stats.hit.name, false, -status.effect.decreaseHit, name);
+  }
+  if (status.effect.increaseEva) {
+    updateStat(state, playerIndex, Stats.eva.name, true, status.effect.increaseEva, name);
+  }
+  if (status.effect.decreaseEva) {
+    updateStat(state, playerIndex, Stats.eva.name, false, -status.effect.decreaseEva, name);
+  }
+  if (status.effect.increaseBrk) {
+    updateStat(state, playerIndex, Stats.brk.name, true, status.effect.increaseBrk, name);
+  }
+  if (status.effect.decreaseBrk) {
+    updateStat(state, playerIndex, Stats.brk.name, false, -status.effect.decreaseBrk, name);
+  }
+  if (status.effect.increaseDef) {
+    updateStat(state, playerIndex, Stats.def.name, true, status.effect.increaseDef, name);
+  }
+  if (status.effect.decreaseDef) {
+    updateStat(state, playerIndex, Stats.def.name, false, -status.effect.decreaseDef, name);
+  }
   if (status.effect.increaseCrt) {
     updateStat(state, playerIndex, Stats.crt.name, true, status.effect.increaseCrt, name);
   }
   if (status.effect.decreaseCrt) {
     updateStat(state, playerIndex, Stats.crt.name, false, -status.effect.decreaseCrt, name);
   }
+  if (status.effect.increaseEva) {
+    updateStat(state, playerIndex, Stats.eva.name, true, status.effect.increaseEva, name);
+  }
   if (status.effect.decreaseEva) {
     updateStat(state, playerIndex, Stats.eva.name, false, -status.effect.decreaseEva, name);
-  }
-  if (status.effect.decreaseHit) {
-    updateStat(state, playerIndex, Stats.hit.name, false, -status.effect.decreaseEva, name);
-  }
-  if (status.effect.decreaseBrk) {
-    updateStat(state, playerIndex, Stats.brk.name, false, -status.effect.decreaseBrk, name);
-  }
-  if (status.effect.decreaseDef) {
-    updateStat(state, playerIndex, Stats.def.name, false, -status.effect.decreaseDef, name);
   }
   if (status.removeAfterDuration) {
     let statusDuration = status.removeAfterDuration;
@@ -565,8 +583,41 @@ function removeStatus(state, playerIndex, name) {
   const indexOfStatus = state.players[playerIndex].status.findIndex(x => x.name === name);
   if (indexOfStatus >= 0) {
     const [removedStatus] = state.players[playerIndex].status.splice(indexOfStatus, 1);
+    if (removedStatus.effect.increaseHit) {
+      updateStat(state, playerIndex, Stats.hit.name, false, -removedStatus.effect.increaseHit, removedStatus.name);
+    }
+    if (removedStatus.effect.decreaseHit) {
+      updateStat(state, playerIndex, Stats.hit.name, true, removedStatus.effect.decreaseHit, removedStatus.name);
+    }
+    if (removedStatus.effect.increaseEva) {
+      updateStat(state, playerIndex, Stats.eva.name, false, -removedStatus.effect.increaseEva, removedStatus.name);
+    }
+    if (removedStatus.effect.decreaseEva) {
+      updateStat(state, playerIndex, Stats.eva.name, true, removedStatus.effect.decreaseEva, removedStatus.name);
+    }
+    if (removedStatus.effect.increaseBrk) {
+      updateStat(state, playerIndex, Stats.brk.name, false, -removedStatus.effect.increaseBrk, removedStatus.name);
+    }
+    if (removedStatus.effect.decreaseBrk) {
+      updateStat(state, playerIndex, Stats.brk.name, true, removedStatus.effect.decreaseBrk, removedStatus.name);
+    }
+    if (removedStatus.effect.increaseDef) {
+      updateStat(state, playerIndex, Stats.def.name, false, -removedStatus.effect.increaseDef, removedStatus.name);
+    }
+    if (removedStatus.effect.decreaseDef) {
+      updateStat(state, playerIndex, Stats.def.name, true, removedStatus.effect.decreaseDef, removedStatus.name);
+    }
     if (removedStatus.effect.increaseCrt) {
       updateStat(state, playerIndex, Stats.crt.name, false, -removedStatus.effect.increaseCrt, removedStatus.name);
+    }
+    if (removedStatus.effect.decreaseCrt) {
+      updateStat(state, playerIndex, Stats.crt.name, true, removedStatus.effect.decreaseCrt, removedStatus.name);
+    }
+    if (removedStatus.effect.increaseEva) {
+      updateStat(state, playerIndex, Stats.eva.name, false, -removedStatus.effect.increaseEva, removedStatus.name);
+    }
+    if (removedStatus.effect.decreaseEva) {
+      updateStat(state, playerIndex, Stats.eva.name, true, removedStatus.effect.decreaseEva, removedStatus.name);
     }
     state.log.push(`|status|remove|${state.players[playerIndex].id}|${name}`);
   }

@@ -5,7 +5,7 @@ import { ImageType, getImagePath } from "../image.js";
 import CFDB from "../data/CFDB.js";
 import Button from "./forms/Button.js";
 import Utils from "../utils.js";
-import { getSavedKeys, load } from "../storage.js";
+import { LS } from "../storage.js";
 import { getBuild, getBuildNames } from "../templates.js";
 
 const petPassives = CFDB.getPetPassives().map(x => x.iconId);
@@ -207,12 +207,12 @@ const PetHouse = () => {
     setEvoSkills([...evoSkills]);
   }
 
-  const options = getSavedKeys();
+  const options = LS.getSavedKeys();
   options.push(...getBuildNames().filter(name => !options.includes(name)));
 
   const loadPetFromBuild = () => {
     if (build === "None") return;
-    const newPet = load(build).pet || getBuild(build).pet;
+    const newPet = LS.load(build).pet || getBuild(build).pet;
     const normal = newPet.skills.map(x => CFDB.getPetSkill(x).iconId);
     const normalSkillLimit = getPetSkillLimit(newPet.evolved ? 27 : newPet.plus);
     while (normal.length < normalSkillLimit) normal.push(0);

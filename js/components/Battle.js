@@ -4,7 +4,7 @@ import { getBuild, getBuildNames } from "../templates.js";
 import { simulateBattle } from "../battle.js";
 import Button from "./forms/Button.js";
 import SelectInput from "./forms/SelectInput.js";
-import { getSavedKeys, load } from "../storage.js";
+import { LS } from "../storage.js";
 import Display from "./Display.js";
 import Carousel from "./Carousel.js";
 import { ImageType, getImagePath } from "../image.js";
@@ -33,11 +33,11 @@ const Battle = () => {
     }
   }, []);
 
-  const options = getSavedKeys();
+  const options = LS.getSavedKeys();
   options.push(...getBuildNames().filter(name => !options.includes(name)));
 
   const getPlayer = name => {
-    const newBuild = load(name) || getBuild(name);
+    const newBuild = LS.load(name) || getBuild(name);
     return toPlayer(newBuild);
   }
 

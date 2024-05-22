@@ -4,7 +4,7 @@ import { getBuild, getBuildNames, getPlayer, getPlayerNames } from "../templates
 import { simulateBattle } from "../battle.js";
 import Button from "./forms/Button.js";
 import SelectInput from "./forms/SelectInput.js";
-import { getSavedKeys, load } from "../storage.js";
+import { LS } from "../storage.js";
 import Display from "./Display.js";
 import Carousel from "./Carousel.js";
 import Utils from "../utils.js";
@@ -22,11 +22,11 @@ const Grade = () => {
   const winratesRef = useRef(null);
   const weightedScoresRef = useRef(null);
 
-  const options = getSavedKeys();
+  const options = LS.getSavedKeys();
   options.push(...getBuildNames().filter(name => !options.includes(name)));
 
   const buildToPlayer = name => {
-    const newBuild = load(name) || getBuild(name);
+    const newBuild = LS.load(name) || getBuild(name);
     return toPlayer(newBuild);
   }
 

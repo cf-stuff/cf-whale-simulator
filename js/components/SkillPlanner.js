@@ -5,7 +5,7 @@ import SkillSet from "./SkillSet.js";
 import Button from "./forms/Button.js";
 import ImageRadio from "./forms/ImageRadio.js";
 import SelectInput from "./forms/SelectInput.js";
-import { getSavedKeys, load } from "../storage.js";
+import { LS } from "../storage.js";
 import { getBuild, getBuildNames } from "../templates.js";
 
 const setMap = { "I": 0, "II": 1, "III": 2 };
@@ -46,12 +46,12 @@ const SkillPlanner = () => {
 
   const getIdFromSkillName = name => CFDB.getSkill(name)?.iconId || 0;
 
-  const options = getSavedKeys();
+  const options = LS.getSavedKeys();
   options.push(...getBuildNames().filter(name => !options.includes(name)));
 
   const loadSkillsFromBuild = () => {
     if (build === "None") return;
-    const newBuild = load(build) || getBuild(build);
+    const newBuild = LS.load(build) || getBuild(build);
     const skillset = setMap[loadPosRef.current.base.value];
     const newSkills = [getIdFromSkillName(newBuild.phylactery.skill), ...newBuild.skills.map(x => getIdFromSkillName(x))];
     newSkills.forEach((skill, i) => setSkill(skillset)(i, skill));

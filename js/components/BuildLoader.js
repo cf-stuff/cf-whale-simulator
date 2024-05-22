@@ -2,7 +2,7 @@ import { html, useState } from "../lib/preact.standalone.module.js";
 import Button from "./forms/Button.js";
 import SelectInput from "./forms/SelectInput.js";
 import { getBuild, getBuildNames } from "../templates.js";
-import { getSavedKeys, load, remove, save } from "../storage.js";
+import { LS } from "../storage.js";
 import { initialState } from "../state.js";
 import Utils from "../utils.js";
 
@@ -13,21 +13,21 @@ const BuildLoader = ({ build, setBuild }) => {
     if (selectedBuild === "None") {
       setBuild(Utils.deepClone(initialState));
     } else {
-      const newBuild = load(selectedBuild) || getBuild(selectedBuild);
+      const newBuild = LS.load(selectedBuild) || getBuild(selectedBuild);
       setBuild(newBuild);
     }
   }
   const saveBuild = () => {
     if (build.fighter.name === "None") return;
-    save(build);
+    LS.save(build);
     setSelectedBuild(build.name)
   };
   const removeBuild = () => {
-    remove(selectedBuild);
+    LS.remove(selectedBuild);
     setSelectedBuild("None");
   };
 
-  const options = getSavedKeys();
+  const options = LS.getSavedKeys();
   options.push(...getBuildNames().filter(name => !options.includes(name)));
 
   return html`

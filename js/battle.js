@@ -803,7 +803,7 @@ function getPlayersEligibleToTakeTurn(state) {
   return state.players.filter(player => {
     let spdMultiplier = 1;
     player.status.forEach(x => spdMultiplier *= x.effect.spdMultiplier || 1);
-    return (state.timer % getSecondsPerAttack(player.stats.current.spd)) === 0;
+    return (state.timer % getSecondsPerAttack(player.stats.current.spd * spdMultiplier)) === 0;
   });
 }
 

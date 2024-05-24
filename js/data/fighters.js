@@ -73,7 +73,7 @@ const Fighters = {
   },
   hel: {
     name: "Hel",
-    evoName: "Hel",
+    evoName: "E·Hel",
     iconId: 85,
     weaponType: WeaponType.dagger,
     isv: [25, 40, 25],

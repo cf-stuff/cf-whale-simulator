@@ -644,6 +644,11 @@ function handleStartOfTurnStatusEffects(state, playerIndex) {
       removeStatus(state, playerIndex, x.name);
     }
   });
+  state.players[playerIndex ^ 1].status.forEach(x => {
+    if (x.removeOnEnemyTurnStart) {
+      removeStatus(state, playerIndex ^ 1, x.name);
+    }
+  });
 }
 
 function handleTimerRelatedStatusEffects(state) {

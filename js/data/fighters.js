@@ -61,9 +61,19 @@ const Fighters = {
     bmv: [16, 8, 12],
     mastery: SkillType.wind.name
   },
+  pigsy: {
+    name: "Pigsy",
+    evoName: "E·Pigsy",
+    iconId: 269,
+    weaponType: WeaponType.heavyWeapon,
+    isv: [38, 24, 40],
+    growthRate: [1.9, 1.5, 2],
+    bmv: [8, 20, 8],
+    mastery: SkillType.earth.name
+  },
   ironMan: {
     name: "Iron Man",
-    evoName: "Iron Man",
+    evoName: "E·Iron Man",
     iconId: 82,
     weaponType: WeaponType.gloves,
     isv: [38, 38, 24],

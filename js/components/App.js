@@ -36,6 +36,7 @@ const App = () => {
     Discord: CF99#9616
     <hr/>
     <h3>Changelog</h3>
+    <p>2025-01-29: 1.8.7 - Added Pigsy</p>
     <p>2024-05-17: 1.8.6 - Fixed stun duration 3.5s to 6s (for quake and hammer)</p>
     <p>2024-03-24: 1.8.5 - Updated Iron Man to reflect announced stats</p>
     <p>2024-03-24: 1.8.4 - Added pet house</p>

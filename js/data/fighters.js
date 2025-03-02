@@ -63,7 +63,7 @@ const Fighters = {
   },
   pigsy: {
     name: "Pigsy",
-    evoName: "E·Pigsy",
+    evoName: "Pigsy",
     iconId: 269,
     weaponType: WeaponType.heavyWeapon,
     isv: [38, 24, 40],

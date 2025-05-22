@@ -682,703 +682,781 @@ Builds.hybrid = {
 }
 
 Players.bellTank = {
-  "name": "Bell Tank (16%)",
-  "level": 100,
-  "fighter": {
-      "name": "Madara",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Rejuventation Reset",
-          "Pray",
-          "Golden Shield Reset"
-      ]
-  },
-  "pet": {
-      "name": "Psychic Dog",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Defense",
-          "Seal (Psychic Dog Special)",
-          "Fire (Active)",
-          "Energy Shield (Passive)"
-      ]
-  },
-  "weapon": "Tyrant Callous Sword",
-  "stats": {
-      "str": 1411,
-      "dex": 1623,
-      "sta": 4057,
-      "brk": 382,
-      "def": 2774,
-      "hit": 1788,
-      "eva": 438,
-      "res": 2012,
-      "crt": 330,
-      "atkPercent": 32,
-      "minAtk": 1421,
-      "maxAtk": 1627,
-      "hpPercent": 79,
-      "hp": 44176,
-      "spd": 348,
-      "spPercent": 0,
-      "sp": 819,
-      "furyReversion": 30
-  },
-  "skills": [
-      "Arrival of Thunder God",
-      "Poisonous Fog",
-      "Draw Power",
-      "Rejuvenation",
-      "Earth-Style Wall",
-      "Golden Shield"
-  ],
-  "expertise": [
-      "Water",
-      "Fire",
-      "Earth",
-      "Thunder",
-      "Wind",
-      "Ninjutsu",
-      "Cursed Seal Jutsu",
-      "Genjutsu",
-      "Healing"
-  ],
-  "resistance": [
-      "Genjutsu",
-      "Healing"
-  ],
-  "phylactery": {
-      "skill": "Moving Illusion",
-      "extraTriggerPercent": 3
-  },
-  "totem": {
-      "name": "Lightning Attack Totem",
-      "level": 64
-  }
+    "name": "Bell Tank (10%)",
+    "level": 100,
+    "fighter": {
+        "name": "Madara",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Rejuventation Reset",
+            "Pray",
+            "Golden Shield Reset"
+        ]
+    },
+    "pet": {
+        "name": "Psychic Dog",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Defense",
+            "Seal (Psychic Dog Special)",
+            "Fire (Active)",
+            "Energy Shield (Passive)"
+        ]
+    },
+    "weapon": "Tyrant Callous Sword",
+    "stats": {
+        "str": 1411,
+        "dex": 1623,
+        "sta": 4057,
+        "brk": 382,
+        "def": 2774,
+        "hit": 1788,
+        "eva": 438,
+        "res": 2012,
+        "crt": 330,
+        "atkPercent": 32,
+        "minAtk": 1421,
+        "maxAtk": 1627,
+        "hpPercent": 79,
+        "hp": 44176,
+        "spd": 348,
+        "spPercent": 0,
+        "sp": 819,
+        "furyReversion": 30
+    },
+    "skills": [
+        "Arrival of Thunder God",
+        "Poisonous Fog",
+        "Draw Power",
+        "Rejuvenation",
+        "Earth-Style Wall",
+        "Golden Shield"
+    ],
+    "expertise": [
+        "Water",
+        "Fire",
+        "Earth",
+        "Thunder",
+        "Wind",
+        "Ninjutsu",
+        "Cursed Seal Jutsu",
+        "Genjutsu",
+        "Healing"
+    ],
+    "resistance": [
+        "Genjutsu",
+        "Healing"
+    ],
+    "phylactery": {
+        "skill": "Moving Illusion",
+        "extraTriggerPercent": 3
+    },
+    "totem": {
+        "name": "Lightning Attack Totem",
+        "level": 64
+    }
 }
 
 Players.bubbleTank = {
-  "name": "Bubble Tank (8%)",
-  "level": 100,
-  "fighter": {
-      "name": "Madara",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Rejuventation Reset",
-          "Pray",
-          "Energy Shield Reset"
-      ]
-  },
-  "pet": {
-      "name": "Psychic Dog",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Defense",
-          "Seal (Psychic Dog Special)",
-          "Fire (Active)",
-          "Energy Shield (Passive)"
-      ]
-  },
-  "weapon": "Tyrant Callous Sword",
-  "stats": {
-      "str": 1061,
-      "dex": 1973,
-      "sta": 4057,
-      "brk": 382,
-      "def": 2774,
-      "hit": 1420,
-      "eva": 461,
-      "res": 2012,
-      "crt": 330,
-      "atkPercent": 32,
-      "minAtk": 1275,
-      "maxAtk": 1459,
-      "hpPercent": 94,
-      "hp": 49479,
-      "spd": 371,
-      "spPercent": 0,
-      "sp": 789,
-      "furyReversion": 30
-  },
-  "skills": [
-      "Arrival of Thunder God",
-      "Poisonous Fog",
-      "Energy Shield",
-      "Draw Power",
-      "Rejuvenation",
-      "Earth-Style Wall"
-  ],
-  "expertise": [
-      "Water",
-      "Fire",
-      "Earth",
-      "Thunder",
-      "Wind",
-      "Ninjutsu",
-      "Cursed Seal Jutsu",
-      "Genjutsu",
-      "Healing"
-  ],
-  "resistance": [
-      "Genjutsu",
-      "Healing"
-  ],
-  "phylactery": {
-      "skill": "Moving Illusion",
-      "extraTriggerPercent": 3
-  },
-  "totem": {
-      "name": "Lightning Attack Totem",
-      "level": 64
-  }
+    "name": "Bubble Tank (9%)",
+    "level": 100,
+    "fighter": {
+        "name": "Madara",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Rejuventation Reset",
+            "Pray",
+            "Energy Shield Reset"
+        ]
+    },
+    "pet": {
+        "name": "Psychic Dog",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Defense",
+            "Seal (Psychic Dog Special)",
+            "Fire (Active)",
+            "Energy Shield (Passive)"
+        ]
+    },
+    "weapon": "Tyrant Callous Sword",
+    "stats": {
+        "str": 1061,
+        "dex": 1973,
+        "sta": 4057,
+        "brk": 382,
+        "def": 2774,
+        "hit": 1420,
+        "eva": 461,
+        "res": 2012,
+        "crt": 330,
+        "atkPercent": 32,
+        "minAtk": 1275,
+        "maxAtk": 1459,
+        "hpPercent": 94,
+        "hp": 49479,
+        "spd": 371,
+        "spPercent": 0,
+        "sp": 789,
+        "furyReversion": 30
+    },
+    "skills": [
+        "Arrival of Thunder God",
+        "Poisonous Fog",
+        "Energy Shield",
+        "Draw Power",
+        "Rejuvenation",
+        "Earth-Style Wall"
+    ],
+    "expertise": [
+        "Water",
+        "Fire",
+        "Earth",
+        "Thunder",
+        "Wind",
+        "Ninjutsu",
+        "Cursed Seal Jutsu",
+        "Genjutsu",
+        "Healing"
+    ],
+    "resistance": [
+        "Genjutsu",
+        "Healing"
+    ],
+    "phylactery": {
+        "skill": "Moving Illusion",
+        "extraTriggerPercent": 3
+    },
+    "totem": {
+        "name": "Lightning Attack Totem",
+        "level": 64
+    }
 }
 
-Players.brkTank = {
-  "name": "BRK Tank (11%)",
-  "level": 100,
-  "fighter": {
-      "name": "Susanoo",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Blood Frenzy Reset",
-          "Shield Wall Burst",
-          "Golden Shield Reset"
-      ]
-  },
-  "pet": {
-      "name": "Sleipnir",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Defense",
-          "Freezing (Sleipnir Special)",
-          "Barbarian (Active)",
-          "Energy Shield (Passive)"
-      ]
-  },
-  "weapon": "Tyrant Callous Axe",
-  "stats": {
-      "str": 1020,
-      "dex": 1565,
-      "sta": 3620,
-      "brk": 2620,
-      "def": 2304,
-      "hit": 2088,
-      "eva": 472,
-      "res": 942,
-      "crt": 330,
-      "atkPercent": 92,
-      "minAtk": 1583,
-      "maxAtk": 2391,
-      "hpPercent": 64,
-      "hp": 31188,
-      "spd": 422,
-      "spPercent": 0,
-      "sp": 642,
-      "furyReversion": 25
-  },
-  "skills": [
-      "Blood Frenzy",
-      "Golden Shield",
-      "Thunderclap Quake",
-      "Thunderbolt Boxing",
-      "Draw Power",
-      "Blood Sacrifice"
-  ],
-  "expertise": [
-      "Water",
-      "Fire",
-      "Earth",
-      "Thunder",
-      "Wind",
-      "Ninjutsu",
-      "Cursed Seal Jutsu",
-      "Genjutsu",
-      "Healing"
-  ],
-  "resistance": [
-      "Genjutsu",
-      "Healing"
-  ],
-  "phylactery": {
-      "skill": "Moving Illusion",
-      "extraTriggerPercent": 3
-  },
-  "totem": {
-      "name": "Lightning Attack Totem",
-      "level": 64
-  }
+Players.brkTankS = {
+    "name": "BRK Tank S (8%)",
+    "level": 100,
+    "fighter": {
+        "name": "Susanoo",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Blood Frenzy Reset",
+            "Shield Wall Burst",
+            "Golden Shield Reset"
+        ]
+    },
+    "pet": {
+        "name": "Sleipnir",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Defense",
+            "Freezing (Sleipnir Special)",
+            "Energy (Active)",
+            "Energy Shield (Passive)"
+        ]
+    },
+    "weapon": "Tyrant Callous Axe",
+    "stats": {
+        "str": 1020,
+        "dex": 2015,
+        "sta": 3488,
+        "brk": 2570,
+        "def": 2304,
+        "hit": 2088,
+        "eva": 513,
+        "res": 1027,
+        "crt": 330,
+        "atkPercent": 92,
+        "minAtk": 1608,
+        "maxAtk": 2416,
+        "hpPercent": 39,
+        "hp": 29112,
+        "spd": 463,
+        "spPercent": 0,
+        "sp": 586,
+        "furyReversion": 30
+    },
+    "skills": [
+        "Thunderbolt Boxing",
+        "Golden Shield",
+        "Blood Frenzy",
+        "Rebirth",
+        "Barbarism",
+        "Moving Illusion"
+    ],
+    "expertise": [
+        "Water",
+        "Fire",
+        "Earth",
+        "Thunder",
+        "Wind",
+        "Ninjutsu",
+        "Cursed Seal Jutsu",
+        "Genjutsu",
+        "Healing"
+    ],
+    "resistance": [
+        "Thunder",
+        "Genjutsu"
+    ],
+    "phylactery": {
+        "skill": "Draw Power",
+        "extraTriggerPercent": 3
+    },
+    "totem": {
+        "name": "Lightning Attack Totem",
+        "level": 64
+    }
+}
+
+Players.brkTankM = {
+    "name": "BRK Tank M (4%)",
+    "level": 100,
+    "fighter": {
+        "name": "Madara",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Blood Frenzy Reset",
+            "Shield Wall Burst",
+            "Golden Shield Reset"
+        ]
+    },
+    "pet": {
+        "name": "Sleipnir",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Defense",
+            "Freezing (Sleipnir Special)",
+            "Barbarian (Active)",
+            "Energy Shield (Passive)"
+        ]
+    },
+    "weapon": "Tyrant Callous Sword",
+    "stats": {
+        "str": 1061,
+        "dex": 1518,
+        "sta": 3397,
+        "brk": 2520,
+        "def": 2304,
+        "hit": 2088,
+        "eva": 431,
+        "res": 1662,
+        "crt": 330,
+        "atkPercent": 92,
+        "minAtk": 1652,
+        "maxAtk": 1891,
+        "hpPercent": 64,
+        "hp": 32858,
+        "spd": 401,
+        "spPercent": 0,
+        "sp": 675,
+        "furyReversion": 30
+    },
+    "skills": [
+        "Blood Frenzy",
+        "Thunderbolt Boxing",
+        "Draw Power",
+        "Golden Shield",
+        "Rebirth",
+        "Earth-Style Wall"
+    ],
+    "expertise": [
+        "Water",
+        "Fire",
+        "Earth",
+        "Thunder",
+        "Wind",
+        "Ninjutsu",
+        "Cursed Seal Jutsu",
+        "Genjutsu",
+        "Healing"
+    ],
+    "resistance": [
+        "Genjutsu",
+        "Healing"
+    ],
+    "phylactery": {
+        "skill": "Moving Illusion",
+        "extraTriggerPercent": 3
+    },
+    "totem": {
+        "name": "Lightning Attack Totem",
+        "level": 64
+    }
 }
 
 Players.brkFire = {
-  "name": "BRK Fire (22%)",
-  "level": 100,
-  "fighter": {
-      "name": "Stryker",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Golden Shield Reset",
-          "Shield Wall Burst",
-          "Blood Frenzy Reset"
-      ]
-  },
-  "pet": {
-      "name": "Sleipnir",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Defense",
-          "Freezing (Sleipnir Special)",
-          "Energy Shield (Passive)"
-      ]
-  },
-  "weapon": "Tyrant Bloodthirsty Sword",
-  "stats": {
-      "str": 2807,
-      "dex": 1020,
-      "sta": 2725,
-      "brk": 2620,
-      "def": 2304,
-      "hit": 2088,
-      "eva": 398,
-      "res": 1012,
-      "crt": 330,
-      "atkPercent": 67,
-      "minAtk": 3257,
-      "maxAtk": 5152,
-      "hpPercent": 74,
-      "hp": 21315,
-      "spd": 348,
-      "spPercent": 0,
-      "sp": 347,
-      "furyReversion": 30
-  },
-  "skills": [
-      "Assassinate",
-      "Rebirth",
-      "Fire Shield",
-      "Barbarism",
-      "Moving Illusion",
-      "Golden Shield"
-  ],
-  "expertise": [
-      "Water",
-      "Fire",
-      "Earth",
-      "Thunder",
-      "Wind",
-      "Ninjutsu",
-      "Cursed Seal Jutsu",
-      "Genjutsu",
-      "Healing"
-  ],
-  "resistance": [
-      "Thunder",
-      "Genjutsu"
-  ],
-  "phylactery": {
-      "skill": "Blood Frenzy",
-      "extraTriggerPercent": 3
-  },
-  "totem": {
-      "name": "Lightning Attack Totem",
-      "level": 64
-  }
+    "name": "BRK Fire (29%)",
+    "level": 100,
+    "fighter": {
+        "name": "Pigsy",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Golden Shield Reset",
+            "Shield Wall Burst",
+            "Blood Frenzy Reset"
+        ]
+    },
+    "pet": {
+        "name": "Sleipnir",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Defense",
+            "Freezing (Sleipnir Special)",
+            "Energy Shield (Passive)"
+        ]
+    },
+    "weapon": "Tyrant Callous Axe",
+    "stats": {
+        "str": 2306,
+        "dex": 1032,
+        "sta": 3273,
+        "brk": 2620,
+        "def": 2304,
+        "hit": 2088,
+        "eva": 381,
+        "res": 1012,
+        "crt": 330,
+        "atkPercent": 67,
+        "minAtk": 2863,
+        "maxAtk": 4529,
+        "hpPercent": 74,
+        "hp": 29517,
+        "spd": 331,
+        "spPercent": 0,
+        "sp": 509,
+        "furyReversion": 30
+    },
+    "skills": [
+        "Assassinate",
+        "Rebirth",
+        "Fire Shield",
+        "Barbarism",
+        "Moving Illusion",
+        "Golden Shield"
+    ],
+    "expertise": [
+        "Water",
+        "Fire",
+        "Earth",
+        "Thunder",
+        "Wind",
+        "Ninjutsu",
+        "Cursed Seal Jutsu",
+        "Genjutsu",
+        "Healing"
+    ],
+    "resistance": [
+        "Thunder",
+        "Genjutsu"
+    ],
+    "phylactery": {
+        "skill": "Blood Frenzy",
+        "extraTriggerPercent": 3
+    },
+    "totem": {
+        "name": "Lightning Attack Totem",
+        "level": 64
+    }
 }
 
 Players.brkStun = {
-  "name": "BRK Stun (11%)",
-  "level": 100,
-  "fighter": {
-      "name": "Lion Dancer",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Blood Frenzy Reset",
-          "Shield Wall Burst",
-          "Golden Shield Reset"
-      ]
-  },
-  "pet": {
-      "name": "Sleipnir",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Defense",
-          "Freezing (Sleipnir Special)",
-          "Barbarian (Active)",
-          "Energy Shield (Passive)"
-      ]
-  },
-  "weapon": "Tyrant Bloodthirsty Fists",
-  "stats": {
-      "str": 3062,
-      "dex": 1373,
-      "sta": 2673,
-      "brk": 2620,
-      "def": 2304,
-      "hit": 2088,
-      "eva": 467,
-      "res": 482,
-      "crt": 330,
-      "atkPercent": 67,
-      "minAtk": 2976,
-      "maxAtk": 4471,
-      "hpPercent": 74,
-      "hp": 22327,
-      "spd": 417,
-      "spPercent": 0,
-      "sp": 367,
-      "furyReversion": 30
-  },
-  "skills": [
-      "Thunderbolt Boxing",
-      "Golden Shield",
-      "Blood Frenzy",
-      "Assassinate",
-      "Rebirth",
-      "Fire Shield"
-  ],
-  "expertise": [
-      "Water",
-      "Fire",
-      "Earth",
-      "Thunder",
-      "Wind",
-      "Ninjutsu",
-      "Genjutsu",
-      "Healing",
-      "Cursed Seal Jutsu"
-  ],
-  "resistance": [
-      "Thunder",
-      "Genjutsu"
-  ],
-  "phylactery": {
-      "skill": "Moving Illusion",
-      "extraTriggerPercent": 3
-  },
-  "totem": {
-      "name": "Lightning Attack Totem",
-      "level": 64
-  }
+    "name": "BRK Stun (7%)",
+    "level": 100,
+    "fighter": {
+        "name": "Pigsy",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Blood Frenzy Reset",
+            "Shield Wall Burst",
+            "Golden Shield Reset"
+        ]
+    },
+    "pet": {
+        "name": "Sleipnir",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Defense",
+            "Freezing (Sleipnir Special)",
+            "Barbarian (Active)",
+            "Energy Shield (Passive)"
+        ]
+    },
+    "weapon": "Tyrant Callous Axe",
+    "stats": {
+        "str": 2668,
+        "dex": 1032,
+        "sta": 2996,
+        "brk": 2620,
+        "def": 2304,
+        "hit": 2088,
+        "eva": 381,
+        "res": 932,
+        "crt": 330,
+        "atkPercent": 67,
+        "minAtk": 3148,
+        "maxAtk": 4729,
+        "hpPercent": 74,
+        "hp": 27745,
+        "spd": 331,
+        "spPercent": 0,
+        "sp": 474,
+        "furyReversion": 30
+    },
+    "skills": [
+        "Thunderbolt Boxing",
+        "Golden Shield",
+        "Blood Frenzy",
+        "Assassinate",
+        "Rebirth",
+        "Thunderclap Quake"
+    ],
+    "expertise": [
+        "Water",
+        "Fire",
+        "Earth",
+        "Thunder",
+        "Wind",
+        "Ninjutsu",
+        "Genjutsu",
+        "Healing",
+        "Cursed Seal Jutsu"
+    ],
+    "resistance": [
+        "Thunder",
+        "Genjutsu"
+    ],
+    "phylactery": {
+        "skill": "Moving Illusion",
+        "extraTriggerPercent": 3
+    },
+    "totem": {
+        "name": "Lightning Attack Totem",
+        "level": 64
+    }
 }
 
 Players.hybridHH = {
-  "name": "Hybrid HH (8%)",
-  "level": 100,
-  "fighter": {
-      "name": "Stryker",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Blood Frenzy Reset",
-          "Shield Wall Burst",
-          "Golden Shield Reset"
-      ]
-  },
-  "pet": {
-      "name": "Vampire Bat",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Defense",
-          "Bloodsucking (Vampire Bat Special)",
-          "Energy Shield (Passive)"
-      ]
-  },
-  "weapon": "Tyrant Bloodthirsty Sword",
-  "stats": {
-      "str": 2529,
-      "dex": 1020,
-      "sta": 2049,
-      "brk": 2130,
-      "def": 2362,
-      "hit": 2028,
-      "eva": 398,
-      "res": 330,
-      "crt": 2509,
-      "atkPercent": 60.4,
-      "minAtk": 2997,
-      "maxAtk": 4503,
-      "hpPercent": 74,
-      "hp": 17884,
-      "spd": 338,
-      "spPercent": 0,
-      "sp": 286,
-      "furyReversion": 30
-  },
-  "skills": [
-      "Assassinate",
-      "Moving Illusion",
-      "Fire Shield",
-      "Golden Shield",
-      "Rebirth",
-      "Barbarism"
-  ],
-  "expertise": [
-      "Water",
-      "Fire",
-      "Earth",
-      "Thunder",
-      "Wind",
-      "Ninjutsu",
-      "Cursed Seal Jutsu",
-      "Genjutsu",
-      "Healing"
-  ],
-  "resistance": [
-      "Thunder",
-      "Genjutsu"
-  ],
-  "phylactery": {
-      "skill": "Blood Frenzy",
-      "extraTriggerPercent": 3
-  },
-  "totem": {
-      "name": "Lightning Attack Totem",
-      "level": 64
-  }
+    "name": "Hybrid HH (13%)",
+    "level": 100,
+    "fighter": {
+        "name": "Pigsy",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Blood Frenzy Reset",
+            "Shield Wall Burst",
+            "Golden Shield Reset"
+        ]
+    },
+    "pet": {
+        "name": "Vampire Bat",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Defense",
+            "Bloodsucking (Vampire Bat Special)",
+            "Energy Shield (Passive)"
+        ]
+    },
+    "weapon": "Tyrant Bloodthirsty Axe",
+    "stats": {
+        "str": 2529,
+        "dex": 1032,
+        "sta": 2096,
+        "brk": 2130,
+        "def": 2332,
+        "hit": 2028,
+        "eva": 381,
+        "res": 330,
+        "crt": 2509,
+        "atkPercent": 60.4,
+        "minAtk": 2997,
+        "maxAtk": 4503,
+        "hpPercent": 74,
+        "hp": 21660,
+        "spd": 331,
+        "spPercent": 0,
+        "sp": 362,
+        "furyReversion": 30
+    },
+    "skills": [
+        "Assassinate",
+        "Moving Illusion",
+        "Fire Shield",
+        "Golden Shield",
+        "Rebirth",
+        "Barbarism"
+    ],
+    "expertise": [
+        "Water",
+        "Fire",
+        "Earth",
+        "Thunder",
+        "Wind",
+        "Ninjutsu",
+        "Cursed Seal Jutsu",
+        "Genjutsu",
+        "Healing"
+    ],
+    "resistance": [
+        "Thunder",
+        "Genjutsu"
+    ],
+    "phylactery": {
+        "skill": "Blood Frenzy",
+        "extraTriggerPercent": 3
+    },
+    "totem": {
+        "name": "Lightning Attack Totem",
+        "level": 64
+    }
 }
 
 Players.evaH = {
-  "name": "EVA H (5%)",
-  "level": 100,
-  "fighter": {
-      "name": "Hel",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Blood Frenzy Reset",
-          "Shield Wall Burst",
-          "Thunderclap Quake Reset"
-      ]
-  },
-  "pet": {
-      "name": "Rekachu",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Defense",
-          "Seal (Rekachu Special)",
-          "Barbarian (Active)",
-          "Energy Shield (Passive)"
-      ]
-  },
-  "weapon": "Tyrant Agile Dagger",
-  "stats": {
-      "str": 1061,
-      "dex": 4052,
-      "sta": 1968,
-      "brk": 330,
-      "def": 2334,
-      "hit": 2088,
-      "eva": 3035,
-      "res": 382,
-      "crt": 330,
-      "atkPercent": 97,
-      "minAtk": 1684,
-      "maxAtk": 2530,
-      "hpPercent": 99,
-      "hp": 16707,
-      "spd": 788,
-      "spPercent": 0,
-      "sp": 231,
-      "furyReversion": 25
-  },
-  "skills": [
-      "Magic Stealing",
-      "Blood Sacrifice",
-      "Lightning Ball",
-      "Thunderclap Quake",
-      "Shield Wall",
-      "Cleanse"
-  ],
-  "expertise": [
-      "Water",
-      "Fire",
-      "Earth",
-      "Thunder",
-      "Wind",
-      "Ninjutsu",
-      "Cursed Seal Jutsu",
-      "Genjutsu",
-      "Healing"
-  ],
-  "resistance": [
-      "Thunder",
-      "Genjutsu"
-  ],
-  "phylactery": {
-      "skill": "Thunderbolt Boxing",
-      "extraTriggerPercent": 3
-  },
-  "totem": {
-      "name": "Lightning Attack Totem",
-      "level": 64
-  }
+    "name": "EVA H (10%)",
+    "level": 100,
+    "fighter": {
+        "name": "Hel",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Blood Frenzy Reset",
+            "Shield Wall Burst",
+            "Thunderclap Quake Reset"
+        ]
+    },
+    "pet": {
+        "name": "Rekachu",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Defense",
+            "Seal (Rekachu Special)",
+            "Barbarian (Active)",
+            "Energy Shield (Passive)"
+        ]
+    },
+    "weapon": "Tyrant Agile Dagger",
+    "stats": {
+        "str": 1061,
+        "dex": 4052,
+        "sta": 1968,
+        "brk": 330,
+        "def": 2334,
+        "hit": 2088,
+        "eva": 3035,
+        "res": 382,
+        "crt": 330,
+        "atkPercent": 97,
+        "minAtk": 1684,
+        "maxAtk": 2530,
+        "hpPercent": 99,
+        "hp": 16707,
+        "spd": 788,
+        "spPercent": 0,
+        "sp": 231,
+        "furyReversion": 25
+    },
+    "skills": [
+        "Magic Stealing",
+        "Blood Sacrifice",
+        "Lightning Ball",
+        "Thunderclap Quake",
+        "Shield Wall",
+        "Cleanse"
+    ],
+    "expertise": [
+        "Water",
+        "Fire",
+        "Earth",
+        "Thunder",
+        "Wind",
+        "Ninjutsu",
+        "Cursed Seal Jutsu",
+        "Genjutsu",
+        "Healing"
+    ],
+    "resistance": [
+        "Thunder",
+        "Genjutsu"
+    ],
+    "phylactery": {
+        "skill": "Thunderbolt Boxing",
+        "extraTriggerPercent": 3
+    },
+    "totem": {
+        "name": "Lightning Attack Totem",
+        "level": 64
+    }
 }
 
 Players.evaC = {
-  "name": "EVA C (12%)",
-  "level": 100,
-  "fighter": {
-      "name": "C.C",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Blood Frenzy Reset",
-          "Shield Wall Burst",
-          "Thunderclap Quake Reset"
-      ]
-  },
-  "pet": {
-      "name": "Rekachu",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Defense",
-          "Seal (Rekachu Special)",
-          "Barbarian (Active)",
-          "Energy Shield (Passive)"
-      ]
-  },
-  "weapon": "Tyrant Agile Staff",
-  "stats": {
-      "str": 1032,
-      "dex": 4023,
-      "sta": 2031,
-      "brk": 330,
-      "def": 2304,
-      "hit": 2088,
-      "eva": 2929,
-      "res": 482,
-      "crt": 330,
-      "atkPercent": 107,
-      "minAtk": 1707,
-      "maxAtk": 2565,
-      "hpPercent": 99,
-      "hp": 19890,
-      "spd": 722,
-      "spPercent": 0,
-      "sp": 303,
-      "furyReversion": 25
-  },
-  "skills": [
-      "Lightning Ball",
-      "Blood Sacrifice",
-      "Thunderclap Quake",
-      "Magic Stealing",
-      "Shield Wall",
-      "Cleanse"
-  ],
-  "expertise": [
-      "Water",
-      "Fire",
-      "Earth",
-      "Thunder",
-      "Wind",
-      "Ninjutsu",
-      "Cursed Seal Jutsu",
-      "Genjutsu",
-      "Healing"
-  ],
-  "resistance": [
-      "Thunder",
-      "Genjutsu"
-  ],
-  "phylactery": {
-      "skill": "Thunderbolt Boxing",
-      "extraTriggerPercent": 3
-  },
-  "totem": {
-      "name": "Lightning Attack Totem",
-      "level": 64
-  }
+    "name": "EVA C (1%)",
+    "level": 100,
+    "fighter": {
+        "name": "C.C",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Blood Frenzy Reset",
+            "Shield Wall Burst",
+            "Thunderclap Quake Reset"
+        ]
+    },
+    "pet": {
+        "name": "Rekachu",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Defense",
+            "Seal (Rekachu Special)",
+            "Barbarian (Active)",
+            "Energy Shield (Passive)"
+        ]
+    },
+    "weapon": "Tyrant Agile Staff",
+    "stats": {
+        "str": 1032,
+        "dex": 4023,
+        "sta": 2031,
+        "brk": 330,
+        "def": 2304,
+        "hit": 2088,
+        "eva": 2959,
+        "res": 382,
+        "crt": 330,
+        "atkPercent": 97,
+        "minAtk": 1644,
+        "maxAtk": 2523,
+        "hpPercent": 89,
+        "hp": 19396,
+        "spd": 722,
+        "spPercent": 0,
+        "sp": 303,
+        "furyReversion": 25
+    },
+    "skills": [
+        "Lightning Ball",
+        "Blood Sacrifice",
+        "Thunderclap Quake",
+        "Magic Stealing",
+        "Shield Wall",
+        "Cleanse"
+    ],
+    "expertise": [
+        "Water",
+        "Fire",
+        "Earth",
+        "Thunder",
+        "Wind",
+        "Ninjutsu",
+        "Cursed Seal Jutsu",
+        "Genjutsu",
+        "Healing"
+    ],
+    "resistance": [
+        "Thunder",
+        "Genjutsu"
+    ],
+    "phylactery": {
+        "skill": "Thunderbolt Boxing",
+        "extraTriggerPercent": 3
+    },
+    "totem": {
+        "name": "Lightning Attack Totem",
+        "level": 64
+    }
 }
 
 Players.brkSpdster = {
-  "name": "BRK Spdster (5%)",
-  "level": 100,
-  "fighter": {
-      "name": "Nami",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Thunderclap Quake Reset",
-          "Shield Wall Burst",
-          "Blood Frenzy Reset"
-      ]
-  },
-  "pet": {
-      "name": "Sleipnir",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Defense",
-          "Freezing (Sleipnir Special)",
-          "Barbarian (Active)",
-          "Energy Shield (Passive)"
-      ]
-  },
-  "weapon": "Tyrant Agile Rod",
-  "stats": {
-      "str": 2017,
-      "dex": 4023,
-      "sta": 1046,
-      "brk": 2620,
-      "def": 2304,
-      "hit": 2088,
-      "eva": 832,
-      "res": 482,
-      "crt": 330,
-      "atkPercent": 92,
-      "minAtk": 2476,
-      "maxAtk": 3720,
-      "hpPercent": 114,
-      "hp": 14125,
-      "spd": 722,
-      "spPercent": 0,
-      "sp": 165,
-      "furyReversion": 25
-  },
-  "skills": [
-      "Blood Frenzy",
-      "Rebirth",
-      "Thunderclap Quake",
-      "Assassinate",
-      "Magic Stealing",
-      "Moving Illusion"
-  ],
-  "expertise": [
-      "Water",
-      "Fire",
-      "Earth",
-      "Thunder",
-      "Wind",
-      "Ninjutsu",
-      "Cursed Seal Jutsu",
-      "Genjutsu",
-      "Healing"
-  ],
-  "resistance": [
-      "Thunder",
-      "Genjutsu"
-  ],
-  "phylactery": {
-      "skill": "Thunderbolt Boxing",
-      "extraTriggerPercent": 3
-  },
-  "totem": {
-      "name": "Lightning Attack Totem",
-      "level": 64
-  }
+    "name": "BRK Spdster (2%)",
+    "level": 100,
+    "fighter": {
+        "name": "Nami",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Thunderclap Quake Reset",
+            "Shield Wall Burst",
+            "Blood Frenzy Reset"
+        ]
+    },
+    "pet": {
+        "name": "Sleipnir",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Defense",
+            "Freezing (Sleipnir Special)",
+            "Barbarian (Active)",
+            "Energy Shield (Passive)"
+        ]
+    },
+    "weapon": "Tyrant Agile Rod",
+    "stats": {
+        "str": 2017,
+        "dex": 4023,
+        "sta": 1046,
+        "brk": 2620,
+        "def": 2304,
+        "hit": 2088,
+        "eva": 832,
+        "res": 482,
+        "crt": 330,
+        "atkPercent": 92,
+        "minAtk": 2476,
+        "maxAtk": 3720,
+        "hpPercent": 114,
+        "hp": 14125,
+        "spd": 722,
+        "spPercent": 0,
+        "sp": 165,
+        "furyReversion": 25
+    },
+    "skills": [
+        "Blood Frenzy",
+        "Rebirth",
+        "Thunderclap Quake",
+        "Assassinate",
+        "Magic Stealing",
+        "Moving Illusion"
+    ],
+    "expertise": [
+        "Water",
+        "Fire",
+        "Earth",
+        "Thunder",
+        "Wind",
+        "Ninjutsu",
+        "Cursed Seal Jutsu",
+        "Genjutsu",
+        "Healing"
+    ],
+    "resistance": [
+        "Thunder",
+        "Genjutsu"
+    ],
+    "phylactery": {
+        "skill": "Thunderbolt Boxing",
+        "extraTriggerPercent": 3
+    },
+    "totem": {
+        "name": "Lightning Attack Totem",
+        "level": 64
+    }
 }
 
 Players.hybridSpdster = {
@@ -1460,78 +1538,78 @@ Players.hybridSpdster = {
 }
 
 Players.reflect = {
-  "name": "Reflect (1%)",
-  "level": 100,
-  "fighter": {
-      "name": "Cloud",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Golden Shield Reset",
-          "Shield Wall Burst",
-          "Energy Shield Reset"
-      ]
-  },
-  "pet": {
-      "name": "Sleipnir",
-      "plus": 21,
-      "evolved": true,
-      "skills": [
-          "Defense",
-          "Freezing (Sleipnir Special)",
-          "Energy Shield (Passive)"
-      ]
-  },
-  "weapon": "Tyrant Callous Axe",
-  "stats": {
-      "str": 2004,
-      "dex": 1018,
-      "sta": 4035,
-      "brk": 2570,
-      "def": 794,
-      "hit": 528,
-      "eva": 393,
-      "res": 330,
-      "crt": 1992,
-      "atkPercent": 97,
-      "minAtk": 3238,
-      "maxAtk": 3659,
-      "hpPercent": 99,
-      "hp": 45997,
-      "spd": 183,
-      "spPercent": 0,
-      "sp": 744,
-      "furyReversion": 30
-  },
-  "skills": [
-      "Anit-damage Chop",
-      "Golden Shield",
-      "Counterattack",
-      "Energy Shield",
-      "Earth-Style Wall",
-      "Barbarism"
-  ],
-  "expertise": [
-      "Water",
-      "Earth",
-      "Thunder",
-      "Wind",
-      "Taijutsu",
-      "Genjutsu",
-      "Healing",
-      "Ninjutsu",
-      "Cursed Seal Jutsu"
-  ],
-  "resistance": [
-      "Genjutsu",
-      "Healing"
-  ],
-  "phylactery": {
-      "skill": "Rebirth",
-      "extraTriggerPercent": 3
-  },
-  "totem": {
-      "name": "Lightning Attack Totem",
-      "level": 64
-  }
+    "name": "Reflect (6%)",
+    "level": 100,
+    "fighter": {
+        "name": "Cloud",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Golden Shield Reset",
+            "Shield Wall Burst",
+            "Energy Shield Reset"
+        ]
+    },
+    "pet": {
+        "name": "Sleipnir",
+        "plus": 21,
+        "evolved": true,
+        "skills": [
+            "Defense",
+            "Freezing (Sleipnir Special)",
+            "Energy Shield (Passive)"
+        ]
+    },
+    "weapon": "Tyrant Callous Axe",
+    "stats": {
+        "str": 2004,
+        "dex": 1018,
+        "sta": 4035,
+        "brk": 2570,
+        "def": 794,
+        "hit": 528,
+        "eva": 393,
+        "res": 330,
+        "crt": 1992,
+        "atkPercent": 97,
+        "minAtk": 3238,
+        "maxAtk": 3659,
+        "hpPercent": 99,
+        "hp": 45997,
+        "spd": 183,
+        "spPercent": 0,
+        "sp": 744,
+        "furyReversion": 30
+    },
+    "skills": [
+        "Anit-damage Chop",
+        "Golden Shield",
+        "Counterattack",
+        "Energy Shield",
+        "Earth-Style Wall",
+        "Barbarism"
+    ],
+    "expertise": [
+        "Water",
+        "Earth",
+        "Thunder",
+        "Wind",
+        "Taijutsu",
+        "Genjutsu",
+        "Healing",
+        "Ninjutsu",
+        "Cursed Seal Jutsu"
+    ],
+    "resistance": [
+        "Genjutsu",
+        "Healing"
+    ],
+    "phylactery": {
+        "skill": "Rebirth",
+        "extraTriggerPercent": 3
+    },
+    "totem": {
+        "name": "Lightning Attack Totem",
+        "level": 64
+    }
 }

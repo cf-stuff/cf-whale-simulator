@@ -36,6 +36,7 @@ const App = () => {
     Discord: CF99#9616
     <hr/>
     <h3>Changelog</h3>
+    <p>2025-05-22: 1.8.8 - Updated grading scale %: bell tank 16→10, bubble tank 8→9, brk tank s 11→8, brk tank m 0→4, brk fire 22→29, brk stun 11→7, hybrid hh 8→13, eva h 5→10, eva c 12→1, brk spdster 5→2, hybrid spd 1→1, reflect 1→6</p>
     <p>2025-01-29: 1.8.7 - Added Pigsy</p>
     <p>2024-05-17: 1.8.6 - Fixed stun duration 3.5s to 6s (for quake and hammer)</p>
     <p>2024-03-24: 1.8.5 - Updated Iron Man to reflect announced stats</p>

@@ -485,6 +485,7 @@ const Skills = {
       atkMultiplier: 1.44,
     },
     phase: SkillPhase.duringEnemyAttack,
+    triggersAgainst: ["Normal Attack", "Poisonous Fog", "Draw Power"],
     triggerPercent: 17,
     spConsumption: 6,
     getNormalVersion: function () {

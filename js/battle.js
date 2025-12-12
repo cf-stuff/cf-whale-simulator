@@ -190,6 +190,7 @@ function getAllSkillsEligibleToBeUsed(state, playerIndex, phase) {
     .filter(skill => skill.cantUseIfThunderGodIsActive ? !isThunderGodActive(state) : true)
     .filter(skill => skill.canUseIfHpNotFullOrPoisoned ? isHpNotFullOrPoisoned(state, playerIndex) : true)
     .filter(skill => skill.numberOfFuryBursts ? state.players[playerIndex].furyBursts % skill.numberOfFuryBursts === 0 : true)
+    .filter(skill => skill.triggersAgainst ? skill.triggersAgainst.includes(state.lastSkill) : true)
     .filter(skill => Utils.testProbability(getSkillTriggerProbability(state, playerIndex, skill)));
 }
 
@@ -238,6 +239,7 @@ function consumeSp(state, playerIndex, skill) {
 
 function useSkill(state, playerIndex, skill) {
   if (state.someoneDied) return;
+  state.lastSkill = skill.name;
   state.log.push(`|skill|${state.players[playerIndex].id}|${skill.name}`);
   consumeSp(state, playerIndex, skill);
   if (skill.maxTriggerTimes) {
